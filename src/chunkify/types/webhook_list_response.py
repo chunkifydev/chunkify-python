@@ -1,14 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
-from .._models import BaseModel
+from .webhook import Webhook
+from .response_ok import ResponseOk
 
 __all__ = ["WebhookListResponse"]
 
 
-class WebhookListResponse(BaseModel):
-    data: Optional[object] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class WebhookListResponse(ResponseOk):
+    data: Optional[List[Webhook]] = None  # type: ignore

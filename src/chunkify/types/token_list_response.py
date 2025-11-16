@@ -1,14 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
-from .._models import BaseModel
+from .token import Token
+from .response_ok import ResponseOk
 
 __all__ = ["TokenListResponse"]
 
 
-class TokenListResponse(BaseModel):
-    data: Optional[object] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class TokenListResponse(ResponseOk):
+    data: Optional[List[Token]] = None  # type: ignore

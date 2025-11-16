@@ -3,13 +3,10 @@
 from typing import Optional
 
 from .file import File
-from .._models import BaseModel
+from .response_ok import ResponseOk
 
 __all__ = ["FileRetrieveResponse"]
 
 
-class FileRetrieveResponse(BaseModel):
-    data: Optional[File] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class FileRetrieveResponse(ResponseOk):
+    data: Optional[File] = None  # type: ignore

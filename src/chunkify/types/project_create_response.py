@@ -3,13 +3,10 @@
 from typing import Optional
 
 from .project import Project
-from .._models import BaseModel
+from .response_ok import ResponseOk
 
 __all__ = ["ProjectCreateResponse"]
 
 
-class ProjectCreateResponse(BaseModel):
-    data: Optional[Project] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class ProjectCreateResponse(ResponseOk):
+    data: Optional[Project] = None  # type: ignore

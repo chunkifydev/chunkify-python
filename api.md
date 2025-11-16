@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from chunkify.types import File, FileRetrieveResponse
+from chunkify.types import File, ResponseOk, FileRetrieveResponse
 ```
 
 Methods:
@@ -18,8 +18,15 @@ Types:
 
 ```python
 from chunkify.types import (
+    HlsAv1,
+    HlsH264,
+    HlsH265,
     Job,
+    Jpg,
+    MP4Av1,
     MP4H264,
+    MP4H265,
+    WebmVp9,
     JobCreateResponse,
     JobRetrieveResponse,
     JobGetFilesResponse,
