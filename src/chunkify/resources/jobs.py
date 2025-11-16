@@ -1,0 +1,902 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing import Dict
+from typing_extensions import Literal
+
+import httpx
+
+from ..types import job_list_params, job_create_params, job_get_logs_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ..types.job import Job
+from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
+from .._base_client import AsyncPaginator, make_request_options
+from ..types.job_create_response import JobCreateResponse
+from ..types.job_get_logs_response import JobGetLogsResponse
+from ..types.job_retrieve_response import JobRetrieveResponse
+from ..types.job_get_files_response import JobGetFilesResponse
+from ..types.job_get_transcoders_response import JobGetTranscodersResponse
+
+__all__ = ["JobsResource", "AsyncJobsResource"]
+
+
+class JobsResource(SyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> JobsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        """
+        return JobsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> JobsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        """
+        return JobsResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        format: job_create_params.Format,
+        source_id: str,
+        hls_manifest_id: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
+        storage: job_create_params.Storage | Omit = omit,
+        transcoder: job_create_params.Transcoder | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobCreateResponse:
+        """
+        Create a new video processing job with specified parameters
+
+        Args:
+          format: Required format configuration, one and only one valid format configuration must
+              be provided. If you want to use a format without specifying any configuration,
+              use an empty object in the corresponding field.
+
+          source_id: The ID of the source file to transcode
+
+          hls_manifest_id: Optional HLS manifest configuration Use the same hls manifest ID to group
+              multiple jobs into a single HLS manifest By default, it's automatically
+              generated if no set for HLS jobs
+
+          metadata: Optional metadata to attach to the job (max 1024 bytes)
+
+          storage: Optional storage configuration
+
+          transcoder: Optional transcoder configuration. If not provided, the system will
+              automatically calculate the optimal quantity and CPU type based on the source
+              file specifications and output requirements. This auto-scaling ensures efficient
+              resource utilization.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/api/jobs",
+            body=maybe_transform(
+                {
+                    "format": format,
+                    "source_id": source_id,
+                    "hls_manifest_id": hls_manifest_id,
+                    "metadata": metadata,
+                    "storage": storage,
+                    "transcoder": transcoder,
+                },
+                job_create_params.JobCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobRetrieveResponse:
+        """
+        Retrieve details of a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/api/jobs/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobRetrieveResponse,
+        )
+
+    def list(
+        self,
+        *,
+        id: str | Omit = omit,
+        created: job_list_params.Created | Omit = omit,
+        format_name: str | Omit = omit,
+        hls_manifest_id: str | Omit = omit,
+        limit: int | Omit = omit,
+        metadata: str | Omit = omit,
+        offset: int | Omit = omit,
+        source_id: str | Omit = omit,
+        status: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncPaginatedResults[Job]:
+        """
+        Retrieve a list of jobs with optional filtering and pagination
+
+        Args:
+          id: Filter by job ID
+
+          format_name: Filter by format name
+
+          hls_manifest_id: Filter by hls manifest ID
+
+          limit: Pagination limit
+
+          metadata: Filter by metadata (format: key:value,key2:value2)
+
+          offset: Pagination offset
+
+          source_id: Filter by source ID
+
+          status: Filter by job status
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/api/jobs",
+            page=SyncPaginatedResults[Job],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "id": id,
+                        "created": created,
+                        "format_name": format_name,
+                        "hls_manifest_id": hls_manifest_id,
+                        "limit": limit,
+                        "metadata": metadata,
+                        "offset": offset,
+                        "source_id": source_id,
+                        "status": status,
+                    },
+                    job_list_params.JobListParams,
+                ),
+            ),
+            model=Job,
+        )
+
+    def delete(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Delete a job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            f"/api/jobs/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Cancel a job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/api/jobs/{job_id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def get_files(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetFilesResponse:
+        """
+        Retrieve all files associated with a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/api/jobs/{job_id}/files",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobGetFilesResponse,
+        )
+
+    def get_logs(
+        self,
+        job_id: str,
+        *,
+        service: Literal["transcoder", "manager"],
+        transcoder_id: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetLogsResponse:
+        """
+        Retrieve logs for a specific job, either from the transcoder or manager service
+
+        Args:
+          service: Service type (transcoder or manager)
+
+          transcoder_id: Transcoder ID (required if service is transcoder)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/api/jobs/{job_id}/logs",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "service": service,
+                        "transcoder_id": transcoder_id,
+                    },
+                    job_get_logs_params.JobGetLogsParams,
+                ),
+            ),
+            cast_to=JobGetLogsResponse,
+        )
+
+    def get_transcoders(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetTranscodersResponse:
+        """
+        Retrieve all the transcoders statuses for a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._get(
+            f"/api/jobs/{job_id}/transcoders",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobGetTranscodersResponse,
+        )
+
+
+class AsyncJobsResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncJobsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncJobsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncJobsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        """
+        return AsyncJobsResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        format: job_create_params.Format,
+        source_id: str,
+        hls_manifest_id: str | Omit = omit,
+        metadata: Dict[str, str] | Omit = omit,
+        storage: job_create_params.Storage | Omit = omit,
+        transcoder: job_create_params.Transcoder | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobCreateResponse:
+        """
+        Create a new video processing job with specified parameters
+
+        Args:
+          format: Required format configuration, one and only one valid format configuration must
+              be provided. If you want to use a format without specifying any configuration,
+              use an empty object in the corresponding field.
+
+          source_id: The ID of the source file to transcode
+
+          hls_manifest_id: Optional HLS manifest configuration Use the same hls manifest ID to group
+              multiple jobs into a single HLS manifest By default, it's automatically
+              generated if no set for HLS jobs
+
+          metadata: Optional metadata to attach to the job (max 1024 bytes)
+
+          storage: Optional storage configuration
+
+          transcoder: Optional transcoder configuration. If not provided, the system will
+              automatically calculate the optimal quantity and CPU type based on the source
+              file specifications and output requirements. This auto-scaling ensures efficient
+              resource utilization.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/api/jobs",
+            body=await async_maybe_transform(
+                {
+                    "format": format,
+                    "source_id": source_id,
+                    "hls_manifest_id": hls_manifest_id,
+                    "metadata": metadata,
+                    "storage": storage,
+                    "transcoder": transcoder,
+                },
+                job_create_params.JobCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobCreateResponse,
+        )
+
+    async def retrieve(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobRetrieveResponse:
+        """
+        Retrieve details of a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/api/jobs/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobRetrieveResponse,
+        )
+
+    def list(
+        self,
+        *,
+        id: str | Omit = omit,
+        created: job_list_params.Created | Omit = omit,
+        format_name: str | Omit = omit,
+        hls_manifest_id: str | Omit = omit,
+        limit: int | Omit = omit,
+        metadata: str | Omit = omit,
+        offset: int | Omit = omit,
+        source_id: str | Omit = omit,
+        status: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[Job, AsyncPaginatedResults[Job]]:
+        """
+        Retrieve a list of jobs with optional filtering and pagination
+
+        Args:
+          id: Filter by job ID
+
+          format_name: Filter by format name
+
+          hls_manifest_id: Filter by hls manifest ID
+
+          limit: Pagination limit
+
+          metadata: Filter by metadata (format: key:value,key2:value2)
+
+          offset: Pagination offset
+
+          source_id: Filter by source ID
+
+          status: Filter by job status
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/api/jobs",
+            page=AsyncPaginatedResults[Job],
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "id": id,
+                        "created": created,
+                        "format_name": format_name,
+                        "hls_manifest_id": hls_manifest_id,
+                        "limit": limit,
+                        "metadata": metadata,
+                        "offset": offset,
+                        "source_id": source_id,
+                        "status": status,
+                    },
+                    job_list_params.JobListParams,
+                ),
+            ),
+            model=Job,
+        )
+
+    async def delete(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Delete a job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            f"/api/jobs/{job_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def cancel(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Cancel a job.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/api/jobs/{job_id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def get_files(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetFilesResponse:
+        """
+        Retrieve all files associated with a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/api/jobs/{job_id}/files",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobGetFilesResponse,
+        )
+
+    async def get_logs(
+        self,
+        job_id: str,
+        *,
+        service: Literal["transcoder", "manager"],
+        transcoder_id: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetLogsResponse:
+        """
+        Retrieve logs for a specific job, either from the transcoder or manager service
+
+        Args:
+          service: Service type (transcoder or manager)
+
+          transcoder_id: Transcoder ID (required if service is transcoder)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/api/jobs/{job_id}/logs",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "service": service,
+                        "transcoder_id": transcoder_id,
+                    },
+                    job_get_logs_params.JobGetLogsParams,
+                ),
+            ),
+            cast_to=JobGetLogsResponse,
+        )
+
+    async def get_transcoders(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> JobGetTranscodersResponse:
+        """
+        Retrieve all the transcoders statuses for a specific job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._get(
+            f"/api/jobs/{job_id}/transcoders",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=JobGetTranscodersResponse,
+        )
+
+
+class JobsResourceWithRawResponse:
+    def __init__(self, jobs: JobsResource) -> None:
+        self._jobs = jobs
+
+        self.create = to_raw_response_wrapper(
+            jobs.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            jobs.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            jobs.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            jobs.delete,
+        )
+        self.cancel = to_raw_response_wrapper(
+            jobs.cancel,
+        )
+        self.get_files = to_raw_response_wrapper(
+            jobs.get_files,
+        )
+        self.get_logs = to_raw_response_wrapper(
+            jobs.get_logs,
+        )
+        self.get_transcoders = to_raw_response_wrapper(
+            jobs.get_transcoders,
+        )
+
+
+class AsyncJobsResourceWithRawResponse:
+    def __init__(self, jobs: AsyncJobsResource) -> None:
+        self._jobs = jobs
+
+        self.create = async_to_raw_response_wrapper(
+            jobs.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            jobs.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            jobs.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            jobs.delete,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            jobs.cancel,
+        )
+        self.get_files = async_to_raw_response_wrapper(
+            jobs.get_files,
+        )
+        self.get_logs = async_to_raw_response_wrapper(
+            jobs.get_logs,
+        )
+        self.get_transcoders = async_to_raw_response_wrapper(
+            jobs.get_transcoders,
+        )
+
+
+class JobsResourceWithStreamingResponse:
+    def __init__(self, jobs: JobsResource) -> None:
+        self._jobs = jobs
+
+        self.create = to_streamed_response_wrapper(
+            jobs.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            jobs.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            jobs.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            jobs.delete,
+        )
+        self.cancel = to_streamed_response_wrapper(
+            jobs.cancel,
+        )
+        self.get_files = to_streamed_response_wrapper(
+            jobs.get_files,
+        )
+        self.get_logs = to_streamed_response_wrapper(
+            jobs.get_logs,
+        )
+        self.get_transcoders = to_streamed_response_wrapper(
+            jobs.get_transcoders,
+        )
+
+
+class AsyncJobsResourceWithStreamingResponse:
+    def __init__(self, jobs: AsyncJobsResource) -> None:
+        self._jobs = jobs
+
+        self.create = async_to_streamed_response_wrapper(
+            jobs.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            jobs.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            jobs.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            jobs.delete,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            jobs.cancel,
+        )
+        self.get_files = async_to_streamed_response_wrapper(
+            jobs.get_files,
+        )
+        self.get_logs = async_to_streamed_response_wrapper(
+            jobs.get_logs,
+        )
+        self.get_transcoders = async_to_streamed_response_wrapper(
+            jobs.get_transcoders,
+        )
