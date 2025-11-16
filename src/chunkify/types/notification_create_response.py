@@ -2,11 +2,14 @@
 
 from typing import Optional
 
-from .response_ok import ResponseOk
+from .._models import BaseModel
 from .notification import Notification
 
 __all__ = ["NotificationCreateResponse"]
 
 
-class NotificationCreateResponse(ResponseOk):
-    data: Optional[Notification] = None  # type: ignore
+class NotificationCreateResponse(BaseModel):
+    data: Optional[Notification] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """

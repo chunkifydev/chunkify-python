@@ -3,10 +3,13 @@
 from typing import Optional
 
 from .storage import Storage
-from .response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["StorageRetrieveResponse"]
 
 
-class StorageRetrieveResponse(ResponseOk):
-    data: Optional[Storage] = None  # type: ignore
+class StorageRetrieveResponse(BaseModel):
+    data: Optional[Storage] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """

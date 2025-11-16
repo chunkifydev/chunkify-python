@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["APIFile"]
+__all__ = ["File"]
 
 
-class APIFile(BaseModel):
+class File(BaseModel):
     id: Optional[str] = None
     """Unique identifier of the file"""
 

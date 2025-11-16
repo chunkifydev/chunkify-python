@@ -16,8 +16,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
+from ..types.file import File
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.api_file import APIFile
 from ..types.file_retrieve_response import FileRetrieveResponse
 
 __all__ = ["FilesResource", "AsyncFilesResource"]
@@ -100,7 +100,7 @@ class FilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPaginatedResults[APIFile]:
+    ) -> SyncPaginatedResults[File]:
         """
         Retrieve a list of files with optional filtering and pagination
 
@@ -131,7 +131,7 @@ class FilesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/api/files",
-            page=SyncPaginatedResults[APIFile],
+            page=SyncPaginatedResults[File],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -157,7 +157,7 @@ class FilesResource(SyncAPIResource):
                     file_list_params.FileListParams,
                 ),
             ),
-            model=APIFile,
+            model=File,
         )
 
     def delete(
@@ -273,7 +273,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[APIFile, AsyncPaginatedResults[APIFile]]:
+    ) -> AsyncPaginator[File, AsyncPaginatedResults[File]]:
         """
         Retrieve a list of files with optional filtering and pagination
 
@@ -304,7 +304,7 @@ class AsyncFilesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/api/files",
-            page=AsyncPaginatedResults[APIFile],
+            page=AsyncPaginatedResults[File],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -330,7 +330,7 @@ class AsyncFilesResource(AsyncAPIResource):
                     file_list_params.FileListParams,
                 ),
             ),
-            model=APIFile,
+            model=File,
         )
 
     async def delete(

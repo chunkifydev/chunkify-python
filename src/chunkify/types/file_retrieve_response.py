@@ -2,11 +2,14 @@
 
 from typing import Optional
 
-from .api_file import APIFile
-from .response_ok import ResponseOk
+from .file import File
+from .._models import BaseModel
 
 __all__ = ["FileRetrieveResponse"]
 
 
-class FileRetrieveResponse(ResponseOk):
-    data: Optional[APIFile] = None  # type: ignore
+class FileRetrieveResponse(BaseModel):
+    data: Optional[File] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """
