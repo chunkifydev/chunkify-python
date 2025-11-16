@@ -1,0 +1,12 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import Optional
+
+from .storage import Storage
+from .response_ok import ResponseOk
+
+__all__ = ["StorageRetrieveResponse"]
+
+
+class StorageRetrieveResponse(ResponseOk):
+    data: Optional[Storage] = None  # type: ignore
