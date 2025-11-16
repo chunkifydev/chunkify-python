@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Annotated, TypedDict
-
-from .._utils import PropertyInfo
+from typing_extensions import TypedDict
 
 __all__ = ["UploadCreateParams"]
 
@@ -17,5 +15,5 @@ class UploadCreateParams(TypedDict, total=False):
     maximum size of 1024 bytes.
     """
 
-    api_timeout: Annotated[int, PropertyInfo(alias="timeout")]
+    validity_timeout: int
     """The upload URL will be valid for the given timeout in seconds"""

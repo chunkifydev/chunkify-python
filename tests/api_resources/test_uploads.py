@@ -36,7 +36,7 @@ class TestUploads:
                 "key": "value",
                 "key2": "value2",
             },
-            api_timeout=3600,
+            validity_timeout=3600,
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
 
@@ -212,7 +212,7 @@ class TestAsyncUploads:
                 "key": "value",
                 "key2": "value2",
             },
-            api_timeout=3600,
+            validity_timeout=3600,
         )
         assert_matches_type(UploadCreateResponse, upload, path=["response"])
 
