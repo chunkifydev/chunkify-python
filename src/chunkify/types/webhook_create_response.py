@@ -3,13 +3,10 @@
 from typing import Optional
 
 from .webhook import Webhook
-from .._models import BaseModel
+from .response_ok import ResponseOk
 
 __all__ = ["WebhookCreateResponse"]
 
 
-class WebhookCreateResponse(BaseModel):
-    data: Optional[Webhook] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class WebhookCreateResponse(ResponseOk):
+    data: Optional[Webhook] = None  # type: ignore

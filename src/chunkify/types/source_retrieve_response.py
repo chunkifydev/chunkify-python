@@ -3,13 +3,10 @@
 from typing import Optional
 
 from .source import Source
-from .._models import BaseModel
+from .response_ok import ResponseOk
 
 __all__ = ["SourceRetrieveResponse"]
 
 
-class SourceRetrieveResponse(BaseModel):
-    data: Optional[Source] = None
-
-    status: Optional[str] = None
-    """Status indicates the response status "success" """
+class SourceRetrieveResponse(ResponseOk):
+    data: Optional[Source] = None  # type: ignore
