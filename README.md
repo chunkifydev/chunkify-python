@@ -49,6 +49,7 @@ job = client.jobs.create(
         "type": "8vCPU",
     },
 )
+print(job.data)
 ```
 
 While you can provide a `project_access_token` keyword argument,
@@ -85,6 +86,7 @@ async def main() -> None:
             "type": "8vCPU",
         },
     )
+    print(job.data)
 
 
 asyncio.run(main())
@@ -130,6 +132,7 @@ async def main() -> None:
                 "type": "8vCPU",
             },
         )
+        print(job.data)
 
 
 asyncio.run(main())

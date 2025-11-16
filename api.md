@@ -3,13 +3,13 @@
 Types:
 
 ```python
-from chunkify.types import APIFile, ResponseOk, FileRetrieveResponse
+from chunkify.types import File, FileRetrieveResponse
 ```
 
 Methods:
 
 - <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/file_retrieve_response.py">FileRetrieveResponse</a></code>
-- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/api_file.py">SyncPaginatedResults[APIFile]</a></code>
+- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/file.py">SyncPaginatedResults[File]</a></code>
 - <code title="delete /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">delete</a>(file_id) -> None</code>
 
 # Jobs
@@ -19,6 +19,7 @@ Types:
 ```python
 from chunkify.types import (
     Job,
+    MP4H264,
     JobCreateResponse,
     JobRetrieveResponse,
     JobGetFilesResponse,

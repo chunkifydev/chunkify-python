@@ -3,10 +3,13 @@
 from typing import Optional
 
 from .upload import Upload
-from .response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["UploadRetrieveResponse"]
 
 
-class UploadRetrieveResponse(ResponseOk):
-    data: Optional[Upload] = None  # type: ignore
+class UploadRetrieveResponse(BaseModel):
+    data: Optional[Upload] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """

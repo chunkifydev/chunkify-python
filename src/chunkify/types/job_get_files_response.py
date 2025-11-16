@@ -1,12 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
-from .api_file import APIFile
-from .response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["JobGetFilesResponse"]
 
 
-class JobGetFilesResponse(ResponseOk):
-    data: Optional[List[APIFile]] = None  # type: ignore
+class JobGetFilesResponse(BaseModel):
+    data: Optional[object] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """

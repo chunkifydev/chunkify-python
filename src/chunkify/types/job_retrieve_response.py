@@ -3,10 +3,13 @@
 from typing import Optional
 
 from .job import Job
-from .response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["JobRetrieveResponse"]
 
 
-class JobRetrieveResponse(ResponseOk):
-    data: Optional[Job] = None  # type: ignore
+class JobRetrieveResponse(BaseModel):
+    data: Optional[Job] = None
+
+    status: Optional[str] = None
+    """Status indicates the response status "success" """
