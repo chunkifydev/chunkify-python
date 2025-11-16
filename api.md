@@ -1,15 +1,21 @@
+# Shared Types
+
+```python
+from chunkify.types import ChunkifyError, ResponseError, ResponseOk
+```
+
 # Files
 
 Types:
 
 ```python
-from chunkify.types import File, ResponseOk, FileRetrieveResponse
+from chunkify.types import APIFile, FileRetrieveResponse
 ```
 
 Methods:
 
 - <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/file_retrieve_response.py">FileRetrieveResponse</a></code>
-- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/file.py">SyncPaginatedResults[File]</a></code>
+- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/api_file.py">SyncPaginatedResults[APIFile]</a></code>
 - <code title="delete /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">delete</a>(file_id) -> None</code>
 
 # Jobs
@@ -29,22 +35,52 @@ from chunkify.types import (
     WebmVp9,
     JobCreateResponse,
     JobRetrieveResponse,
-    JobGetFilesResponse,
-    JobGetLogsResponse,
-    JobGetTranscodersResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /api/jobs">client.jobs.<a href="./src/chunkify/resources/jobs.py">create</a>(\*\*<a href="src/chunkify/types/job_create_params.py">params</a>) -> <a href="./src/chunkify/types/job_create_response.py">JobCreateResponse</a></code>
-- <code title="get /api/jobs/{jobId}">client.jobs.<a href="./src/chunkify/resources/jobs.py">retrieve</a>(job_id) -> <a href="./src/chunkify/types/job_retrieve_response.py">JobRetrieveResponse</a></code>
-- <code title="get /api/jobs">client.jobs.<a href="./src/chunkify/resources/jobs.py">list</a>(\*\*<a href="src/chunkify/types/job_list_params.py">params</a>) -> <a href="./src/chunkify/types/job.py">SyncPaginatedResults[Job]</a></code>
-- <code title="delete /api/jobs/{jobId}">client.jobs.<a href="./src/chunkify/resources/jobs.py">delete</a>(job_id) -> None</code>
-- <code title="post /api/jobs/{jobId}/cancel">client.jobs.<a href="./src/chunkify/resources/jobs.py">cancel</a>(job_id) -> None</code>
-- <code title="get /api/jobs/{jobId}/files">client.jobs.<a href="./src/chunkify/resources/jobs.py">get_files</a>(job_id) -> <a href="./src/chunkify/types/job_get_files_response.py">JobGetFilesResponse</a></code>
-- <code title="get /api/jobs/{jobId}/logs">client.jobs.<a href="./src/chunkify/resources/jobs.py">get_logs</a>(job_id, \*\*<a href="src/chunkify/types/job_get_logs_params.py">params</a>) -> <a href="./src/chunkify/types/job_get_logs_response.py">JobGetLogsResponse</a></code>
-- <code title="get /api/jobs/{jobId}/transcoders">client.jobs.<a href="./src/chunkify/resources/jobs.py">get_transcoders</a>(job_id) -> <a href="./src/chunkify/types/job_get_transcoders_response.py">JobGetTranscodersResponse</a></code>
+- <code title="post /api/jobs">client.jobs.<a href="./src/chunkify/resources/jobs/jobs.py">create</a>(\*\*<a href="src/chunkify/types/job_create_params.py">params</a>) -> <a href="./src/chunkify/types/job_create_response.py">JobCreateResponse</a></code>
+- <code title="get /api/jobs/{jobId}">client.jobs.<a href="./src/chunkify/resources/jobs/jobs.py">retrieve</a>(job_id) -> <a href="./src/chunkify/types/job_retrieve_response.py">JobRetrieveResponse</a></code>
+- <code title="get /api/jobs">client.jobs.<a href="./src/chunkify/resources/jobs/jobs.py">list</a>(\*\*<a href="src/chunkify/types/job_list_params.py">params</a>) -> <a href="./src/chunkify/types/job.py">SyncPaginatedResults[Job]</a></code>
+- <code title="delete /api/jobs/{jobId}">client.jobs.<a href="./src/chunkify/resources/jobs/jobs.py">delete</a>(job_id) -> None</code>
+- <code title="post /api/jobs/{jobId}/cancel">client.jobs.<a href="./src/chunkify/resources/jobs/jobs.py">cancel</a>(job_id) -> None</code>
+
+## Files
+
+Types:
+
+```python
+from chunkify.types.jobs import FileListResponse
+```
+
+Methods:
+
+- <code title="get /api/jobs/{jobId}/files">client.jobs.files.<a href="./src/chunkify/resources/jobs/files.py">list</a>(job_id) -> <a href="./src/chunkify/types/jobs/file_list_response.py">FileListResponse</a></code>
+
+## Logs
+
+Types:
+
+```python
+from chunkify.types.jobs import LogListResponse
+```
+
+Methods:
+
+- <code title="get /api/jobs/{jobId}/logs">client.jobs.logs.<a href="./src/chunkify/resources/jobs/logs.py">list</a>(job_id, \*\*<a href="src/chunkify/types/jobs/log_list_params.py">params</a>) -> <a href="./src/chunkify/types/jobs/log_list_response.py">LogListResponse</a></code>
+
+## Transcoders
+
+Types:
+
+```python
+from chunkify.types.jobs import TranscoderListResponse
+```
+
+Methods:
+
+- <code title="get /api/jobs/{jobId}/transcoders">client.jobs.transcoders.<a href="./src/chunkify/resources/jobs/transcoders.py">list</a>(job_id) -> <a href="./src/chunkify/types/jobs/transcoder_list_response.py">TranscoderListResponse</a></code>
 
 # Notifications
 

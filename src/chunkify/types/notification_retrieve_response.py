@@ -2,8 +2,8 @@
 
 from typing import Optional
 
-from .response_ok import ResponseOk
 from .notification import Notification
+from .shared.response_ok import ResponseOk
 
 __all__ = ["NotificationRetrieveResponse"]
 

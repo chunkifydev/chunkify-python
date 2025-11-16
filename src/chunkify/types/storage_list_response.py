@@ -3,7 +3,7 @@
 from typing import List, Optional
 
 from .storage import Storage
-from .response_ok import ResponseOk
+from .shared.response_ok import ResponseOk
 
 __all__ = ["StorageListResponse"]
 

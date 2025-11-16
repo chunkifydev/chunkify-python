@@ -2,13 +2,13 @@
 
 from typing import List, Optional
 
-from .._models import BaseModel
-from .response_ok import ResponseOk
+from ..._models import BaseModel
+from ..shared.response_ok import ResponseOk
 
-__all__ = ["JobGetLogsResponse", "JobGetLogsResponseData"]
+__all__ = ["LogListResponse", "LogListResponseData"]
 
 
-class JobGetLogsResponseData(BaseModel):
+class LogListResponseData(BaseModel):
     attributes: Optional[object] = None
     """Additional structured data attached to the log"""
 
@@ -28,5 +28,5 @@ class JobGetLogsResponseData(BaseModel):
     """Timestamp when the log was created"""
 
 
-class JobGetLogsResponse(ResponseOk):
-    data: Optional[List[JobGetLogsResponseData]] = None  # type: ignore
+class LogListResponse(ResponseOk):
+    data: Optional[List[LogListResponseData]] = None  # type: ignore
