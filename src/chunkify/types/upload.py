@@ -3,19 +3,9 @@
 from typing import Dict, Optional
 
 from .._models import BaseModel
+from .shared.chunkify_error import ChunkifyError
 
-__all__ = ["Upload", "Error"]
-
-
-class Error(BaseModel):
-    detail: Optional[str] = None
-    """Additional error details or output"""
-
-    message: Optional[str] = None
-    """Main error message"""
-
-    type: Optional[str] = None
-    """Type of error (e.g., "ffmpeg", "network", "storage", etc.)"""
+__all__ = ["Upload"]
 
 
 class Upload(BaseModel):
@@ -25,7 +15,7 @@ class Upload(BaseModel):
     created_at: Optional[str] = None
     """Timestamp when the upload was created"""
 
-    error: Optional[Error] = None
+    error: Optional[ChunkifyError] = None
     """Error message of the upload"""
 
     expires_at: Optional[str] = None

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["JobGetLogsParams"]
+__all__ = ["LogListParams"]
 
 
-class JobGetLogsParams(TypedDict, total=False):
+class LogListParams(TypedDict, total=False):
     service: Required[Literal["transcoder", "manager"]]
     """Service type (transcoder or manager)"""
 

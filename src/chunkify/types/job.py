@@ -3,19 +3,9 @@
 from typing import Dict, Optional
 
 from .._models import BaseModel
+from .shared.chunkify_error import ChunkifyError
 
-__all__ = ["Job", "Error", "Format", "Storage", "Transcoder"]
-
-
-class Error(BaseModel):
-    detail: Optional[str] = None
-    """Additional error details or output"""
-
-    message: Optional[str] = None
-    """Main error message"""
-
-    type: Optional[str] = None
-    """Type of error (e.g., "ffmpeg", "network", "storage", etc.)"""
+__all__ = ["Job", "Format", "Storage", "Transcoder"]
 
 
 class Format(BaseModel):
@@ -60,7 +50,7 @@ class Job(BaseModel):
     created_at: Optional[str] = None
     """Creation timestamp"""
 
-    error: Optional[Error] = None
+    error: Optional[ChunkifyError] = None
     """Error message for the job"""
 
     format: Optional[Format] = None

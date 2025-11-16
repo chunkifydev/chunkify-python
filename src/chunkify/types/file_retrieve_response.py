@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .file import File
-from .response_ok import ResponseOk
+from .api_file import APIFile
+from .shared.response_ok import ResponseOk
 
 __all__ = ["FileRetrieveResponse"]
 
 
 class FileRetrieveResponse(ResponseOk):
-    data: Optional[File] = None  # type: ignore
+    data: Optional[APIFile] = None  # type: ignore

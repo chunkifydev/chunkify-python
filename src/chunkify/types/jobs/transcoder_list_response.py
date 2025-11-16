@@ -2,24 +2,14 @@
 
 from typing import List, Optional
 
-from .._models import BaseModel
-from .response_ok import ResponseOk
+from ..._models import BaseModel
+from ..shared.response_ok import ResponseOk
+from ..shared.chunkify_error import ChunkifyError
 
-__all__ = ["JobGetTranscodersResponse", "JobGetTranscodersResponseData", "JobGetTranscodersResponseDataError"]
-
-
-class JobGetTranscodersResponseDataError(BaseModel):
-    detail: Optional[str] = None
-    """Additional error details or output"""
-
-    message: Optional[str] = None
-    """Main error message"""
-
-    type: Optional[str] = None
-    """Type of error (e.g., "ffmpeg", "network", "storage", etc.)"""
+__all__ = ["TranscoderListResponse", "TranscoderListResponseData"]
 
 
-class JobGetTranscodersResponseData(BaseModel):
+class TranscoderListResponseData(BaseModel):
     id: Optional[str] = None
     """Unique identifier of the transcoder"""
 
@@ -41,7 +31,7 @@ class JobGetTranscodersResponseData(BaseModel):
     created_at: Optional[str] = None
     """Timestamp when the status was created"""
 
-    error: Optional[JobGetTranscodersResponseDataError] = None
+    error: Optional[ChunkifyError] = None
     """Error message if the transcoding failed"""
 
     fps: Optional[float] = None
@@ -72,5 +62,5 @@ class JobGetTranscodersResponseData(BaseModel):
     """Timestamp when the status was last updated"""
 
 
-class JobGetTranscodersResponse(ResponseOk):
-    data: Optional[List[JobGetTranscodersResponseData]] = None  # type: ignore
+class TranscoderListResponse(ResponseOk):
+    data: Optional[List[TranscoderListResponseData]] = None  # type: ignore

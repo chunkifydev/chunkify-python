@@ -3,34 +3,66 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Literal
 
 import httpx
 
-from ..types import job_list_params, job_create_params, job_get_logs_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from .logs import (
+    LogsResource,
+    AsyncLogsResource,
+    LogsResourceWithRawResponse,
+    AsyncLogsResourceWithRawResponse,
+    LogsResourceWithStreamingResponse,
+    AsyncLogsResourceWithStreamingResponse,
+)
+from .files import (
+    FilesResource,
+    AsyncFilesResource,
+    FilesResourceWithRawResponse,
+    AsyncFilesResourceWithRawResponse,
+    FilesResourceWithStreamingResponse,
+    AsyncFilesResourceWithStreamingResponse,
+)
+from ...types import job_list_params, job_create_params
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..types.job import Job
-from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.job_create_response import JobCreateResponse
-from ..types.job_get_logs_response import JobGetLogsResponse
-from ..types.job_retrieve_response import JobRetrieveResponse
-from ..types.job_get_files_response import JobGetFilesResponse
-from ..types.job_get_transcoders_response import JobGetTranscodersResponse
+from ...types.job import Job
+from .transcoders import (
+    TranscodersResource,
+    AsyncTranscodersResource,
+    TranscodersResourceWithRawResponse,
+    AsyncTranscodersResourceWithRawResponse,
+    TranscodersResourceWithStreamingResponse,
+    AsyncTranscodersResourceWithStreamingResponse,
+)
+from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.job_create_response import JobCreateResponse
+from ...types.job_retrieve_response import JobRetrieveResponse
 
 __all__ = ["JobsResource", "AsyncJobsResource"]
 
 
 class JobsResource(SyncAPIResource):
+    @cached_property
+    def files(self) -> FilesResource:
+        return FilesResource(self._client)
+
+    @cached_property
+    def logs(self) -> LogsResource:
+        return LogsResource(self._client)
+
+    @cached_property
+    def transcoders(self) -> TranscodersResource:
+        return TranscodersResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> JobsResourceWithRawResponse:
         """
@@ -290,123 +322,20 @@ class JobsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def get_files(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetFilesResponse:
-        """
-        Retrieve all files associated with a specific job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/api/jobs/{job_id}/files",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobGetFilesResponse,
-        )
-
-    def get_logs(
-        self,
-        job_id: str,
-        *,
-        service: Literal["transcoder", "manager"],
-        transcoder_id: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetLogsResponse:
-        """
-        Retrieve logs for a specific job, either from the transcoder or manager service
-
-        Args:
-          service: Service type (transcoder or manager)
-
-          transcoder_id: Transcoder ID (required if service is transcoder)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/api/jobs/{job_id}/logs",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "service": service,
-                        "transcoder_id": transcoder_id,
-                    },
-                    job_get_logs_params.JobGetLogsParams,
-                ),
-            ),
-            cast_to=JobGetLogsResponse,
-        )
-
-    def get_transcoders(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetTranscodersResponse:
-        """
-        Retrieve all the transcoders statuses for a specific job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._get(
-            f"/api/jobs/{job_id}/transcoders",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobGetTranscodersResponse,
-        )
-
 
 class AsyncJobsResource(AsyncAPIResource):
+    @cached_property
+    def files(self) -> AsyncFilesResource:
+        return AsyncFilesResource(self._client)
+
+    @cached_property
+    def logs(self) -> AsyncLogsResource:
+        return AsyncLogsResource(self._client)
+
+    @cached_property
+    def transcoders(self) -> AsyncTranscodersResource:
+        return AsyncTranscodersResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncJobsResourceWithRawResponse:
         """
@@ -666,121 +595,6 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def get_files(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetFilesResponse:
-        """
-        Retrieve all files associated with a specific job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/api/jobs/{job_id}/files",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobGetFilesResponse,
-        )
-
-    async def get_logs(
-        self,
-        job_id: str,
-        *,
-        service: Literal["transcoder", "manager"],
-        transcoder_id: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetLogsResponse:
-        """
-        Retrieve logs for a specific job, either from the transcoder or manager service
-
-        Args:
-          service: Service type (transcoder or manager)
-
-          transcoder_id: Transcoder ID (required if service is transcoder)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/api/jobs/{job_id}/logs",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "service": service,
-                        "transcoder_id": transcoder_id,
-                    },
-                    job_get_logs_params.JobGetLogsParams,
-                ),
-            ),
-            cast_to=JobGetLogsResponse,
-        )
-
-    async def get_transcoders(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobGetTranscodersResponse:
-        """
-        Retrieve all the transcoders statuses for a specific job
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._get(
-            f"/api/jobs/{job_id}/transcoders",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobGetTranscodersResponse,
-        )
-
 
 class JobsResourceWithRawResponse:
     def __init__(self, jobs: JobsResource) -> None:
@@ -801,15 +615,18 @@ class JobsResourceWithRawResponse:
         self.cancel = to_raw_response_wrapper(
             jobs.cancel,
         )
-        self.get_files = to_raw_response_wrapper(
-            jobs.get_files,
-        )
-        self.get_logs = to_raw_response_wrapper(
-            jobs.get_logs,
-        )
-        self.get_transcoders = to_raw_response_wrapper(
-            jobs.get_transcoders,
-        )
+
+    @cached_property
+    def files(self) -> FilesResourceWithRawResponse:
+        return FilesResourceWithRawResponse(self._jobs.files)
+
+    @cached_property
+    def logs(self) -> LogsResourceWithRawResponse:
+        return LogsResourceWithRawResponse(self._jobs.logs)
+
+    @cached_property
+    def transcoders(self) -> TranscodersResourceWithRawResponse:
+        return TranscodersResourceWithRawResponse(self._jobs.transcoders)
 
 
 class AsyncJobsResourceWithRawResponse:
@@ -831,15 +648,18 @@ class AsyncJobsResourceWithRawResponse:
         self.cancel = async_to_raw_response_wrapper(
             jobs.cancel,
         )
-        self.get_files = async_to_raw_response_wrapper(
-            jobs.get_files,
-        )
-        self.get_logs = async_to_raw_response_wrapper(
-            jobs.get_logs,
-        )
-        self.get_transcoders = async_to_raw_response_wrapper(
-            jobs.get_transcoders,
-        )
+
+    @cached_property
+    def files(self) -> AsyncFilesResourceWithRawResponse:
+        return AsyncFilesResourceWithRawResponse(self._jobs.files)
+
+    @cached_property
+    def logs(self) -> AsyncLogsResourceWithRawResponse:
+        return AsyncLogsResourceWithRawResponse(self._jobs.logs)
+
+    @cached_property
+    def transcoders(self) -> AsyncTranscodersResourceWithRawResponse:
+        return AsyncTranscodersResourceWithRawResponse(self._jobs.transcoders)
 
 
 class JobsResourceWithStreamingResponse:
@@ -861,15 +681,18 @@ class JobsResourceWithStreamingResponse:
         self.cancel = to_streamed_response_wrapper(
             jobs.cancel,
         )
-        self.get_files = to_streamed_response_wrapper(
-            jobs.get_files,
-        )
-        self.get_logs = to_streamed_response_wrapper(
-            jobs.get_logs,
-        )
-        self.get_transcoders = to_streamed_response_wrapper(
-            jobs.get_transcoders,
-        )
+
+    @cached_property
+    def files(self) -> FilesResourceWithStreamingResponse:
+        return FilesResourceWithStreamingResponse(self._jobs.files)
+
+    @cached_property
+    def logs(self) -> LogsResourceWithStreamingResponse:
+        return LogsResourceWithStreamingResponse(self._jobs.logs)
+
+    @cached_property
+    def transcoders(self) -> TranscodersResourceWithStreamingResponse:
+        return TranscodersResourceWithStreamingResponse(self._jobs.transcoders)
 
 
 class AsyncJobsResourceWithStreamingResponse:
@@ -891,12 +714,15 @@ class AsyncJobsResourceWithStreamingResponse:
         self.cancel = async_to_streamed_response_wrapper(
             jobs.cancel,
         )
-        self.get_files = async_to_streamed_response_wrapper(
-            jobs.get_files,
-        )
-        self.get_logs = async_to_streamed_response_wrapper(
-            jobs.get_logs,
-        )
-        self.get_transcoders = async_to_streamed_response_wrapper(
-            jobs.get_transcoders,
-        )
+
+    @cached_property
+    def files(self) -> AsyncFilesResourceWithStreamingResponse:
+        return AsyncFilesResourceWithStreamingResponse(self._jobs.files)
+
+    @cached_property
+    def logs(self) -> AsyncLogsResourceWithStreamingResponse:
+        return AsyncLogsResourceWithStreamingResponse(self._jobs.logs)
+
+    @cached_property
+    def transcoders(self) -> AsyncTranscodersResourceWithStreamingResponse:
+        return AsyncTranscodersResourceWithStreamingResponse(self._jobs.transcoders)

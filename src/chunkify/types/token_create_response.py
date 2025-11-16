@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .token import Token
-from .response_ok import ResponseOk
+from .shared.response_ok import ResponseOk
 
 __all__ = ["TokenCreateResponse"]
 

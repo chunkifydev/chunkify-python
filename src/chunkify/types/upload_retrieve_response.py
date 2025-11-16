@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .upload import Upload
-from .response_ok import ResponseOk
+from .shared.response_ok import ResponseOk
 
 __all__ = ["UploadRetrieveResponse"]
 

@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 from .job import Job as Job
-from .file import File as File
 from .token import Token as Token
+from .shared import ResponseOk as ResponseOk, ChunkifyError as ChunkifyError, ResponseError as ResponseError
 from .source import Source as Source
 from .upload import Upload as Upload
 from .project import Project as Project
 from .storage import Storage as Storage
 from .webhook import Webhook as Webhook
+from .api_file import APIFile as APIFile
 from .jpg_param import JpgParam as JpgParam
-from .response_ok import ResponseOk as ResponseOk
 from .notification import Notification as Notification
 from .hls_av1_param import HlsAv1Param as HlsAv1Param
 from .mp4_av1_param import MP4Av1Param as MP4Av1Param
@@ -26,13 +26,11 @@ from .job_create_params import JobCreateParams as JobCreateParams
 from .source_list_params import SourceListParams as SourceListParams
 from .upload_list_params import UploadListParams as UploadListParams
 from .job_create_response import JobCreateResponse as JobCreateResponse
-from .job_get_logs_params import JobGetLogsParams as JobGetLogsParams
 from .project_list_params import ProjectListParams as ProjectListParams
 from .token_create_params import TokenCreateParams as TokenCreateParams
 from .token_list_response import TokenListResponse as TokenListResponse
 from .source_create_params import SourceCreateParams as SourceCreateParams
 from .upload_create_params import UploadCreateParams as UploadCreateParams
-from .job_get_logs_response import JobGetLogsResponse as JobGetLogsResponse
 from .job_retrieve_response import JobRetrieveResponse as JobRetrieveResponse
 from .project_create_params import ProjectCreateParams as ProjectCreateParams
 from .project_list_response import ProjectListResponse as ProjectListResponse
@@ -44,7 +42,6 @@ from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
 from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
 from .file_retrieve_response import FileRetrieveResponse as FileRetrieveResponse
-from .job_get_files_response import JobGetFilesResponse as JobGetFilesResponse
 from .source_create_response import SourceCreateResponse as SourceCreateResponse
 from .upload_create_response import UploadCreateResponse as UploadCreateResponse
 from .project_create_response import ProjectCreateResponse as ProjectCreateResponse
@@ -57,6 +54,5 @@ from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetriev
 from .storage_retrieve_response import StorageRetrieveResponse as StorageRetrieveResponse
 from .webhook_retrieve_response import WebhookRetrieveResponse as WebhookRetrieveResponse
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
-from .job_get_transcoders_response import JobGetTranscodersResponse as JobGetTranscodersResponse
 from .notification_create_response import NotificationCreateResponse as NotificationCreateResponse
 from .notification_retrieve_response import NotificationRetrieveResponse as NotificationRetrieveResponse
