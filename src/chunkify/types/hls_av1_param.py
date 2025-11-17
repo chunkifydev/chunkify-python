@@ -2,25 +2,16 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["HlsAv1Param"]
 
 
 class HlsAv1Param(TypedDict, total=False):
-    audio_bitrate: Required[int]
+    audio_bitrate: int
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
-    """
-
-    name: Required[Literal["hls_av1"]]
-    """Name of the HLS AV1 configuration"""
-
-    video_bitrate: Required[int]
-    """
-    VideoBitrate specifies the video bitrate in bits per second. Must be between
-    100Kbps and 50Mbps.
     """
 
     bufsize: int
@@ -181,6 +172,12 @@ class HlsAv1Param(TypedDict, total=False):
     """
     Seek specifies the timestamp to start processing from (in seconds). Must be a
     positive value.
+    """
+
+    video_bitrate: int
+    """
+    VideoBitrate specifies the video bitrate in bits per second. Must be between
+    100Kbps and 50Mbps.
     """
 
     width: int

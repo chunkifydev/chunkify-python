@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
 __all__ = ["JpgParam"]
 
@@ -14,9 +14,6 @@ class JpgParam(TypedDict, total=False):
     interval=10 extracts frames at 0s, 10s, 20s, etc.). Must be between 1 and 60
     seconds.
     """
-
-    name: Required[Literal["jpg"]]
-    """Name of the JPEG configuration"""
 
     chunk_duration: int
 
