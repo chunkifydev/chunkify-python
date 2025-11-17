@@ -63,4 +63,4 @@ class TranscoderListResponseData(BaseModel):
 
 
 class TranscoderListResponse(ResponseOk):
-    data: Optional[List[TranscoderListResponseData]] = None  # type: ignore
+    data: List[TranscoderListResponseData]

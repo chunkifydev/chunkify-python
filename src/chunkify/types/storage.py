@@ -1,36 +1,34 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-
 from .._models import BaseModel
 
 __all__ = ["Storage"]
 
 
 class Storage(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Unique identifier of the storage configuration"""
 
-    bucket: Optional[str] = None
+    bucket: str
     """Name of the storage bucket"""
 
-    created_at: Optional[str] = None
+    created_at: str
     """Created at timestamp"""
 
-    endpoint: Optional[str] = None
+    endpoint: str
     """Endpoint of the storage provider"""
 
-    location: Optional[str] = None
+    location: str
     """Continent location of the storage (eg. US, EU, ASIA)"""
 
-    provider: Optional[str] = None
+    provider: str
     """Name of the storage provider (e.g. AWS, GCP)"""
 
-    public: Optional[bool] = None
+    public: bool
     """Whether the storage bucket is publicly accessible"""
 
-    region: Optional[str] = None
+    region: str
     """Geographic region where the storage is located"""
 
-    slug: Optional[str] = None
+    slug: str
     """Unique identifier of the storage configuration"""

@@ -9,4 +9,4 @@ __all__ = ["WebhookCreateResponse"]
 
 
 class WebhookCreateResponse(ResponseOk):
-    data: Optional[Webhook] = None  # type: ignore
+    data: Optional[Webhook] = None

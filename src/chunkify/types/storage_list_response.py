@@ -9,4 +9,4 @@ __all__ = ["StorageListResponse"]
 
 
 class StorageListResponse(ResponseOk):
-    data: Optional[List[Storage]] = None  # type: ignore
+    data: Optional[List[Storage]] = None

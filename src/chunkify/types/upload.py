@@ -9,29 +9,29 @@ __all__ = ["Upload"]
 
 
 class Upload(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Unique identifier of the upload"""
 
-    created_at: Optional[str] = None
+    created_at: str
     """Timestamp when the upload was created"""
 
-    error: Optional[ChunkifyError] = None
+    error: ChunkifyError
     """Error message of the upload"""
 
-    expires_at: Optional[str] = None
+    expires_at: str
     """Timestamp when the upload will expire"""
+
+    source_id: str
+    """SourceId is the id of the source that was created from the upload"""
+
+    status: str
+    """Current status of the upload (waiting, completed, failed, expired)"""
+
+    updated_at: str
+    """Timestamp when the upload was updated"""
+
+    upload_url: str
+    """Pre-signed URL where the file should be uploaded to"""
 
     metadata: Optional[Dict[str, str]] = None
     """Additional metadata for the upload"""
-
-    source_id: Optional[str] = None
-    """SourceId is the id of the source that was created from the upload"""
-
-    status: Optional[str] = None
-    """Current status of the upload (waiting, completed, failed, expired)"""
-
-    updated_at: Optional[str] = None
-    """Timestamp when the upload was updated"""
-
-    upload_url: Optional[str] = None
-    """Pre-signed URL where the file should be uploaded to"""

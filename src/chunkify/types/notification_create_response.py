@@ -9,4 +9,4 @@ __all__ = ["NotificationCreateResponse"]
 
 
 class NotificationCreateResponse(ResponseOk):
-    data: Optional[Notification] = None  # type: ignore
+    data: Optional[Notification] = None

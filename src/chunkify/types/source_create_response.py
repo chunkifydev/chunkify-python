@@ -9,4 +9,4 @@ __all__ = ["SourceCreateResponse"]
 
 
 class SourceCreateResponse(ResponseOk):
-    data: Optional[Source] = None  # type: ignore
+    data: Optional[Source] = None

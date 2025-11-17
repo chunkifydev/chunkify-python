@@ -8,17 +8,17 @@ __all__ = ["Project"]
 
 
 class Project(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Id is the unique identifier for the project."""
+
+    name: str
+    """Name of the project"""
+
+    slug: str
+    """Slug is the slug for the project."""
+
+    storage_id: str
+    """StorageId identifier where project files are stored"""
 
     created_at: Optional[str] = None
     """Timestamp when the project was created"""
-
-    name: Optional[str] = None
-    """Name of the project"""
-
-    slug: Optional[str] = None
-    """Slug is the slug for the project."""
-
-    storage_id: Optional[str] = None
-    """StorageId identifier where project files are stored"""
