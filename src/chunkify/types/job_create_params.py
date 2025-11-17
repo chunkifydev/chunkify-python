@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .jpg_param import JpgParam
 from .hls_av1_param import HlsAv1Param
@@ -14,34 +14,11 @@ from .mp4_h264_param import MP4H264Param
 from .mp4_h265_param import MP4H265Param
 from .webm_vp9_param import WebmVp9Param
 
-__all__ = [
-    "JobCreateParams",
-    "FormatJobsHlsAv1",
-    "FormatJobsHlsH264",
-    "FormatJobsHlsH265",
-    "FormatJobsJpg",
-    "FormatJobsMP4Av1",
-    "FormatJobsMP4H264",
-    "FormatJobsMP4H265",
-    "FormatJobsWebmVp9",
-    "Storage",
-    "Transcoder",
-]
+__all__ = ["JobCreateParams", "Format", "Storage", "Transcoder"]
 
 
 class JobCreateParams(TypedDict, total=False):
-    format: Required[
-        Union[
-            FormatJobsHlsAv1,
-            FormatJobsHlsH264,
-            FormatJobsHlsH265,
-            FormatJobsJpg,
-            FormatJobsMP4Av1,
-            FormatJobsMP4H264,
-            FormatJobsMP4H265,
-            FormatJobsWebmVp9,
-        ]
-    ]
+    format: Required[Format]
     """
     Required format configuration, one and only one valid format configuration must
     be provided. If you want to use a format without specifying any configuration,
@@ -73,44 +50,9 @@ class JobCreateParams(TypedDict, total=False):
     """
 
 
-class FormatJobsHlsAv1(HlsAv1Param, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsHlsH264(HlsH264Param, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsHlsH265(HlsH265Param, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsJpg(JpgParam, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsMP4Av1(MP4Av1Param, total=False):
-    name: str  # type: ignore
-    """Name of the format"""
-
-
-class FormatJobsMP4H264(MP4H264Param, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsMP4H265(MP4H265Param, total=False):
-    name: str
-    """Name of the format"""
-
-
-class FormatJobsWebmVp9(WebmVp9Param, total=False):
-    name: str
-    """Name of the format"""
+Format: TypeAlias = Union[
+    HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam, MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param
+]
 
 
 class Storage(TypedDict, total=False):
