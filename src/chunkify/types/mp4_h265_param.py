@@ -81,7 +81,6 @@ class MP4H265Param(TypedDict, total=False):
     movflags: str
 
     name: Literal["mp4_h265"]
-    """Name of the MP4 H265 configuration"""
 
     pixfmt: Literal[
         "yuv410p",

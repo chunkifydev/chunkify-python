@@ -15,7 +15,6 @@ class HlsAv1Param(TypedDict, total=False):
     """
 
     name: Required[Literal["hls_av1"]]
-    """Name of the HLS AV1 configuration"""
 
     video_bitrate: Required[int]
     """
