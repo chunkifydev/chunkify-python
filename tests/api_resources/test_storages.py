@@ -19,17 +19,38 @@ class TestStorages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create(self, client: Chunkify) -> None:
+    def test_method_create_overload_1(self, client: Chunkify) -> None:
         storage = client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
         )
         assert_matches_type(StorageCreateResponse, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Chunkify) -> None:
-        response = client.storages.with_raw_response.create(
+    def test_method_create_with_all_params_overload_1(self, client: Chunkify) -> None:
+        storage = client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
+            public=True,
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_create_overload_1(self, client: Chunkify) -> None:
+        response = client.storages.with_raw_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
         )
 
         assert response.is_closed is True
@@ -39,9 +60,117 @@ class TestStorages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Chunkify) -> None:
+    def test_streaming_response_create_overload_1(self, client: Chunkify) -> None:
         with client.storages.with_streaming_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = response.parse()
+            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_overload_2(self, client: Chunkify) -> None:
+        storage = client.storages.create(
+            provider="chunkify",
+            region="us-east-1",
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Chunkify) -> None:
+        response = client.storages.with_raw_response.create(
+            provider="chunkify",
+            region="us-east-1",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = response.parse()
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Chunkify) -> None:
+        with client.storages.with_streaming_response.create(
+            provider="chunkify",
+            region="us-east-1",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = response.parse()
+            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_overload_3(self, client: Chunkify) -> None:
+        storage = client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_with_all_params_overload_3(self, client: Chunkify) -> None:
+        storage = client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+            public=True,
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_create_overload_3(self, client: Chunkify) -> None:
+        response = client.storages.with_raw_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = response.parse()
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_create_overload_3(self, client: Chunkify) -> None:
+        with client.storages.with_streaming_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -171,17 +300,38 @@ class TestAsyncStorages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncChunkify) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncChunkify) -> None:
         storage = await async_client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
         )
         assert_matches_type(StorageCreateResponse, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.storages.with_raw_response.create(
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
+            public=True,
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_create_overload_1(self, async_client: AsyncChunkify) -> None:
+        response = await async_client.storages.with_raw_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
         )
 
         assert response.is_closed is True
@@ -191,9 +341,117 @@ class TestAsyncStorages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncChunkify) -> None:
         async with async_client.storages.with_streaming_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
             provider="aws",
+            region="us-east-1",
+            secret_access_key="1234567890",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = await response.parse()
+            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.create(
+            provider="chunkify",
+            region="us-east-1",
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncChunkify) -> None:
+        response = await async_client.storages.with_raw_response.create(
+            provider="chunkify",
+            region="us-east-1",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = await response.parse()
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncChunkify) -> None:
+        async with async_client.storages.with_streaming_response.create(
+            provider="chunkify",
+            region="us-east-1",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = await response.parse()
+            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_overload_3(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+            public=True,
+        )
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_create_overload_3(self, async_client: AsyncChunkify) -> None:
+        response = await async_client.storages.with_raw_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = await response.parse()
+        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncChunkify) -> None:
+        async with async_client.storages.with_streaming_response.create(
+            access_key_id="1234567890",
+            bucket="my-bucket",
+            endpoint="https://[id].r2.cloudflarestorage.com",
+            location="US",
+            provider="cloudflare",
+            region="auto",
+            secret_access_key="1234567890",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
