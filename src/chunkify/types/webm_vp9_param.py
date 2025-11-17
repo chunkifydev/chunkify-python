@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["WebmVp9Param"]
 
 
 class WebmVp9Param(TypedDict, total=False):
-    name: Required[Literal["webm_vp9"]]
-    """Name of the WebM VP9 configuration"""
-
     audio_bitrate: int
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
