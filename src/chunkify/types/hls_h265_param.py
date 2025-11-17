@@ -8,13 +8,19 @@ __all__ = ["HlsH265Param"]
 
 
 class HlsH265Param(TypedDict, total=False):
-    name: Required[Literal["hls_h265"]]
-    """Name of the HLS H265 configuration"""
-
-    audio_bitrate: int
+    audio_bitrate: Required[int]
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
+    """
+
+    name: Required[Literal["hls_h265"]]
+    """Name of the HLS H265 configuration"""
+
+    video_bitrate: Required[int]
+    """
+    VideoBitrate specifies the video bitrate in bits per second. Must be between
+    100Kbps and 50Mbps.
     """
 
     bufsize: int
@@ -174,12 +180,6 @@ class HlsH265Param(TypedDict, total=False):
     """
     Seek specifies the timestamp to start processing from (in seconds). Must be a
     positive value.
-    """
-
-    video_bitrate: int
-    """
-    VideoBitrate specifies the video bitrate in bits per second. Must be between
-    100Kbps and 50Mbps.
     """
 
     width: int

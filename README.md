@@ -227,7 +227,11 @@ from chunkify import Chunkify
 client = Chunkify()
 
 job = client.jobs.create(
-    format={"name": "hls_av1"},
+    format={
+        "audio_bitrate": 32000,
+        "name": "hls_av1",
+        "video_bitrate": 100000,
+    },
     source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
     storage={},
 )
