@@ -22,11 +22,7 @@ class TestJobs:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         job = client.jobs.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -36,9 +32,8 @@ class TestJobs:
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         job = client.jobs.create(
             format={
-                "audio_bitrate": 32000,
                 "name": "hls_av1",
-                "video_bitrate": 100000,
+                "audio_bitrate": 32000,
                 "bufsize": 100000,
                 "channels": 1,
                 "crf": 35,
@@ -62,6 +57,7 @@ class TestJobs:
                 "preset": "10",
                 "profilev": "main10",
                 "seek": 1,
+                "video_bitrate": 100000,
                 "width": -2,
             },
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
@@ -85,11 +81,7 @@ class TestJobs:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
 
@@ -102,11 +94,7 @@ class TestJobs:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         ) as response:
             assert not response.is_closed
@@ -301,11 +289,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -315,9 +299,8 @@ class TestAsyncJobs:
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.create(
             format={
-                "audio_bitrate": 32000,
                 "name": "hls_av1",
-                "video_bitrate": 100000,
+                "audio_bitrate": 32000,
                 "bufsize": 100000,
                 "channels": 1,
                 "crf": 35,
@@ -341,6 +324,7 @@ class TestAsyncJobs:
                 "preset": "10",
                 "profilev": "main10",
                 "seek": 1,
+                "video_bitrate": 100000,
                 "width": -2,
             },
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
@@ -364,11 +348,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
 
@@ -381,11 +361,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.create(
-            format={
-                "audio_bitrate": 32000,
-                "name": "hls_av1",
-                "video_bitrate": 100000,
-            },
+            format={"name": "hls_av1"},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         ) as response:
             assert not response.is_closed
