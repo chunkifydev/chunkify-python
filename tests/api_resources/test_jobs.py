@@ -22,7 +22,7 @@ class TestJobs:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         job = client.jobs.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -82,7 +82,7 @@ class TestJobs:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
 
@@ -95,7 +95,7 @@ class TestJobs:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         ) as response:
             assert not response.is_closed
@@ -290,7 +290,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -350,7 +350,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
 
@@ -363,7 +363,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.create(
-            format={},
+            format={"hls_av1": {}},
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         ) as response:
             assert not response.is_closed
