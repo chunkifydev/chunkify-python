@@ -14,7 +14,20 @@ from .mp4_h264_param import MP4H264Param
 from .mp4_h265_param import MP4H265Param
 from .webm_vp9_param import WebmVp9Param
 
-__all__ = ["JobCreateParams", "Format", "Storage", "Transcoder"]
+__all__ = [
+    "JobCreateParams",
+    "Format",
+    "FormatHlsAv1",
+    "FormatHlsH264",
+    "FormatHlsH265",
+    "FormatJpg",
+    "FormatMP4Av1",
+    "FormatMP4H264",
+    "FormatMP4H265",
+    "FormatWebmVp9",
+    "Storage",
+    "Transcoder",
+]
 
 
 class JobCreateParams(TypedDict, total=False):
@@ -50,8 +63,48 @@ class JobCreateParams(TypedDict, total=False):
     """
 
 
+class FormatHlsAv1(TypedDict, total=False):
+    hls_av1: HlsAv1Param
+    """HLS AV1 configuration"""
+
+
+class FormatHlsH264(TypedDict, total=False):
+    hls_h264: HlsH264Param
+    """HLS H264 configuration"""
+
+
+class FormatHlsH265(TypedDict, total=False):
+    hls_h265: HlsH265Param
+    """HLS H265 configuration"""
+
+
+class FormatJpg(TypedDict, total=False):
+    jpg: JpgParam
+    """JPEG configuration"""
+
+
+class FormatMP4Av1(TypedDict, total=False):
+    mp4_av1: MP4Av1Param
+    """AV1 configuration"""
+
+
+class FormatMP4H264(TypedDict, total=False):
+    mp4_h264: MP4H264Param
+    """H264 configuration"""
+
+
+class FormatMP4H265(TypedDict, total=False):
+    mp4_h265: MP4H265Param
+    """H265 configuration"""
+
+
+class FormatWebmVp9(TypedDict, total=False):
+    webm_vp9: WebmVp9Param
+    """VP9 configuration"""
+
+
 Format: TypeAlias = Union[
-    HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam, MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param
+    FormatHlsAv1, FormatHlsH264, FormatHlsH265, FormatJpg, FormatMP4Av1, FormatMP4H264, FormatMP4H265, FormatWebmVp9
 ]
 
 

@@ -37,7 +37,7 @@ client = Chunkify(
 
 job = client.jobs.create(
     format={
-        "mp": {
+        "jpg": {
             "width": 1920,
             "height": 1080,
             "crf": 21,
@@ -73,7 +73,7 @@ client = AsyncChunkify(
 async def main() -> None:
     job = await client.jobs.create(
         format={
-            "mp": {
+            "jpg": {
                 "width": 1920,
                 "height": 1080,
                 "crf": 21,
@@ -118,7 +118,7 @@ async def main() -> None:
     ) as client:
         job = await client.jobs.create(
             format={
-                "mp": {
+                "jpg": {
                     "width": 1920,
                     "height": 1080,
                     "crf": 21,
