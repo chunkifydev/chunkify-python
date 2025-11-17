@@ -37,7 +37,7 @@ client = Chunkify(
 
 job = client.jobs.create(
     format={
-        "mp4_h264": {
+        "mp": {
             "width": 1920,
             "height": 1080,
             "crf": 21,
@@ -73,7 +73,7 @@ client = AsyncChunkify(
 async def main() -> None:
     job = await client.jobs.create(
         format={
-            "mp4_h264": {
+            "mp": {
                 "width": 1920,
                 "height": 1080,
                 "crf": 21,
@@ -118,7 +118,7 @@ async def main() -> None:
     ) as client:
         job = await client.jobs.create(
             format={
-                "mp4_h264": {
+                "mp": {
                     "width": 1920,
                     "height": 1080,
                     "crf": 21,
@@ -229,8 +229,9 @@ client = Chunkify()
 job = client.jobs.create(
     format={},
     source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
+    storage={},
 )
-print(job.format)
+print(job.storage)
 ```
 
 ## Handling errors
