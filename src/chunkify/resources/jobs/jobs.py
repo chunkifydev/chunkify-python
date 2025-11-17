@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict
 
 import httpx
 
@@ -85,16 +85,7 @@ class JobsResource(SyncAPIResource):
     def create(
         self,
         *,
-        format: Union[
-            job_create_params.FormatJobsHlsAv1,
-            job_create_params.FormatJobsHlsH264,
-            job_create_params.FormatJobsHlsH265,
-            job_create_params.FormatJobsJpg,
-            job_create_params.FormatJobsMP4Av1,
-            job_create_params.FormatJobsMP4H264,
-            job_create_params.FormatJobsMP4H265,
-            job_create_params.FormatJobsWebmVp9,
-        ],
+        format: job_create_params.Format,
         source_id: str,
         hls_manifest_id: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
@@ -367,16 +358,7 @@ class AsyncJobsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        format: Union[
-            job_create_params.FormatJobsHlsAv1,
-            job_create_params.FormatJobsHlsH264,
-            job_create_params.FormatJobsHlsH265,
-            job_create_params.FormatJobsJpg,
-            job_create_params.FormatJobsMP4Av1,
-            job_create_params.FormatJobsMP4H264,
-            job_create_params.FormatJobsMP4H265,
-            job_create_params.FormatJobsWebmVp9,
-        ],
+        format: job_create_params.Format,
         source_id: str,
         hls_manifest_id: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
