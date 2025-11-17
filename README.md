@@ -36,7 +36,13 @@ client = Chunkify(
 )
 
 job = client.jobs.create(
-    format={"hls_av1": {}},
+    format={
+        "jpg": {
+            "width": 1920,
+            "height": 1080,
+            "crf": 21,
+        }
+    },
     source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
     transcoder={
         "quantity": 4,
@@ -66,7 +72,13 @@ client = AsyncChunkify(
 
 async def main() -> None:
     job = await client.jobs.create(
-        format={"hls_av1": {}},
+        format={
+            "jpg": {
+                "width": 1920,
+                "height": 1080,
+                "crf": 21,
+            }
+        },
         source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
         transcoder={
             "quantity": 4,
@@ -105,7 +117,13 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         job = await client.jobs.create(
-            format={"hls_av1": {}},
+            format={
+                "jpg": {
+                    "width": 1920,
+                    "height": 1080,
+                    "crf": 21,
+                }
+            },
             source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
             transcoder={
                 "quantity": 4,
@@ -209,7 +227,11 @@ from chunkify import Chunkify
 client = Chunkify()
 
 job = client.jobs.create(
-    format={"hls_av1": {}},
+    format={
+        "audio_bitrate": 32000,
+        "name": "hls_av1",
+        "video_bitrate": 100000,
+    },
     source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
     storage={},
 )

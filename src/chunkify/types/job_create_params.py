@@ -14,25 +14,16 @@ from .mp4_h264_param import MP4H264Param
 from .mp4_h265_param import MP4H265Param
 from .webm_vp9_param import WebmVp9Param
 
-__all__ = [
-    "JobCreateParams",
-    "Format",
-    "FormatHlsAv1",
-    "FormatHlsH264",
-    "FormatHlsH265",
-    "FormatJpg",
-    "FormatMP4Av1",
-    "FormatMP4H264",
-    "FormatMP4H265",
-    "FormatWebmVp9",
-    "Storage",
-    "Transcoder",
-]
+__all__ = ["JobCreateParams", "Format", "Storage", "Transcoder"]
 
 
 class JobCreateParams(TypedDict, total=False):
     format: Required[Format]
-    """Required format configuration..."""
+    """
+    Required format configuration, one and only one valid format configuration must
+    be provided. If you want to use a format without specifying any configuration,
+    use an empty object in the corresponding field.
+    """
 
     source_id: Required[str]
     """The ID of the source file to transcode"""
@@ -59,48 +50,8 @@ class JobCreateParams(TypedDict, total=False):
     """
 
 
-class FormatHlsAv1(TypedDict, total=False):
-    hls_av1: Required[HlsAv1Param]
-    """FFmpeg encoding parameters specific to HLS with AV1 encoding."""
-
-
-class FormatHlsH264(TypedDict, total=False):
-    hls_h264: Required[HlsH264Param]
-    """FFmpeg encoding parameters specific to HLS with H.264 encoding."""
-
-
-class FormatHlsH265(TypedDict, total=False):
-    hls_h265: Required[HlsH265Param]
-    """FFmpeg encoding parameters specific to HLS with H.265 encoding."""
-
-
-class FormatJpg(TypedDict, total=False):
-    jpg: Required[JpgParam]
-    """FFmpeg encoding parameters specific to JPEG image extraction."""
-
-
-class FormatMP4Av1(TypedDict, total=False):
-    mp4_av1: Required[MP4Av1Param]
-    """FFmpeg encoding parameters specific to MP4 with AV1 encoding."""
-
-
-class FormatMP4H264(TypedDict, total=False):
-    mp4_h264: Required[MP4H264Param]
-    """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
-
-
-class FormatMP4H265(TypedDict, total=False):
-    mp4_h265: Required[MP4H265Param]
-    """FFmpeg encoding parameters specific to MP4 with H.265 encoding."""
-
-
-class FormatWebmVp9(TypedDict, total=False):
-    webm_vp9: Required[WebmVp9Param]
-    """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
-
-
 Format: TypeAlias = Union[
-    FormatHlsAv1, FormatHlsH264, FormatHlsH265, FormatJpg, FormatMP4Av1, FormatMP4H264, FormatMP4H265, FormatWebmVp9
+    HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam, MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param
 ]
 
 

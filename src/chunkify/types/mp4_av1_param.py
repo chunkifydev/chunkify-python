@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["MP4Av1Param"]
 
 
 class MP4Av1Param(TypedDict, total=False):
+    name: Required[Literal["mp4_av1"]]
+    """Name of the MP4 AV1 configuration"""
+
     audio_bitrate: int
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
