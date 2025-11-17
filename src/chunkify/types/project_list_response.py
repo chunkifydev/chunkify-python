@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 
 from .project import Project
 from .shared.response_ok import ResponseOk
@@ -9,4 +9,4 @@ __all__ = ["ProjectListResponse"]
 
 
 class ProjectListResponse(ResponseOk):
-    data: Optional[List[Project]] = None  # type: ignore
+    data: List[Project]

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 
 from .._models import BaseModel
 
@@ -8,17 +8,17 @@ __all__ = ["Webhook"]
 
 
 class Webhook(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Unique identifier of the webhook"""
 
-    enabled: Optional[bool] = None
+    enabled: bool
     """Whether the webhook is currently enabled"""
 
-    events: Optional[List[str]] = None
+    events: List[str]
     """Array of event types this webhook subscribes to"""
 
-    project_id: Optional[str] = None
+    project_id: str
     """ID of the project this webhook belongs to"""
 
-    url: Optional[str] = None
+    url: str
     """URL where webhook events will be sent"""

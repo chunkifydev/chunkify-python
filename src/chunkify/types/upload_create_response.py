@@ -9,4 +9,4 @@ __all__ = ["UploadCreateResponse"]
 
 
 class UploadCreateResponse(ResponseOk):
-    data: Optional[Upload] = None  # type: ignore
+    data: Optional[Upload] = None

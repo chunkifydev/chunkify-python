@@ -9,4 +9,4 @@ __all__ = ["ProjectCreateResponse"]
 
 
 class ProjectCreateResponse(ResponseOk):
-    data: Optional[Project] = None  # type: ignore
+    data: Optional[Project] = None

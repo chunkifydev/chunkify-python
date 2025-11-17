@@ -9,4 +9,4 @@ __all__ = ["TokenListResponse"]
 
 
 class TokenListResponse(ResponseOk):
-    data: Optional[List[Token]] = None  # type: ignore
+    data: Optional[List[Token]] = None

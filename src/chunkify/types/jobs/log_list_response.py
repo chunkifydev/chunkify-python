@@ -9,24 +9,24 @@ __all__ = ["LogListResponse", "LogListResponseData"]
 
 
 class LogListResponseData(BaseModel):
-    attributes: Optional[object] = None
+    attributes: object
     """Additional structured data attached to the log"""
+
+    level: str
+    """Log level (e.g. "info", "error", "debug")"""
+
+    msg: str
+    """The log message content"""
+
+    service: str
+    """Name of the service that generated the log"""
+
+    time: str
+    """Timestamp when the log was created"""
 
     job_id: Optional[str] = None
     """Optional ID of the job this log is associated with"""
 
-    level: Optional[str] = None
-    """Log level (e.g. "info", "error", "debug")"""
-
-    msg: Optional[str] = None
-    """The log message content"""
-
-    service: Optional[str] = None
-    """Name of the service that generated the log"""
-
-    time: Optional[str] = None
-    """Timestamp when the log was created"""
-
 
 class LogListResponse(ResponseOk):
-    data: Optional[List[LogListResponseData]] = None  # type: ignore
+    data: List[LogListResponseData]

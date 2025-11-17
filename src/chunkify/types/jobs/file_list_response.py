@@ -9,4 +9,4 @@ __all__ = ["FileListResponse"]
 
 
 class FileListResponse(ResponseOk):
-    data: Optional[List[APIFile]] = None  # type: ignore
+    data: Optional[List[APIFile]] = None

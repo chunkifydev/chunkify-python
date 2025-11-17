@@ -9,4 +9,4 @@ __all__ = ["StorageCreateResponse"]
 
 
 class StorageCreateResponse(ResponseOk):
-    data: Optional[Storage] = None  # type: ignore
+    data: Optional[Storage] = None

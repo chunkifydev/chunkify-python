@@ -41,20 +41,41 @@ class Transcoder(BaseModel):
 
 
 class Job(BaseModel):
-    id: Optional[str] = None
+    id: str
     """Unique identifier for the job"""
 
-    billable_time: Optional[int] = None
+    billable_time: int
     """Billable time in seconds"""
 
-    created_at: Optional[str] = None
+    created_at: str
     """Creation timestamp"""
+
+    format: Format
+    """A template defines the transcoding parameters and settings for a job"""
+
+    progress: float
+    """Progress percentage of the job (0-100)"""
+
+    source_id: str
+    """ID of the source video being transcoded"""
+
+    status: str
+    """
+    Current status of the job (e.g., "queued", "ingesting","transcoding",
+    "downloading", "merging", "uploading", "failed", "completed")
+    """
+
+    storage: Storage
+    """Storage settings for where the job output will be saved"""
+
+    transcoder: Transcoder
+    """The transcoder configuration for a job"""
+
+    updated_at: str
+    """Last update timestamp"""
 
     error: Optional[ChunkifyError] = None
     """Error message for the job"""
-
-    format: Optional[Format] = None
-    """A template defines the transcoding parameters and settings for a job"""
 
     hls_manifest_id: Optional[str] = None
     """HLS manifest ID"""
@@ -62,26 +83,5 @@ class Job(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     """Additional metadata for the job"""
 
-    progress: Optional[float] = None
-    """Progress percentage of the job (0-100)"""
-
-    source_id: Optional[str] = None
-    """ID of the source video being transcoded"""
-
     started_at: Optional[str] = None
     """When the job started processing"""
-
-    status: Optional[str] = None
-    """
-    Current status of the job (e.g., "queued", "ingesting","transcoding",
-    "downloading", "merging", "uploading", "failed", "completed")
-    """
-
-    storage: Optional[Storage] = None
-    """Storage settings for where the job output will be saved"""
-
-    transcoder: Optional[Transcoder] = None
-    """The transcoder configuration for a job"""
-
-    updated_at: Optional[str] = None
-    """Last update timestamp"""
