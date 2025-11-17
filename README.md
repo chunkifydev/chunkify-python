@@ -37,11 +37,9 @@ client = Chunkify(
 
 job = client.jobs.create(
     format={
-        "jpg": {
-            "width": 1920,
-            "height": 1080,
-            "crf": 21,
-        }
+        "audio_bitrate": 32000,
+        "name": "hls_av1",
+        "video_bitrate": 100000,
     },
     source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
     transcoder={
@@ -73,11 +71,9 @@ client = AsyncChunkify(
 async def main() -> None:
     job = await client.jobs.create(
         format={
-            "jpg": {
-                "width": 1920,
-                "height": 1080,
-                "crf": 21,
-            }
+            "audio_bitrate": 32000,
+            "name": "hls_av1",
+            "video_bitrate": 100000,
         },
         source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
         transcoder={
@@ -118,11 +114,9 @@ async def main() -> None:
     ) as client:
         job = await client.jobs.create(
             format={
-                "jpg": {
-                    "width": 1920,
-                    "height": 1080,
-                    "crf": 21,
-                }
+                "audio_bitrate": 32000,
+                "name": "hls_av1",
+                "video_bitrate": 100000,
             },
             source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
             transcoder={

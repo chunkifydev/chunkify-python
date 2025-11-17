@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["MP4H265Param"]
 
 
 class MP4H265Param(TypedDict, total=False):
+    name: Required[Literal["mp4_h265"]]
+
     audio_bitrate: int
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
@@ -79,8 +81,6 @@ class MP4H265Param(TypedDict, total=False):
     """
 
     movflags: str
-
-    name: Literal["mp4_h265"]
 
     pixfmt: Literal[
         "yuv410p",
