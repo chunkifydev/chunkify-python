@@ -30,6 +30,7 @@ from .project_list_params import ProjectListParams as ProjectListParams
 from .token_create_params import TokenCreateParams as TokenCreateParams
 from .token_list_response import TokenListResponse as TokenListResponse
 from .source_create_params import SourceCreateParams as SourceCreateParams
+from .unwrap_webhook_event import UnwrapWebhookEvent as UnwrapWebhookEvent
 from .upload_create_params import UploadCreateParams as UploadCreateParams
 from .job_retrieve_response import JobRetrieveResponse as JobRetrieveResponse
 from .project_create_params import ProjectCreateParams as ProjectCreateParams
@@ -44,6 +45,7 @@ from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
 from .file_retrieve_response import FileRetrieveResponse as FileRetrieveResponse
 from .source_create_response import SourceCreateResponse as SourceCreateResponse
 from .upload_create_response import UploadCreateResponse as UploadCreateResponse
+from .new_event_webhook_event import NewEventWebhookEvent as NewEventWebhookEvent
 from .project_create_response import ProjectCreateResponse as ProjectCreateResponse
 from .storage_create_response import StorageCreateResponse as StorageCreateResponse
 from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse

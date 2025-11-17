@@ -60,12 +60,14 @@ class Chunkify(SyncAPIClient):
     # client options
     project_access_token: str | None
     team_access_token: str | None
+    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         project_access_token: str | None = None,
         team_access_token: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -90,6 +92,7 @@ class Chunkify(SyncAPIClient):
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `project_access_token` from `CHUNKIFY_TOKEN`
         - `team_access_token` from `CHUNKIFY_TEAM_TOKEN`
+        - `webhook_secret` from `CHUNKIFY_WEBHOOK_SECRET`
         """
         if project_access_token is None:
             project_access_token = os.environ.get("CHUNKIFY_TOKEN")
@@ -98,6 +101,10 @@ class Chunkify(SyncAPIClient):
         if team_access_token is None:
             team_access_token = os.environ.get("CHUNKIFY_TEAM_TOKEN")
         self.team_access_token = team_access_token
+
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("CHUNKIFY_WEBHOOK_SECRET")
+        self.webhook_secret = webhook_secret
 
         if base_url is None:
             base_url = os.environ.get("CHUNKIFY_BASE_URL")
@@ -181,6 +188,7 @@ class Chunkify(SyncAPIClient):
         *,
         project_access_token: str | None = None,
         team_access_token: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -216,6 +224,7 @@ class Chunkify(SyncAPIClient):
         return self.__class__(
             project_access_token=project_access_token or self.project_access_token,
             team_access_token=team_access_token or self.team_access_token,
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -279,12 +288,14 @@ class AsyncChunkify(AsyncAPIClient):
     # client options
     project_access_token: str | None
     team_access_token: str | None
+    webhook_secret: str | None
 
     def __init__(
         self,
         *,
         project_access_token: str | None = None,
         team_access_token: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -309,6 +320,7 @@ class AsyncChunkify(AsyncAPIClient):
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `project_access_token` from `CHUNKIFY_TOKEN`
         - `team_access_token` from `CHUNKIFY_TEAM_TOKEN`
+        - `webhook_secret` from `CHUNKIFY_WEBHOOK_SECRET`
         """
         if project_access_token is None:
             project_access_token = os.environ.get("CHUNKIFY_TOKEN")
@@ -317,6 +329,10 @@ class AsyncChunkify(AsyncAPIClient):
         if team_access_token is None:
             team_access_token = os.environ.get("CHUNKIFY_TEAM_TOKEN")
         self.team_access_token = team_access_token
+
+        if webhook_secret is None:
+            webhook_secret = os.environ.get("CHUNKIFY_WEBHOOK_SECRET")
+        self.webhook_secret = webhook_secret
 
         if base_url is None:
             base_url = os.environ.get("CHUNKIFY_BASE_URL")
@@ -400,6 +416,7 @@ class AsyncChunkify(AsyncAPIClient):
         *,
         project_access_token: str | None = None,
         team_access_token: str | None = None,
+        webhook_secret: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -435,6 +452,7 @@ class AsyncChunkify(AsyncAPIClient):
         return self.__class__(
             project_access_token=project_access_token or self.project_access_token,
             team_access_token=team_access_token or self.team_access_token,
+            webhook_secret=webhook_secret or self.webhook_secret,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,

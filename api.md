@@ -192,6 +192,8 @@ from chunkify.types import (
     WebhookCreateResponse,
     WebhookRetrieveResponse,
     WebhookListResponse,
+    NewEventWebhookEvent,
+    UnwrapWebhookEvent,
 )
 ```
 
