@@ -16,7 +16,6 @@ class JpgParam(TypedDict, total=False):
     """
 
     name: Required[Literal["jpg"]]
-    """Name of the JPEG configuration"""
 
     chunk_duration: int
 

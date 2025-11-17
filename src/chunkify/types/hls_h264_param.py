@@ -15,7 +15,6 @@ class HlsH264Param(TypedDict, total=False):
     """
 
     name: Required[Literal["hls_h264"]]
-    """Name of the HLS H264 configuration"""
 
     video_bitrate: Required[int]
     """
