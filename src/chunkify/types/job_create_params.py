@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict
-from typing_extensions import Literal, Required, TypedDict
+from typing import Dict, Union
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .jpg_param import JpgParam
 from .hls_av1_param import HlsAv1Param
@@ -50,30 +50,9 @@ class JobCreateParams(TypedDict, total=False):
     """
 
 
-class Format(TypedDict, total=False):
-    hls_av1: HlsAv1Param
-    """FFmpeg encoding parameters specific to HLS with AV1 encoding."""
-
-    hls_h264: HlsH264Param
-    """FFmpeg encoding parameters specific to HLS with H.264 encoding."""
-
-    hls_h265: HlsH265Param
-    """FFmpeg encoding parameters specific to HLS with H.265 encoding."""
-
-    jpg: JpgParam
-    """FFmpeg encoding parameters specific to JPEG image extraction."""
-
-    mp4_av1: MP4Av1Param
-    """FFmpeg encoding parameters specific to MP4 with AV1 encoding."""
-
-    mp4_h264: MP4H264Param
-    """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
-
-    mp4_h265: MP4H265Param
-    """FFmpeg encoding parameters specific to MP4 with H.265 encoding."""
-
-    webm_vp9: WebmVp9Param
-    """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
+Format: TypeAlias = Union[
+    HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam, MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param
+]
 
 
 class Storage(TypedDict, total=False):
