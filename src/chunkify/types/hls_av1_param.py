@@ -8,13 +8,13 @@ __all__ = ["HlsAv1Param"]
 
 
 class HlsAv1Param(TypedDict, total=False):
+    id: Required[Literal["hls_av1"]]
+
     audio_bitrate: Required[int]
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
     """
-
-    name: Required[Literal["hls_av1"]]
 
     video_bitrate: Required[int]
     """

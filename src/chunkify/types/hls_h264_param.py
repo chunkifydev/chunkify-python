@@ -8,13 +8,13 @@ __all__ = ["HlsH264Param"]
 
 
 class HlsH264Param(TypedDict, total=False):
+    id: Required[Literal["hls_h264"]]
+
     audio_bitrate: Required[int]
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
     """
-
-    name: Required[Literal["hls_h264"]]
 
     video_bitrate: Required[int]
     """
