@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Type, cast
 
 import httpx
 
@@ -33,6 +33,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._wrappers import DataWrapper
 from ...types.job import Job
 from .transcoders import (
     TranscodersResource,
@@ -44,8 +45,6 @@ from .transcoders import (
 )
 from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.job_create_response import JobCreateResponse
-from ...types.job_retrieve_response import JobRetrieveResponse
 
 __all__ = ["JobsResource", "AsyncJobsResource"]
 
@@ -97,7 +96,7 @@ class JobsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobCreateResponse:
+    ) -> Job:
         """
         Create a new video processing job with specified parameters
 
@@ -143,9 +142,13 @@ class JobsResource(SyncAPIResource):
                 job_create_params.JobCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Job]._unwrapper,
             ),
-            cast_to=JobCreateResponse,
+            cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
     def retrieve(
@@ -158,7 +161,7 @@ class JobsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobRetrieveResponse:
+    ) -> Job:
         """
         Retrieve details of a specific job
 
@@ -176,9 +179,13 @@ class JobsResource(SyncAPIResource):
         return self._get(
             f"/api/jobs/{job_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Job]._unwrapper,
             ),
-            cast_to=JobRetrieveResponse,
+            cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
     def list(
@@ -370,7 +377,7 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobCreateResponse:
+    ) -> Job:
         """
         Create a new video processing job with specified parameters
 
@@ -416,9 +423,13 @@ class AsyncJobsResource(AsyncAPIResource):
                 job_create_params.JobCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Job]._unwrapper,
             ),
-            cast_to=JobCreateResponse,
+            cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
     async def retrieve(
@@ -431,7 +442,7 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobRetrieveResponse:
+    ) -> Job:
         """
         Retrieve details of a specific job
 
@@ -449,9 +460,13 @@ class AsyncJobsResource(AsyncAPIResource):
         return await self._get(
             f"/api/jobs/{job_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Job]._unwrapper,
             ),
-            cast_to=JobRetrieveResponse,
+            cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
     def list(

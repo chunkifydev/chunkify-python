@@ -9,11 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import (
-    Notification,
-    NotificationCreateResponse,
-    NotificationRetrieveResponse,
-)
+from chunkify.types import Notification
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -30,7 +26,7 @@ class TestNotifications:
             object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
-        assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -44,7 +40,7 @@ class TestNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -58,7 +54,7 @@ class TestNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+            assert_matches_type(Notification, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -68,7 +64,7 @@ class TestNotifications:
         notification = client.notifications.retrieve(
             "notificationId",
         )
-        assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -80,7 +76,7 @@ class TestNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -92,7 +88,7 @@ class TestNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+            assert_matches_type(Notification, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -210,7 +206,7 @@ class TestAsyncNotifications:
             object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
-        assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -224,7 +220,7 @@ class TestAsyncNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -238,7 +234,7 @@ class TestAsyncNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationCreateResponse, notification, path=["response"])
+            assert_matches_type(Notification, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -248,7 +244,7 @@ class TestAsyncNotifications:
         notification = await async_client.notifications.retrieve(
             "notificationId",
         )
-        assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -260,7 +256,7 @@ class TestAsyncNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+        assert_matches_type(Notification, notification, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -272,7 +268,7 @@ class TestAsyncNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationRetrieveResponse, notification, path=["response"])
+            assert_matches_type(Notification, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

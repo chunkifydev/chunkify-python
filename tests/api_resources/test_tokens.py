@@ -9,7 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import TokenListResponse, TokenCreateResponse
+from chunkify.types import Token, TokenListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestTokens:
         token = client.tokens.create(
             scope="project",
         )
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -33,7 +33,7 @@ class TestTokens:
             name="My Token",
             project_id="proj_A1cce6120E56e7Tu9ioP09Nhjk1",
         )
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -45,7 +45,7 @@ class TestTokens:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         token = response.parse()
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -57,7 +57,7 @@ class TestTokens:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             token = response.parse()
-            assert_matches_type(TokenCreateResponse, token, path=["response"])
+            assert_matches_type(Token, token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -143,7 +143,7 @@ class TestAsyncTokens:
         token = await async_client.tokens.create(
             scope="project",
         )
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -153,7 +153,7 @@ class TestAsyncTokens:
             name="My Token",
             project_id="proj_A1cce6120E56e7Tu9ioP09Nhjk1",
         )
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -165,7 +165,7 @@ class TestAsyncTokens:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         token = await response.parse()
-        assert_matches_type(TokenCreateResponse, token, path=["response"])
+        assert_matches_type(Token, token, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -177,7 +177,7 @@ class TestAsyncTokens:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             token = await response.parse()
-            assert_matches_type(TokenCreateResponse, token, path=["response"])
+            assert_matches_type(Token, token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

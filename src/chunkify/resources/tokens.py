@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Type, cast
 from typing_extensions import Literal
 
 import httpx
@@ -17,9 +18,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
+from ..types.token import Token
 from .._base_client import make_request_options
 from ..types.token_list_response import TokenListResponse
-from ..types.token_create_response import TokenCreateResponse
 
 __all__ = ["TokensResource", "AsyncTokensResource"]
 
@@ -56,7 +58,7 @@ class TokensResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenCreateResponse:
+    ) -> Token:
         """
         Create a new access token for either account-wide or project-specific access.
         Project tokens require a valid project slug.
@@ -88,9 +90,13 @@ class TokensResource(SyncAPIResource):
                 token_create_params.TokenCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Token]._unwrapper,
             ),
-            cast_to=TokenCreateResponse,
+            cast_to=cast(Type[Token], DataWrapper[Token]),
         )
 
     def list(
@@ -186,7 +192,7 @@ class AsyncTokensResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenCreateResponse:
+    ) -> Token:
         """
         Create a new access token for either account-wide or project-specific access.
         Project tokens require a valid project slug.
@@ -218,9 +224,13 @@ class AsyncTokensResource(AsyncAPIResource):
                 token_create_params.TokenCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Token]._unwrapper,
             ),
-            cast_to=TokenCreateResponse,
+            cast_to=cast(Type[Token], DataWrapper[Token]),
         )
 
     async def list(

@@ -9,7 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import StorageListResponse, StorageCreateResponse, StorageRetrieveResponse
+from chunkify.types import Storage, StorageListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +27,7 @@ class TestStorages:
             region="us-east-1",
             secret_access_key="1234567890",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -40,7 +40,7 @@ class TestStorages:
             secret_access_key="1234567890",
             public=True,
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -56,7 +56,7 @@ class TestStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -72,7 +72,7 @@ class TestStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -83,7 +83,7 @@ class TestStorages:
             provider="chunkify",
             region="us-east-1",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -96,7 +96,7 @@ class TestStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -109,7 +109,7 @@ class TestStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -125,7 +125,7 @@ class TestStorages:
             region="auto",
             secret_access_key="1234567890",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -140,7 +140,7 @@ class TestStorages:
             secret_access_key="1234567890",
             public=True,
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -158,7 +158,7 @@ class TestStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -176,7 +176,7 @@ class TestStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -186,7 +186,7 @@ class TestStorages:
         storage = client.storages.retrieve(
             "storageId",
         )
-        assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -198,7 +198,7 @@ class TestStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = response.parse()
-        assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -210,7 +210,7 @@ class TestStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = response.parse()
-            assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -308,7 +308,7 @@ class TestAsyncStorages:
             region="us-east-1",
             secret_access_key="1234567890",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -321,7 +321,7 @@ class TestAsyncStorages:
             secret_access_key="1234567890",
             public=True,
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -337,7 +337,7 @@ class TestAsyncStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = await response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -353,7 +353,7 @@ class TestAsyncStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = await response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -364,7 +364,7 @@ class TestAsyncStorages:
             provider="chunkify",
             region="us-east-1",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -377,7 +377,7 @@ class TestAsyncStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = await response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -390,7 +390,7 @@ class TestAsyncStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = await response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -406,7 +406,7 @@ class TestAsyncStorages:
             region="auto",
             secret_access_key="1234567890",
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -421,7 +421,7 @@ class TestAsyncStorages:
             secret_access_key="1234567890",
             public=True,
         )
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -439,7 +439,7 @@ class TestAsyncStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = await response.parse()
-        assert_matches_type(StorageCreateResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -457,7 +457,7 @@ class TestAsyncStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = await response.parse()
-            assert_matches_type(StorageCreateResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -467,7 +467,7 @@ class TestAsyncStorages:
         storage = await async_client.storages.retrieve(
             "storageId",
         )
-        assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -479,7 +479,7 @@ class TestAsyncStorages:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         storage = await response.parse()
-        assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+        assert_matches_type(Storage, storage, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -491,7 +491,7 @@ class TestAsyncStorages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             storage = await response.parse()
-            assert_matches_type(StorageRetrieveResponse, storage, path=["response"])
+            assert_matches_type(Storage, storage, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

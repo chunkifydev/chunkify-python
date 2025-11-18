@@ -9,11 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import (
-    Upload,
-    UploadCreateResponse,
-    UploadRetrieveResponse,
-)
+from chunkify.types import Upload
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,7 +22,7 @@ class TestUploads:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         upload = client.uploads.create()
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -38,7 +34,7 @@ class TestUploads:
             },
             validity_timeout=3600,
         )
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -48,7 +44,7 @@ class TestUploads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         upload = response.parse()
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -58,7 +54,7 @@ class TestUploads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             upload = response.parse()
-            assert_matches_type(UploadCreateResponse, upload, path=["response"])
+            assert_matches_type(Upload, upload, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -68,7 +64,7 @@ class TestUploads:
         upload = client.uploads.retrieve(
             "uploadId",
         )
-        assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -80,7 +76,7 @@ class TestUploads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         upload = response.parse()
-        assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -92,7 +88,7 @@ class TestUploads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             upload = response.parse()
-            assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+            assert_matches_type(Upload, upload, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -202,7 +198,7 @@ class TestAsyncUploads:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.create()
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -214,7 +210,7 @@ class TestAsyncUploads:
             },
             validity_timeout=3600,
         )
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -224,7 +220,7 @@ class TestAsyncUploads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         upload = await response.parse()
-        assert_matches_type(UploadCreateResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -234,7 +230,7 @@ class TestAsyncUploads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             upload = await response.parse()
-            assert_matches_type(UploadCreateResponse, upload, path=["response"])
+            assert_matches_type(Upload, upload, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -244,7 +240,7 @@ class TestAsyncUploads:
         upload = await async_client.uploads.retrieve(
             "uploadId",
         )
-        assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -256,7 +252,7 @@ class TestAsyncUploads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         upload = await response.parse()
-        assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+        assert_matches_type(Upload, upload, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -268,7 +264,7 @@ class TestAsyncUploads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             upload = await response.parse()
-            assert_matches_type(UploadRetrieveResponse, upload, path=["response"])
+            assert_matches_type(Upload, upload, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

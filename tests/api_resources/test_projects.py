@@ -10,9 +10,8 @@ import pytest
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
 from chunkify.types import (
+    Project,
     ProjectListResponse,
-    ProjectCreateResponse,
-    ProjectRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,7 +26,7 @@ class TestProjects:
         project = client.projects.create(
             name="My Project",
         )
-        assert_matches_type(ProjectCreateResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -39,7 +38,7 @@ class TestProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = response.parse()
-        assert_matches_type(ProjectCreateResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -51,7 +50,7 @@ class TestProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = response.parse()
-            assert_matches_type(ProjectCreateResponse, project, path=["response"])
+            assert_matches_type(Project, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -61,7 +60,7 @@ class TestProjects:
         project = client.projects.retrieve(
             "projectId",
         )
-        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -73,7 +72,7 @@ class TestProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = response.parse()
-        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -85,7 +84,7 @@ class TestProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = response.parse()
-            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+            assert_matches_type(Project, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -240,7 +239,7 @@ class TestAsyncProjects:
         project = await async_client.projects.create(
             name="My Project",
         )
-        assert_matches_type(ProjectCreateResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -252,7 +251,7 @@ class TestAsyncProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = await response.parse()
-        assert_matches_type(ProjectCreateResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -264,7 +263,7 @@ class TestAsyncProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = await response.parse()
-            assert_matches_type(ProjectCreateResponse, project, path=["response"])
+            assert_matches_type(Project, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -274,7 +273,7 @@ class TestAsyncProjects:
         project = await async_client.projects.retrieve(
             "projectId",
         )
-        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -286,7 +285,7 @@ class TestAsyncProjects:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         project = await response.parse()
-        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+        assert_matches_type(Project, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -298,7 +297,7 @@ class TestAsyncProjects:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             project = await response.parse()
-            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+            assert_matches_type(Project, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

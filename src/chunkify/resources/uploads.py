@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Type, cast
 
 import httpx
 
@@ -17,11 +17,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.upload import Upload
-from ..types.upload_create_response import UploadCreateResponse
-from ..types.upload_retrieve_response import UploadRetrieveResponse
 
 __all__ = ["UploadsResource", "AsyncUploadsResource"]
 
@@ -57,7 +56,7 @@ class UploadsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> UploadCreateResponse:
+    ) -> Upload:
         """
         Create a new upload with the specified name.
 
@@ -85,9 +84,13 @@ class UploadsResource(SyncAPIResource):
                 upload_create_params.UploadCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Upload]._unwrapper,
             ),
-            cast_to=UploadCreateResponse,
+            cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
 
     def retrieve(
@@ -100,7 +103,7 @@ class UploadsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> UploadRetrieveResponse:
+    ) -> Upload:
         """
         Retrieve details of a specific upload by its ID, including metadata, status, and
         associated source.
@@ -119,9 +122,13 @@ class UploadsResource(SyncAPIResource):
         return self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Upload]._unwrapper,
             ),
-            cast_to=UploadRetrieveResponse,
+            cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
 
     def list(
@@ -255,7 +262,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> UploadCreateResponse:
+    ) -> Upload:
         """
         Create a new upload with the specified name.
 
@@ -283,9 +290,13 @@ class AsyncUploadsResource(AsyncAPIResource):
                 upload_create_params.UploadCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Upload]._unwrapper,
             ),
-            cast_to=UploadCreateResponse,
+            cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
 
     async def retrieve(
@@ -298,7 +309,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> UploadRetrieveResponse:
+    ) -> Upload:
         """
         Retrieve details of a specific upload by its ID, including metadata, status, and
         associated source.
@@ -317,9 +328,13 @@ class AsyncUploadsResource(AsyncAPIResource):
         return await self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Upload]._unwrapper,
             ),
-            cast_to=UploadRetrieveResponse,
+            cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
 
     def list(
