@@ -9,7 +9,6 @@ __all__ = ["WebmVp9Param"]
 
 class WebmVp9Param(TypedDict, total=False):
     name: Required[Literal["webm_vp9"]]
-    """Name of the WebM VP9 configuration"""
 
     audio_bitrate: int
     """

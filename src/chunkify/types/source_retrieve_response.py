@@ -1,10 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .source import Source
-from .shared.response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["SourceRetrieveResponse"]
 
 
-class SourceRetrieveResponse(ResponseOk):
+class SourceRetrieveResponse(BaseModel):
     data: Source
+    """Data contains the response object"""
+
+    status: str
+    """Status indicates the response status "success" """
