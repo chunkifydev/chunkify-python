@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import cast
+from typing import Type, cast
 
 import httpx
 
@@ -19,11 +19,11 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from .._base_client import make_request_options
+from ..types.webhook import Webhook
 from ..types.unwrap_webhook_event import UnwrapWebhookEvent
 from ..types.webhook_list_response import WebhookListResponse
-from ..types.webhook_create_response import WebhookCreateResponse
-from ..types.webhook_retrieve_response import WebhookRetrieveResponse
 
 __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
 
@@ -60,7 +60,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookCreateResponse:
+    ) -> Webhook:
         """Create a new webhook for a project.
 
         The webhook will receive notifications for
@@ -93,9 +93,13 @@ class WebhooksResource(SyncAPIResource):
                 webhook_create_params.WebhookCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Webhook]._unwrapper,
             ),
-            cast_to=WebhookCreateResponse,
+            cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
 
     def retrieve(
@@ -108,7 +112,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookRetrieveResponse:
+    ) -> Webhook:
         """Retrieve details of a specific webhook configuration by its ID.
 
         The webhook must
@@ -128,9 +132,13 @@ class WebhooksResource(SyncAPIResource):
         return self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Webhook]._unwrapper,
             ),
-            cast_to=WebhookRetrieveResponse,
+            cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
 
     def update(
@@ -283,7 +291,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookCreateResponse:
+    ) -> Webhook:
         """Create a new webhook for a project.
 
         The webhook will receive notifications for
@@ -316,9 +324,13 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 webhook_create_params.WebhookCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Webhook]._unwrapper,
             ),
-            cast_to=WebhookCreateResponse,
+            cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
 
     async def retrieve(
@@ -331,7 +343,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookRetrieveResponse:
+    ) -> Webhook:
         """Retrieve details of a specific webhook configuration by its ID.
 
         The webhook must
@@ -351,9 +363,13 @@ class AsyncWebhooksResource(AsyncAPIResource):
         return await self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Webhook]._unwrapper,
             ),
-            cast_to=WebhookRetrieveResponse,
+            cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
 
     async def update(

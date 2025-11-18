@@ -9,11 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import (
-    Source,
-    SourceCreateResponse,
-    SourceRetrieveResponse,
-)
+from chunkify.types import Source
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -28,7 +24,7 @@ class TestSources:
         source = client.sources.create(
             url="https://example.com/video.mp4",
         )
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -40,7 +36,7 @@ class TestSources:
                 "key2": "value2",
             },
         )
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -52,7 +48,7 @@ class TestSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = response.parse()
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -64,7 +60,7 @@ class TestSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = response.parse()
-            assert_matches_type(SourceCreateResponse, source, path=["response"])
+            assert_matches_type(Source, source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -74,7 +70,7 @@ class TestSources:
         source = client.sources.retrieve(
             "sourceId",
         )
-        assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -86,7 +82,7 @@ class TestSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = response.parse()
-        assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -98,7 +94,7 @@ class TestSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = response.parse()
-            assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+            assert_matches_type(Source, source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -239,7 +235,7 @@ class TestAsyncSources:
         source = await async_client.sources.create(
             url="https://example.com/video.mp4",
         )
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -251,7 +247,7 @@ class TestAsyncSources:
                 "key2": "value2",
             },
         )
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -263,7 +259,7 @@ class TestAsyncSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = await response.parse()
-        assert_matches_type(SourceCreateResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -275,7 +271,7 @@ class TestAsyncSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = await response.parse()
-            assert_matches_type(SourceCreateResponse, source, path=["response"])
+            assert_matches_type(Source, source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -285,7 +281,7 @@ class TestAsyncSources:
         source = await async_client.sources.retrieve(
             "sourceId",
         )
-        assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -297,7 +293,7 @@ class TestAsyncSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = await response.parse()
-        assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+        assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -309,7 +305,7 @@ class TestAsyncSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = await response.parse()
-            assert_matches_type(SourceRetrieveResponse, source, path=["response"])
+            assert_matches_type(Source, source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

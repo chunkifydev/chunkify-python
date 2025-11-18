@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Type, cast
 from typing_extensions import Literal, overload
 
 import httpx
@@ -17,10 +18,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from .._base_client import make_request_options
+from ..types.storage import Storage
 from ..types.storage_list_response import StorageListResponse
-from ..types.storage_create_response import StorageCreateResponse
-from ..types.storage_retrieve_response import StorageRetrieveResponse
 
 __all__ = ["StoragesResource", "AsyncStoragesResource"]
 
@@ -79,7 +80,7 @@ class StoragesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -139,7 +140,7 @@ class StoragesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -177,7 +178,7 @@ class StoragesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -250,7 +251,7 @@ class StoragesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         return self._post(
             "/api/storages",
             body=maybe_transform(
@@ -267,9 +268,13 @@ class StoragesResource(SyncAPIResource):
                 storage_create_params.StorageCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Storage]._unwrapper,
             ),
-            cast_to=StorageCreateResponse,
+            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     def retrieve(
@@ -282,7 +287,7 @@ class StoragesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageRetrieveResponse:
+    ) -> Storage:
         """
         Retrieve details of a specific storage configuration by its id.
 
@@ -300,9 +305,13 @@ class StoragesResource(SyncAPIResource):
         return self._get(
             f"/api/storages/{storage_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Storage]._unwrapper,
             ),
-            cast_to=StorageRetrieveResponse,
+            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     def list(
@@ -415,7 +424,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -475,7 +484,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -513,7 +522,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         """
         Create a new storage configuration for cloud storage providers like AWS S3,
         Cloudflare R2, etc. The storage credentials will be validated before saving.
@@ -586,7 +595,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageCreateResponse:
+    ) -> Storage:
         return await self._post(
             "/api/storages",
             body=await async_maybe_transform(
@@ -603,9 +612,13 @@ class AsyncStoragesResource(AsyncAPIResource):
                 storage_create_params.StorageCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Storage]._unwrapper,
             ),
-            cast_to=StorageCreateResponse,
+            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     async def retrieve(
@@ -618,7 +631,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> StorageRetrieveResponse:
+    ) -> Storage:
         """
         Retrieve details of a specific storage configuration by its id.
 
@@ -636,9 +649,13 @@ class AsyncStoragesResource(AsyncAPIResource):
         return await self._get(
             f"/api/storages/{storage_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Storage]._unwrapper,
             ),
-            cast_to=StorageRetrieveResponse,
+            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     async def list(

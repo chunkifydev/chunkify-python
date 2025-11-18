@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Type, cast
+
 import httpx
 
 from ..types import project_list_params, project_create_params, project_update_params
@@ -15,10 +17,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from .._base_client import make_request_options
+from ..types.project import Project
 from ..types.project_list_response import ProjectListResponse
-from ..types.project_create_response import ProjectCreateResponse
-from ..types.project_retrieve_response import ProjectRetrieveResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -53,7 +55,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectCreateResponse:
+    ) -> Project:
         """Create a new project with the specified name.
 
         The project will be created with
@@ -74,9 +76,13 @@ class ProjectsResource(SyncAPIResource):
             "/api/projects",
             body=maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Project]._unwrapper,
             ),
-            cast_to=ProjectCreateResponse,
+            cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
     def retrieve(
@@ -89,7 +95,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveResponse:
+    ) -> Project:
         """
         Retrieve details of a specific project by its slug
 
@@ -107,9 +113,13 @@ class ProjectsResource(SyncAPIResource):
         return self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Project]._unwrapper,
             ),
-            cast_to=ProjectRetrieveResponse,
+            cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
     def update(
@@ -275,7 +285,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectCreateResponse:
+    ) -> Project:
         """Create a new project with the specified name.
 
         The project will be created with
@@ -296,9 +306,13 @@ class AsyncProjectsResource(AsyncAPIResource):
             "/api/projects",
             body=await async_maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Project]._unwrapper,
             ),
-            cast_to=ProjectCreateResponse,
+            cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
     async def retrieve(
@@ -311,7 +325,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveResponse:
+    ) -> Project:
         """
         Retrieve details of a specific project by its slug
 
@@ -329,9 +343,13 @@ class AsyncProjectsResource(AsyncAPIResource):
         return await self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Project]._unwrapper,
             ),
-            cast_to=ProjectRetrieveResponse,
+            cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
     async def update(

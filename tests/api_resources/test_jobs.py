@@ -9,7 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import Job, JobCreateResponse, JobRetrieveResponse
+from chunkify.types import Job
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -29,7 +29,7 @@ class TestJobs:
             },
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -79,7 +79,7 @@ class TestJobs:
                 "type": "8vCPU",
             },
         )
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -96,7 +96,7 @@ class TestJobs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         job = response.parse()
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -113,7 +113,7 @@ class TestJobs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             job = response.parse()
-            assert_matches_type(JobCreateResponse, job, path=["response"])
+            assert_matches_type(Job, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -123,7 +123,7 @@ class TestJobs:
         job = client.jobs.retrieve(
             "jobId",
         )
-        assert_matches_type(JobRetrieveResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -135,7 +135,7 @@ class TestJobs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         job = response.parse()
-        assert_matches_type(JobRetrieveResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -147,7 +147,7 @@ class TestJobs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             job = response.parse()
-            assert_matches_type(JobRetrieveResponse, job, path=["response"])
+            assert_matches_type(Job, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -308,7 +308,7 @@ class TestAsyncJobs:
             },
             source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
         )
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -358,7 +358,7 @@ class TestAsyncJobs:
                 "type": "8vCPU",
             },
         )
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -375,7 +375,7 @@ class TestAsyncJobs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         job = await response.parse()
-        assert_matches_type(JobCreateResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -392,7 +392,7 @@ class TestAsyncJobs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             job = await response.parse()
-            assert_matches_type(JobCreateResponse, job, path=["response"])
+            assert_matches_type(Job, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -402,7 +402,7 @@ class TestAsyncJobs:
         job = await async_client.jobs.retrieve(
             "jobId",
         )
-        assert_matches_type(JobRetrieveResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -414,7 +414,7 @@ class TestAsyncJobs:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         job = await response.parse()
-        assert_matches_type(JobRetrieveResponse, job, path=["response"])
+        assert_matches_type(Job, job, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -426,7 +426,7 @@ class TestAsyncJobs:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             job = await response.parse()
-            assert_matches_type(JobRetrieveResponse, job, path=["response"])
+            assert_matches_type(Job, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

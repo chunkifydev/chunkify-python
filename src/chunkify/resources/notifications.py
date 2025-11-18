@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Type, cast
 from typing_extensions import Literal
 
 import httpx
@@ -17,11 +18,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.notification import Notification
-from ..types.notification_create_response import NotificationCreateResponse
-from ..types.notification_retrieve_response import NotificationRetrieveResponse
 
 __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
@@ -60,7 +60,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationCreateResponse:
+    ) -> Notification:
         """
         Create a new notification for a job event
 
@@ -91,9 +91,13 @@ class NotificationsResource(SyncAPIResource):
                 notification_create_params.NotificationCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Notification]._unwrapper,
             ),
-            cast_to=NotificationCreateResponse,
+            cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
 
     def retrieve(
@@ -106,7 +110,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationRetrieveResponse:
+    ) -> Notification:
         """
         Retrieve details of a specific notification
 
@@ -124,9 +128,13 @@ class NotificationsResource(SyncAPIResource):
         return self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Notification]._unwrapper,
             ),
-            cast_to=NotificationRetrieveResponse,
+            cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
 
     def list(
@@ -262,7 +270,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationCreateResponse:
+    ) -> Notification:
         """
         Create a new notification for a job event
 
@@ -293,9 +301,13 @@ class AsyncNotificationsResource(AsyncAPIResource):
                 notification_create_params.NotificationCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Notification]._unwrapper,
             ),
-            cast_to=NotificationCreateResponse,
+            cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
 
     async def retrieve(
@@ -308,7 +320,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationRetrieveResponse:
+    ) -> Notification:
         """
         Retrieve details of a specific notification
 
@@ -326,9 +338,13 @@ class AsyncNotificationsResource(AsyncAPIResource):
         return await self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Notification]._unwrapper,
             ),
-            cast_to=NotificationRetrieveResponse,
+            cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
 
     def list(

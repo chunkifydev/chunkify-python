@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Type, cast
 
 import httpx
 
@@ -17,11 +17,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.source import Source
-from ..types.source_create_response import SourceCreateResponse
-from ..types.source_retrieve_response import SourceRetrieveResponse
 
 __all__ = ["SourcesResource", "AsyncSourcesResource"]
 
@@ -57,7 +56,7 @@ class SourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SourceCreateResponse:
+    ) -> Source:
         """Create a new source from a media URL.
 
         The source will be analyzed to extract
@@ -88,9 +87,13 @@ class SourcesResource(SyncAPIResource):
                 source_create_params.SourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Source]._unwrapper,
             ),
-            cast_to=SourceCreateResponse,
+            cast_to=cast(Type[Source], DataWrapper[Source]),
         )
 
     def retrieve(
@@ -103,7 +106,7 @@ class SourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SourceRetrieveResponse:
+    ) -> Source:
         """
         Retrieve details of a specific source by its ID, including metadata, media
         properties, and associated jobs.
@@ -122,9 +125,13 @@ class SourcesResource(SyncAPIResource):
         return self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Source]._unwrapper,
             ),
-            cast_to=SourceRetrieveResponse,
+            cast_to=cast(Type[Source], DataWrapper[Source]),
         )
 
     def list(
@@ -273,7 +280,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SourceCreateResponse:
+    ) -> Source:
         """Create a new source from a media URL.
 
         The source will be analyzed to extract
@@ -304,9 +311,13 @@ class AsyncSourcesResource(AsyncAPIResource):
                 source_create_params.SourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Source]._unwrapper,
             ),
-            cast_to=SourceCreateResponse,
+            cast_to=cast(Type[Source], DataWrapper[Source]),
         )
 
     async def retrieve(
@@ -319,7 +330,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SourceRetrieveResponse:
+    ) -> Source:
         """
         Retrieve details of a specific source by its ID, including metadata, media
         properties, and associated jobs.
@@ -338,9 +349,13 @@ class AsyncSourcesResource(AsyncAPIResource):
         return await self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Source]._unwrapper,
             ),
-            cast_to=SourceRetrieveResponse,
+            cast_to=cast(Type[Source], DataWrapper[Source]),
         )
 
     def list(
