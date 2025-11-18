@@ -37,10 +37,10 @@ client = Chunkify(
 
 job = client.jobs.create(
     format={
-        "id": "mp4_av1",
-        "crf": 21,
-        "height": 1080,
+        "id": "mp4_h264",
         "width": 1920,
+        "height": 1080,
+        "crf": 21,
     },
     source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
     transcoder={
@@ -73,10 +73,10 @@ client = AsyncChunkify(
 async def main() -> None:
     job = await client.jobs.create(
         format={
-            "id": "mp4_av1",
-            "crf": 21,
-            "height": 1080,
+            "id": "mp4_h264",
             "width": 1920,
+            "height": 1080,
+            "crf": 21,
         },
         source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
         transcoder={
@@ -118,10 +118,10 @@ async def main() -> None:
     ) as client:
         job = await client.jobs.create(
             format={
-                "id": "mp4_av1",
-                "crf": 21,
-                "height": 1080,
+                "id": "mp4_h264",
                 "width": 1920,
+                "height": 1080,
+                "crf": 21,
             },
             source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
             transcoder={
