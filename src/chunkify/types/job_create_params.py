@@ -51,7 +51,7 @@ class JobCreateParams(TypedDict, total=False):
 
 
 Format: TypeAlias = Union[
-    HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam, MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param
+    MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param, HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam
 ]
 
 
