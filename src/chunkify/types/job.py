@@ -9,7 +9,7 @@ __all__ = ["Job", "Format", "Storage", "Transcoder"]
 
 
 class Format(BaseModel):
-    config: Optional[object] = None
+    config: Optional[Dict[str, object]] = None
     """Configuration parameters for the template.
 
     A map of configuration values specific to the format For example, for mp4/h264

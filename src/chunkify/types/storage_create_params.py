@@ -5,15 +5,15 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = [
-    "StorageCreateParams",
-    "StorageAwsCreateParams",
-    "StorageChunkifyCreateParams",
-    "StorageCloudflareCreateParams",
-]
+__all__ = ["StorageCreateParams", "Storage", "StorageAws", "StorageChunkify", "StorageCloudflare"]
 
 
-class StorageAwsCreateParams(TypedDict, total=False):
+class StorageCreateParams(TypedDict, total=False):
+    storage: Required[Storage]
+    """The parameters for creating a new storage configuration."""
+
+
+class StorageAws(TypedDict, total=False):
     access_key_id: Required[str]
     """AccessKeyId is the access key for the storage provider.
 
@@ -59,7 +59,7 @@ class StorageAwsCreateParams(TypedDict, total=False):
     """Public indicates whether the storage is publicly accessible."""
 
 
-class StorageChunkifyCreateParams(TypedDict, total=False):
+class StorageChunkify(TypedDict, total=False):
     provider: Required[Literal["chunkify"]]
     """Provider specifies the storage provider."""
 
@@ -87,7 +87,7 @@ class StorageChunkifyCreateParams(TypedDict, total=False):
     """Region specifies the region of the storage provider."""
 
 
-class StorageCloudflareCreateParams(TypedDict, total=False):
+class StorageCloudflare(TypedDict, total=False):
     access_key_id: Required[str]
     """AccessKeyId is the access key for the storage provider."""
 
@@ -113,6 +113,4 @@ class StorageCloudflareCreateParams(TypedDict, total=False):
     """Public indicates whether the storage is publicly accessible."""
 
 
-StorageCreateParams: TypeAlias = Union[
-    StorageAwsCreateParams, StorageChunkifyCreateParams, StorageCloudflareCreateParams
-]
+Storage: TypeAlias = Union[StorageAws, StorageChunkify, StorageCloudflare]

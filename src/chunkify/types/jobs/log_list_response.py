@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from ..._models import BaseModel
 from ..shared.response_ok import ResponseOk
@@ -9,7 +9,7 @@ __all__ = ["LogListResponse", "LogListResponseData"]
 
 
 class LogListResponseData(BaseModel):
-    attributes: object
+    attributes: Dict[str, object]
     """Additional structured data attached to the log"""
 
     level: str
