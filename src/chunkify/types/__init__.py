@@ -42,7 +42,6 @@ from .token_create_response import TokenCreateResponse as TokenCreateResponse
 from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
 from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
-from .file_retrieve_response import FileRetrieveResponse as FileRetrieveResponse
 from .source_create_response import SourceCreateResponse as SourceCreateResponse
 from .upload_create_response import UploadCreateResponse as UploadCreateResponse
 from .new_event_webhook_event import NewEventWebhookEvent as NewEventWebhookEvent

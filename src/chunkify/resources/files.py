@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Type, cast
+
 import httpx
 
 from ..types import file_list_params
@@ -15,10 +17,10 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.api_file import APIFile
-from ..types.file_retrieve_response import FileRetrieveResponse
 
 __all__ = ["FilesResource", "AsyncFilesResource"]
 
@@ -53,7 +55,7 @@ class FilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileRetrieveResponse:
+    ) -> APIFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
         properties, and associated jobs.
@@ -72,9 +74,13 @@ class FilesResource(SyncAPIResource):
         return self._get(
             f"/api/files/{file_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[APIFile]._unwrapper,
             ),
-            cast_to=FileRetrieveResponse,
+            cast_to=cast(Type[APIFile], DataWrapper[APIFile]),
         )
 
     def list(
@@ -226,7 +232,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileRetrieveResponse:
+    ) -> APIFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
         properties, and associated jobs.
@@ -245,9 +251,13 @@ class AsyncFilesResource(AsyncAPIResource):
         return await self._get(
             f"/api/files/{file_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[APIFile]._unwrapper,
             ),
-            cast_to=FileRetrieveResponse,
+            cast_to=cast(Type[APIFile], DataWrapper[APIFile]),
         )
 
     def list(

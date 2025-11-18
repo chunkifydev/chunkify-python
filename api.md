@@ -9,12 +9,12 @@ from chunkify.types import ChunkifyError, ResponseError, ResponseOk
 Types:
 
 ```python
-from chunkify.types import APIFile, FileRetrieveResponse
+from chunkify.types import APIFile
 ```
 
 Methods:
 
-- <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/file_retrieve_response.py">FileRetrieveResponse</a></code>
+- <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/api_file.py">APIFile</a></code>
 - <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/api_file.py">SyncPaginatedResults[APIFile]</a></code>
 - <code title="delete /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">delete</a>(file_id) -> None</code>
 

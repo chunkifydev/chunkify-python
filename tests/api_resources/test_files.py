@@ -9,7 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import APIFile, FileRetrieveResponse
+from chunkify.types import APIFile
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -24,7 +24,7 @@ class TestFiles:
         file = client.files.retrieve(
             "fileId",
         )
-        assert_matches_type(FileRetrieveResponse, file, path=["response"])
+        assert_matches_type(APIFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -36,7 +36,7 @@ class TestFiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         file = response.parse()
-        assert_matches_type(FileRetrieveResponse, file, path=["response"])
+        assert_matches_type(APIFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -48,7 +48,7 @@ class TestFiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             file = response.parse()
-            assert_matches_type(FileRetrieveResponse, file, path=["response"])
+            assert_matches_type(APIFile, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -194,7 +194,7 @@ class TestAsyncFiles:
         file = await async_client.files.retrieve(
             "fileId",
         )
-        assert_matches_type(FileRetrieveResponse, file, path=["response"])
+        assert_matches_type(APIFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -206,7 +206,7 @@ class TestAsyncFiles:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         file = await response.parse()
-        assert_matches_type(FileRetrieveResponse, file, path=["response"])
+        assert_matches_type(APIFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -218,7 +218,7 @@ class TestAsyncFiles:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             file = await response.parse()
-            assert_matches_type(FileRetrieveResponse, file, path=["response"])
+            assert_matches_type(APIFile, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
