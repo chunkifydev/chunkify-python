@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 from typing import Type, cast
-from typing_extensions import Literal, overload
 
 import httpx
 
 from ..types import storage_create_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import required_args, maybe_transform, async_maybe_transform
+from .._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -46,34 +45,10 @@ class StoragesResource(SyncAPIResource):
         """
         return StoragesResourceWithStreamingResponse(self)
 
-    @overload
     def create(
         self,
         *,
-        access_key_id: str,
-        bucket: str,
-        provider: Literal["aws"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ],
-        secret_access_key: str,
-        public: bool | Omit = omit,
+        storage: storage_create_params.Storage,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,19 +61,7 @@ class StoragesResource(SyncAPIResource):
         Cloudflare R2, etc. The storage credentials will be validated before saving.
 
         Args:
-          access_key_id: AccessKeyId is the access key for the storage provider. Required if not using
-              Chunkify storage.
-
-          bucket: Bucket is the name of the storage bucket.
-
-          provider: Provider specifies the storage provider.
-
-          region: Region specifies the region of the storage provider.
-
-          secret_access_key: SecretAccessKey is the secret key for the storage provider. Required if not
-              using Chunkify storage.
-
-          public: Public indicates whether the storage is publicly accessible.
+          storage: The parameters for creating a new storage configuration.
 
           extra_headers: Send extra headers
 
@@ -108,165 +71,9 @@ class StoragesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def create(
-        self,
-        *,
-        provider: Literal["chunkify"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
-        """
-        Create a new storage configuration for cloud storage providers like AWS S3,
-        Cloudflare R2, etc. The storage credentials will be validated before saving.
-
-        Args:
-          provider: Provider specifies the storage provider.
-
-          region: Region specifies the region of the storage provider.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def create(
-        self,
-        *,
-        access_key_id: str,
-        bucket: str,
-        endpoint: str,
-        location: Literal["US", "EU", "ASIA"],
-        provider: Literal["cloudflare"],
-        region: Literal["auto"],
-        secret_access_key: str,
-        public: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
-        """
-        Create a new storage configuration for cloud storage providers like AWS S3,
-        Cloudflare R2, etc. The storage credentials will be validated before saving.
-
-        Args:
-          access_key_id: AccessKeyId is the access key for the storage provider.
-
-          bucket: Bucket is the name of the storage bucket.
-
-          endpoint: Endpoint is the endpoint of the storage provider.
-
-          location: Location specifies the location of the storage provider.
-
-          provider: Provider specifies the storage provider.
-
-          region: Region must be set to 'auto'.
-
-          secret_access_key: SecretAccessKey is the secret key for the storage provider.
-
-          public: Public indicates whether the storage is publicly accessible.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["access_key_id", "bucket", "provider", "region", "secret_access_key"],
-        ["provider", "region"],
-        ["access_key_id", "bucket", "endpoint", "location", "provider", "region", "secret_access_key"],
-    )
-    def create(
-        self,
-        *,
-        access_key_id: str | Omit = omit,
-        bucket: str | Omit = omit,
-        provider: Literal["aws"] | Literal["chunkify"] | Literal["cloudflare"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ]
-        | Literal["auto"],
-        secret_access_key: str | Omit = omit,
-        public: bool | Omit = omit,
-        endpoint: str | Omit = omit,
-        location: Literal["US", "EU", "ASIA"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
         return self._post(
             "/api/storages",
-            body=maybe_transform(
-                {
-                    "access_key_id": access_key_id,
-                    "bucket": bucket,
-                    "provider": provider,
-                    "region": region,
-                    "secret_access_key": secret_access_key,
-                    "public": public,
-                    "endpoint": endpoint,
-                    "location": location,
-                },
-                storage_create_params.StorageCreateParams,
-            ),
+            body=maybe_transform(storage, storage_create_params.StorageCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -390,34 +197,10 @@ class AsyncStoragesResource(AsyncAPIResource):
         """
         return AsyncStoragesResourceWithStreamingResponse(self)
 
-    @overload
     async def create(
         self,
         *,
-        access_key_id: str,
-        bucket: str,
-        provider: Literal["aws"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ],
-        secret_access_key: str,
-        public: bool | Omit = omit,
+        storage: storage_create_params.Storage,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -430,19 +213,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         Cloudflare R2, etc. The storage credentials will be validated before saving.
 
         Args:
-          access_key_id: AccessKeyId is the access key for the storage provider. Required if not using
-              Chunkify storage.
-
-          bucket: Bucket is the name of the storage bucket.
-
-          provider: Provider specifies the storage provider.
-
-          region: Region specifies the region of the storage provider.
-
-          secret_access_key: SecretAccessKey is the secret key for the storage provider. Required if not
-              using Chunkify storage.
-
-          public: Public indicates whether the storage is publicly accessible.
+          storage: The parameters for creating a new storage configuration.
 
           extra_headers: Send extra headers
 
@@ -452,165 +223,9 @@ class AsyncStoragesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def create(
-        self,
-        *,
-        provider: Literal["chunkify"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
-        """
-        Create a new storage configuration for cloud storage providers like AWS S3,
-        Cloudflare R2, etc. The storage credentials will be validated before saving.
-
-        Args:
-          provider: Provider specifies the storage provider.
-
-          region: Region specifies the region of the storage provider.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def create(
-        self,
-        *,
-        access_key_id: str,
-        bucket: str,
-        endpoint: str,
-        location: Literal["US", "EU", "ASIA"],
-        provider: Literal["cloudflare"],
-        region: Literal["auto"],
-        secret_access_key: str,
-        public: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
-        """
-        Create a new storage configuration for cloud storage providers like AWS S3,
-        Cloudflare R2, etc. The storage credentials will be validated before saving.
-
-        Args:
-          access_key_id: AccessKeyId is the access key for the storage provider.
-
-          bucket: Bucket is the name of the storage bucket.
-
-          endpoint: Endpoint is the endpoint of the storage provider.
-
-          location: Location specifies the location of the storage provider.
-
-          provider: Provider specifies the storage provider.
-
-          region: Region must be set to 'auto'.
-
-          secret_access_key: SecretAccessKey is the secret key for the storage provider.
-
-          public: Public indicates whether the storage is publicly accessible.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["access_key_id", "bucket", "provider", "region", "secret_access_key"],
-        ["provider", "region"],
-        ["access_key_id", "bucket", "endpoint", "location", "provider", "region", "secret_access_key"],
-    )
-    async def create(
-        self,
-        *,
-        access_key_id: str | Omit = omit,
-        bucket: str | Omit = omit,
-        provider: Literal["aws"] | Literal["chunkify"] | Literal["cloudflare"],
-        region: Literal[
-            "us-east-1",
-            "us-east-2",
-            "us-central-1",
-            "us-west-1",
-            "us-west-2",
-            "eu-west-1",
-            "eu-west-2",
-            "eu-west-3",
-            "eu-central-1",
-            "eu-north-1",
-            "ap-east-1",
-            "ap-east-2",
-            "ap-northeast-1",
-            "ap-northeast-2",
-            "ap-south-1",
-            "ap-southeast-1",
-            "ap-southeast-2",
-        ]
-        | Literal["auto"],
-        secret_access_key: str | Omit = omit,
-        public: bool | Omit = omit,
-        endpoint: str | Omit = omit,
-        location: Literal["US", "EU", "ASIA"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Storage:
         return await self._post(
             "/api/storages",
-            body=await async_maybe_transform(
-                {
-                    "access_key_id": access_key_id,
-                    "bucket": bucket,
-                    "provider": provider,
-                    "region": region,
-                    "secret_access_key": secret_access_key,
-                    "public": public,
-                    "endpoint": endpoint,
-                    "location": location,
-                },
-                storage_create_params.StorageCreateParams,
-            ),
+            body=await async_maybe_transform(storage, storage_create_params.StorageCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
