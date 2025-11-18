@@ -8,7 +8,7 @@ __all__ = ["MP4H265Param"]
 
 
 class MP4H265Param(TypedDict, total=False):
-    name: Required[Literal["mp4_h265"]]
+    id: Required[Literal["mp4_h265"]]
 
     audio_bitrate: int
     """

@@ -8,14 +8,14 @@ __all__ = ["JpgParam"]
 
 
 class JpgParam(TypedDict, total=False):
+    id: Required[Literal["jpg"]]
+
     interval: Required[int]
     """
     Time interval in seconds at which frames are extracted from the video (e.g.,
     interval=10 extracts frames at 0s, 10s, 20s, etc.). Must be between 1 and 60
     seconds.
     """
-
-    name: Required[Literal["jpg"]]
 
     chunk_duration: int
 
