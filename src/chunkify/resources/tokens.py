@@ -49,7 +49,7 @@ class TokensResource(SyncAPIResource):
     def create(
         self,
         *,
-        scope: Literal["team", "project"],
+        scope: Literal["project", "team"],
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -183,7 +183,7 @@ class AsyncTokensResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        scope: Literal["team", "project"],
+        scope: Literal["project", "team"],
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

@@ -32,74 +32,42 @@ __all__ = [
 
 class FormatMP4Av1(MP4Av1):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatMP4H264(MP4H264):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatMP4H265(MP4H265):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatWebmVp9(WebmVp9):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatHlsAv1(HlsAv1):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatHlsH264(HlsH264):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatHlsH265(HlsH265):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class FormatJpg(Jpg):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """Name of the transcoding template.
-
-    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
-    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
-    """
+    """The format ID"""
 
 
 class Storage(BaseModel):
@@ -155,11 +123,9 @@ class Job(BaseModel):
         "merged",
         "downloaded",
         "transcoded",
+        "waiting",
     ]
-    """
-    Current status of the job (e.g., "queued", "ingesting","transcoding",
-    "downloading", "merging", "uploading", "failed", "completed")
-    """
+    """Current status of the job"""
 
     storage: Storage
     """Storage settings for where the job output will be saved"""

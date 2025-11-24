@@ -14,7 +14,7 @@ class Data(BaseModel):
     """Additional structured data attached to the log"""
 
     level: Literal["info", "error", "debug"]
-    """Log level (e.g. "info", "error", "debug")"""
+    """Log level"""
 
     msg: str
     """The log message content"""

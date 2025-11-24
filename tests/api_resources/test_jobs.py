@@ -66,7 +66,7 @@ class TestJobs:
             },
             transcoder={
                 "quantity": 2,
-                "type": "8vCPU",
+                "type": "4vCPU",
             },
         )
         assert_matches_type(Job, job, path=["response"])
@@ -153,14 +153,14 @@ class TestJobs:
         job = client.jobs.list(
             id="id",
             created={
-                "gte": "2102-57-32",
-                "lte": "2102-57-32",
+                "gte": "2025-01-01",
+                "lte": "2025-01-01",
                 "sort": "asc",
             },
             format_id="mp4_h264",
             hls_manifest_id="hls_manifest_id",
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             source_id="source_id",
             status="completed",
@@ -327,7 +327,7 @@ class TestAsyncJobs:
             },
             transcoder={
                 "quantity": 2,
-                "type": "8vCPU",
+                "type": "4vCPU",
             },
         )
         assert_matches_type(Job, job, path=["response"])
@@ -414,14 +414,14 @@ class TestAsyncJobs:
         job = await async_client.jobs.list(
             id="id",
             created={
-                "gte": "2102-57-32",
-                "lte": "2102-57-32",
+                "gte": "2025-01-01",
+                "lte": "2025-01-01",
                 "sort": "asc",
             },
             format_id="mp4_h264",
             hls_manifest_id="hls_manifest_id",
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             source_id="source_id",
             status="completed",

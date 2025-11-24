@@ -16,7 +16,7 @@ class Source(BaseModel):
     """Audio bitrate in bits per second"""
 
     audio_codec: str
-    """Audio codec used (e.g. aac, mp3)"""
+    """Audio codec used"""
 
     created_at: datetime
     """Timestamp when the source was created"""
@@ -43,7 +43,7 @@ class Source(BaseModel):
     """Video bitrate in bits per second"""
 
     video_codec: str
-    """Video codec used (e.g. h264, h265)"""
+    """Video codec used"""
 
     video_framerate: float
     """Video framerate in frames per second"""

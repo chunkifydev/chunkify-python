@@ -8,7 +8,7 @@ __all__ = ["TokenCreateParams"]
 
 
 class TokenCreateParams(TypedDict, total=False):
-    scope: Required[Literal["team", "project"]]
+    scope: Required[Literal["project", "team"]]
     """
     Scope specifies the scope of the token, which must be either "team" or
     "project".

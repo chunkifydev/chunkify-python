@@ -73,10 +73,7 @@ class Storage(TypedDict, total=False):
 
 class Transcoder(TypedDict, total=False):
     quantity: int
-    """
-    Quantity specifies the number of transcoder instances to use (1-50). Required if
-    Type is set.
-    """
+    """Quantity specifies the number of transcoder instances. Required if Type is set."""
 
     type: Literal["4vCPU", "8vCPU", "16vCPU"]
     """

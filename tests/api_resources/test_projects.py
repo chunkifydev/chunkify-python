@@ -98,16 +98,15 @@ class TestProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_overload_1(self, client: Chunkify) -> None:
+    def test_method_update(self, client: Chunkify) -> None:
         project = client.projects.update(
             project_id="projectId",
-            name="xxxx",
         )
         assert project is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params_overload_1(self, client: Chunkify) -> None:
+    def test_method_update_with_all_params(self, client: Chunkify) -> None:
         project = client.projects.update(
             project_id="projectId",
             name="xxxx",
@@ -117,10 +116,9 @@ class TestProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Chunkify) -> None:
+    def test_raw_response_update(self, client: Chunkify) -> None:
         response = client.projects.with_raw_response.update(
             project_id="projectId",
-            name="xxxx",
         )
 
         assert response.is_closed is True
@@ -130,10 +128,9 @@ class TestProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Chunkify) -> None:
+    def test_streaming_response_update(self, client: Chunkify) -> None:
         with client.projects.with_streaming_response.update(
             project_id="projectId",
-            name="xxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -145,67 +142,10 @@ class TestProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update_overload_1(self, client: Chunkify) -> None:
+    def test_path_params_update(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.with_raw_response.update(
                 project_id="",
-                name="xxxx",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_update_overload_2(self, client: Chunkify) -> None:
-        project = client.projects.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        )
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_update_with_all_params_overload_2(self, client: Chunkify) -> None:
-        project = client.projects.update(
-            project_id="projectId",
-            storage_id="xxxx",
-            name="xxxx",
-        )
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Chunkify) -> None:
-        response = client.projects.with_raw_response.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Chunkify) -> None:
-        with client.projects.with_streaming_response.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = response.parse()
-            assert project is None
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_path_params_update_overload_2(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.with_raw_response.update(
-                project_id="",
-                storage_id="xxxx",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -371,16 +311,15 @@ class TestAsyncProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_method_update(self, async_client: AsyncChunkify) -> None:
         project = await async_client.projects.update(
             project_id="projectId",
-            name="xxxx",
         )
         assert project is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
         project = await async_client.projects.update(
             project_id="projectId",
             name="xxxx",
@@ -390,10 +329,9 @@ class TestAsyncProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_raw_response_update(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.with_raw_response.update(
             project_id="projectId",
-            name="xxxx",
         )
 
         assert response.is_closed is True
@@ -403,10 +341,9 @@ class TestAsyncProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.with_streaming_response.update(
             project_id="projectId",
-            name="xxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -418,67 +355,10 @@ class TestAsyncProjects:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_path_params_update(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.with_raw_response.update(
                 project_id="",
-                name="xxxx",
-            )
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncChunkify) -> None:
-        project = await async_client.projects.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        )
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncChunkify) -> None:
-        project = await async_client.projects.update(
-            project_id="projectId",
-            storage_id="xxxx",
-            name="xxxx",
-        )
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.projects.with_raw_response.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert project is None
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncChunkify) -> None:
-        async with async_client.projects.with_streaming_response.update(
-            project_id="projectId",
-            storage_id="xxxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = await response.parse()
-            assert project is None
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_path_params_update_overload_2(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.with_raw_response.update(
-                project_id="",
-                storage_id="xxxx",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
