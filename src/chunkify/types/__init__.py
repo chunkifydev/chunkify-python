@@ -5,7 +5,7 @@ from __future__ import annotations
 from .job import Job as Job
 from .jpg import Jpg as Jpg
 from .token import Token as Token
-from .shared import ChunkifyError as ChunkifyError, ResponseError as ResponseError
+from .shared import ChunkifyError as ChunkifyError
 from .source import Source as Source
 from .upload import Upload as Upload
 from .hls_av1 import HlsAv1 as HlsAv1

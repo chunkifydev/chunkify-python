@@ -21,7 +21,7 @@ class Upload(BaseModel):
     """Timestamp when the upload will expire"""
 
     status: Literal["waiting", "completed", "failed", "expired"]
-    """Current status of the upload (waiting, completed, failed, expired)"""
+    """Current status of the upload"""
 
     updated_at: datetime
     """Timestamp when the upload was updated"""
