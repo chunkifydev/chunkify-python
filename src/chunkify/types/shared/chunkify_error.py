@@ -27,4 +27,4 @@ class ChunkifyError(BaseModel):
         "timeout",
         "cancelled",
     ]
-    """Type of error (e.g., "ffmpeg", "network", "storage", etc.)"""
+    """Type of error"""

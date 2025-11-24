@@ -2,22 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["ProjectUpdateParams", "Variant0", "Variant1"]
+__all__ = ["ProjectUpdateParams"]
 
 
-class Variant0(TypedDict, total=False):
-    name: Required[str]
+class ProjectUpdateParams(TypedDict, total=False):
+    name: str
+    """Name is the name of the project. Required when storage_id is not provided."""
 
     storage_id: str
-
-
-class Variant1(TypedDict, total=False):
-    storage_id: Required[str]
-
-    name: str
-
-
-ProjectUpdateParams: TypeAlias = Union[Variant0, Variant1]
+    """StorageId is the storage id of the project. Required when name is not provided."""

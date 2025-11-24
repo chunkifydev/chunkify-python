@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -14,7 +15,9 @@ class Webhook(BaseModel):
     enabled: bool
     """Whether the webhook is currently enabled"""
 
-    events: List[str]
+    events: List[
+        Literal["job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"]
+    ]
     """Array of event types this webhook subscribes to"""
 
     project_id: str

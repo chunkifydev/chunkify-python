@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 from typing import Type, cast
-from typing_extensions import overload
 
 import httpx
 
 from ..types import project_list_params, project_create_params, project_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import required_args, maybe_transform, async_maybe_transform
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -123,12 +122,11 @@ class ProjectsResource(SyncAPIResource):
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
-    @overload
     def update(
         self,
         project_id: str,
         *,
-        name: str,
+        name: str | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -143,6 +141,10 @@ class ProjectsResource(SyncAPIResource):
         projects.
 
         Args:
+          name: Name is the name of the project. Required when storage_id is not provided.
+
+          storage_id: StorageId is the storage id of the project. Required when name is not provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -151,52 +153,6 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        project_id: str,
-        *,
-        storage_id: str,
-        name: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """Update a project's name or storage settings.
-
-        Only team owners can update
-        projects.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["name"], ["storage_id"])
-    def update(
-        self,
-        project_id: str,
-        *,
-        name: str | Omit = omit,
-        storage_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -395,12 +351,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
 
-    @overload
     async def update(
         self,
         project_id: str,
         *,
-        name: str,
+        name: str | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -415,6 +370,10 @@ class AsyncProjectsResource(AsyncAPIResource):
         projects.
 
         Args:
+          name: Name is the name of the project. Required when storage_id is not provided.
+
+          storage_id: StorageId is the storage id of the project. Required when name is not provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -423,52 +382,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        project_id: str,
-        *,
-        storage_id: str,
-        name: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """Update a project's name or storage settings.
-
-        Only team owners can update
-        projects.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["name"], ["storage_id"])
-    async def update(
-        self,
-        project_id: str,
-        *,
-        name: str | Omit = omit,
-        storage_id: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}

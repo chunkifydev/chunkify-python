@@ -112,7 +112,7 @@ class TestNotifications:
         notification = client.notifications.list(
             created={
                 "gte": "2102-57-32",
-                "lte": "2102-57-32",
+                "lte": "2025-01-01",
                 "sort": "asc",
             },
             events=["job.completed"],
@@ -292,7 +292,7 @@ class TestAsyncNotifications:
         notification = await async_client.notifications.list(
             created={
                 "gte": "2102-57-32",
-                "lte": "2102-57-32",
+                "lte": "2025-01-01",
                 "sort": "asc",
             },
             events=["job.completed"],

@@ -2,6 +2,7 @@
 
 from typing import Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -18,11 +19,11 @@ class Storage(BaseModel):
     created_at: datetime
     """Created at timestamp"""
 
-    location: str
-    """Continent location of the storage (eg. US, EU, ASIA)"""
+    location: Literal["US", "EU", "Asia"]
+    """Continent location of the storage"""
 
-    provider: str
-    """Name of the storage provider (e.g. AWS, GCP)"""
+    provider: Literal["aws", "chunkify", "cloudflare"]
+    """Name of the storage provider"""
 
     public: bool
     """Whether the storage bucket is publicly accessible"""
