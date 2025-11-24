@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
-
-from .._types import SequenceNotStr
+from typing import List
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["NotificationListParams", "Created", "ResponseStatusCode"]
 
@@ -12,7 +11,9 @@ __all__ = ["NotificationListParams", "Created", "ResponseStatusCode"]
 class NotificationListParams(TypedDict, total=False):
     created: Created
 
-    events: SequenceNotStr[str]
+    events: List[
+        Literal["job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"]
+    ]
     """Filter by events (e.g.
 
     job.completed, job.failed, upload.completed, upload.failed, upload.expired)
@@ -40,7 +41,7 @@ class Created(TypedDict, total=False):
     lte: str
     """Filter by creation date less than or equal (RFC3339)"""
 
-    sort: str
+    sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""
 
 

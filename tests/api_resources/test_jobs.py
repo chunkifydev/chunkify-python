@@ -153,17 +153,17 @@ class TestJobs:
         job = client.jobs.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            format_name="format_name",
+            format_id="mp4_h264",
             hls_manifest_id="hls_manifest_id",
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             source_id="source_id",
-            status="status",
+            status="completed",
         )
         assert_matches_type(SyncPaginatedResults[Job], job, path=["response"])
 
@@ -414,17 +414,17 @@ class TestAsyncJobs:
         job = await async_client.jobs.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            format_name="format_name",
+            format_id="mp4_h264",
             hls_manifest_id="hls_manifest_id",
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             source_id="source_id",
-            status="status",
+            status="completed",
         )
         assert_matches_type(AsyncPaginatedResults[Job], job, path=["response"])
 

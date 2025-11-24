@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, cast
+from typing import Dict, Type, Iterable, cast
+from typing_extensions import Literal
 
 import httpx
 
 from ..types import source_list_params, source_create_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -140,11 +141,11 @@ class SourcesResource(SyncAPIResource):
         id: str | Omit = omit,
         audio_codec: str | Omit = omit,
         created: source_list_params.Created | Omit = omit,
-        device: str | Omit = omit,
+        device: Literal["apple", "android", "unknown"] | Omit = omit,
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,
@@ -364,11 +365,11 @@ class AsyncSourcesResource(AsyncAPIResource):
         id: str | Omit = omit,
         audio_codec: str | Omit = omit,
         created: source_list_params.Created | Omit = omit,
-        device: str | Omit = omit,
+        device: Literal["apple", "android", "unknown"] | Omit = omit,
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,

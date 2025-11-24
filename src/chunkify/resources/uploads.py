@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, cast
+from typing import Dict, Type, Iterable, cast
+from typing_extensions import Literal
 
 import httpx
 
 from ..types import upload_list_params, upload_create_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -137,10 +138,10 @@ class UploadsResource(SyncAPIResource):
         id: str | Omit = omit,
         created: upload_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: str | Omit = omit,
+        status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,10 +344,10 @@ class AsyncUploadsResource(AsyncAPIResource):
         id: str | Omit = omit,
         created: upload_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: str | Omit = omit,
+        status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

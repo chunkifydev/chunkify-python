@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, cast
+from typing import Dict, Type, Iterable, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -23,7 +24,7 @@ from .files import (
     AsyncFilesResourceWithStreamingResponse,
 )
 from ...types import job_list_params, job_create_params
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -193,13 +194,14 @@ class JobsResource(SyncAPIResource):
         *,
         id: str | Omit = omit,
         created: job_list_params.Created | Omit = omit,
-        format_name: str | Omit = omit,
+        format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
+        | Omit = omit,
         hls_manifest_id: str | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: str | Omit = omit,
+        status: Literal["completed", "processing", "failed", "cancelled", "queued"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -213,7 +215,7 @@ class JobsResource(SyncAPIResource):
         Args:
           id: Filter by job ID
 
-          format_name: Filter by format name
+          format_id: Filter by format id
 
           hls_manifest_id: Filter by hls manifest ID
 
@@ -247,7 +249,7 @@ class JobsResource(SyncAPIResource):
                     {
                         "id": id,
                         "created": created,
-                        "format_name": format_name,
+                        "format_id": format_id,
                         "hls_manifest_id": hls_manifest_id,
                         "limit": limit,
                         "metadata": metadata,
@@ -474,13 +476,14 @@ class AsyncJobsResource(AsyncAPIResource):
         *,
         id: str | Omit = omit,
         created: job_list_params.Created | Omit = omit,
-        format_name: str | Omit = omit,
+        format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
+        | Omit = omit,
         hls_manifest_id: str | Omit = omit,
         limit: int | Omit = omit,
-        metadata: str | Omit = omit,
+        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: str | Omit = omit,
+        status: Literal["completed", "processing", "failed", "cancelled", "queued"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -494,7 +497,7 @@ class AsyncJobsResource(AsyncAPIResource):
         Args:
           id: Filter by job ID
 
-          format_name: Filter by format name
+          format_id: Filter by format id
 
           hls_manifest_id: Filter by hls manifest ID
 
@@ -528,7 +531,7 @@ class AsyncJobsResource(AsyncAPIResource):
                     {
                         "id": id,
                         "created": created,
-                        "format_name": format_name,
+                        "format_id": format_id,
                         "hls_manifest_id": hls_manifest_id,
                         "limit": limit,
                         "metadata": metadata,

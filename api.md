@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from chunkify.types import ChunkifyError, ResponseError, ResponseOk
+from chunkify.types import ChunkifyError, ResponseError
 ```
 
 # Files

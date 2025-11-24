@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Type, cast
+from typing import List, Type, cast
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import notification_list_params, notification_create_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -65,8 +65,7 @@ class NotificationsResource(SyncAPIResource):
         Create a new notification for a job event
 
         Args:
-          event: Event specifies the type of event that triggered the notification. Currently
-              only supports "job.completed" event type.
+          event: Event specifies the type of event that triggered the notification.
 
           object_id: ObjectId specifies the object that triggered this notification.
 
@@ -141,7 +140,12 @@ class NotificationsResource(SyncAPIResource):
         self,
         *,
         created: notification_list_params.Created | Omit = omit,
-        events: SequenceNotStr[str] | Omit = omit,
+        events: List[
+            Literal[
+                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+            ]
+        ]
+        | Omit = omit,
         limit: int | Omit = omit,
         object_id: str | Omit = omit,
         offset: int | Omit = omit,
@@ -275,8 +279,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Create a new notification for a job event
 
         Args:
-          event: Event specifies the type of event that triggered the notification. Currently
-              only supports "job.completed" event type.
+          event: Event specifies the type of event that triggered the notification.
 
           object_id: ObjectId specifies the object that triggered this notification.
 
@@ -351,7 +354,12 @@ class AsyncNotificationsResource(AsyncAPIResource):
         self,
         *,
         created: notification_list_params.Created | Omit = omit,
-        events: SequenceNotStr[str] | Omit = omit,
+        events: List[
+            Literal[
+                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+            ]
+        ]
+        | Omit = omit,
         limit: int | Omit = omit,
         object_id: str | Omit = omit,
         offset: int | Omit = omit,

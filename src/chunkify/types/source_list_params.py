@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Iterable
+from typing_extensions import Literal, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["SourceListParams", "Created", "Duration", "Height", "Size", "Width"]
 
@@ -16,7 +19,7 @@ class SourceListParams(TypedDict, total=False):
 
     created: Created
 
-    device: str
+    device: Literal["apple", "android", "unknown"]
     """Filter by device (apple/android)"""
 
     duration: Duration
@@ -26,7 +29,7 @@ class SourceListParams(TypedDict, total=False):
     limit: int
     """Pagination limit (max 100)"""
 
-    metadata: str
+    metadata: Iterable[SequenceNotStr[str]]
     """Filter by metadata (format: key:value,key:value)"""
 
     offset: int
@@ -47,7 +50,7 @@ class Created(TypedDict, total=False):
     lte: str
     """Filter by creation date less than or equal (RFC3339)"""
 
-    sort: str
+    sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""
 
 

@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from datetime import datetime
+
 from .._models import BaseModel
 
 __all__ = ["APIFile"]
@@ -15,7 +17,7 @@ class APIFile(BaseModel):
     audio_codec: str
     """Audio codec used (e.g. aac, mp3)"""
 
-    created_at: str
+    created_at: datetime
     """Timestamp when the file was created"""
 
     duration: int

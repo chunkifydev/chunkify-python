@@ -1,12 +1,16 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
+from typing_extensions import Literal
 
+from ..._models import BaseModel
 from ..api_file import APIFile
-from ..shared.response_ok import ResponseOk
 
 __all__ = ["FileListResponse"]
 
 
-class FileListResponse(ResponseOk):
-    data: Optional[List[APIFile]] = None
+class FileListResponse(BaseModel):
+    data: List[APIFile]
+
+    status: Literal["success"]
+    """Status indicates the response status "success" """

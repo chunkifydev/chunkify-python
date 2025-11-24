@@ -114,13 +114,13 @@ class TestUploads:
             created={
                 "gte": "gte",
                 "lte": "lte",
-                "sort": "sort",
+                "sort": "asc",
             },
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             source_id="source_id",
-            status="status",
+            status="waiting",
         )
         assert_matches_type(SyncPaginatedResults[Upload], upload, path=["response"])
 
@@ -290,13 +290,13 @@ class TestAsyncUploads:
             created={
                 "gte": "gte",
                 "lte": "lte",
-                "sort": "sort",
+                "sort": "asc",
             },
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             source_id="source_id",
-            status="status",
+            status="waiting",
         )
         assert_matches_type(AsyncPaginatedResults[Upload], upload, path=["response"])
 

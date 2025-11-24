@@ -31,7 +31,7 @@ class TestWebhooks:
         webhook = client.webhooks.create(
             url="https://example.com/webhook",
             enabled=True,
-            events=['["job.completed"]'],
+            events=["job.completed"],
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 
@@ -117,7 +117,7 @@ class TestWebhooks:
         webhook = client.webhooks.update(
             webhook_id="webhookId",
             enabled=True,
-            events=['["job.completed"]'],
+            events=["job.completed"],
         )
         assert webhook is None
 
@@ -245,7 +245,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.create(
             url="https://example.com/webhook",
             enabled=True,
-            events=['["job.completed"]'],
+            events=["job.completed"],
         )
         assert_matches_type(Webhook, webhook, path=["response"])
 
@@ -331,7 +331,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.update(
             webhook_id="webhookId",
             enabled=True,
-            events=['["job.completed"]'],
+            events=["job.completed"],
         )
         assert webhook is None
 

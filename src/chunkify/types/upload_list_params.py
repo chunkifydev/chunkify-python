@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Iterable
+from typing_extensions import Literal, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["UploadListParams", "Created"]
 
@@ -16,7 +19,7 @@ class UploadListParams(TypedDict, total=False):
     limit: int
     """Pagination limit (max 100)"""
 
-    metadata: str
+    metadata: Iterable[SequenceNotStr[str]]
     """Filter by metadata (format: key:value,key:value)"""
 
     offset: int
@@ -25,7 +28,7 @@ class UploadListParams(TypedDict, total=False):
     source_id: str
     """Filter by source ID"""
 
-    status: str
+    status: Literal["waiting", "completed", "failed", "expired"]
     """Filter by status (pending, completed, error)"""
 
 
@@ -36,5 +39,5 @@ class Created(TypedDict, total=False):
     lte: str
     """Filter by creation date less than or equal (RFC3339)"""
 
-    sort: str
+    sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""
