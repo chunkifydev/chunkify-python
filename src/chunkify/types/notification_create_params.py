@@ -11,10 +11,7 @@ class NotificationCreateParams(TypedDict, total=False):
     event: Required[
         Literal["job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"]
     ]
-    """
-    Event specifies the type of event that triggered the notification. Currently
-    only supports "job.completed" event type.
-    """
+    """Event specifies the type of event that triggered the notification."""
 
     object_id: Required[str]
     """ObjectId specifies the object that triggered this notification."""

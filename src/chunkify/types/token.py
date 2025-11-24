@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from datetime import datetime
 
 from .._models import BaseModel
 
@@ -14,6 +14,9 @@ class Token(BaseModel):
     token: str
     """The actual token value (only returned on creation)"""
 
+    created_at: datetime
+    """Timestamp when the token was created"""
+
     name: str
     """Name given to the token"""
 
@@ -22,6 +25,3 @@ class Token(BaseModel):
 
     scope: str
     """Access scope of the token (e.g.project, team)"""
-
-    created_at: Optional[str] = None
-    """Timestamp when the token was created"""

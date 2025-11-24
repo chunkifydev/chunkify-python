@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
-
-from .._types import SequenceNotStr
+from typing import List
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["WebhookCreateParams"]
 
@@ -19,5 +18,7 @@ class WebhookCreateParams(TypedDict, total=False):
     enabled: bool
     """Enabled indicates whether the webhook is active."""
 
-    events: SequenceNotStr[str]
+    events: List[
+        Literal["job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"]
+    ]
     """Events specifies the types of events that will trigger the webhook."""

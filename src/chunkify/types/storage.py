@@ -1,5 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
+from datetime import datetime
+
 from .._models import BaseModel
 
 __all__ = ["Storage"]
@@ -12,11 +15,8 @@ class Storage(BaseModel):
     bucket: str
     """Name of the storage bucket"""
 
-    created_at: str
+    created_at: datetime
     """Created at timestamp"""
-
-    endpoint: str
-    """Endpoint of the storage provider"""
 
     location: str
     """Continent location of the storage (eg. US, EU, ASIA)"""
@@ -32,3 +32,6 @@ class Storage(BaseModel):
 
     slug: str
     """Unique identifier of the storage configuration"""
+
+    endpoint: Optional[str] = None
+    """Endpoint of the storage provider"""

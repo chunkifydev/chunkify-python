@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["FileListParams", "Created", "Duration", "Height", "Path", "Size", "Width"]
 
@@ -52,7 +52,7 @@ class Created(TypedDict, total=False):
     lte: str
     """Filter by creation date less than or equal (RFC3339)"""
 
-    sort: str
+    sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""
 
 

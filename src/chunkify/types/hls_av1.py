@@ -1,195 +1,192 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
+from typing import Optional
+from typing_extensions import Literal
 
-from typing_extensions import Literal, Required, TypedDict
+from .._models import BaseModel
 
-__all__ = ["HlsH265Param"]
+__all__ = ["HlsAv1"]
 
 
-class HlsH265Param(TypedDict, total=False):
-    id: Required[Literal["hls_h265"]]
+class HlsAv1(BaseModel):
+    id: Literal["hls_av1"]
 
-    audio_bitrate: int
+    audio_bitrate: Optional[int] = None
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
     """
 
-    bufsize: int
+    bufsize: Optional[int] = None
     """
     Bufsize specifies the video buffer size in bits. Must be between 100Kbps and
     50Mbps.
     """
 
-    channels: Literal[1, 2, 5, 7]
+    channels: Optional[Literal[1, 2, 5, 7]] = None
     """
     Channels specifies the number of audio channels. Valid values: 1 (mono), 2
     (stereo), 5 (5.1), 7 (7.1)
     """
 
-    crf: int
+    crf: Optional[int] = None
     """
     Crf (Constant Rate Factor) controls the quality of the output video. Lower
-    values mean better quality but larger file size. Range: 16 to 35. Recommended
-    values: 18-28 for high quality, 23-28 for good quality, 28-35 for acceptable
+    values mean better quality but larger file size. Range: 16 to 63. Recommended
+    values: 16-35 for high quality, 35-45 for good quality, 45-63 for acceptable
     quality.
     """
 
-    disable_audio: bool
+    disable_audio: Optional[bool] = None
     """DisableAudio indicates whether to disable audio processing."""
 
-    disable_video: bool
+    disable_video: Optional[bool] = None
     """DisableVideo indicates whether to disable video processing."""
 
-    duration: int
+    duration: Optional[int] = None
     """
     Duration specifies the duration to process in seconds. Must be a positive value.
     """
 
-    framerate: float
+    framerate: Optional[float] = None
     """
     Framerate specifies the output video frame rate. Must be between 15 and 120 fps.
     """
 
-    gop: int
+    gop: Optional[int] = None
     """Gop specifies the Group of Pictures (GOP) size. Must be between 1 and 300."""
 
-    height: int
+    height: Optional[int] = None
     """Height specifies the output video height in pixels. Must be between -2 and 7680.
 
     Use -2 for automatic calculation while maintaining aspect ratio.
     """
 
-    hls_enc: bool
+    hls_enc: Optional[bool] = None
     """HlsEnc enables encryption for HLS segments when set to true."""
 
-    hls_enc_iv: str
+    hls_enc_iv: Optional[str] = None
     """HlsEncIv specifies the initialization vector for encryption.
 
     Maximum length: 64 characters. Required when HlsEnc is true.
     """
 
-    hls_enc_key: str
+    hls_enc_key: Optional[str] = None
     """HlsEncKey specifies the encryption key for HLS segments.
 
     Maximum length: 64 characters. Required when HlsEnc is true.
     """
 
-    hls_enc_key_url: str
+    hls_enc_key_url: Optional[str] = None
     """
     HlsEncKeyUrl specifies the URL where clients can fetch the encryption key.
     Required when HlsEnc is true.
     """
 
-    hls_segment_type: Literal["mpegts", "fmp4"]
+    hls_segment_type: Optional[Literal["mpegts", "fmp4"]] = None
     """HlsSegmentType specifies the type of HLS segments. Valid values:
 
     - mpegts: Traditional MPEG-TS segments, better compatibility
     - fmp4: Fragmented MP4 segments, better efficiency
     """
 
-    hls_time: int
+    hls_time: Optional[int] = None
     """HlsTime specifies the duration of each HLS segment in seconds.
 
     Range: 1 to 10. Shorter segments provide faster startup but more overhead,
     longer segments are more efficient.
     """
 
-    level: Literal[30, 31, 41]
-    """Level specifies the H.265 profile level.
+    level: Optional[Literal[30, 31, 41]] = None
+    """Level specifies the AV1 profile level.
 
     Valid values: 30-31 (main), 41 (main10). Higher levels support higher
     resolutions and bitrates but require more processing power.
     """
 
-    maxrate: int
+    maxrate: Optional[int] = None
     """
     Maxrate specifies the maximum video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    minrate: int
+    minrate: Optional[int] = None
     """
     Minrate specifies the minimum video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    movflags: str
+    movflags: Optional[str] = None
 
-    pixfmt: Literal[
-        "yuv410p",
-        "yuv411p",
-        "yuv420p",
-        "yuv422p",
-        "yuv440p",
-        "yuv444p",
-        "yuvJ411p",
-        "yuvJ420p",
-        "yuvJ422p",
-        "yuvJ440p",
-        "yuvJ444p",
-        "yuv420p10le",
-        "yuv422p10le",
-        "yuv440p10le",
-        "yuv444p10le",
-        "yuv420p12le",
-        "yuv422p12le",
-        "yuv440p12le",
-        "yuv444p12le",
-        "yuv420p10be",
-        "yuv422p10be",
-        "yuv440p10be",
-        "yuv444p10be",
-        "yuv420p12be",
-        "yuv422p12be",
-        "yuv440p12be",
-        "yuv444p12be",
-    ]
+    pixfmt: Optional[
+        Literal[
+            "yuv410p",
+            "yuv411p",
+            "yuv420p",
+            "yuv422p",
+            "yuv440p",
+            "yuv444p",
+            "yuvJ411p",
+            "yuvJ420p",
+            "yuvJ422p",
+            "yuvJ440p",
+            "yuvJ444p",
+            "yuv420p10le",
+            "yuv422p10le",
+            "yuv440p10le",
+            "yuv444p10le",
+            "yuv420p12le",
+            "yuv422p12le",
+            "yuv440p12le",
+            "yuv444p12le",
+            "yuv420p10be",
+            "yuv422p10be",
+            "yuv440p10be",
+            "yuv444p10be",
+            "yuv420p12be",
+            "yuv422p12be",
+            "yuv440p12be",
+            "yuv444p12be",
+        ]
+    ] = None
     """PixFmt specifies the pixel format. Valid value: yuv420p"""
 
-    preset: Literal["ultrafast", "superfast", "veryfast", "faster", "fast", "medium"]
-    """Preset specifies the encoding speed preset.
+    preset: Optional[Literal["6", "7", "8", "9", "10", "11", "12", "13"]] = None
+    """Preset controls the encoding efficiency and processing intensity.
 
-    Valid values (from fastest to slowest):
+    Lower presets use more optimization features, creating smaller files with better
+    quality but requiring more compute time. Higher presets encode faster but
+    produce larger files.
 
-    - ultrafast: Fastest encoding, lowest quality
-    - superfast: Very fast encoding, lower quality
-    - veryfast: Fast encoding, moderate quality
-    - faster: Faster encoding, good quality
-    - fast: Fast encoding, better quality
-    - medium: Balanced preset, best quality
+    Preset ranges:
+
+    - 6-7: Fast encoding for real-time applications (smaller files)
+    - 8-10: Balanced efficiency and speed for general use
+    - 11-13: Fastest encoding for real-time applications (larger files)
     """
 
-    profilev: Literal["main", "main10", "mainstillpicture"]
-    """Profilev specifies the H.265 profile. Valid values:
+    profilev: Optional[Literal["main", "main10", "mainstillpicture"]] = None
+    """Profilev specifies the AV1 profile. Valid values:
 
     - main: Main profile, good for most applications
     - main10: Main 10-bit profile, supports 10-bit color
     - mainstillpicture: Still picture profile, optimized for single images
     """
 
-    seek: int
+    seek: Optional[int] = None
     """
     Seek specifies the timestamp to start processing from (in seconds). Must be a
     positive value.
     """
 
-    video_bitrate: int
+    video_bitrate: Optional[int] = None
     """
     VideoBitrate specifies the video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    width: int
+    width: Optional[int] = None
     """Width specifies the output video width in pixels. Must be between -2 and 7680.
 
     Use -2 for automatic calculation while maintaining aspect ratio.
-    """
-
-    x265_keyint: int
-    """
-    X265KeyInt specifies the maximum number of frames between keyframes for H.265
-    encoding. Range: 1 to 300. Higher values can improve compression but may affect
-    seeking.
     """

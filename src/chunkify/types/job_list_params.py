@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Iterable
+from typing_extensions import Literal, TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["JobListParams", "Created"]
 
@@ -13,8 +16,8 @@ class JobListParams(TypedDict, total=False):
 
     created: Created
 
-    format_name: str
-    """Filter by format name"""
+    format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
+    """Filter by format id"""
 
     hls_manifest_id: str
     """Filter by hls manifest ID"""
@@ -22,7 +25,7 @@ class JobListParams(TypedDict, total=False):
     limit: int
     """Pagination limit"""
 
-    metadata: str
+    metadata: Iterable[SequenceNotStr[str]]
     """Filter by metadata (format: key:value,key2:value2)"""
 
     offset: int
@@ -31,7 +34,7 @@ class JobListParams(TypedDict, total=False):
     source_id: str
     """Filter by source ID"""
 
-    status: str
+    status: Literal["completed", "processing", "failed", "cancelled", "queued"]
     """Filter by job status"""
 
 
@@ -42,5 +45,5 @@ class Created(TypedDict, total=False):
     lte: str
     """Filter by creation date less than or equal"""
 
-    sort: str
+    sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""

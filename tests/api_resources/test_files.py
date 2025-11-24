@@ -75,7 +75,7 @@ class TestFiles:
             created={
                 "gte": "gte",
                 "lte": "lte",
-                "sort": "sort",
+                "sort": "asc",
             },
             duration={
                 "eq": 0,
@@ -92,7 +92,7 @@ class TestFiles:
                 "lte": 0,
             },
             job_id="job_id",
-            limit=0,
+            limit=1,
             mime_type="mime_type",
             offset=0,
             path={
@@ -245,7 +245,7 @@ class TestAsyncFiles:
             created={
                 "gte": "gte",
                 "lte": "lte",
-                "sort": "sort",
+                "sort": "asc",
             },
             duration={
                 "eq": 0,
@@ -262,7 +262,7 @@ class TestAsyncFiles:
                 "lte": 0,
             },
             job_id="job_id",
-            limit=0,
+            limit=1,
             mime_type="mime_type",
             offset=0,
             path={

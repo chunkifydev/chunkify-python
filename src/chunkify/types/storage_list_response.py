@@ -1,12 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 
 from .storage import Storage
-from .shared.response_ok import ResponseOk
+from .._models import BaseModel
 
 __all__ = ["StorageListResponse"]
 
 
-class StorageListResponse(ResponseOk):
-    data: Optional[List[Storage]] = None
+class StorageListResponse(BaseModel):
+    data: List[Storage]
+
+    status: str
+    """Status indicates the response status "success" """

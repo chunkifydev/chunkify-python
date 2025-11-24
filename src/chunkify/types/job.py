@@ -1,26 +1,104 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, Union, Optional
+from datetime import datetime
+from typing_extensions import Literal
 
+from .jpg import Jpg
+from .hls_av1 import HlsAv1
+from .mp4_av1 import MP4Av1
 from .._models import BaseModel
+from .hls_h264 import HlsH264
+from .hls_h265 import HlsH265
+from .mp4_h264 import MP4H264
+from .mp4_h265 import MP4H265
+from .webm_vp9 import WebmVp9
 from .shared.chunkify_error import ChunkifyError
 
-__all__ = ["Job", "Format", "Storage", "Transcoder"]
+__all__ = [
+    "Job",
+    "FormatMP4Av1",
+    "FormatMP4H264",
+    "FormatMP4H265",
+    "FormatWebmVp9",
+    "FormatHlsAv1",
+    "FormatHlsH264",
+    "FormatHlsH265",
+    "FormatJpg",
+    "Storage",
+    "Transcoder",
+]
 
 
-class Format(BaseModel):
-    config: Optional[Dict[str, object]] = None
-    """Configuration parameters for the template.
+class FormatMP4Av1(MP4Av1):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
 
-    A map of configuration values specific to the format For example, for mp4/h264
-    format this includes parameters like crf, preset, profile etc.
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
     """
 
-    name: Optional[str] = None
-    """Name of the transcoding template.The format to use for transcoding.
 
-    Valid formats are: mp4/h264, mp4/h265, mp4/av1, webm/vp9, hls/h264, hls/h265,
-    hls/av1, jpg
+class FormatMP4H264(MP4H264):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatMP4H265(MP4H265):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatWebmVp9(WebmVp9):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatHlsAv1(HlsAv1):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatHlsH264(HlsH264):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatHlsH265(HlsH265):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
+    """
+
+
+class FormatJpg(Jpg):
+    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
+    """Name of the transcoding template.
+
+    The format to use for transcoding. Valid formats are: mp4_h264, mp4_h265,
+    mp4_av1, webm_vp9, hls_h264, hls_h265, hls_av1, jpg
     """
 
 
@@ -33,10 +111,13 @@ class Storage(BaseModel):
 
 
 class Transcoder(BaseModel):
-    quantity: Optional[int] = None
+    auto: bool
+    """Whether the transcoder configuration is automatically set by Chunkify"""
+
+    quantity: int
     """Number of instances allocated"""
 
-    type: Optional[str] = None
+    type: Literal["4vCPU", "8vCPU", "16vCPU"]
     """Type of transcoder instance"""
 
 
@@ -47,10 +128,12 @@ class Job(BaseModel):
     billable_time: int
     """Billable time in seconds"""
 
-    created_at: str
+    created_at: datetime
     """Creation timestamp"""
 
-    format: Format
+    format: Union[
+        FormatMP4Av1, FormatMP4H264, FormatMP4H265, FormatWebmVp9, FormatHlsAv1, FormatHlsH264, FormatHlsH265, FormatJpg
+    ]
     """A template defines the transcoding parameters and settings for a job"""
 
     progress: float
@@ -59,7 +142,20 @@ class Job(BaseModel):
     source_id: str
     """ID of the source video being transcoded"""
 
-    status: str
+    status: Literal[
+        "queued",
+        "ingesting",
+        "transcoding",
+        "downloading",
+        "merging",
+        "uploading",
+        "failed",
+        "completed",
+        "cancelled",
+        "merged",
+        "downloaded",
+        "transcoded",
+    ]
     """
     Current status of the job (e.g., "queued", "ingesting","transcoding",
     "downloading", "merging", "uploading", "failed", "completed")
@@ -71,7 +167,7 @@ class Job(BaseModel):
     transcoder: Transcoder
     """The transcoder configuration for a job"""
 
-    updated_at: str
+    updated_at: datetime
     """Last update timestamp"""
 
     error: Optional[ChunkifyError] = None
@@ -83,5 +179,5 @@ class Job(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     """Additional metadata for the job"""
 
-    started_at: Optional[str] = None
+    started_at: Optional[datetime] = None
     """When the job started processing"""

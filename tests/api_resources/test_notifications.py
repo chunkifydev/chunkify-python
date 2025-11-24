@@ -111,18 +111,18 @@ class TestNotifications:
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
         notification = client.notifications.list(
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            events=["string"],
-            limit=0,
+            events=["job.completed"],
+            limit=1,
             object_id="object_id",
             offset=0,
             response_status_code={
-                "eq": 0,
-                "gte": 0,
-                "lte": 0,
+                "eq": 100,
+                "gte": 100,
+                "lte": 100,
             },
             webhook_id="webhook_id",
         )
@@ -291,18 +291,18 @@ class TestAsyncNotifications:
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
         notification = await async_client.notifications.list(
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            events=["string"],
-            limit=0,
+            events=["job.completed"],
+            limit=1,
             object_id="object_id",
             offset=0,
             response_status_code={
-                "eq": 0,
-                "gte": 0,
-                "lte": 0,
+                "eq": 100,
+                "gte": 100,
+                "lte": 100,
             },
             webhook_id="webhook_id",
         )

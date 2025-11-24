@@ -119,11 +119,11 @@ class TestSources:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            device="device",
+            device="apple",
             duration={
                 "eq": 0,
                 "gt": 0,
@@ -138,8 +138,8 @@ class TestSources:
                 "lt": 0,
                 "lte": 0,
             },
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             size={
                 "eq": 0,
@@ -330,11 +330,11 @@ class TestAsyncSources:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "gte",
-                "lte": "lte",
-                "sort": "sort",
+                "gte": "2102-57-32",
+                "lte": "2102-57-32",
+                "sort": "asc",
             },
-            device="device",
+            device="apple",
             duration={
                 "eq": 0,
                 "gt": 0,
@@ -349,8 +349,8 @@ class TestAsyncSources:
                 "lt": 0,
                 "lte": 0,
             },
-            limit=0,
-            metadata="metadata",
+            limit=1,
+            metadata=[["J!Q0Ok0bzJb7:pro"]],
             offset=0,
             size={
                 "eq": 0,

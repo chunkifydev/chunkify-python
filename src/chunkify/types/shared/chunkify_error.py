@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
@@ -8,11 +8,23 @@ __all__ = ["ChunkifyError"]
 
 
 class ChunkifyError(BaseModel):
-    detail: Optional[str] = None
+    detail: str
     """Additional error details or output"""
 
-    message: Optional[str] = None
+    message: str
     """Main error message"""
 
-    type: Optional[str] = None
+    type: Literal[
+        "setup",
+        "ffmpeg",
+        "source",
+        "upload",
+        "download",
+        "ingest",
+        "job",
+        "unexpected",
+        "permission",
+        "timeout",
+        "cancelled",
+    ]
     """Type of error (e.g., "ffmpeg", "network", "storage", etc.)"""

@@ -2,19 +2,22 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Union
+from typing_extensions import Required, TypeAlias, TypedDict
 
-__all__ = ["ProjectUpdateParams"]
+__all__ = ["ProjectUpdateParams", "Variant0", "Variant1"]
 
 
-class ProjectUpdateParams(TypedDict, total=False):
-    name: str
-    """
-    Name is the new name for the project, which must be between 4 and 32 characters.
-    """
+class Variant0(TypedDict, total=False):
+    name: Required[str]
 
     storage_id: str
-    """
-    StorageId specifies the storage configuration for the project, which must be
-    between 4 and 64 characters.
-    """
+
+
+class Variant1(TypedDict, total=False):
+    storage_id: Required[str]
+
+    name: str
+
+
+ProjectUpdateParams: TypeAlias = Union[Variant0, Variant1]

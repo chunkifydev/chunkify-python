@@ -1,34 +1,35 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
+from typing import Optional
+from typing_extensions import Literal
 
-from typing_extensions import Literal, Required, TypedDict
+from .._models import BaseModel
 
-__all__ = ["HlsH264Param"]
+__all__ = ["MP4H264"]
 
 
-class HlsH264Param(TypedDict, total=False):
-    id: Required[Literal["hls_h264"]]
+class MP4H264(BaseModel):
+    id: Literal["mp4_h264"]
 
-    audio_bitrate: int
+    audio_bitrate: Optional[int] = None
     """
     AudioBitrate specifies the audio bitrate in bits per second. Must be between
     32Kbps and 512Kbps.
     """
 
-    bufsize: int
+    bufsize: Optional[int] = None
     """
     Bufsize specifies the video buffer size in bits. Must be between 100Kbps and
     50Mbps.
     """
 
-    channels: Literal[1, 2, 5, 7]
+    channels: Optional[Literal[1, 2, 5, 7]] = None
     """
     Channels specifies the number of audio channels. Valid values: 1 (mono), 2
     (stereo), 5 (5.1), 7 (7.1)
     """
 
-    crf: int
+    crf: Optional[int] = None
     """
     Crf (Constant Rate Factor) controls the quality of the output video. Lower
     values mean better quality but larger file size. Range: 16 to 35. Recommended
@@ -36,67 +37,32 @@ class HlsH264Param(TypedDict, total=False):
     quality.
     """
 
-    disable_audio: bool
+    disable_audio: Optional[bool] = None
     """DisableAudio indicates whether to disable audio processing."""
 
-    disable_video: bool
+    disable_video: Optional[bool] = None
     """DisableVideo indicates whether to disable video processing."""
 
-    duration: int
+    duration: Optional[int] = None
     """
     Duration specifies the duration to process in seconds. Must be a positive value.
     """
 
-    framerate: float
+    framerate: Optional[float] = None
     """
     Framerate specifies the output video frame rate. Must be between 15 and 120 fps.
     """
 
-    gop: int
+    gop: Optional[int] = None
     """Gop specifies the Group of Pictures (GOP) size. Must be between 1 and 300."""
 
-    height: int
+    height: Optional[int] = None
     """Height specifies the output video height in pixels. Must be between -2 and 7680.
 
     Use -2 for automatic calculation while maintaining aspect ratio.
     """
 
-    hls_enc: bool
-    """HlsEnc enables encryption for HLS segments when set to true."""
-
-    hls_enc_iv: str
-    """HlsEncIv specifies the initialization vector for encryption.
-
-    Maximum length: 64 characters. Required when HlsEnc is true.
-    """
-
-    hls_enc_key: str
-    """HlsEncKey specifies the encryption key for HLS segments.
-
-    Maximum length: 64 characters. Required when HlsEnc is true.
-    """
-
-    hls_enc_key_url: str
-    """
-    HlsEncKeyUrl specifies the URL where clients can fetch the encryption key.
-    Required when HlsEnc is true.
-    """
-
-    hls_segment_type: Literal["mpegts", "fmp4"]
-    """HlsSegmentType specifies the type of HLS segments. Valid values:
-
-    - mpegts: Traditional MPEG-TS segments, better compatibility
-    - fmp4: Fragmented MP4 segments, better efficiency
-    """
-
-    hls_time: int
-    """HlsTime specifies the duration of each HLS segment in seconds.
-
-    Range: 1 to 10. Shorter segments provide faster startup but more overhead,
-    longer segments are more efficient.
-    """
-
-    level: Literal[10, 11, 12, 13, 20, 21, 22, 30, 31, 32, 40, 41, 42, 50, 51]
+    level: Optional[Literal[10, 11, 12, 13, 20, 21, 22, 30, 31, 32, 40, 41, 42, 50, 51]] = None
     """Level specifies the H.264 profile level.
 
     Valid values: 10-13 (baseline), 20-22 (main), 30-32 (high), 40-42 (high), 50-51
@@ -104,52 +70,54 @@ class HlsH264Param(TypedDict, total=False):
     processing power.
     """
 
-    maxrate: int
+    maxrate: Optional[int] = None
     """
     Maxrate specifies the maximum video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    minrate: int
+    minrate: Optional[int] = None
     """
     Minrate specifies the minimum video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    movflags: str
+    movflags: Optional[str] = None
 
-    pixfmt: Literal[
-        "yuv410p",
-        "yuv411p",
-        "yuv420p",
-        "yuv422p",
-        "yuv440p",
-        "yuv444p",
-        "yuvJ411p",
-        "yuvJ420p",
-        "yuvJ422p",
-        "yuvJ440p",
-        "yuvJ444p",
-        "yuv420p10le",
-        "yuv422p10le",
-        "yuv440p10le",
-        "yuv444p10le",
-        "yuv420p12le",
-        "yuv422p12le",
-        "yuv440p12le",
-        "yuv444p12le",
-        "yuv420p10be",
-        "yuv422p10be",
-        "yuv440p10be",
-        "yuv444p10be",
-        "yuv420p12be",
-        "yuv422p12be",
-        "yuv440p12be",
-        "yuv444p12be",
-    ]
+    pixfmt: Optional[
+        Literal[
+            "yuv410p",
+            "yuv411p",
+            "yuv420p",
+            "yuv422p",
+            "yuv440p",
+            "yuv444p",
+            "yuvJ411p",
+            "yuvJ420p",
+            "yuvJ422p",
+            "yuvJ440p",
+            "yuvJ444p",
+            "yuv420p10le",
+            "yuv422p10le",
+            "yuv440p10le",
+            "yuv444p10le",
+            "yuv420p12le",
+            "yuv422p12le",
+            "yuv440p12le",
+            "yuv444p12le",
+            "yuv420p10be",
+            "yuv422p10be",
+            "yuv440p10be",
+            "yuv444p10be",
+            "yuv420p12be",
+            "yuv422p12be",
+            "yuv440p12be",
+            "yuv444p12be",
+        ]
+    ] = None
     """PixFmt specifies the pixel format. Valid value: yuv420p"""
 
-    preset: Literal["ultrafast", "superfast", "veryfast", "faster", "fast", "medium"]
+    preset: Optional[Literal["ultrafast", "superfast", "veryfast", "faster", "fast", "medium"]] = None
     """Preset specifies the encoding speed preset.
 
     Valid values (from fastest to slowest):
@@ -162,7 +130,7 @@ class HlsH264Param(TypedDict, total=False):
     - medium: Balanced preset, best quality
     """
 
-    profilev: Literal["baseline", "main", "high", "high10", "high422", "high444"]
+    profilev: Optional[Literal["baseline", "main", "high", "high10", "high422", "high444"]] = None
     """Profilev specifies the H.264 profile. Valid values:
 
     - baseline: Basic profile, good for mobile devices
@@ -173,25 +141,25 @@ class HlsH264Param(TypedDict, total=False):
     - high444: High 4:4:4 profile, supports 4:4:4 color sampling
     """
 
-    seek: int
+    seek: Optional[int] = None
     """
     Seek specifies the timestamp to start processing from (in seconds). Must be a
     positive value.
     """
 
-    video_bitrate: int
+    video_bitrate: Optional[int] = None
     """
     VideoBitrate specifies the video bitrate in bits per second. Must be between
     100Kbps and 50Mbps.
     """
 
-    width: int
+    width: Optional[int] = None
     """Width specifies the output video width in pixels. Must be between -2 and 7680.
 
     Use -2 for automatic calculation while maintaining aspect ratio.
     """
 
-    x264_keyint: int
+    x264_keyint: Optional[int] = None
     """
     X264KeyInt specifies the maximum number of frames between keyframes for H.264
     encoding. Range: 1 to 300. Higher values can improve compression but may affect

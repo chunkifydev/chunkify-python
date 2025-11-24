@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict
+from datetime import datetime
 
 from .._models import BaseModel
 
@@ -17,7 +18,7 @@ class Source(BaseModel):
     audio_codec: str
     """Audio codec used (e.g. aac, mp3)"""
 
-    created_at: str
+    created_at: datetime
     """Timestamp when the source was created"""
 
     device: str
