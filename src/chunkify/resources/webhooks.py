@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import List, Type, cast
+from typing import List, Type, Mapping, cast
 from typing_extensions import Literal
 
 import httpx
@@ -21,6 +21,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._wrappers import DataWrapper
+from .._exceptions import ChunkifyError
 from .._base_client import make_request_options
 from ..types.webhook import Webhook
 from ..types.unwrap_webhook_event import UnwrapWebhookEvent
@@ -260,7 +261,24 @@ class WebhooksResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def unwrap(self, payload: str) -> UnwrapWebhookEvent:
+    def unwrap(self, payload: str, *, headers: Mapping[str, str], key: str | bytes | None = None) -> UnwrapWebhookEvent:
+        try:
+            from standardwebhooks import Webhook
+        except ImportError as exc:
+            raise ChunkifyError("You need to install `chunkify[webhooks]` to use this method") from exc
+
+        if key is None:
+            key = self._client.webhook_key
+            if key is None:
+                raise ValueError(
+                    "Cannot verify a webhook without a key on either the client's webhook_key or passed in as an argument"
+                )
+
+        if not isinstance(headers, dict):
+            headers = dict(headers)
+
+        Webhook(key).verify(payload, headers)
+
         return cast(
             UnwrapWebhookEvent,
             construct_type(
@@ -501,7 +519,24 @@ class AsyncWebhooksResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    def unwrap(self, payload: str) -> UnwrapWebhookEvent:
+    def unwrap(self, payload: str, *, headers: Mapping[str, str], key: str | bytes | None = None) -> UnwrapWebhookEvent:
+        try:
+            from standardwebhooks import Webhook
+        except ImportError as exc:
+            raise ChunkifyError("You need to install `chunkify[webhooks]` to use this method") from exc
+
+        if key is None:
+            key = self._client.webhook_key
+            if key is None:
+                raise ValueError(
+                    "Cannot verify a webhook without a key on either the client's webhook_key or passed in as an argument"
+                )
+
+        if not isinstance(headers, dict):
+            headers = dict(headers)
+
+        Webhook(key).verify(payload, headers)
+
         return cast(
             UnwrapWebhookEvent,
             construct_type(
