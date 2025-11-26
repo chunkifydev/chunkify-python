@@ -71,10 +71,10 @@ class FormatJpg(Jpg):
 
 
 class Storage(BaseModel):
-    id: Optional[str] = None
+    id: str
     """ID of the storage"""
 
-    path: Optional[str] = None
+    path: str
     """Path where the output will be stored"""
 
 
