@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Type, cast
+from typing import Any, cast
 
 import httpx
 
@@ -71,17 +71,22 @@ class StoragesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
-            "/api/storages",
-            body=maybe_transform(storage, storage_create_params.StorageCreateParams),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                post_parser=DataWrapper[Storage]._unwrapper,
+        return cast(
+            Storage,
+            self._post(
+                "/api/storages",
+                body=maybe_transform(storage, storage_create_params.StorageCreateParams),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    post_parser=DataWrapper[Storage]._unwrapper,
+                ),
+                cast_to=cast(
+                    Any, DataWrapper[Storage]
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     def retrieve(
@@ -109,16 +114,21 @@ class StoragesResource(SyncAPIResource):
         """
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
-        return self._get(
-            f"/api/storages/{storage_id}",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                post_parser=DataWrapper[Storage]._unwrapper,
+        return cast(
+            Storage,
+            self._get(
+                f"/api/storages/{storage_id}",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    post_parser=DataWrapper[Storage]._unwrapper,
+                ),
+                cast_to=cast(
+                    Any, DataWrapper[Storage]
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     def list(
@@ -223,17 +233,22 @@ class AsyncStoragesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
-            "/api/storages",
-            body=await async_maybe_transform(storage, storage_create_params.StorageCreateParams),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                post_parser=DataWrapper[Storage]._unwrapper,
+        return cast(
+            Storage,
+            await self._post(
+                "/api/storages",
+                body=await async_maybe_transform(storage, storage_create_params.StorageCreateParams),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    post_parser=DataWrapper[Storage]._unwrapper,
+                ),
+                cast_to=cast(
+                    Any, DataWrapper[Storage]
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     async def retrieve(
@@ -261,16 +276,21 @@ class AsyncStoragesResource(AsyncAPIResource):
         """
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
-        return await self._get(
-            f"/api/storages/{storage_id}",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                post_parser=DataWrapper[Storage]._unwrapper,
+        return cast(
+            Storage,
+            await self._get(
+                f"/api/storages/{storage_id}",
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    post_parser=DataWrapper[Storage]._unwrapper,
+                ),
+                cast_to=cast(
+                    Any, DataWrapper[Storage]
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=cast(Type[Storage], DataWrapper[Storage]),
         )
 
     async def list(
