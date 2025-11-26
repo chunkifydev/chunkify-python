@@ -32,7 +32,7 @@ class StoragesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
         return StoragesResourceWithRawResponse(self)
 
@@ -41,7 +41,7 @@ class StoragesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
         return StoragesResourceWithStreamingResponse(self)
 
@@ -194,7 +194,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
         return AsyncStoragesResourceWithRawResponse(self)
 
@@ -203,7 +203,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
         return AsyncStoragesResourceWithStreamingResponse(self)
 
