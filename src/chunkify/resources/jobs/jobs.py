@@ -221,7 +221,7 @@ class JobsResource(SyncAPIResource):
 
           limit: Pagination limit
 
-          metadata: Filter by metadata (format: key:value,key2:value2)
+          metadata: Filter by metadata
 
           offset: Pagination offset
 
@@ -503,7 +503,7 @@ class AsyncJobsResource(AsyncAPIResource):
 
           limit: Pagination limit
 
-          metadata: Filter by metadata (format: key:value,key2:value2)
+          metadata: Filter by metadata
 
           offset: Pagination offset
 

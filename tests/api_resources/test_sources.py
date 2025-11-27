@@ -139,7 +139,7 @@ class TestSources:
                 "lte": 0,
             },
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             size={
                 "eq": 0,
@@ -350,7 +350,7 @@ class TestAsyncSources:
                 "lte": 0,
             },
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             size={
                 "eq": 0,

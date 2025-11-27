@@ -30,7 +30,7 @@ class SourceListParams(TypedDict, total=False):
     """Pagination limit (max 100)"""
 
     metadata: Iterable[SequenceNotStr[str]]
-    """Filter by metadata (format: key:value,key:value)"""
+    """Filter by metadata"""
 
     offset: int
     """Pagination offset"""
