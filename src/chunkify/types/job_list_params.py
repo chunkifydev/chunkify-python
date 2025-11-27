@@ -26,7 +26,7 @@ class JobListParams(TypedDict, total=False):
     """Pagination limit"""
 
     metadata: Iterable[SequenceNotStr[str]]
-    """Filter by metadata (format: key:value,key2:value2)"""
+    """Filter by metadata"""
 
     offset: int
     """Pagination offset"""

@@ -157,7 +157,7 @@ class UploadsResource(SyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata (format: key:value,key:value)
+          metadata: Filter by metadata
 
           offset: Pagination offset
 
@@ -363,7 +363,7 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata (format: key:value,key:value)
+          metadata: Filter by metadata
 
           offset: Pagination offset
 
