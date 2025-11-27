@@ -119,8 +119,8 @@ class TestSources:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "2025-01-01",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             device="apple",
@@ -330,8 +330,8 @@ class TestAsyncSources:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "2025-01-01",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             device="apple",
