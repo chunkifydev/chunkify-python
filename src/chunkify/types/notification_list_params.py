@@ -14,10 +14,7 @@ class NotificationListParams(TypedDict, total=False):
     events: List[
         Literal["job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"]
     ]
-    """Filter by events (e.g.
-
-    job.completed, job.failed, upload.completed, upload.failed, upload.expired)
-    """
+    """Filter by events"""
 
     limit: int
     """Pagination limit (max 100)"""
@@ -35,11 +32,11 @@ class NotificationListParams(TypedDict, total=False):
 
 
 class Created(TypedDict, total=False):
-    gte: str
-    """Filter by creation date greater than or equal (RFC3339)"""
+    gte: int
+    """Filter by creation date greater than or equal (UNIX epoch time)"""
 
-    lte: str
-    """Filter by creation date less than or equal (RFC3339)"""
+    lte: int
+    """Filter by creation date less than or equal (UNIX epoch time)"""
 
     sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""

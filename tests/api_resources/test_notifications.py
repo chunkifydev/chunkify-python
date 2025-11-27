@@ -111,8 +111,8 @@ class TestNotifications:
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
         notification = client.notifications.list(
             created={
-                "gte": "2102-57-32",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             events=["job.completed"],
@@ -291,8 +291,8 @@ class TestAsyncNotifications:
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
         notification = await async_client.notifications.list(
             created={
-                "gte": "2102-57-32",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             events=["job.completed"],

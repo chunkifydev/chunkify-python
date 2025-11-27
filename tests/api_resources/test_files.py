@@ -73,8 +73,8 @@ class TestFiles:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             duration={
@@ -243,8 +243,8 @@ class TestAsyncFiles:
             id="id",
             audio_codec="audio_codec",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             duration={

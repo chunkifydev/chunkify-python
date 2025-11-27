@@ -162,8 +162,7 @@ class NotificationsResource(SyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
-          events: Filter by events (e.g. job.completed, job.failed, upload.completed,
-              upload.failed, upload.expired)
+          events: Filter by events
 
           limit: Pagination limit (max 100)
 
@@ -376,8 +375,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
-          events: Filter by events (e.g. job.completed, job.failed, upload.completed,
-              upload.failed, upload.expired)
+          events: Filter by events
 
           limit: Pagination limit (max 100)
 

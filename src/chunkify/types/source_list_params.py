@@ -44,11 +44,11 @@ class SourceListParams(TypedDict, total=False):
 
 
 class Created(TypedDict, total=False):
-    gte: str
-    """Filter by creation date greater than or equal (RFC3339)"""
+    gte: int
+    """Filter by creation date greater than or equal (UNIX epoch time)"""
 
-    lte: str
-    """Filter by creation date less than or equal (RFC3339)"""
+    lte: int
+    """Filter by creation date less than or equal (UNIX epoch time)"""
 
     sort: Literal["asc", "desc"]
     """Sort by creation date (asc/desc)"""

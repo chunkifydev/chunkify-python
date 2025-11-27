@@ -112,8 +112,8 @@ class TestUploads:
         upload = client.uploads.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             limit=1,
@@ -288,8 +288,8 @@ class TestAsyncUploads:
         upload = await async_client.uploads.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             limit=1,
