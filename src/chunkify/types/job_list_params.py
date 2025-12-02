@@ -26,7 +26,7 @@ class JobListParams(TypedDict, total=False):
     """Pagination limit"""
 
     metadata: Iterable[SequenceNotStr[str]]
-    """Filter by metadata (format: key:value,key2:value2)"""
+    """Filter by metadata"""
 
     offset: int
     """Pagination offset"""
@@ -39,10 +39,10 @@ class JobListParams(TypedDict, total=False):
 
 
 class Created(TypedDict, total=False):
-    gte: str
+    gte: int
     """Filter by creation date greater than or equal"""
 
-    lte: str
+    lte: int
     """Filter by creation date less than or equal"""
 
     sort: Literal["asc", "desc"]

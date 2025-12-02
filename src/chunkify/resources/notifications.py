@@ -33,7 +33,7 @@ class NotificationsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
         return NotificationsResourceWithRawResponse(self)
 
@@ -42,7 +42,7 @@ class NotificationsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
         return NotificationsResourceWithStreamingResponse(self)
 
@@ -162,8 +162,7 @@ class NotificationsResource(SyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
-          events: Filter by events (e.g. job.completed, job.failed, upload.completed,
-              upload.failed, upload.expired)
+          events: Filter by events
 
           limit: Pagination limit (max 100)
 
@@ -247,7 +246,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
         return AsyncNotificationsResourceWithRawResponse(self)
 
@@ -256,7 +255,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/chunkify-python#with_streaming_response
+        For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
         return AsyncNotificationsResourceWithStreamingResponse(self)
 
@@ -376,8 +375,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
-          events: Filter by events (e.g. job.completed, job.failed, upload.completed,
-              upload.failed, upload.expired)
+          events: Filter by events
 
           limit: Pagination limit (max 100)
 

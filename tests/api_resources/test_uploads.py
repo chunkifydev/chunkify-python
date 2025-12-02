@@ -112,12 +112,12 @@ class TestUploads:
         upload = client.uploads.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             source_id="source_id",
             status="waiting",
@@ -288,12 +288,12 @@ class TestAsyncUploads:
         upload = await async_client.uploads.list(
             id="id",
             created={
-                "gte": "gte",
-                "lte": "lte",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             limit=1,
-            metadata=[["J!Q0Ok0bzJb7:pro"]],
+            metadata=[["key1:value1"]],
             offset=0,
             source_id="source_id",
             status="waiting",

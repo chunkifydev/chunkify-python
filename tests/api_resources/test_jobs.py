@@ -153,8 +153,8 @@ class TestJobs:
         job = client.jobs.list(
             id="id",
             created={
-                "gte": "2025-01-01",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             format_id="mp4_h264",
@@ -414,8 +414,8 @@ class TestAsyncJobs:
         job = await async_client.jobs.list(
             id="id",
             created={
-                "gte": "2025-01-01",
-                "lte": "2025-01-01",
+                "gte": 0,
+                "lte": 0,
                 "sort": "asc",
             },
             format_id="mp4_h264",
