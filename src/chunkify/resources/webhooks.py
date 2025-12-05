@@ -265,7 +265,7 @@ class WebhooksResource(SyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise ChunkifyError("You need to install `chunkify[webhooks]` to use this method") from exc
+            raise ChunkifyError("You need to install `chunkify-sdk[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_key
@@ -523,7 +523,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise ChunkifyError("You need to install `chunkify[webhooks]` to use this method") from exc
+            raise ChunkifyError("You need to install `chunkify-sdk[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_key
