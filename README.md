@@ -16,12 +16,9 @@ The REST API documentation can be found on [chunkify.dev](https://chunkify.dev/d
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/chunkifydev/chunkify-python.git
+# install from PyPI
+pip install chunkify
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install chunkify`
 
 ## Usage
 
@@ -99,8 +96,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'chunkify[aiohttp] @ git+ssh://git@github.com/chunkifydev/chunkify-python.git'
+# install from PyPI
+pip install chunkify[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
