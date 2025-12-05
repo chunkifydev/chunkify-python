@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 (2025-12-05)
+
+Full Changelog: [v0.1.0...v0.5.0](https://github.com/chunkifydev/chunkify-python/compare/v0.1.0...v0.5.0)
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([8f4c1ca](https://github.com/chunkifydev/chunkify-python/commit/8f4c1ca737123aa29b1fb69570a0b0a61eacc4b5))
+* update lockfile ([b94e00b](https://github.com/chunkifydev/chunkify-python/commit/b94e00bd7d4e64eb8e6a87245b1feea3bd2e4cba))
+* update SDK settings ([0da6d65](https://github.com/chunkifydev/chunkify-python/commit/0da6d657000eb7b1c83f9c0fda5b757295bfa095))
+
 ## 0.1.0 (2025-12-01)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/chunkifydev/chunkify-python/compare/v0.0.1...v0.1.0)
