@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2025-12-05)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/chunkifydev/chunkify-python/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* update SDK settings ([252d83a](https://github.com/chunkifydev/chunkify-python/commit/252d83aba71ed06e713522fcd0998e146b9d2cec))
+
 ## 0.5.0 (2025-12-05)
 
 Full Changelog: [v0.1.0...v0.5.0](https://github.com/chunkifydev/chunkify-python/compare/v0.1.0...v0.5.0)
