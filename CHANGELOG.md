@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.2 (2025-12-09)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/chunkifydev/chunkify-python/compare/v0.5.1...v0.5.2)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([ecf2c56](https://github.com/chunkifydev/chunkify-python/commit/ecf2c56c163eb1acca16f6fcff98dad4cc42c520))
+
+
+### Chores
+
+* add missing docstrings ([271a3e2](https://github.com/chunkifydev/chunkify-python/commit/271a3e23befafa9f35f295d1e5c712a7f4377f1e))
+
 ## 0.5.1 (2025-12-05)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/chunkifydev/chunkify-python/compare/v0.5.0...v0.5.1)
