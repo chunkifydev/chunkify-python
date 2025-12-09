@@ -10,6 +10,8 @@ __all__ = ["FileListResponse"]
 
 
 class FileListResponse(BaseModel):
+    """Response containing a list of files for a job"""
+
     data: List[APIFile]
 
     status: Literal["success"]
