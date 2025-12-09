@@ -56,6 +56,8 @@ Format: TypeAlias = Union[
 
 
 class Storage(TypedDict, total=False):
+    """Optional storage configuration"""
+
     id: str
     """
     Storage Id specifies the storage configuration to use from pre-configured
@@ -72,6 +74,13 @@ class Storage(TypedDict, total=False):
 
 
 class Transcoder(TypedDict, total=False):
+    """Optional transcoder configuration.
+
+    If not provided, the system will automatically
+    calculate the optimal quantity and CPU type based on the source file specifications
+    and output requirements. This auto-scaling ensures efficient resource utilization.
+    """
+
     quantity: int
     """Quantity specifies the number of transcoder instances. Required if Type is set."""
 

@@ -8,6 +8,8 @@ __all__ = ["JpgParam"]
 
 
 class JpgParam(TypedDict, total=False):
+    """FFmpeg encoding parameters specific to JPEG image extraction."""
+
     id: Required[Literal["jpg"]]
 
     interval: Required[int]

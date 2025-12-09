@@ -14,6 +14,8 @@ class StorageCreateParams(TypedDict, total=False):
 
 
 class StorageAws(TypedDict, total=False):
+    """Storage parameters for AWS S3 storage."""
+
     access_key_id: Required[str]
     """AccessKeyId is the access key for the storage provider.
 
@@ -60,6 +62,8 @@ class StorageAws(TypedDict, total=False):
 
 
 class StorageChunkify(TypedDict, total=False):
+    """Storage parameters for Chunkify ephemeral storage."""
+
     provider: Required[Literal["chunkify"]]
     """Provider specifies the storage provider."""
 
@@ -79,6 +83,8 @@ class StorageChunkify(TypedDict, total=False):
 
 
 class StorageCloudflare(TypedDict, total=False):
+    """Storage parameters for Cloudflare R2 storage."""
+
     access_key_id: Required[str]
     """AccessKeyId is the access key for the storage provider."""
 

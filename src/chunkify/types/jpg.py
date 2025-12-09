@@ -9,6 +9,8 @@ __all__ = ["Jpg"]
 
 
 class Jpg(BaseModel):
+    """FFmpeg encoding parameters specific to JPEG image extraction."""
+
     id: Literal["jpg"]
 
     interval: int
