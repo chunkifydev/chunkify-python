@@ -30,6 +30,8 @@ class Data(BaseModel):
 
 
 class LogListResponse(BaseModel):
+    """Response containing a list of logs for a job"""
+
     data: List[Data]
 
     status: str

@@ -31,46 +31,64 @@ __all__ = [
 
 
 class FormatMP4Av1(MP4Av1):
+    """FFmpeg encoding parameters specific to MP4 with AV1 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatMP4H264(MP4H264):
+    """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatMP4H265(MP4H265):
+    """FFmpeg encoding parameters specific to MP4 with H.265 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatWebmVp9(WebmVp9):
+    """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatHlsAv1(HlsAv1):
+    """FFmpeg encoding parameters specific to HLS with AV1 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatHlsH264(HlsH264):
+    """FFmpeg encoding parameters specific to HLS with H.264 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatHlsH265(HlsH265):
+    """FFmpeg encoding parameters specific to HLS with H.265 encoding."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class FormatJpg(Jpg):
+    """FFmpeg encoding parameters specific to JPEG image extraction."""
+
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
 
 class Storage(BaseModel):
+    """Storage settings for where the job output will be saved"""
+
     id: str
     """ID of the storage"""
 
@@ -79,6 +97,8 @@ class Storage(BaseModel):
 
 
 class Transcoder(BaseModel):
+    """The transcoder configuration for a job"""
+
     auto: bool
     """Whether the transcoder configuration is automatically set by Chunkify"""
 
