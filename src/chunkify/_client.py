@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -21,8 +21,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import files, tokens, sources, uploads, projects, storages, webhooks, notifications
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -30,7 +30,18 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.jobs import jobs
+
+if TYPE_CHECKING:
+    from .resources import jobs, files, tokens, sources, uploads, projects, storages, webhooks, notifications
+    from .resources.files import FilesResource, AsyncFilesResource
+    from .resources.tokens import TokensResource, AsyncTokensResource
+    from .resources.sources import SourcesResource, AsyncSourcesResource
+    from .resources.uploads import UploadsResource, AsyncUploadsResource
+    from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.storages import StoragesResource, AsyncStoragesResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
+    from .resources.jobs.jobs import JobsResource, AsyncJobsResource
+    from .resources.notifications import NotificationsResource, AsyncNotificationsResource
 
 __all__ = [
     "Timeout",
@@ -45,18 +56,6 @@ __all__ = [
 
 
 class Chunkify(SyncAPIClient):
-    files: files.FilesResource
-    jobs: jobs.JobsResource
-    notifications: notifications.NotificationsResource
-    projects: projects.ProjectsResource
-    sources: sources.SourcesResource
-    storages: storages.StoragesResource
-    tokens: tokens.TokensResource
-    uploads: uploads.UploadsResource
-    webhooks: webhooks.WebhooksResource
-    with_raw_response: ChunkifyWithRawResponse
-    with_streaming_response: ChunkifyWithStreamedResponse
-
     # client options
     project_access_token: str | None
     team_access_token: str | None
@@ -122,17 +121,67 @@ class Chunkify(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.files = files.FilesResource(self)
-        self.jobs = jobs.JobsResource(self)
-        self.notifications = notifications.NotificationsResource(self)
-        self.projects = projects.ProjectsResource(self)
-        self.sources = sources.SourcesResource(self)
-        self.storages = storages.StoragesResource(self)
-        self.tokens = tokens.TokensResource(self)
-        self.uploads = uploads.UploadsResource(self)
-        self.webhooks = webhooks.WebhooksResource(self)
-        self.with_raw_response = ChunkifyWithRawResponse(self)
-        self.with_streaming_response = ChunkifyWithStreamedResponse(self)
+    @cached_property
+    def files(self) -> FilesResource:
+        from .resources.files import FilesResource
+
+        return FilesResource(self)
+
+    @cached_property
+    def jobs(self) -> JobsResource:
+        from .resources.jobs import JobsResource
+
+        return JobsResource(self)
+
+    @cached_property
+    def notifications(self) -> NotificationsResource:
+        from .resources.notifications import NotificationsResource
+
+        return NotificationsResource(self)
+
+    @cached_property
+    def projects(self) -> ProjectsResource:
+        from .resources.projects import ProjectsResource
+
+        return ProjectsResource(self)
+
+    @cached_property
+    def sources(self) -> SourcesResource:
+        from .resources.sources import SourcesResource
+
+        return SourcesResource(self)
+
+    @cached_property
+    def storages(self) -> StoragesResource:
+        from .resources.storages import StoragesResource
+
+        return StoragesResource(self)
+
+    @cached_property
+    def tokens(self) -> TokensResource:
+        from .resources.tokens import TokensResource
+
+        return TokensResource(self)
+
+    @cached_property
+    def uploads(self) -> UploadsResource:
+        from .resources.uploads import UploadsResource
+
+        return UploadsResource(self)
+
+    @cached_property
+    def webhooks(self) -> WebhooksResource:
+        from .resources.webhooks import WebhooksResource
+
+        return WebhooksResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> ChunkifyWithRawResponse:
+        return ChunkifyWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ChunkifyWithStreamedResponse:
+        return ChunkifyWithStreamedResponse(self)
 
     @property
     @override
@@ -273,18 +322,6 @@ class Chunkify(SyncAPIClient):
 
 
 class AsyncChunkify(AsyncAPIClient):
-    files: files.AsyncFilesResource
-    jobs: jobs.AsyncJobsResource
-    notifications: notifications.AsyncNotificationsResource
-    projects: projects.AsyncProjectsResource
-    sources: sources.AsyncSourcesResource
-    storages: storages.AsyncStoragesResource
-    tokens: tokens.AsyncTokensResource
-    uploads: uploads.AsyncUploadsResource
-    webhooks: webhooks.AsyncWebhooksResource
-    with_raw_response: AsyncChunkifyWithRawResponse
-    with_streaming_response: AsyncChunkifyWithStreamedResponse
-
     # client options
     project_access_token: str | None
     team_access_token: str | None
@@ -350,17 +387,67 @@ class AsyncChunkify(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.files = files.AsyncFilesResource(self)
-        self.jobs = jobs.AsyncJobsResource(self)
-        self.notifications = notifications.AsyncNotificationsResource(self)
-        self.projects = projects.AsyncProjectsResource(self)
-        self.sources = sources.AsyncSourcesResource(self)
-        self.storages = storages.AsyncStoragesResource(self)
-        self.tokens = tokens.AsyncTokensResource(self)
-        self.uploads = uploads.AsyncUploadsResource(self)
-        self.webhooks = webhooks.AsyncWebhooksResource(self)
-        self.with_raw_response = AsyncChunkifyWithRawResponse(self)
-        self.with_streaming_response = AsyncChunkifyWithStreamedResponse(self)
+    @cached_property
+    def files(self) -> AsyncFilesResource:
+        from .resources.files import AsyncFilesResource
+
+        return AsyncFilesResource(self)
+
+    @cached_property
+    def jobs(self) -> AsyncJobsResource:
+        from .resources.jobs import AsyncJobsResource
+
+        return AsyncJobsResource(self)
+
+    @cached_property
+    def notifications(self) -> AsyncNotificationsResource:
+        from .resources.notifications import AsyncNotificationsResource
+
+        return AsyncNotificationsResource(self)
+
+    @cached_property
+    def projects(self) -> AsyncProjectsResource:
+        from .resources.projects import AsyncProjectsResource
+
+        return AsyncProjectsResource(self)
+
+    @cached_property
+    def sources(self) -> AsyncSourcesResource:
+        from .resources.sources import AsyncSourcesResource
+
+        return AsyncSourcesResource(self)
+
+    @cached_property
+    def storages(self) -> AsyncStoragesResource:
+        from .resources.storages import AsyncStoragesResource
+
+        return AsyncStoragesResource(self)
+
+    @cached_property
+    def tokens(self) -> AsyncTokensResource:
+        from .resources.tokens import AsyncTokensResource
+
+        return AsyncTokensResource(self)
+
+    @cached_property
+    def uploads(self) -> AsyncUploadsResource:
+        from .resources.uploads import AsyncUploadsResource
+
+        return AsyncUploadsResource(self)
+
+    @cached_property
+    def webhooks(self) -> AsyncWebhooksResource:
+        from .resources.webhooks import AsyncWebhooksResource
+
+        return AsyncWebhooksResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncChunkifyWithRawResponse:
+        return AsyncChunkifyWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncChunkifyWithStreamedResponse:
+        return AsyncChunkifyWithStreamedResponse(self)
 
     @property
     @override
@@ -501,55 +588,247 @@ class AsyncChunkify(AsyncAPIClient):
 
 
 class ChunkifyWithRawResponse:
+    _client: Chunkify
+
     def __init__(self, client: Chunkify) -> None:
-        self.files = files.FilesResourceWithRawResponse(client.files)
-        self.jobs = jobs.JobsResourceWithRawResponse(client.jobs)
-        self.notifications = notifications.NotificationsResourceWithRawResponse(client.notifications)
-        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
-        self.sources = sources.SourcesResourceWithRawResponse(client.sources)
-        self.storages = storages.StoragesResourceWithRawResponse(client.storages)
-        self.tokens = tokens.TokensResourceWithRawResponse(client.tokens)
-        self.uploads = uploads.UploadsResourceWithRawResponse(client.uploads)
-        self.webhooks = webhooks.WebhooksResourceWithRawResponse(client.webhooks)
+        self._client = client
+
+    @cached_property
+    def files(self) -> files.FilesResourceWithRawResponse:
+        from .resources.files import FilesResourceWithRawResponse
+
+        return FilesResourceWithRawResponse(self._client.files)
+
+    @cached_property
+    def jobs(self) -> jobs.JobsResourceWithRawResponse:
+        from .resources.jobs import JobsResourceWithRawResponse
+
+        return JobsResourceWithRawResponse(self._client.jobs)
+
+    @cached_property
+    def notifications(self) -> notifications.NotificationsResourceWithRawResponse:
+        from .resources.notifications import NotificationsResourceWithRawResponse
+
+        return NotificationsResourceWithRawResponse(self._client.notifications)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        from .resources.projects import ProjectsResourceWithRawResponse
+
+        return ProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def sources(self) -> sources.SourcesResourceWithRawResponse:
+        from .resources.sources import SourcesResourceWithRawResponse
+
+        return SourcesResourceWithRawResponse(self._client.sources)
+
+    @cached_property
+    def storages(self) -> storages.StoragesResourceWithRawResponse:
+        from .resources.storages import StoragesResourceWithRawResponse
+
+        return StoragesResourceWithRawResponse(self._client.storages)
+
+    @cached_property
+    def tokens(self) -> tokens.TokensResourceWithRawResponse:
+        from .resources.tokens import TokensResourceWithRawResponse
+
+        return TokensResourceWithRawResponse(self._client.tokens)
+
+    @cached_property
+    def uploads(self) -> uploads.UploadsResourceWithRawResponse:
+        from .resources.uploads import UploadsResourceWithRawResponse
+
+        return UploadsResourceWithRawResponse(self._client.uploads)
+
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+        from .resources.webhooks import WebhooksResourceWithRawResponse
+
+        return WebhooksResourceWithRawResponse(self._client.webhooks)
 
 
 class AsyncChunkifyWithRawResponse:
+    _client: AsyncChunkify
+
     def __init__(self, client: AsyncChunkify) -> None:
-        self.files = files.AsyncFilesResourceWithRawResponse(client.files)
-        self.jobs = jobs.AsyncJobsResourceWithRawResponse(client.jobs)
-        self.notifications = notifications.AsyncNotificationsResourceWithRawResponse(client.notifications)
-        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.sources = sources.AsyncSourcesResourceWithRawResponse(client.sources)
-        self.storages = storages.AsyncStoragesResourceWithRawResponse(client.storages)
-        self.tokens = tokens.AsyncTokensResourceWithRawResponse(client.tokens)
-        self.uploads = uploads.AsyncUploadsResourceWithRawResponse(client.uploads)
-        self.webhooks = webhooks.AsyncWebhooksResourceWithRawResponse(client.webhooks)
+        self._client = client
+
+    @cached_property
+    def files(self) -> files.AsyncFilesResourceWithRawResponse:
+        from .resources.files import AsyncFilesResourceWithRawResponse
+
+        return AsyncFilesResourceWithRawResponse(self._client.files)
+
+    @cached_property
+    def jobs(self) -> jobs.AsyncJobsResourceWithRawResponse:
+        from .resources.jobs import AsyncJobsResourceWithRawResponse
+
+        return AsyncJobsResourceWithRawResponse(self._client.jobs)
+
+    @cached_property
+    def notifications(self) -> notifications.AsyncNotificationsResourceWithRawResponse:
+        from .resources.notifications import AsyncNotificationsResourceWithRawResponse
+
+        return AsyncNotificationsResourceWithRawResponse(self._client.notifications)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        from .resources.projects import AsyncProjectsResourceWithRawResponse
+
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def sources(self) -> sources.AsyncSourcesResourceWithRawResponse:
+        from .resources.sources import AsyncSourcesResourceWithRawResponse
+
+        return AsyncSourcesResourceWithRawResponse(self._client.sources)
+
+    @cached_property
+    def storages(self) -> storages.AsyncStoragesResourceWithRawResponse:
+        from .resources.storages import AsyncStoragesResourceWithRawResponse
+
+        return AsyncStoragesResourceWithRawResponse(self._client.storages)
+
+    @cached_property
+    def tokens(self) -> tokens.AsyncTokensResourceWithRawResponse:
+        from .resources.tokens import AsyncTokensResourceWithRawResponse
+
+        return AsyncTokensResourceWithRawResponse(self._client.tokens)
+
+    @cached_property
+    def uploads(self) -> uploads.AsyncUploadsResourceWithRawResponse:
+        from .resources.uploads import AsyncUploadsResourceWithRawResponse
+
+        return AsyncUploadsResourceWithRawResponse(self._client.uploads)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+        from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
+
+        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
 
 class ChunkifyWithStreamedResponse:
+    _client: Chunkify
+
     def __init__(self, client: Chunkify) -> None:
-        self.files = files.FilesResourceWithStreamingResponse(client.files)
-        self.jobs = jobs.JobsResourceWithStreamingResponse(client.jobs)
-        self.notifications = notifications.NotificationsResourceWithStreamingResponse(client.notifications)
-        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
-        self.sources = sources.SourcesResourceWithStreamingResponse(client.sources)
-        self.storages = storages.StoragesResourceWithStreamingResponse(client.storages)
-        self.tokens = tokens.TokensResourceWithStreamingResponse(client.tokens)
-        self.uploads = uploads.UploadsResourceWithStreamingResponse(client.uploads)
-        self.webhooks = webhooks.WebhooksResourceWithStreamingResponse(client.webhooks)
+        self._client = client
+
+    @cached_property
+    def files(self) -> files.FilesResourceWithStreamingResponse:
+        from .resources.files import FilesResourceWithStreamingResponse
+
+        return FilesResourceWithStreamingResponse(self._client.files)
+
+    @cached_property
+    def jobs(self) -> jobs.JobsResourceWithStreamingResponse:
+        from .resources.jobs import JobsResourceWithStreamingResponse
+
+        return JobsResourceWithStreamingResponse(self._client.jobs)
+
+    @cached_property
+    def notifications(self) -> notifications.NotificationsResourceWithStreamingResponse:
+        from .resources.notifications import NotificationsResourceWithStreamingResponse
+
+        return NotificationsResourceWithStreamingResponse(self._client.notifications)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        from .resources.projects import ProjectsResourceWithStreamingResponse
+
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def sources(self) -> sources.SourcesResourceWithStreamingResponse:
+        from .resources.sources import SourcesResourceWithStreamingResponse
+
+        return SourcesResourceWithStreamingResponse(self._client.sources)
+
+    @cached_property
+    def storages(self) -> storages.StoragesResourceWithStreamingResponse:
+        from .resources.storages import StoragesResourceWithStreamingResponse
+
+        return StoragesResourceWithStreamingResponse(self._client.storages)
+
+    @cached_property
+    def tokens(self) -> tokens.TokensResourceWithStreamingResponse:
+        from .resources.tokens import TokensResourceWithStreamingResponse
+
+        return TokensResourceWithStreamingResponse(self._client.tokens)
+
+    @cached_property
+    def uploads(self) -> uploads.UploadsResourceWithStreamingResponse:
+        from .resources.uploads import UploadsResourceWithStreamingResponse
+
+        return UploadsResourceWithStreamingResponse(self._client.uploads)
+
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+        from .resources.webhooks import WebhooksResourceWithStreamingResponse
+
+        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
 
 class AsyncChunkifyWithStreamedResponse:
+    _client: AsyncChunkify
+
     def __init__(self, client: AsyncChunkify) -> None:
-        self.files = files.AsyncFilesResourceWithStreamingResponse(client.files)
-        self.jobs = jobs.AsyncJobsResourceWithStreamingResponse(client.jobs)
-        self.notifications = notifications.AsyncNotificationsResourceWithStreamingResponse(client.notifications)
-        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.sources = sources.AsyncSourcesResourceWithStreamingResponse(client.sources)
-        self.storages = storages.AsyncStoragesResourceWithStreamingResponse(client.storages)
-        self.tokens = tokens.AsyncTokensResourceWithStreamingResponse(client.tokens)
-        self.uploads = uploads.AsyncUploadsResourceWithStreamingResponse(client.uploads)
-        self.webhooks = webhooks.AsyncWebhooksResourceWithStreamingResponse(client.webhooks)
+        self._client = client
+
+    @cached_property
+    def files(self) -> files.AsyncFilesResourceWithStreamingResponse:
+        from .resources.files import AsyncFilesResourceWithStreamingResponse
+
+        return AsyncFilesResourceWithStreamingResponse(self._client.files)
+
+    @cached_property
+    def jobs(self) -> jobs.AsyncJobsResourceWithStreamingResponse:
+        from .resources.jobs import AsyncJobsResourceWithStreamingResponse
+
+        return AsyncJobsResourceWithStreamingResponse(self._client.jobs)
+
+    @cached_property
+    def notifications(self) -> notifications.AsyncNotificationsResourceWithStreamingResponse:
+        from .resources.notifications import AsyncNotificationsResourceWithStreamingResponse
+
+        return AsyncNotificationsResourceWithStreamingResponse(self._client.notifications)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def sources(self) -> sources.AsyncSourcesResourceWithStreamingResponse:
+        from .resources.sources import AsyncSourcesResourceWithStreamingResponse
+
+        return AsyncSourcesResourceWithStreamingResponse(self._client.sources)
+
+    @cached_property
+    def storages(self) -> storages.AsyncStoragesResourceWithStreamingResponse:
+        from .resources.storages import AsyncStoragesResourceWithStreamingResponse
+
+        return AsyncStoragesResourceWithStreamingResponse(self._client.storages)
+
+    @cached_property
+    def tokens(self) -> tokens.AsyncTokensResourceWithStreamingResponse:
+        from .resources.tokens import AsyncTokensResourceWithStreamingResponse
+
+        return AsyncTokensResourceWithStreamingResponse(self._client.tokens)
+
+    @cached_property
+    def uploads(self) -> uploads.AsyncUploadsResourceWithStreamingResponse:
+        from .resources.uploads import AsyncUploadsResourceWithStreamingResponse
+
+        return AsyncUploadsResourceWithStreamingResponse(self._client.uploads)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+        from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
+
+        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
 
 
 Client = Chunkify
