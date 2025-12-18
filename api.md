@@ -98,7 +98,7 @@ Methods:
 - <code title="post /api/projects">client.projects.<a href="./src/chunkify/resources/projects.py">create</a>(\*\*<a href="src/chunkify/types/project_create_params.py">params</a>) -> <a href="./src/chunkify/types/project.py">Project</a></code>
 - <code title="get /api/projects/{projectId}">client.projects.<a href="./src/chunkify/resources/projects.py">retrieve</a>(project_id) -> <a href="./src/chunkify/types/project.py">Project</a></code>
 - <code title="patch /api/projects/{projectId}">client.projects.<a href="./src/chunkify/resources/projects.py">update</a>(project_id, \*\*<a href="src/chunkify/types/project_update_params.py">params</a>) -> None</code>
-- <code title="get /api/projects">client.projects.<a href="./src/chunkify/resources/projects.py">list</a>(\*\*<a href="src/chunkify/types/project_list_params.py">params</a>) -> <a href="./src/chunkify/types/project_list_response.py">ProjectListResponse</a></code>
+- <code title="get /api/projects">client.projects.<a href="./src/chunkify/resources/projects.py">list</a>() -> <a href="./src/chunkify/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /api/projects/{projectId}">client.projects.<a href="./src/chunkify/resources/projects.py">delete</a>(project_id) -> None</code>
 
 # Sources

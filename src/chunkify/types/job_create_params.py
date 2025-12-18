@@ -36,7 +36,7 @@ class JobCreateParams(TypedDict, total=False):
     """
 
     metadata: Dict[str, str]
-    """Optional metadata to attach to the job (max 1024 bytes)"""
+    """Optional metadata to attach to the job, the maximum size allowed is 2048 bytes"""
 
     storage: Storage
     """Optional storage configuration"""

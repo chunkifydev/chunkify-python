@@ -34,5 +34,5 @@ class LogListResponse(BaseModel):
 
     data: List[Data]
 
-    status: str
+    status: Literal["success"]
     """Status indicates the response status "success" """

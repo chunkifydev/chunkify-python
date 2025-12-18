@@ -112,7 +112,7 @@ class JobsResource(SyncAPIResource):
               multiple jobs into a single HLS manifest By default, it's automatically
               generated if no set for HLS jobs
 
-          metadata: Optional metadata to attach to the job (max 1024 bytes)
+          metadata: Optional metadata to attach to the job, the maximum size allowed is 2048 bytes
 
           storage: Optional storage configuration
 
@@ -394,7 +394,7 @@ class AsyncJobsResource(AsyncAPIResource):
               multiple jobs into a single HLS manifest By default, it's automatically
               generated if no set for HLS jobs
 
-          metadata: Optional metadata to attach to the job (max 1024 bytes)
+          metadata: Optional metadata to attach to the job, the maximum size allowed is 2048 bytes
 
           storage: Optional storage configuration
 
