@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.6.0 (2025-12-18)
+
+Full Changelog: [v0.5.2...v0.6.0](https://github.com/chunkifydev/chunkify-python/compare/v0.5.2...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([b1f0b50](https://github.com/chunkifydev/chunkify-python/commit/b1f0b50e522834e69d5f10227e21225a2a6c0167))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([f1226ac](https://github.com/chunkifydev/chunkify-python/commit/f1226acaddcc83f376b36e10a9f03e55a66e8cb3))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([f3cba1a](https://github.com/chunkifydev/chunkify-python/commit/f3cba1acf3f047f4f79fe79a3fea2d56f780c14c))
+* speedup initial import ([ac8ba11](https://github.com/chunkifydev/chunkify-python/commit/ac8ba11b7b06a079c1bb30b18a2d2b47a5134624))
+
 ## 0.5.2 (2025-12-09)
 
 Full Changelog: [v0.5.1...v0.5.2](https://github.com/chunkifydev/chunkify-python/compare/v0.5.1...v0.5.2)
