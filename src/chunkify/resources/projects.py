@@ -6,7 +6,7 @@ from typing import Type, cast
 
 import httpx
 
-from ..types import project_list_params, project_create_params, project_update_params
+from ..types import project_create_params, project_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -174,8 +174,6 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -183,36 +181,11 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
-        """
-        Retrieve a list of all projects with optional filtering and pagination
-
-        Args:
-          limit: Pagination limit (max 100)
-
-          offset: Pagination offset
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
+        """Retrieve a list of all projects for a team"""
         return self._get(
             "/api/projects",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                    },
-                    project_list_params.ProjectListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ProjectListResponse,
         )
@@ -403,8 +376,6 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -412,36 +383,11 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
-        """
-        Retrieve a list of all projects with optional filtering and pagination
-
-        Args:
-          limit: Pagination limit (max 100)
-
-          offset: Pagination offset
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
+        """Retrieve a list of all projects for a team"""
         return await self._get(
             "/api/projects",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "limit": limit,
-                        "offset": offset,
-                    },
-                    project_list_params.ProjectListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ProjectListResponse,
         )

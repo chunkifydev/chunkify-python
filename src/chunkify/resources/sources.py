@@ -68,7 +68,7 @@ class SourcesResource(SyncAPIResource):
           url: Url is the URL of the source, which must be a valid HTTP URL.
 
           metadata: Metadata allows for additional information to be attached to the source, with a
-              maximum size of 1024 bytes.
+              maximum size of 2048 bytes.
 
           extra_headers: Send extra headers
 
@@ -292,7 +292,7 @@ class AsyncSourcesResource(AsyncAPIResource):
           url: Url is the URL of the source, which must be a valid HTTP URL.
 
           metadata: Metadata allows for additional information to be attached to the source, with a
-              maximum size of 1024 bytes.
+              maximum size of 2048 bytes.
 
           extra_headers: Send extra headers
 

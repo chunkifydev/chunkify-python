@@ -12,7 +12,7 @@ class UploadCreateParams(TypedDict, total=False):
     metadata: Dict[str, str]
     """
     Metadata allows for additional information to be attached to the upload, with a
-    maximum size of 1024 bytes.
+    maximum size of 2048 bytes.
     """
 
     validity_timeout: int

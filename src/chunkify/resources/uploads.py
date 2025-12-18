@@ -63,7 +63,7 @@ class UploadsResource(SyncAPIResource):
 
         Args:
           metadata: Metadata allows for additional information to be attached to the upload, with a
-              maximum size of 1024 bytes.
+              maximum size of 2048 bytes.
 
           validity_timeout: The upload URL will be valid for the given timeout in seconds
 
@@ -269,7 +269,7 @@ class AsyncUploadsResource(AsyncAPIResource):
 
         Args:
           metadata: Metadata allows for additional information to be attached to the upload, with a
-              maximum size of 1024 bytes.
+              maximum size of 2048 bytes.
 
           validity_timeout: The upload URL will be valid for the given timeout in seconds
 
