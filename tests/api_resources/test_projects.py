@@ -9,10 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import (
-    Project,
-    ProjectListResponse,
-)
+from chunkify.types import Project, ProjectListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -152,15 +149,6 @@ class TestProjects:
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
         project = client.projects.list()
-        assert_matches_type(ProjectListResponse, project, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_list_with_all_params(self, client: Chunkify) -> None:
-        project = client.projects.list(
-            limit=0,
-            offset=0,
-        )
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -365,15 +353,6 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
         project = await async_client.projects.list()
-        assert_matches_type(ProjectListResponse, project, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
-        project = await async_client.projects.list(
-            limit=0,
-            offset=0,
-        )
         assert_matches_type(ProjectListResponse, project, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -33,7 +33,6 @@ from .file_list_params import FileListParams as FileListParams
 from .job_create_params import JobCreateParams as JobCreateParams
 from .source_list_params import SourceListParams as SourceListParams
 from .upload_list_params import UploadListParams as UploadListParams
-from .project_list_params import ProjectListParams as ProjectListParams
 from .token_create_params import TokenCreateParams as TokenCreateParams
 from .token_list_response import TokenListResponse as TokenListResponse
 from .source_create_params import SourceCreateParams as SourceCreateParams

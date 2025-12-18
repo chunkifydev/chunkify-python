@@ -110,10 +110,10 @@ class TokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenListResponse:
         """
-        Retrieve a list of all API tokens for your account, including both
-        account-scoped and project-scoped tokens. For each token, the response includes
-        its name, scope, creation date, and usage statistics. The token values are not
-        included in the response for security reasons.
+        Retrieve a list of all API tokens for your account, including both team-scoped
+        and project-scoped tokens. For each token, the response includes its name,
+        scope, creation date, and usage statistics. The token values are not included in
+        the response for security reasons.
         """
         return self._get(
             "/api/tokens",
@@ -244,10 +244,10 @@ class AsyncTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TokenListResponse:
         """
-        Retrieve a list of all API tokens for your account, including both
-        account-scoped and project-scoped tokens. For each token, the response includes
-        its name, scope, creation date, and usage statistics. The token values are not
-        included in the response for security reasons.
+        Retrieve a list of all API tokens for your account, including both team-scoped
+        and project-scoped tokens. For each token, the response includes its name,
+        scope, creation date, and usage statistics. The token values are not included in
+        the response for security reasons.
         """
         return await self._get(
             "/api/tokens",
