@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2025-12-18)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/chunkifydev/chunkify-python/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([157ffda](https://github.com/chunkifydev/chunkify-python/commit/157ffda77c6733ec5eba34c2a69538bcd3c189b9))
+
 ## 0.6.0 (2025-12-18)
 
 Full Changelog: [v0.5.2...v0.6.0](https://github.com/chunkifydev/chunkify-python/compare/v0.5.2...v0.6.0)
