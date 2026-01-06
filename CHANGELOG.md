@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.2 (2026-01-06)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/chunkifydev/chunkify-python/compare/v0.6.1...v0.6.2)
+
+### Chores
+
+* **internal:** codegen related update ([06b1abe](https://github.com/chunkifydev/chunkify-python/commit/06b1abe0f4089ca00fa4e6354540dc45ac1f756f))
+
 ## 0.6.1 (2025-12-18)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/chunkifydev/chunkify-python/compare/v0.6.0...v0.6.1)
