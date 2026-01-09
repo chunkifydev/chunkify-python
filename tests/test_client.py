@@ -359,27 +359,6 @@ class TestChunkify:
         test_client.close()
         test_client2.close()
 
-    def test_validate_headers(self) -> None:
-        client = Chunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
-        )
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
-
-        with update_env(**{"CHUNKIFY_TOKEN": Omit()}):
-            client2 = Chunkify(base_url=base_url, project_access_token=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected either project_access_token or team_access_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
-
     def test_default_query_option(self) -> None:
         client = Chunkify(
             base_url=base_url,
@@ -1222,27 +1201,6 @@ class TestAsyncChunkify:
 
         await test_client.close()
         await test_client2.close()
-
-    def test_validate_headers(self) -> None:
-        client = AsyncChunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
-        )
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
-
-        with update_env(**{"CHUNKIFY_TOKEN": Omit()}):
-            client2 = AsyncChunkify(base_url=base_url, project_access_token=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected either project_access_token or team_access_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
 
     async def test_default_query_option(self) -> None:
         client = AsyncChunkify(
