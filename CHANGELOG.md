@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.7.0 (2026-01-14)
+
+Full Changelog: [v0.6.2...v0.7.0](https://github.com/chunkifydev/chunkify-python/compare/v0.6.2...v0.7.0)
+
+### Features
+
+* **api:** removed security from config ([16ea279](https://github.com/chunkifydev/chunkify-python/commit/16ea27944972a3a197e0d40a6fadf1bc7e0d3cd2))
+* **client:** add support for binary request streaming ([32d90c2](https://github.com/chunkifydev/chunkify-python/commit/32d90c2b19828224ca44fcaa3024a0430286297b))
+
+
+### Bug Fixes
+
+* **client:** loosen auth header validation ([32660ad](https://github.com/chunkifydev/chunkify-python/commit/32660adb9408097d522a0254657590599dfdecde))
+
+
+### Chores
+
+* **sdk/config:** change model api_file to job-file ([0816575](https://github.com/chunkifydev/chunkify-python/commit/08165753eb25b0bc97380e9ce6cccc89f9094898))
+
 ## 0.6.2 (2026-01-06)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/chunkifydev/chunkify-python/compare/v0.6.1...v0.6.2)

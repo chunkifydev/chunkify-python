@@ -9,13 +9,13 @@ from chunkify.types import ChunkifyError
 Types:
 
 ```python
-from chunkify.types import APIFile
+from chunkify.types import JobFile
 ```
 
 Methods:
 
-- <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/api_file.py">APIFile</a></code>
-- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/api_file.py">SyncPaginatedResults[APIFile]</a></code>
+- <code title="get /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">retrieve</a>(file_id) -> <a href="./src/chunkify/types/job_file.py">JobFile</a></code>
+- <code title="get /api/files">client.files.<a href="./src/chunkify/resources/files.py">list</a>(\*\*<a href="src/chunkify/types/file_list_params.py">params</a>) -> <a href="./src/chunkify/types/job_file.py">SyncPaginatedResults[JobFile]</a></code>
 - <code title="delete /api/files/{fileId}">client.files.<a href="./src/chunkify/resources/files.py">delete</a>(file_id) -> None</code>
 
 # Jobs
