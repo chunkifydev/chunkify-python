@@ -4,7 +4,7 @@ from typing import List
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..api_file import APIFile
+from ..job_file import JobFile
 
 __all__ = ["FileListResponse"]
 
@@ -12,7 +12,7 @@ __all__ = ["FileListResponse"]
 class FileListResponse(BaseModel):
     """Response containing a list of files for a job"""
 
-    data: List[APIFile]
+    data: List[JobFile]
 
     status: Literal["success"]
     """Status indicates the response status "success" """

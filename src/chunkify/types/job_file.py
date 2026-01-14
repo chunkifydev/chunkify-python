@@ -4,10 +4,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["APIFile"]
+__all__ = ["JobFile"]
 
 
-class APIFile(BaseModel):
+class JobFile(BaseModel):
     id: str
     """Unique identifier of the file"""
 
