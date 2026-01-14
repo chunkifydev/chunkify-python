@@ -20,7 +20,7 @@ from .._response import (
 from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.api_file import APIFile
+from ..types.job_file import JobFile
 
 __all__ = ["FilesResource", "AsyncFilesResource"]
 
@@ -55,7 +55,7 @@ class FilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> APIFile:
+    ) -> JobFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
         properties, and associated jobs.
@@ -78,9 +78,9 @@ class FilesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[APIFile]._unwrapper,
+                post_parser=DataWrapper[JobFile]._unwrapper,
             ),
-            cast_to=cast(Type[APIFile], DataWrapper[APIFile]),
+            cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
 
     def list(
@@ -106,7 +106,7 @@ class FilesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncPaginatedResults[APIFile]:
+    ) -> SyncPaginatedResults[JobFile]:
         """
         Retrieve a list of files with optional filtering and pagination
 
@@ -137,7 +137,7 @@ class FilesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/api/files",
-            page=SyncPaginatedResults[APIFile],
+            page=SyncPaginatedResults[JobFile],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -163,7 +163,7 @@ class FilesResource(SyncAPIResource):
                     file_list_params.FileListParams,
                 ),
             ),
-            model=APIFile,
+            model=JobFile,
         )
 
     def delete(
@@ -232,7 +232,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> APIFile:
+    ) -> JobFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
         properties, and associated jobs.
@@ -255,9 +255,9 @@ class AsyncFilesResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[APIFile]._unwrapper,
+                post_parser=DataWrapper[JobFile]._unwrapper,
             ),
-            cast_to=cast(Type[APIFile], DataWrapper[APIFile]),
+            cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
 
     def list(
@@ -283,7 +283,7 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[APIFile, AsyncPaginatedResults[APIFile]]:
+    ) -> AsyncPaginator[JobFile, AsyncPaginatedResults[JobFile]]:
         """
         Retrieve a list of files with optional filtering and pagination
 
@@ -314,7 +314,7 @@ class AsyncFilesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/api/files",
-            page=AsyncPaginatedResults[APIFile],
+            page=AsyncPaginatedResults[JobFile],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -340,7 +340,7 @@ class AsyncFilesResource(AsyncAPIResource):
                     file_list_params.FileListParams,
                 ),
             ),
-            model=APIFile,
+            model=JobFile,
         )
 
     async def delete(
