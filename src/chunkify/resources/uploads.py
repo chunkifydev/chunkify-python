@@ -75,6 +75,7 @@ class UploadsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/uploads",
             body=maybe_transform(
@@ -120,6 +121,7 @@ class UploadsResource(SyncAPIResource):
         """
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
@@ -173,6 +175,7 @@ class UploadsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/uploads",
             page=SyncPaginatedResults[Upload],
@@ -223,6 +226,7 @@ class UploadsResource(SyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
@@ -281,6 +285,7 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/uploads",
             body=await async_maybe_transform(
@@ -326,6 +331,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         """
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
@@ -379,6 +385,7 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/uploads",
             page=AsyncPaginatedResults[Upload],
@@ -429,6 +436,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/uploads/{upload_id}",
             options=make_request_options(

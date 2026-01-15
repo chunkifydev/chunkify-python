@@ -79,6 +79,7 @@ class TokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._post(
             "/api/tokens",
             body=maybe_transform(
@@ -115,6 +116,7 @@ class TokensResource(SyncAPIResource):
         scope, creation date, and usage statistics. The token values are not included in
         the response for security reasons.
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             "/api/tokens",
             options=make_request_options(
@@ -151,6 +153,7 @@ class TokensResource(SyncAPIResource):
         if not token_id:
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return self._delete(
             f"/api/tokens/{token_id}",
             options=make_request_options(
@@ -213,6 +216,7 @@ class AsyncTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/tokens",
             body=await async_maybe_transform(
@@ -249,6 +253,7 @@ class AsyncTokensResource(AsyncAPIResource):
         scope, creation date, and usage statistics. The token values are not included in
         the response for security reasons.
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/tokens",
             options=make_request_options(
@@ -285,6 +290,7 @@ class AsyncTokensResource(AsyncAPIResource):
         if not token_id:
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return await self._delete(
             f"/api/tokens/{token_id}",
             options=make_request_options(

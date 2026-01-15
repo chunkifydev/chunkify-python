@@ -40,6 +40,7 @@ from .utils import update_env
 T = TypeVar("T")
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 project_access_token = "My Project Access Token"
+team_access_token = "My Team Access Token"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -132,6 +133,10 @@ class TestChunkify:
         assert copied.project_access_token == "another My Project Access Token"
         assert client.project_access_token == "My Project Access Token"
 
+        copied = client.copy(team_access_token="another My Team Access Token")
+        assert copied.team_access_token == "another My Team Access Token"
+        assert client.team_access_token == "My Team Access Token"
+
     def test_copy_default_options(self, client: Chunkify) -> None:
         # options that have a default are overridden correctly
         copied = client.copy(max_retries=7)
@@ -152,6 +157,7 @@ class TestChunkify:
         client = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -190,6 +196,7 @@ class TestChunkify:
         client = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_query={"foo": "bar"},
         )
@@ -319,6 +326,7 @@ class TestChunkify:
         client = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             timeout=httpx.Timeout(0),
         )
@@ -335,6 +343,7 @@ class TestChunkify:
             client = Chunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -350,6 +359,7 @@ class TestChunkify:
             client = Chunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -365,6 +375,7 @@ class TestChunkify:
             client = Chunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -381,6 +392,7 @@ class TestChunkify:
                 Chunkify(
                     base_url=base_url,
                     project_access_token=project_access_token,
+                    team_access_token=team_access_token,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -389,6 +401,7 @@ class TestChunkify:
         test_client = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -399,6 +412,7 @@ class TestChunkify:
         test_client2 = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -416,6 +430,7 @@ class TestChunkify:
         client = Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -590,6 +605,7 @@ class TestChunkify:
         with Chunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             http_client=httpx.Client(transport=MockTransport(handler=mock_handler)),
         ) as client:
@@ -686,6 +702,7 @@ class TestChunkify:
         client = Chunkify(
             base_url="https://example.com/from_init",
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -698,7 +715,11 @@ class TestChunkify:
 
     def test_base_url_env(self) -> None:
         with update_env(CHUNKIFY_BASE_URL="http://localhost:5000/from/env"):
-            client = Chunkify(project_access_token=project_access_token, _strict_response_validation=True)
+            client = Chunkify(
+                project_access_token=project_access_token,
+                team_access_token=team_access_token,
+                _strict_response_validation=True,
+            )
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -707,11 +728,13 @@ class TestChunkify:
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -735,11 +758,13 @@ class TestChunkify:
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -763,11 +788,13 @@ class TestChunkify:
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             Chunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -787,7 +814,10 @@ class TestChunkify:
 
     def test_copied_client_does_not_close_http(self) -> None:
         test_client = Chunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
         assert not test_client.is_closed()
 
@@ -800,7 +830,10 @@ class TestChunkify:
 
     def test_client_context_manager(self) -> None:
         test_client = Chunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
         with test_client as c2:
             assert c2 is test_client
@@ -825,6 +858,7 @@ class TestChunkify:
             Chunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -837,14 +871,20 @@ class TestChunkify:
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
         strict_client = Chunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
         non_strict_client = Chunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=False
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=False,
         )
 
         response = non_strict_client.get("/foo", cast_to=Model)
@@ -1037,6 +1077,10 @@ class TestAsyncChunkify:
         assert copied.project_access_token == "another My Project Access Token"
         assert async_client.project_access_token == "My Project Access Token"
 
+        copied = async_client.copy(team_access_token="another My Team Access Token")
+        assert copied.team_access_token == "another My Team Access Token"
+        assert async_client.team_access_token == "My Team Access Token"
+
     def test_copy_default_options(self, async_client: AsyncChunkify) -> None:
         # options that have a default are overridden correctly
         copied = async_client.copy(max_retries=7)
@@ -1057,6 +1101,7 @@ class TestAsyncChunkify:
         client = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -1095,6 +1140,7 @@ class TestAsyncChunkify:
         client = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_query={"foo": "bar"},
         )
@@ -1226,6 +1272,7 @@ class TestAsyncChunkify:
         client = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             timeout=httpx.Timeout(0),
         )
@@ -1242,6 +1289,7 @@ class TestAsyncChunkify:
             client = AsyncChunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1257,6 +1305,7 @@ class TestAsyncChunkify:
             client = AsyncChunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1272,6 +1321,7 @@ class TestAsyncChunkify:
             client = AsyncChunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=http_client,
             )
@@ -1288,6 +1338,7 @@ class TestAsyncChunkify:
                 AsyncChunkify(
                     base_url=base_url,
                     project_access_token=project_access_token,
+                    team_access_token=team_access_token,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -1296,6 +1347,7 @@ class TestAsyncChunkify:
         test_client = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -1306,6 +1358,7 @@ class TestAsyncChunkify:
         test_client2 = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1323,6 +1376,7 @@ class TestAsyncChunkify:
         client = AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -1497,6 +1551,7 @@ class TestAsyncChunkify:
         async with AsyncChunkify(
             base_url=base_url,
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
             http_client=httpx.AsyncClient(transport=MockTransport(handler=mock_handler)),
         ) as client:
@@ -1597,6 +1652,7 @@ class TestAsyncChunkify:
         client = AsyncChunkify(
             base_url="https://example.com/from_init",
             project_access_token=project_access_token,
+            team_access_token=team_access_token,
             _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1609,7 +1665,11 @@ class TestAsyncChunkify:
 
     async def test_base_url_env(self) -> None:
         with update_env(CHUNKIFY_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncChunkify(project_access_token=project_access_token, _strict_response_validation=True)
+            client = AsyncChunkify(
+                project_access_token=project_access_token,
+                team_access_token=team_access_token,
+                _strict_response_validation=True,
+            )
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -1618,11 +1678,13 @@ class TestAsyncChunkify:
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1646,11 +1708,13 @@ class TestAsyncChunkify:
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1674,11 +1738,13 @@ class TestAsyncChunkify:
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
             ),
             AsyncChunkify(
                 base_url="http://localhost:5000/custom/path/",
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1698,7 +1764,10 @@ class TestAsyncChunkify:
 
     async def test_copied_client_does_not_close_http(self) -> None:
         test_client = AsyncChunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
         assert not test_client.is_closed()
 
@@ -1712,7 +1781,10 @@ class TestAsyncChunkify:
 
     async def test_client_context_manager(self) -> None:
         test_client = AsyncChunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
         async with test_client as c2:
             assert c2 is test_client
@@ -1737,6 +1809,7 @@ class TestAsyncChunkify:
             AsyncChunkify(
                 base_url=base_url,
                 project_access_token=project_access_token,
+                team_access_token=team_access_token,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -1749,14 +1822,20 @@ class TestAsyncChunkify:
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
         strict_client = AsyncChunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=True
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
         )
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
         non_strict_client = AsyncChunkify(
-            base_url=base_url, project_access_token=project_access_token, _strict_response_validation=False
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=False,
         )
 
         response = await non_strict_client.get("/foo", cast_to=Model)
