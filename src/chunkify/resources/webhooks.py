@@ -89,6 +89,7 @@ class WebhooksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/webhooks",
             body=maybe_transform(
@@ -136,6 +137,7 @@ class WebhooksResource(SyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
@@ -187,6 +189,7 @@ class WebhooksResource(SyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._patch(
             f"/api/webhooks/{webhook_id}",
             body=maybe_transform(
@@ -217,6 +220,7 @@ class WebhooksResource(SyncAPIResource):
         Each webhook
         includes its URL, enabled status, and subscribed events.
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             "/api/webhooks",
             options=make_request_options(
@@ -253,6 +257,7 @@ class WebhooksResource(SyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
@@ -347,6 +352,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/webhooks",
             body=await async_maybe_transform(
@@ -394,6 +400,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
@@ -445,6 +452,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._patch(
             f"/api/webhooks/{webhook_id}",
             body=await async_maybe_transform(
@@ -475,6 +483,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Each webhook
         includes its URL, enabled status, and subscribed events.
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/webhooks",
             options=make_request_options(
@@ -511,6 +520,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(

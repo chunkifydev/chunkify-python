@@ -72,6 +72,7 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._post(
             "/api/projects",
             body=maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
@@ -110,6 +111,7 @@ class ProjectsResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -156,6 +158,7 @@ class ProjectsResource(SyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return self._patch(
             f"/api/projects/{project_id}",
             body=maybe_transform(
@@ -182,6 +185,7 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             "/api/projects",
             options=make_request_options(
@@ -218,6 +222,7 @@ class ProjectsResource(SyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return self._delete(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -274,6 +279,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/projects",
             body=await async_maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
@@ -312,6 +318,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -358,6 +365,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return await self._patch(
             f"/api/projects/{project_id}",
             body=await async_maybe_transform(
@@ -384,6 +392,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
+        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/projects",
             options=make_request_options(
@@ -420,6 +429,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._team_access_token})
         return await self._delete(
             f"/api/projects/{project_id}",
             options=make_request_options(

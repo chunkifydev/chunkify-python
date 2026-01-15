@@ -79,6 +79,7 @@ class NotificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/notifications",
             body=maybe_transform(
@@ -124,6 +125,7 @@ class NotificationsResource(SyncAPIResource):
         """
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
@@ -180,6 +182,7 @@ class NotificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/notifications",
             page=SyncPaginatedResults[Notification],
@@ -230,6 +233,7 @@ class NotificationsResource(SyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
@@ -292,6 +296,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/notifications",
             body=await async_maybe_transform(
@@ -337,6 +342,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         """
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
@@ -393,6 +399,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/notifications",
             page=AsyncPaginatedResults[Notification],
@@ -443,6 +450,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
