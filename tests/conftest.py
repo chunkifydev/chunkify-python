@@ -46,6 +46,7 @@ def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 project_access_token = "My Project Access Token"
+team_access_token = "My Team Access Token"
 
 
 @pytest.fixture(scope="session")
@@ -55,7 +56,10 @@ def client(request: FixtureRequest) -> Iterator[Chunkify]:
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
     with Chunkify(
-        base_url=base_url, project_access_token=project_access_token, _strict_response_validation=strict
+        base_url=base_url,
+        project_access_token=project_access_token,
+        team_access_token=team_access_token,
+        _strict_response_validation=strict,
     ) as client:
         yield client
 
@@ -83,6 +87,7 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncChunkify]:
     async with AsyncChunkify(
         base_url=base_url,
         project_access_token=project_access_token,
+        team_access_token=team_access_token,
         _strict_response_validation=strict,
         http_client=http_client,
     ) as client:

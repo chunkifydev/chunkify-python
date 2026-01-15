@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 (2026-01-15)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/chunkifydev/chunkify-python/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **config:** added per endpoint security settings ([f93c952](https://github.com/chunkifydev/chunkify-python/commit/f93c9521ce8feb076e3a427f986031099bc4d42c))
+
 ## 0.7.0 (2026-01-14)
 
 Full Changelog: [v0.6.2...v0.7.0](https://github.com/chunkifydev/chunkify-python/compare/v0.6.2...v0.7.0)

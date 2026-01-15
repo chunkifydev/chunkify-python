@@ -78,6 +78,7 @@ class SourcesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/sources",
             body=maybe_transform(
@@ -123,6 +124,7 @@ class SourcesResource(SyncAPIResource):
         """
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
@@ -185,6 +187,7 @@ class SourcesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/sources",
             page=SyncPaginatedResults[Source],
@@ -241,6 +244,7 @@ class SourcesResource(SyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/sources/{source_id}",
             options=make_request_options(
@@ -302,6 +306,7 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/sources",
             body=await async_maybe_transform(
@@ -347,6 +352,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         """
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
@@ -409,6 +415,7 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/sources",
             page=AsyncPaginatedResults[Source],
@@ -465,6 +472,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/sources/{source_id}",
             options=make_request_options(

@@ -71,6 +71,7 @@ class StoragesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return cast(
             Storage,
             self._post(
@@ -114,6 +115,7 @@ class StoragesResource(SyncAPIResource):
         """
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return cast(
             Storage,
             self._get(
@@ -142,6 +144,7 @@ class StoragesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StorageListResponse:
         """Retrieve a list of all storage configurations for the current project."""
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             "/api/storages",
             options=make_request_options(
@@ -178,6 +181,7 @@ class StoragesResource(SyncAPIResource):
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/storages/{storage_id}",
             options=make_request_options(
@@ -233,6 +237,7 @@ class AsyncStoragesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return cast(
             Storage,
             await self._post(
@@ -276,6 +281,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         """
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return cast(
             Storage,
             await self._get(
@@ -304,6 +310,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StorageListResponse:
         """Retrieve a list of all storage configurations for the current project."""
+        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/storages",
             options=make_request_options(
@@ -340,6 +347,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         if not storage_id:
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/storages/{storage_id}",
             options=make_request_options(
