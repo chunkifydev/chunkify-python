@@ -64,7 +64,9 @@ class Data(BaseModel):
 
 
 class TranscoderListResponse(BaseModel):
+    """Response containing a list of transcoders for a job"""
+
     data: List[Data]
 
-    status: str
+    status: Literal["success"]
     """Status indicates the response status "success" """
