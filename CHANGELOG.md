@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.0 (2026-01-17)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/chunkifydev/chunkify-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([269082d](https://github.com/chunkifydev/chunkify-python/commit/269082da4f396f217e7c6a6d5aa39af0b49b447f))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([25fb601](https://github.com/chunkifydev/chunkify-python/commit/25fb601a7f26d9f0445e2f303bf77cf3ea1aba69))
+
 ## 0.8.0 (2026-01-15)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/chunkifydev/chunkify-python/compare/v0.7.0...v0.8.0)
