@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.1 (2026-01-24)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/chunkifydev/chunkify-python/compare/v0.9.0...v0.9.1)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([748b8a0](https://github.com/chunkifydev/chunkify-python/commit/748b8a047581d72618e8c97b2ef2a6ff67496910))
+
 ## 0.9.0 (2026-01-17)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/chunkifydev/chunkify-python/compare/v0.8.0...v0.9.0)
