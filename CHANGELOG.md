@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 (2026-01-30)
+
+Full Changelog: [v0.9.1...v0.10.0](https://github.com/chunkifydev/chunkify-python/compare/v0.9.1...v0.10.0)
+
+### Features
+
+* **client:** add custom JSON encoder for extended type support ([a953026](https://github.com/chunkifydev/chunkify-python/commit/a9530261ddb9be93f9362194fa3df6657188b7d2))
+
 ## 0.9.1 (2026-01-24)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/chunkifydev/chunkify-python/compare/v0.9.0...v0.9.1)
