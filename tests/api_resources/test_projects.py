@@ -106,7 +106,7 @@ class TestProjects:
     def test_method_update_with_all_params(self, client: Chunkify) -> None:
         project = client.projects.update(
             project_id="projectId",
-            name="xxxx",
+            name="name",
             storage_id="xxxx",
         )
         assert project is None
@@ -310,7 +310,7 @@ class TestAsyncProjects:
     async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
         project = await async_client.projects.update(
             project_id="projectId",
-            name="xxxx",
+            name="name",
             storage_id="xxxx",
         )
         assert project is None
