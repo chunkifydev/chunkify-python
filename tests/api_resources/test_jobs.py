@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestJobs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         job = client.jobs.create(
@@ -27,7 +27,7 @@ class TestJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         job = client.jobs.create(
@@ -71,7 +71,7 @@ class TestJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.create(
@@ -84,7 +84,7 @@ class TestJobs:
         job = response.parse()
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.create(
@@ -99,7 +99,7 @@ class TestJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Chunkify) -> None:
         job = client.jobs.retrieve(
@@ -107,7 +107,7 @@ class TestJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.retrieve(
@@ -119,7 +119,7 @@ class TestJobs:
         job = response.parse()
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.retrieve(
@@ -133,7 +133,7 @@ class TestJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -141,13 +141,13 @@ class TestJobs:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
         job = client.jobs.list()
         assert_matches_type(SyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
         job = client.jobs.list(
@@ -167,7 +167,7 @@ class TestJobs:
         )
         assert_matches_type(SyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.list()
@@ -177,7 +177,7 @@ class TestJobs:
         job = response.parse()
         assert_matches_type(SyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.list() as response:
@@ -189,7 +189,7 @@ class TestJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Chunkify) -> None:
         job = client.jobs.delete(
@@ -197,7 +197,7 @@ class TestJobs:
         )
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.delete(
@@ -209,7 +209,7 @@ class TestJobs:
         job = response.parse()
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.delete(
@@ -223,7 +223,7 @@ class TestJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -231,7 +231,7 @@ class TestJobs:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel(self, client: Chunkify) -> None:
         job = client.jobs.cancel(
@@ -239,7 +239,7 @@ class TestJobs:
         )
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel(self, client: Chunkify) -> None:
         response = client.jobs.with_raw_response.cancel(
@@ -251,7 +251,7 @@ class TestJobs:
         job = response.parse()
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel(self, client: Chunkify) -> None:
         with client.jobs.with_streaming_response.cancel(
@@ -265,7 +265,7 @@ class TestJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_cancel(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -279,7 +279,7 @@ class TestAsyncJobs:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.create(
@@ -288,7 +288,7 @@ class TestAsyncJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.create(
@@ -332,7 +332,7 @@ class TestAsyncJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.create(
@@ -345,7 +345,7 @@ class TestAsyncJobs:
         job = await response.parse()
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.create(
@@ -360,7 +360,7 @@ class TestAsyncJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.retrieve(
@@ -368,7 +368,7 @@ class TestAsyncJobs:
         )
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.retrieve(
@@ -380,7 +380,7 @@ class TestAsyncJobs:
         job = await response.parse()
         assert_matches_type(Job, job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.retrieve(
@@ -394,7 +394,7 @@ class TestAsyncJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -402,13 +402,13 @@ class TestAsyncJobs:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.list()
         assert_matches_type(AsyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.list(
@@ -428,7 +428,7 @@ class TestAsyncJobs:
         )
         assert_matches_type(AsyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.list()
@@ -438,7 +438,7 @@ class TestAsyncJobs:
         job = await response.parse()
         assert_matches_type(AsyncPaginatedResults[Job], job, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.list() as response:
@@ -450,7 +450,7 @@ class TestAsyncJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.delete(
@@ -458,7 +458,7 @@ class TestAsyncJobs:
         )
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.delete(
@@ -470,7 +470,7 @@ class TestAsyncJobs:
         job = await response.parse()
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.delete(
@@ -484,7 +484,7 @@ class TestAsyncJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -492,7 +492,7 @@ class TestAsyncJobs:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel(self, async_client: AsyncChunkify) -> None:
         job = await async_client.jobs.cancel(
@@ -500,7 +500,7 @@ class TestAsyncJobs:
         )
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncChunkify) -> None:
         response = await async_client.jobs.with_raw_response.cancel(
@@ -512,7 +512,7 @@ class TestAsyncJobs:
         job = await response.parse()
         assert job is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncChunkify) -> None:
         async with async_client.jobs.with_streaming_response.cancel(
@@ -526,7 +526,7 @@ class TestAsyncJobs:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_cancel(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):

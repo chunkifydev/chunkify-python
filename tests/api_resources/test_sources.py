@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSources:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         source = client.sources.create(
@@ -26,7 +26,7 @@ class TestSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         source = client.sources.create(
@@ -38,7 +38,7 @@ class TestSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.sources.with_raw_response.create(
@@ -50,7 +50,7 @@ class TestSources:
         source = response.parse()
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.sources.with_streaming_response.create(
@@ -64,7 +64,7 @@ class TestSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Chunkify) -> None:
         source = client.sources.retrieve(
@@ -72,7 +72,7 @@ class TestSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Chunkify) -> None:
         response = client.sources.with_raw_response.retrieve(
@@ -84,7 +84,7 @@ class TestSources:
         source = response.parse()
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Chunkify) -> None:
         with client.sources.with_streaming_response.retrieve(
@@ -98,7 +98,7 @@ class TestSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `source_id` but received ''"):
@@ -106,13 +106,13 @@ class TestSources:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
         source = client.sources.list()
         assert_matches_type(SyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
         source = client.sources.list(
@@ -159,7 +159,7 @@ class TestSources:
         )
         assert_matches_type(SyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
         response = client.sources.with_raw_response.list()
@@ -169,7 +169,7 @@ class TestSources:
         source = response.parse()
         assert_matches_type(SyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
         with client.sources.with_streaming_response.list() as response:
@@ -181,7 +181,7 @@ class TestSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Chunkify) -> None:
         source = client.sources.delete(
@@ -189,7 +189,7 @@ class TestSources:
         )
         assert source is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Chunkify) -> None:
         response = client.sources.with_raw_response.delete(
@@ -201,7 +201,7 @@ class TestSources:
         source = response.parse()
         assert source is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Chunkify) -> None:
         with client.sources.with_streaming_response.delete(
@@ -215,7 +215,7 @@ class TestSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `source_id` but received ''"):
@@ -229,7 +229,7 @@ class TestAsyncSources:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.create(
@@ -237,7 +237,7 @@ class TestAsyncSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.create(
@@ -249,7 +249,7 @@ class TestAsyncSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.sources.with_raw_response.create(
@@ -261,7 +261,7 @@ class TestAsyncSources:
         source = await response.parse()
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.sources.with_streaming_response.create(
@@ -275,7 +275,7 @@ class TestAsyncSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.retrieve(
@@ -283,7 +283,7 @@ class TestAsyncSources:
         )
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncChunkify) -> None:
         response = await async_client.sources.with_raw_response.retrieve(
@@ -295,7 +295,7 @@ class TestAsyncSources:
         source = await response.parse()
         assert_matches_type(Source, source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncChunkify) -> None:
         async with async_client.sources.with_streaming_response.retrieve(
@@ -309,7 +309,7 @@ class TestAsyncSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `source_id` but received ''"):
@@ -317,13 +317,13 @@ class TestAsyncSources:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.list()
         assert_matches_type(AsyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.list(
@@ -370,7 +370,7 @@ class TestAsyncSources:
         )
         assert_matches_type(AsyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
         response = await async_client.sources.with_raw_response.list()
@@ -380,7 +380,7 @@ class TestAsyncSources:
         source = await response.parse()
         assert_matches_type(AsyncPaginatedResults[Source], source, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
         async with async_client.sources.with_streaming_response.list() as response:
@@ -392,7 +392,7 @@ class TestAsyncSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.delete(
@@ -400,7 +400,7 @@ class TestAsyncSources:
         )
         assert source is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.sources.with_raw_response.delete(
@@ -412,7 +412,7 @@ class TestAsyncSources:
         source = await response.parse()
         assert source is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncChunkify) -> None:
         async with async_client.sources.with_streaming_response.delete(
@@ -426,7 +426,7 @@ class TestAsyncSources:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `source_id` but received ''"):
