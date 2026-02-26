@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.11.0 (2026-02-25)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/chunkifydev/chunkify-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([4a2f9ba](https://github.com/chunkifydev/chunkify-python/commit/4a2f9ba6b1643ba15b241890cf9bc6b708eb8434))
+
+
+### Chores
+
+* **dependencies:** require standardwebhooks 1.0.1 ([5f17622](https://github.com/chunkifydev/chunkify-python/commit/5f1762274a3f06f17a951082ac7f2de9aebd178f))
+* format all `api.md` files ([b369f44](https://github.com/chunkifydev/chunkify-python/commit/b369f444c02d42e998f1d566ae670b8b0bc84e6e))
+* **internal:** add request options to SSE classes ([b464428](https://github.com/chunkifydev/chunkify-python/commit/b4644288b3aad98e89903d33fdf99119fd5a30c0))
+* **internal:** bump dependencies ([bce9c62](https://github.com/chunkifydev/chunkify-python/commit/bce9c620fb338f4eaa109973b2d4e65fa1901cb7))
+* **internal:** fix lint error on Python 3.14 ([6ee1adf](https://github.com/chunkifydev/chunkify-python/commit/6ee1adf2af5ac65abc09513d41e70db6ba2b3aa1))
+* **internal:** make `test_proxy_environment_variables` more resilient ([b75ade3](https://github.com/chunkifydev/chunkify-python/commit/b75ade3f687b19b75c939cb91df51e38c6f592a1))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([1f2227a](https://github.com/chunkifydev/chunkify-python/commit/1f2227acb231e41ffd8c186e6bb2885e8fc8a16b))
+* **internal:** remove mock server code ([33c7611](https://github.com/chunkifydev/chunkify-python/commit/33c76115ff16775ba2c42cd3344cd5f010041dcc))
+* update mock server docs ([1526a0a](https://github.com/chunkifydev/chunkify-python/commit/1526a0a68bb375113d748150e973ba38209f77bb))
+
 ## 0.10.0 (2026-01-30)
 
 Full Changelog: [v0.9.1...v0.10.0](https://github.com/chunkifydev/chunkify-python/compare/v0.9.1...v0.10.0)

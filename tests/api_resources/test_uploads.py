@@ -18,13 +18,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestUploads:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         upload = client.uploads.create()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         upload = client.uploads.create(
@@ -36,7 +36,7 @@ class TestUploads:
         )
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.create()
@@ -46,7 +46,7 @@ class TestUploads:
         upload = response.parse()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.create() as response:
@@ -58,7 +58,7 @@ class TestUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Chunkify) -> None:
         upload = client.uploads.retrieve(
@@ -66,7 +66,7 @@ class TestUploads:
         )
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.retrieve(
@@ -78,7 +78,7 @@ class TestUploads:
         upload = response.parse()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.retrieve(
@@ -92,7 +92,7 @@ class TestUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `upload_id` but received ''"):
@@ -100,13 +100,13 @@ class TestUploads:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
         upload = client.uploads.list()
         assert_matches_type(SyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
         upload = client.uploads.list(
@@ -124,7 +124,7 @@ class TestUploads:
         )
         assert_matches_type(SyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.list()
@@ -134,7 +134,7 @@ class TestUploads:
         upload = response.parse()
         assert_matches_type(SyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.list() as response:
@@ -146,7 +146,7 @@ class TestUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Chunkify) -> None:
         upload = client.uploads.delete(
@@ -154,7 +154,7 @@ class TestUploads:
         )
         assert upload is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.delete(
@@ -166,7 +166,7 @@ class TestUploads:
         upload = response.parse()
         assert upload is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.delete(
@@ -180,7 +180,7 @@ class TestUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `upload_id` but received ''"):
@@ -194,13 +194,13 @@ class TestAsyncUploads:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.create()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.create(
@@ -212,7 +212,7 @@ class TestAsyncUploads:
         )
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.create()
@@ -222,7 +222,7 @@ class TestAsyncUploads:
         upload = await response.parse()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.create() as response:
@@ -234,7 +234,7 @@ class TestAsyncUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.retrieve(
@@ -242,7 +242,7 @@ class TestAsyncUploads:
         )
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.retrieve(
@@ -254,7 +254,7 @@ class TestAsyncUploads:
         upload = await response.parse()
         assert_matches_type(Upload, upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.retrieve(
@@ -268,7 +268,7 @@ class TestAsyncUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `upload_id` but received ''"):
@@ -276,13 +276,13 @@ class TestAsyncUploads:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.list()
         assert_matches_type(AsyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.list(
@@ -300,7 +300,7 @@ class TestAsyncUploads:
         )
         assert_matches_type(AsyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.list()
@@ -310,7 +310,7 @@ class TestAsyncUploads:
         upload = await response.parse()
         assert_matches_type(AsyncPaginatedResults[Upload], upload, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.list() as response:
@@ -322,7 +322,7 @@ class TestAsyncUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.delete(
@@ -330,7 +330,7 @@ class TestAsyncUploads:
         )
         assert upload is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.delete(
@@ -342,7 +342,7 @@ class TestAsyncUploads:
         upload = await response.parse()
         assert upload is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.delete(
@@ -356,7 +356,7 @@ class TestAsyncUploads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `upload_id` but received ''"):
