@@ -72,7 +72,6 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._post(
             "/api/projects",
             body=maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
@@ -82,6 +81,7 @@ class ProjectsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Project]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
@@ -111,7 +111,6 @@ class ProjectsResource(SyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -120,6 +119,7 @@ class ProjectsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Project]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
@@ -158,7 +158,6 @@ class ProjectsResource(SyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return self._patch(
             f"/api/projects/{project_id}",
             body=maybe_transform(
@@ -169,7 +168,11 @@ class ProjectsResource(SyncAPIResource):
                 project_update_params.ProjectUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -185,11 +188,14 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             "/api/projects",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=ProjectListResponse,
         )
@@ -222,11 +228,14 @@ class ProjectsResource(SyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return self._delete(
             f"/api/projects/{project_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -279,7 +288,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/projects",
             body=await async_maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
@@ -289,6 +297,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Project]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
@@ -318,7 +327,6 @@ class AsyncProjectsResource(AsyncAPIResource):
         """
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/projects/{project_id}",
             options=make_request_options(
@@ -327,6 +335,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Project]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Project], DataWrapper[Project]),
         )
@@ -365,7 +374,6 @@ class AsyncProjectsResource(AsyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return await self._patch(
             f"/api/projects/{project_id}",
             body=await async_maybe_transform(
@@ -376,7 +384,11 @@ class AsyncProjectsResource(AsyncAPIResource):
                 project_update_params.ProjectUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -392,11 +404,14 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/projects",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=ProjectListResponse,
         )
@@ -429,11 +444,14 @@ class AsyncProjectsResource(AsyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return await self._delete(
             f"/api/projects/{project_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )

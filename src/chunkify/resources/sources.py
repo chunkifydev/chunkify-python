@@ -78,7 +78,6 @@ class SourcesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/sources",
             body=maybe_transform(
@@ -94,6 +93,7 @@ class SourcesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Source]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Source], DataWrapper[Source]),
         )
@@ -124,7 +124,6 @@ class SourcesResource(SyncAPIResource):
         """
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
@@ -133,6 +132,7 @@ class SourcesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Source]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Source], DataWrapper[Source]),
         )
@@ -187,7 +187,6 @@ class SourcesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/sources",
             page=SyncPaginatedResults[Source],
@@ -213,6 +212,7 @@ class SourcesResource(SyncAPIResource):
                     },
                     source_list_params.SourceListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Source,
         )
@@ -244,11 +244,14 @@ class SourcesResource(SyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/sources/{source_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -306,7 +309,6 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/sources",
             body=await async_maybe_transform(
@@ -322,6 +324,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Source]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Source], DataWrapper[Source]),
         )
@@ -352,7 +355,6 @@ class AsyncSourcesResource(AsyncAPIResource):
         """
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/sources/{source_id}",
             options=make_request_options(
@@ -361,6 +363,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Source]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Source], DataWrapper[Source]),
         )
@@ -415,7 +418,6 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/sources",
             page=AsyncPaginatedResults[Source],
@@ -441,6 +443,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                     },
                     source_list_params.SourceListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Source,
         )
@@ -472,11 +475,14 @@ class AsyncSourcesResource(AsyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/sources/{source_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
