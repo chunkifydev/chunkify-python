@@ -79,7 +79,6 @@ class TokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._post(
             "/api/tokens",
             body=maybe_transform(
@@ -96,6 +95,7 @@ class TokensResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Token]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Token], DataWrapper[Token]),
         )
@@ -116,11 +116,14 @@ class TokensResource(SyncAPIResource):
         scope, creation date, and usage statistics. The token values are not included in
         the response for security reasons.
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return self._get(
             "/api/tokens",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=TokenListResponse,
         )
@@ -153,11 +156,14 @@ class TokensResource(SyncAPIResource):
         if not token_id:
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return self._delete(
             f"/api/tokens/{token_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -216,7 +222,6 @@ class AsyncTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/tokens",
             body=await async_maybe_transform(
@@ -233,6 +238,7 @@ class AsyncTokensResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Token]._unwrapper,
+                security={"team_access_token": True},
             ),
             cast_to=cast(Type[Token], DataWrapper[Token]),
         )
@@ -253,11 +259,14 @@ class AsyncTokensResource(AsyncAPIResource):
         scope, creation date, and usage statistics. The token values are not included in
         the response for security reasons.
         """
-        extra_headers = {**self._client._team_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/tokens",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=TokenListResponse,
         )
@@ -290,11 +299,14 @@ class AsyncTokensResource(AsyncAPIResource):
         if not token_id:
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._team_access_token})
         return await self._delete(
             f"/api/tokens/{token_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"team_access_token": True},
             ),
             cast_to=NoneType,
         )

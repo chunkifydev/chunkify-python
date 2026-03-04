@@ -71,7 +71,6 @@ class FilesResource(SyncAPIResource):
         """
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/files/{file_id}",
             options=make_request_options(
@@ -80,6 +79,7 @@ class FilesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[JobFile]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
@@ -136,7 +136,6 @@ class FilesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/files",
             page=SyncPaginatedResults[JobFile],
@@ -164,6 +163,7 @@ class FilesResource(SyncAPIResource):
                     },
                     file_list_params.FileListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=JobFile,
         )
@@ -195,11 +195,14 @@ class FilesResource(SyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/files/{file_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -251,7 +254,6 @@ class AsyncFilesResource(AsyncAPIResource):
         """
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/files/{file_id}",
             options=make_request_options(
@@ -260,6 +262,7 @@ class AsyncFilesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[JobFile]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
@@ -316,7 +319,6 @@ class AsyncFilesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/files",
             page=AsyncPaginatedResults[JobFile],
@@ -344,6 +346,7 @@ class AsyncFilesResource(AsyncAPIResource):
                     },
                     file_list_params.FileListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=JobFile,
         )
@@ -375,11 +378,14 @@ class AsyncFilesResource(AsyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/files/{file_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )

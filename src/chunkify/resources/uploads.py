@@ -75,7 +75,6 @@ class UploadsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/uploads",
             body=maybe_transform(
@@ -91,6 +90,7 @@ class UploadsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Upload]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
@@ -121,7 +121,6 @@ class UploadsResource(SyncAPIResource):
         """
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
@@ -130,6 +129,7 @@ class UploadsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Upload]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
@@ -175,7 +175,6 @@ class UploadsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/uploads",
             page=SyncPaginatedResults[Upload],
@@ -196,6 +195,7 @@ class UploadsResource(SyncAPIResource):
                     },
                     upload_list_params.UploadListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Upload,
         )
@@ -226,11 +226,14 @@ class UploadsResource(SyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -285,7 +288,6 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/uploads",
             body=await async_maybe_transform(
@@ -301,6 +303,7 @@ class AsyncUploadsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Upload]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
@@ -331,7 +334,6 @@ class AsyncUploadsResource(AsyncAPIResource):
         """
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
@@ -340,6 +342,7 @@ class AsyncUploadsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Upload]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Upload], DataWrapper[Upload]),
         )
@@ -385,7 +388,6 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/uploads",
             page=AsyncPaginatedResults[Upload],
@@ -406,6 +408,7 @@ class AsyncUploadsResource(AsyncAPIResource):
                     },
                     upload_list_params.UploadListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Upload,
         )
@@ -436,11 +439,14 @@ class AsyncUploadsResource(AsyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/uploads/{upload_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )

@@ -129,7 +129,6 @@ class JobsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/jobs",
             body=maybe_transform(
@@ -149,6 +148,7 @@ class JobsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Job]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
@@ -178,7 +178,6 @@ class JobsResource(SyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/jobs/{job_id}",
             options=make_request_options(
@@ -187,6 +186,7 @@ class JobsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Job]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
@@ -239,7 +239,6 @@ class JobsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/jobs",
             page=SyncPaginatedResults[Job],
@@ -262,6 +261,7 @@ class JobsResource(SyncAPIResource):
                     },
                     job_list_params.JobListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Job,
         )
@@ -292,11 +292,14 @@ class JobsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/jobs/{job_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -327,11 +330,14 @@ class JobsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._post(
             f"/api/jobs/{job_id}/cancel",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -416,7 +422,6 @@ class AsyncJobsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/jobs",
             body=await async_maybe_transform(
@@ -436,6 +441,7 @@ class AsyncJobsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Job]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
@@ -465,7 +471,6 @@ class AsyncJobsResource(AsyncAPIResource):
         """
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/jobs/{job_id}",
             options=make_request_options(
@@ -474,6 +479,7 @@ class AsyncJobsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Job]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
@@ -526,7 +532,6 @@ class AsyncJobsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/jobs",
             page=AsyncPaginatedResults[Job],
@@ -549,6 +554,7 @@ class AsyncJobsResource(AsyncAPIResource):
                     },
                     job_list_params.JobListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Job,
         )
@@ -579,11 +585,14 @@ class AsyncJobsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/jobs/{job_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -614,11 +623,14 @@ class AsyncJobsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._post(
             f"/api/jobs/{job_id}/cancel",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
