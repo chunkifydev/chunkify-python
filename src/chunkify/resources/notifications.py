@@ -79,7 +79,6 @@ class NotificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/notifications",
             body=maybe_transform(
@@ -96,6 +95,7 @@ class NotificationsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Notification]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
@@ -125,7 +125,6 @@ class NotificationsResource(SyncAPIResource):
         """
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
@@ -134,6 +133,7 @@ class NotificationsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Notification]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
@@ -182,7 +182,6 @@ class NotificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/notifications",
             page=SyncPaginatedResults[Notification],
@@ -203,6 +202,7 @@ class NotificationsResource(SyncAPIResource):
                     },
                     notification_list_params.NotificationListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Notification,
         )
@@ -233,11 +233,14 @@ class NotificationsResource(SyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -296,7 +299,6 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/notifications",
             body=await async_maybe_transform(
@@ -313,6 +315,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Notification]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
@@ -342,7 +345,6 @@ class AsyncNotificationsResource(AsyncAPIResource):
         """
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
@@ -351,6 +353,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Notification]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Notification], DataWrapper[Notification]),
         )
@@ -399,7 +402,6 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get_api_list(
             "/api/notifications",
             page=AsyncPaginatedResults[Notification],
@@ -420,6 +422,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                     },
                     notification_list_params.NotificationListParams,
                 ),
+                security={"project_access_token": True},
             ),
             model=Notification,
         )
@@ -450,11 +453,14 @@ class AsyncNotificationsResource(AsyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/notifications/{notification_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )

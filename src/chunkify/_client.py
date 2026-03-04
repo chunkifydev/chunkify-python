@@ -22,6 +22,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._compat import cached_property
+from ._models import SecurityOptions
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
@@ -188,10 +189,12 @@ class Chunkify(SyncAPIClient):
     def qs(self) -> Querystring:
         return Querystring(array_format="repeat")
 
-    @property
     @override
-    def auth_headers(self) -> dict[str, str]:
-        return {**self._project_access_token, **self._team_access_token}
+    def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
+        return {
+            **(self._project_access_token if security.get("project_access_token", False) else {}),
+            **(self._team_access_token if security.get("team_access_token", False) else {}),
+        }
 
     @property
     def _project_access_token(self) -> dict[str, str]:
@@ -447,10 +450,12 @@ class AsyncChunkify(AsyncAPIClient):
     def qs(self) -> Querystring:
         return Querystring(array_format="repeat")
 
-    @property
     @override
-    def auth_headers(self) -> dict[str, str]:
-        return {**self._project_access_token, **self._team_access_token}
+    def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
+        return {
+            **(self._project_access_token if security.get("project_access_token", False) else {}),
+            **(self._team_access_token if security.get("team_access_token", False) else {}),
+        }
 
     @property
     def _project_access_token(self) -> dict[str, str]:

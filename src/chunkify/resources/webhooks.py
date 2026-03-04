@@ -89,7 +89,6 @@ class WebhooksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._post(
             "/api/webhooks",
             body=maybe_transform(
@@ -106,6 +105,7 @@ class WebhooksResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Webhook]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
@@ -137,7 +137,6 @@ class WebhooksResource(SyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
@@ -146,6 +145,7 @@ class WebhooksResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Webhook]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
@@ -189,7 +189,6 @@ class WebhooksResource(SyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._patch(
             f"/api/webhooks/{webhook_id}",
             body=maybe_transform(
@@ -200,7 +199,11 @@ class WebhooksResource(SyncAPIResource):
                 webhook_update_params.WebhookUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -220,11 +223,14 @@ class WebhooksResource(SyncAPIResource):
         Each webhook
         includes its URL, enabled status, and subscribed events.
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return self._get(
             "/api/webhooks",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=WebhookListResponse,
         )
@@ -257,11 +263,14 @@ class WebhooksResource(SyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return self._delete(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -352,7 +361,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._post(
             "/api/webhooks",
             body=await async_maybe_transform(
@@ -369,6 +377,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Webhook]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
@@ -400,7 +409,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
@@ -409,6 +417,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 post_parser=DataWrapper[Webhook]._unwrapper,
+                security={"project_access_token": True},
             ),
             cast_to=cast(Type[Webhook], DataWrapper[Webhook]),
         )
@@ -452,7 +461,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._patch(
             f"/api/webhooks/{webhook_id}",
             body=await async_maybe_transform(
@@ -463,7 +471,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 webhook_update_params.WebhookUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
@@ -483,11 +495,14 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Each webhook
         includes its URL, enabled status, and subscribed events.
         """
-        extra_headers = {**self._client._project_access_token, **(extra_headers or {})}
         return await self._get(
             "/api/webhooks",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=WebhookListResponse,
         )
@@ -520,11 +535,14 @@ class AsyncWebhooksResource(AsyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        extra_headers.update({**self._client._project_access_token})
         return await self._delete(
             f"/api/webhooks/{webhook_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
             ),
             cast_to=NoneType,
         )
