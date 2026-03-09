@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.2 (2026-03-07)
+
+Full Changelog: [v0.11.1...v0.11.2](https://github.com/chunkifydev/chunkify-python/compare/v0.11.1...v0.11.2)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([7f53099](https://github.com/chunkifydev/chunkify-python/commit/7f530996399459affea404ebbc0fb535d46fa7a7))
+
 ## 0.11.1 (2026-03-04)
 
 Full Changelog: [v0.11.0...v0.11.1](https://github.com/chunkifydev/chunkify-python/compare/v0.11.0...v0.11.1)
