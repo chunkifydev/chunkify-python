@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.11.3 (2026-03-20)
+
+Full Changelog: [v0.11.2...v0.11.3](https://github.com/chunkifydev/chunkify-python/compare/v0.11.2...v0.11.3)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([6ae9348](https://github.com/chunkifydev/chunkify-python/commit/6ae9348cdf3ceb2360bdb687875f88e6ecb51e92))
+* **pydantic:** do not pass `by_alias` unless set ([0143800](https://github.com/chunkifydev/chunkify-python/commit/0143800177a55333dd1ad3f31780c73c5a11f576))
+* sanitize endpoint path params ([77a8dd5](https://github.com/chunkifydev/chunkify-python/commit/77a8dd5f4facea67230b491ab68b0c157af7645e))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([05279a0](https://github.com/chunkifydev/chunkify-python/commit/05279a03c0a3a8a73d8f5b6b508201d39107489f))
+
 ## 0.11.2 (2026-03-07)
 
 Full Changelog: [v0.11.1...v0.11.2](https://github.com/chunkifydev/chunkify-python/compare/v0.11.1...v0.11.2)
