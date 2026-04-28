@@ -20,7 +20,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._models import SecurityOptions
 from ._version import __version__
@@ -110,6 +114,15 @@ class Chunkify(SyncAPIClient):
             base_url = os.environ.get("CHUNKIFY_BASE_URL")
         if base_url is None:
             base_url = f"https://api.chunkify.dev/v1"
+
+        custom_headers_env = os.environ.get("CHUNKIFY_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
@@ -371,6 +384,15 @@ class AsyncChunkify(AsyncAPIClient):
             base_url = os.environ.get("CHUNKIFY_BASE_URL")
         if base_url is None:
             base_url = f"https://api.chunkify.dev/v1"
+
+        custom_headers_env = os.environ.get("CHUNKIFY_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
