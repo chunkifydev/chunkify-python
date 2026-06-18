@@ -204,10 +204,14 @@ class Chunkify(SyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._project_access_token if security.get("project_access_token", False) else {}),
-            **(self._team_access_token if security.get("team_access_token", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("project_access_token", False):
+            for key, value in self._project_access_token.items():
+                headers.setdefault(key, value)
+        if security.get("team_access_token", False):
+            for key, value in self._team_access_token.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _project_access_token(self) -> dict[str, str]:
@@ -474,10 +478,14 @@ class AsyncChunkify(AsyncAPIClient):
 
     @override
     def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
-        return {
-            **(self._project_access_token if security.get("project_access_token", False) else {}),
-            **(self._team_access_token if security.get("team_access_token", False) else {}),
-        }
+        headers: dict[str, str] = {}
+        if security.get("project_access_token", False):
+            for key, value in self._project_access_token.items():
+                headers.setdefault(key, value)
+        if security.get("team_access_token", False):
+            for key, value in self._team_access_token.items():
+                headers.setdefault(key, value)
+        return headers
 
     @property
     def _project_access_token(self) -> dict[str, str]:
