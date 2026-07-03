@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.12.0 (2026-07-03)
+
+Full Changelog: [v0.11.2...v0.12.0](https://github.com/chunkifydev/chunkify-python/compare/v0.11.2...v0.12.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([168abcf](https://github.com/chunkifydev/chunkify-python/commit/168abcf6094e16205a6da24691172999397e184a))
+* **internal:** implement indices array format for query and form serialization ([636adfc](https://github.com/chunkifydev/chunkify-python/commit/636adfc30d6ae82e77775d5e1e49524ec695fafa))
+* support setting headers via env ([500bdc5](https://github.com/chunkifydev/chunkify-python/commit/500bdc500a7a8a34868160ba9b515736d4b185c5))
+
+
+### Bug Fixes
+
+* **auth:** prioritize first auth header ([0b2efb5](https://github.com/chunkifydev/chunkify-python/commit/0b2efb5536c7fd17e268d902abe1f4b4d71eedc9))
+* **client:** add missing f-string prefix in file type error message ([11ccb33](https://github.com/chunkifydev/chunkify-python/commit/11ccb33c5c5a4edf2c345b665a95a2f13eefd617))
+* **client:** preserve hardcoded query params when merging with user params ([1e05143](https://github.com/chunkifydev/chunkify-python/commit/1e0514328c0ceba25a502bbca6c4da244b8a069c))
+* **deps:** bump minimum typing-extensions version ([6ae9348](https://github.com/chunkifydev/chunkify-python/commit/6ae9348cdf3ceb2360bdb687875f88e6ecb51e92))
+* ensure file data are only sent as 1 parameter ([29bcbd8](https://github.com/chunkifydev/chunkify-python/commit/29bcbd8a4e133d8f10ea6df200ef6785396cdbd4))
+* **pydantic:** do not pass `by_alias` unless set ([0143800](https://github.com/chunkifydev/chunkify-python/commit/0143800177a55333dd1ad3f31780c73c5a11f576))
+* sanitize endpoint path params ([77a8dd5](https://github.com/chunkifydev/chunkify-python/commit/77a8dd5f4facea67230b491ab68b0c157af7645e))
+* use correct field name format for multipart file arrays ([ae76976](https://github.com/chunkifydev/chunkify-python/commit/ae76976e111198a62cb0a8140717c10ec3ae8194))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([29fe6ad](https://github.com/chunkifydev/chunkify-python/commit/29fe6ad39fdbde2527a9c345d21312fe7ea94b48))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([f8ba6a8](https://github.com/chunkifydev/chunkify-python/commit/f8ba6a863bda930c36ecdc670c855773e8f0b9c3))
+* **internal:** more robust bootstrap script ([5fab768](https://github.com/chunkifydev/chunkify-python/commit/5fab768b33ca4d6758de6977766ac7afbb0ae255))
+* **internal:** reformat pyproject.toml ([2c3863d](https://github.com/chunkifydev/chunkify-python/commit/2c3863d645837f3255469575c761fdb80f5046fb))
+* **internal:** tweak CI branches ([05279a0](https://github.com/chunkifydev/chunkify-python/commit/05279a03c0a3a8a73d8f5b6b508201d39107489f))
+* **internal:** update gitignore ([2af41c5](https://github.com/chunkifydev/chunkify-python/commit/2af41c5f9b8ae1d7bd6df4d6edda479e9f3eecca))
+
 ## 0.11.2 (2026-03-07)
 
 Full Changelog: [v0.11.1...v0.11.2](https://github.com/chunkifydev/chunkify-python/compare/v0.11.1...v0.11.2)
