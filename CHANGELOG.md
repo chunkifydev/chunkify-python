@@ -1,0 +1,266 @@
+# Changelog
+
+## 0.13.0 (2026-07-18)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/chunkifydev/chunkify-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([faabf52](https://github.com/chunkifydev/chunkify-python/commit/faabf5202213e0352146c2064e9ade3539303c37))
+
+## 0.12.0 (2026-07-03)
+
+Full Changelog: [v0.11.2...v0.12.0](https://github.com/chunkifydev/chunkify-python/compare/v0.11.2...v0.12.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([168abcf](https://github.com/chunkifydev/chunkify-python/commit/168abcf6094e16205a6da24691172999397e184a))
+* **internal:** implement indices array format for query and form serialization ([636adfc](https://github.com/chunkifydev/chunkify-python/commit/636adfc30d6ae82e77775d5e1e49524ec695fafa))
+* support setting headers via env ([500bdc5](https://github.com/chunkifydev/chunkify-python/commit/500bdc500a7a8a34868160ba9b515736d4b185c5))
+
+
+### Bug Fixes
+
+* **auth:** prioritize first auth header ([0b2efb5](https://github.com/chunkifydev/chunkify-python/commit/0b2efb5536c7fd17e268d902abe1f4b4d71eedc9))
+* **client:** add missing f-string prefix in file type error message ([11ccb33](https://github.com/chunkifydev/chunkify-python/commit/11ccb33c5c5a4edf2c345b665a95a2f13eefd617))
+* **client:** preserve hardcoded query params when merging with user params ([1e05143](https://github.com/chunkifydev/chunkify-python/commit/1e0514328c0ceba25a502bbca6c4da244b8a069c))
+* **deps:** bump minimum typing-extensions version ([6ae9348](https://github.com/chunkifydev/chunkify-python/commit/6ae9348cdf3ceb2360bdb687875f88e6ecb51e92))
+* ensure file data are only sent as 1 parameter ([29bcbd8](https://github.com/chunkifydev/chunkify-python/commit/29bcbd8a4e133d8f10ea6df200ef6785396cdbd4))
+* **pydantic:** do not pass `by_alias` unless set ([0143800](https://github.com/chunkifydev/chunkify-python/commit/0143800177a55333dd1ad3f31780c73c5a11f576))
+* sanitize endpoint path params ([77a8dd5](https://github.com/chunkifydev/chunkify-python/commit/77a8dd5f4facea67230b491ab68b0c157af7645e))
+* use correct field name format for multipart file arrays ([ae76976](https://github.com/chunkifydev/chunkify-python/commit/ae76976e111198a62cb0a8140717c10ec3ae8194))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([29fe6ad](https://github.com/chunkifydev/chunkify-python/commit/29fe6ad39fdbde2527a9c345d21312fe7ea94b48))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([f8ba6a8](https://github.com/chunkifydev/chunkify-python/commit/f8ba6a863bda930c36ecdc670c855773e8f0b9c3))
+* **internal:** more robust bootstrap script ([5fab768](https://github.com/chunkifydev/chunkify-python/commit/5fab768b33ca4d6758de6977766ac7afbb0ae255))
+* **internal:** reformat pyproject.toml ([2c3863d](https://github.com/chunkifydev/chunkify-python/commit/2c3863d645837f3255469575c761fdb80f5046fb))
+* **internal:** tweak CI branches ([05279a0](https://github.com/chunkifydev/chunkify-python/commit/05279a03c0a3a8a73d8f5b6b508201d39107489f))
+* **internal:** update gitignore ([2af41c5](https://github.com/chunkifydev/chunkify-python/commit/2af41c5f9b8ae1d7bd6df4d6edda479e9f3eecca))
+
+## 0.11.2 (2026-03-07)
+
+Full Changelog: [v0.11.1...v0.11.2](https://github.com/chunkifydev/chunkify-python/compare/v0.11.1...v0.11.2)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([7f53099](https://github.com/chunkifydev/chunkify-python/commit/7f530996399459affea404ebbc0fb535d46fa7a7))
+
+## 0.11.1 (2026-03-04)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/chunkifydev/chunkify-python/compare/v0.11.0...v0.11.1)
+
+### Chores
+
+* **internal:** refactor authentication internals ([98a0de8](https://github.com/chunkifydev/chunkify-python/commit/98a0de8abe2134c6b10b96478b72e4c39cc78820))
+* **tests:** update webhook tests ([61923d7](https://github.com/chunkifydev/chunkify-python/commit/61923d7db8b4392a65a5ca7bdae85c4bc921213c))
+
+## 0.11.0 (2026-02-25)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/chunkifydev/chunkify-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([4a2f9ba](https://github.com/chunkifydev/chunkify-python/commit/4a2f9ba6b1643ba15b241890cf9bc6b708eb8434))
+
+
+### Chores
+
+* **dependencies:** require standardwebhooks 1.0.1 ([5f17622](https://github.com/chunkifydev/chunkify-python/commit/5f1762274a3f06f17a951082ac7f2de9aebd178f))
+* format all `api.md` files ([b369f44](https://github.com/chunkifydev/chunkify-python/commit/b369f444c02d42e998f1d566ae670b8b0bc84e6e))
+* **internal:** add request options to SSE classes ([b464428](https://github.com/chunkifydev/chunkify-python/commit/b4644288b3aad98e89903d33fdf99119fd5a30c0))
+* **internal:** bump dependencies ([bce9c62](https://github.com/chunkifydev/chunkify-python/commit/bce9c620fb338f4eaa109973b2d4e65fa1901cb7))
+* **internal:** fix lint error on Python 3.14 ([6ee1adf](https://github.com/chunkifydev/chunkify-python/commit/6ee1adf2af5ac65abc09513d41e70db6ba2b3aa1))
+* **internal:** make `test_proxy_environment_variables` more resilient ([b75ade3](https://github.com/chunkifydev/chunkify-python/commit/b75ade3f687b19b75c939cb91df51e38c6f592a1))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([1f2227a](https://github.com/chunkifydev/chunkify-python/commit/1f2227acb231e41ffd8c186e6bb2885e8fc8a16b))
+* **internal:** remove mock server code ([33c7611](https://github.com/chunkifydev/chunkify-python/commit/33c76115ff16775ba2c42cd3344cd5f010041dcc))
+* update mock server docs ([1526a0a](https://github.com/chunkifydev/chunkify-python/commit/1526a0a68bb375113d748150e973ba38209f77bb))
+
+## 0.10.0 (2026-01-30)
+
+Full Changelog: [v0.9.1...v0.10.0](https://github.com/chunkifydev/chunkify-python/compare/v0.9.1...v0.10.0)
+
+### Features
+
+* **client:** add custom JSON encoder for extended type support ([a953026](https://github.com/chunkifydev/chunkify-python/commit/a9530261ddb9be93f9362194fa3df6657188b7d2))
+
+## 0.9.1 (2026-01-24)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/chunkifydev/chunkify-python/compare/v0.9.0...v0.9.1)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([748b8a0](https://github.com/chunkifydev/chunkify-python/commit/748b8a047581d72618e8c97b2ef2a6ff67496910))
+
+## 0.9.0 (2026-01-17)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/chunkifydev/chunkify-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([269082d](https://github.com/chunkifydev/chunkify-python/commit/269082da4f396f217e7c6a6d5aa39af0b49b447f))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([25fb601](https://github.com/chunkifydev/chunkify-python/commit/25fb601a7f26d9f0445e2f303bf77cf3ea1aba69))
+
+## 0.8.0 (2026-01-15)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/chunkifydev/chunkify-python/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **config:** added per endpoint security settings ([f93c952](https://github.com/chunkifydev/chunkify-python/commit/f93c9521ce8feb076e3a427f986031099bc4d42c))
+
+## 0.7.0 (2026-01-14)
+
+Full Changelog: [v0.6.2...v0.7.0](https://github.com/chunkifydev/chunkify-python/compare/v0.6.2...v0.7.0)
+
+### Features
+
+* **api:** removed security from config ([16ea279](https://github.com/chunkifydev/chunkify-python/commit/16ea27944972a3a197e0d40a6fadf1bc7e0d3cd2))
+* **client:** add support for binary request streaming ([32d90c2](https://github.com/chunkifydev/chunkify-python/commit/32d90c2b19828224ca44fcaa3024a0430286297b))
+
+
+### Bug Fixes
+
+* **client:** loosen auth header validation ([32660ad](https://github.com/chunkifydev/chunkify-python/commit/32660adb9408097d522a0254657590599dfdecde))
+
+
+### Chores
+
+* **sdk/config:** change model api_file to job-file ([0816575](https://github.com/chunkifydev/chunkify-python/commit/08165753eb25b0bc97380e9ce6cccc89f9094898))
+
+## 0.6.2 (2026-01-06)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/chunkifydev/chunkify-python/compare/v0.6.1...v0.6.2)
+
+### Chores
+
+* **internal:** codegen related update ([06b1abe](https://github.com/chunkifydev/chunkify-python/commit/06b1abe0f4089ca00fa4e6354540dc45ac1f756f))
+
+## 0.6.1 (2025-12-18)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/chunkifydev/chunkify-python/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([157ffda](https://github.com/chunkifydev/chunkify-python/commit/157ffda77c6733ec5eba34c2a69538bcd3c189b9))
+
+## 0.6.0 (2025-12-18)
+
+Full Changelog: [v0.5.2...v0.6.0](https://github.com/chunkifydev/chunkify-python/compare/v0.5.2...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([b1f0b50](https://github.com/chunkifydev/chunkify-python/commit/b1f0b50e522834e69d5f10227e21225a2a6c0167))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([f1226ac](https://github.com/chunkifydev/chunkify-python/commit/f1226acaddcc83f376b36e10a9f03e55a66e8cb3))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([f3cba1a](https://github.com/chunkifydev/chunkify-python/commit/f3cba1acf3f047f4f79fe79a3fea2d56f780c14c))
+* speedup initial import ([ac8ba11](https://github.com/chunkifydev/chunkify-python/commit/ac8ba11b7b06a079c1bb30b18a2d2b47a5134624))
+
+## 0.5.2 (2025-12-09)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/chunkifydev/chunkify-python/compare/v0.5.1...v0.5.2)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([ecf2c56](https://github.com/chunkifydev/chunkify-python/commit/ecf2c56c163eb1acca16f6fcff98dad4cc42c520))
+
+
+### Chores
+
+* add missing docstrings ([271a3e2](https://github.com/chunkifydev/chunkify-python/commit/271a3e23befafa9f35f295d1e5c712a7f4377f1e))
+
+## 0.5.1 (2025-12-05)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/chunkifydev/chunkify-python/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* update SDK settings ([252d83a](https://github.com/chunkifydev/chunkify-python/commit/252d83aba71ed06e713522fcd0998e146b9d2cec))
+
+## 0.5.0 (2025-12-05)
+
+Full Changelog: [v0.1.0...v0.5.0](https://github.com/chunkifydev/chunkify-python/compare/v0.1.0...v0.5.0)
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([8f4c1ca](https://github.com/chunkifydev/chunkify-python/commit/8f4c1ca737123aa29b1fb69570a0b0a61eacc4b5))
+* update lockfile ([b94e00b](https://github.com/chunkifydev/chunkify-python/commit/b94e00bd7d4e64eb8e6a87245b1feea3bd2e4cba))
+* update SDK settings ([0da6d65](https://github.com/chunkifydev/chunkify-python/commit/0da6d657000eb7b1c83f9c0fda5b757295bfa095))
+
+## 0.1.0 (2025-12-01)
+
+Full Changelog: [v0.0.1...v0.1.0](https://github.com/chunkifydev/chunkify-python/compare/v0.0.1...v0.1.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** update all created.* query string to epoch unix time format
+
+### Features
+
+* **api:** manual updates ([698448c](https://github.com/chunkifydev/chunkify-python/commit/698448c87e3ca90f9f60e1ace588b4f110f0ea77))
+* **api:** manual updates ([39b0ff3](https://github.com/chunkifydev/chunkify-python/commit/39b0ff3d98dfb5539a2248029f09d6640006119d))
+* **api:** manual updates ([34348cc](https://github.com/chunkifydev/chunkify-python/commit/34348cc4b2e440c93e6bcfe0674f6ed0b253bfe0))
+* **api:** manual updates ([d89d9f6](https://github.com/chunkifydev/chunkify-python/commit/d89d9f679259914c86cc9ea55a38173f841e65a7))
+* **api:** manual updates ([638fa8b](https://github.com/chunkifydev/chunkify-python/commit/638fa8b2a746213d44efbdb7fd7305066d437c15))
+* **api:** manual updates ([b375266](https://github.com/chunkifydev/chunkify-python/commit/b3752666f8165e83a6a7bd82ff8e7aa1573a72d0))
+* **api:** manual updates ([9a5e399](https://github.com/chunkifydev/chunkify-python/commit/9a5e399923193182740587eb059ffdc9a5822f7c))
+* **api:** manual updates ([4ed25fb](https://github.com/chunkifydev/chunkify-python/commit/4ed25fbdfa5ee65dccd0a3c2587669afaf3cbd8a))
+* **api:** manual updates ([667d3fe](https://github.com/chunkifydev/chunkify-python/commit/667d3fe02dd17d91ed10b258ab305eaa4b3e7218))
+* **api:** manual updates ([f544d76](https://github.com/chunkifydev/chunkify-python/commit/f544d76cecee5a6456f2b18265069c66607f3bee))
+* **api:** manual updates ([3e2723e](https://github.com/chunkifydev/chunkify-python/commit/3e2723e9fa09bfb8c610ea86fe2fb27ce39e89e6))
+* **api:** manual updates ([736c71c](https://github.com/chunkifydev/chunkify-python/commit/736c71c801f5c3d52fe328d8562af95700e7dbc9))
+* **api:** manual updates ([e935396](https://github.com/chunkifydev/chunkify-python/commit/e9353961af70a3e58b1d2b2fb7c1b4e0014c3581))
+* **api:** manual updates ([19fdfde](https://github.com/chunkifydev/chunkify-python/commit/19fdfdee72ac14d97592c46d1373fbbfe8d4ef0a))
+* **api:** manual updates ([6d53f3a](https://github.com/chunkifydev/chunkify-python/commit/6d53f3a4563f60d10aa005a8d316b00e9f2cffb5))
+* **api:** manual updates ([fd85cb4](https://github.com/chunkifydev/chunkify-python/commit/fd85cb42c91e4137a3b0f5561536a7f967ed51ea))
+* **api:** manual updates ([94578b2](https://github.com/chunkifydev/chunkify-python/commit/94578b2a94cc17db40014f6d742d356e7e60c89b))
+* **api:** manual updates ([ec8423b](https://github.com/chunkifydev/chunkify-python/commit/ec8423bb7f56e6579d51f0938ee45755865fd3b9))
+* **api:** manual updates ([5e418f4](https://github.com/chunkifydev/chunkify-python/commit/5e418f43014f58303fd11b6f9f2a3a8bf940cef0))
+* **api:** manual updates ([abf146e](https://github.com/chunkifydev/chunkify-python/commit/abf146e53e66b6ef0e223edbc0dfaa1e20a724a6))
+* **api:** manual updates ([f914aa7](https://github.com/chunkifydev/chunkify-python/commit/f914aa7a4eeb07533c4b283213d772cc02ac875d))
+* **api:** manual updates ([ee6cc18](https://github.com/chunkifydev/chunkify-python/commit/ee6cc18c7591d08223bcc60556f01fa31fa2698c))
+* **api:** manual updates ([c062003](https://github.com/chunkifydev/chunkify-python/commit/c062003500d1818c5dd85e510d2ef60c2d5ac25d))
+* **api:** manual updates ([548561f](https://github.com/chunkifydev/chunkify-python/commit/548561fcb28acaea8bf3ff8417a5a9c46f88b064))
+* **api:** manual updates ([d511794](https://github.com/chunkifydev/chunkify-python/commit/d511794bf0a9891300e6187fa7685983238016d3))
+* **api:** manual updates ([97c1ec7](https://github.com/chunkifydev/chunkify-python/commit/97c1ec75a9f4b53f7973f018042e0d235d09f43b))
+* **api:** manual updates ([1878583](https://github.com/chunkifydev/chunkify-python/commit/1878583dc7dd24aeeb600bb73ecbd01ac5e1f2ae))
+* **api:** manual updates ([c64e40a](https://github.com/chunkifydev/chunkify-python/commit/c64e40ab3539602a68273bc7dc94ca62ddbc09b4))
+* **api:** manual updates ([77f9528](https://github.com/chunkifydev/chunkify-python/commit/77f95284341aa48fac4d9232d964c391fe8378f4))
+* **api:** manual updates ([a7ca3b8](https://github.com/chunkifydev/chunkify-python/commit/a7ca3b83c7f176655c2ec84f5cd02833bd772114))
+* **api:** manual updates ([486f116](https://github.com/chunkifydev/chunkify-python/commit/486f1166bdde950dd13cf0656ddd7458515d270c))
+* **api:** manual updates ([c17f18d](https://github.com/chunkifydev/chunkify-python/commit/c17f18d967fba5fbadca9b5fa15d55c56816ad23))
+* **api:** manual updates ([6d0a293](https://github.com/chunkifydev/chunkify-python/commit/6d0a2935fbbc8e2c91968dc22dc6cf1b3a7b8dd7))
+* **api:** manual updates ([a99a24e](https://github.com/chunkifydev/chunkify-python/commit/a99a24e92f0edb9acb762da0f7e79deba94760da))
+* **api:** manual updates ([9a1d62f](https://github.com/chunkifydev/chunkify-python/commit/9a1d62fc8ce277f5d39e717150f7c05b632eb257))
+* **api:** manual updates ([df3edd8](https://github.com/chunkifydev/chunkify-python/commit/df3edd8442e4e366e4f22a4587626fb1b735a7e9))
+* **api:** update all created.* query string to epoch unix time format ([704c3dd](https://github.com/chunkifydev/chunkify-python/commit/704c3dd4d483c881241e5138cb9a7ab2568191e8))
+
+
+### Bug Fixes
+
+* ensure streams are always closed ([4ca75a8](https://github.com/chunkifydev/chunkify-python/commit/4ca75a812b0c675d9c274082a6beee661310502f))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([b9e87ef](https://github.com/chunkifydev/chunkify-python/commit/b9e87effb71fd14fc4999ec5c5665eed5f6b8429))
+* configure new SDK language ([ae76a37](https://github.com/chunkifydev/chunkify-python/commit/ae76a37e82e0e4c32c62286c46402caff9fd62d4))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([69ed2bf](https://github.com/chunkifydev/chunkify-python/commit/69ed2bfe412b46de1197f8ba00f0ae8847564794))
+* update SDK settings ([60ca36b](https://github.com/chunkifydev/chunkify-python/commit/60ca36b08fe166eb1dc82139baac1560088340e3))
