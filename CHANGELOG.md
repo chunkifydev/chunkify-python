@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.14.0 (2026-07-20)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/chunkifydev/chunkify-python/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* initial stlc build ([ec669b1](https://github.com/chunkifydev/chunkify-python/commit/ec669b1b571af1327c1026d8c87888dfdabc5fc6))
+
+
+### Chores
+
+* add release automation ([ea74507](https://github.com/chunkifydev/chunkify-python/commit/ea74507690f914df1b592ba52d596be3d82dbc2d))
+
 ## 0.13.0 (2026-07-18)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/chunkifydev/chunkify-python/compare/v0.12.0...v0.13.0)
