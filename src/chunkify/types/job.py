@@ -36,12 +36,18 @@ class FormatMP4Av1(MP4Av1):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
+
 
 class FormatMP4H264(MP4H264):
     """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
+
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatMP4H265(MP4H265):
@@ -50,6 +56,9 @@ class FormatMP4H265(MP4H265):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
+
 
 class FormatWebmVp9(WebmVp9):
     """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
@@ -57,26 +66,47 @@ class FormatWebmVp9(WebmVp9):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
+
 
 class FormatHlsAv1(HlsAv1):
-    """FFmpeg encoding parameters specific to HLS with AV1 encoding."""
+    """FFmpeg encoding parameters specific to HLS with AV1 encoding.
+
+    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
+    """
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
+
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatHlsH264(HlsH264):
-    """FFmpeg encoding parameters specific to HLS with H.264 encoding."""
+    """FFmpeg encoding parameters specific to HLS with H.264 encoding.
+
+    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
+    """
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
+
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatHlsH265(HlsH265):
-    """FFmpeg encoding parameters specific to HLS with H.265 encoding."""
+    """FFmpeg encoding parameters specific to HLS with H.265 encoding.
+
+    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
+    """
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
+
+    per_title: bool  # type: ignore
+    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatJpg(Jpg):
@@ -84,6 +114,9 @@ class FormatJpg(Jpg):
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
+
+    per_title: bool
+    """Whether per-title optimization was enabled for this job."""
 
 
 class Storage(BaseModel):
