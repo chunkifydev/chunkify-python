@@ -81,6 +81,15 @@ class WebmVp9Param(TypedDict, total=False):
     100Kbps and 50Mbps.
     """
 
+    per_title: bool
+    """Enables per-title optimization.
+
+    Disabled by default. Set it to true to let Chunkify select rate control
+    automatically. When enabled, explicit rate-control fields cannot be provided.
+    For HLS outputs, either audio_bitrate or video_bitrate is required when
+    per-title optimization is disabled or omitted.
+    """
+
     pixfmt: Literal[
         "yuv410p",
         "yuv411p",
