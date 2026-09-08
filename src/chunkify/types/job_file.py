@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 
 from .._models import BaseModel
@@ -55,3 +56,9 @@ class JobFile(BaseModel):
 
     width: int
     """Width of the video in pixels"""
+
+    cdn_url: Optional[str] = None
+    """
+    Stable, unsigned CDN delivery URL derived from the file's current storage
+    configuration. Omitted when no CDN base URL is configured.
+    """

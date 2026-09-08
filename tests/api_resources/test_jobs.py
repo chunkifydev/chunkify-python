@@ -63,7 +63,7 @@ class TestJobs:
             },
             storage={
                 "id": "aws-my-storage",
-                "path": "/path/to/video.mp4",
+                "path": "exports/video.mp4",
             },
             transcoder={
                 "quantity": 2,
@@ -325,7 +325,7 @@ class TestAsyncJobs:
             },
             storage={
                 "id": "aws-my-storage",
-                "path": "/path/to/video.mp4",
+                "path": "exports/video.mp4",
             },
             transcoder={
                 "quantity": 2,

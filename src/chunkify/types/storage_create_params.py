@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = ["StorageCreateParams", "Storage", "StorageAws", "StorageChunkify", "StorageCloudflare"]
@@ -57,6 +57,19 @@ class StorageAws(TypedDict, total=False):
     Required if not using Chunkify storage.
     """
 
+    base_prefix: str
+    """Object-key prefix for final job outputs.
+
+    The API normalizes it without a leading slash and with one trailing slash. Omit
+    it or send an empty string to use the bucket root.
+    """
+
+    cdn_base_url: Optional[str]
+    """Optional customer-managed HTTPS delivery origin.
+
+    It must not contain credentials, a path, query string, or fragment.
+    """
+
     public: bool
     """Public indicates whether the storage is publicly accessible."""
 
@@ -80,6 +93,12 @@ class StorageChunkify(TypedDict, total=False):
         ]
     ]
     """Region specifies the region of the storage provider."""
+
+    cdn_base_url: Optional[str]
+    """Unsupported for Chunkify-managed temporary storage.
+
+    Requests that provide this field are rejected.
+    """
 
 
 class StorageCloudflare(TypedDict, total=False):
@@ -105,6 +124,19 @@ class StorageCloudflare(TypedDict, total=False):
 
     secret_access_key: Required[str]
     """SecretAccessKey is the secret key for the storage provider."""
+
+    base_prefix: str
+    """Object-key prefix for final job outputs.
+
+    The API normalizes it without a leading slash and with one trailing slash. Omit
+    it or send an empty string to use the bucket root.
+    """
+
+    cdn_base_url: Optional[str]
+    """Optional customer-managed HTTPS delivery origin.
+
+    It must not contain credentials, a path, query string, or fragment.
+    """
 
     public: bool
     """Public indicates whether the storage is publicly accessible."""
