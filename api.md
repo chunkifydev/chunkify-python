@@ -128,6 +128,7 @@ Methods:
 
 - <code title="post /api/storages">client.storages.<a href="./src/chunkify/resources/storages.py">create</a>(\*\*<a href="src/chunkify/types/storage_create_params.py">params</a>) -> <a href="./src/chunkify/types/storage.py">Storage</a></code>
 - <code title="get /api/storages/{storageId}">client.storages.<a href="./src/chunkify/resources/storages.py">retrieve</a>(storage_id) -> <a href="./src/chunkify/types/storage.py">Storage</a></code>
+- <code title="patch /api/storages/{storageId}">client.storages.<a href="./src/chunkify/resources/storages.py">update</a>(storage_id, \*\*<a href="src/chunkify/types/storage_update_params.py">params</a>) -> None</code>
 - <code title="get /api/storages">client.storages.<a href="./src/chunkify/resources/storages.py">list</a>() -> <a href="./src/chunkify/types/storage_list_response.py">StorageListResponse</a></code>
 - <code title="delete /api/storages/{storageId}">client.storages.<a href="./src/chunkify/resources/storages.py">delete</a>(storage_id) -> None</code>
 

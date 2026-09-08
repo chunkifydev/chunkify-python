@@ -41,6 +41,8 @@ class TestStorages:
                 "provider": "aws",
                 "region": "us-east-1",
                 "secret_access_key": "1234567890",
+                "base_prefix": "chunkify/",
+                "cdn_base_url": "https://media.example.com",
                 "public": True,
             },
         )
@@ -124,6 +126,58 @@ class TestStorages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `storage_id` but received ''"):
             client.storages.with_raw_response.retrieve(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_update(self, client: Chunkify) -> None:
+        storage = client.storages.update(
+            storage_id="storageId",
+        )
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_update_with_all_params(self, client: Chunkify) -> None:
+        storage = client.storages.update(
+            storage_id="storageId",
+            base_prefix="chunkify/",
+            cdn_base_url="https://media.example.com",
+        )
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_update(self, client: Chunkify) -> None:
+        response = client.storages.with_raw_response.update(
+            storage_id="storageId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = response.parse()
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_update(self, client: Chunkify) -> None:
+        with client.storages.with_streaming_response.update(
+            storage_id="storageId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = response.parse()
+            assert storage is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_update(self, client: Chunkify) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `storage_id` but received ''"):
+            client.storages.with_raw_response.update(
+                storage_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -226,6 +280,8 @@ class TestAsyncStorages:
                 "provider": "aws",
                 "region": "us-east-1",
                 "secret_access_key": "1234567890",
+                "base_prefix": "chunkify/",
+                "cdn_base_url": "https://media.example.com",
                 "public": True,
             },
         )
@@ -309,6 +365,58 @@ class TestAsyncStorages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `storage_id` but received ''"):
             await async_client.storages.with_raw_response.retrieve(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_update(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.update(
+            storage_id="storageId",
+        )
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
+        storage = await async_client.storages.update(
+            storage_id="storageId",
+            base_prefix="chunkify/",
+            cdn_base_url="https://media.example.com",
+        )
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_update(self, async_client: AsyncChunkify) -> None:
+        response = await async_client.storages.with_raw_response.update(
+            storage_id="storageId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        storage = await response.parse()
+        assert storage is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_update(self, async_client: AsyncChunkify) -> None:
+        async with async_client.storages.with_streaming_response.update(
+            storage_id="storageId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            storage = await response.parse()
+            assert storage is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_update(self, async_client: AsyncChunkify) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `storage_id` but received ''"):
+            await async_client.storages.with_raw_response.update(
+                storage_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
