@@ -164,6 +164,7 @@ class Job(BaseModel):
     """ID of the source video being transcoded"""
 
     status: Literal[
+        "pending",
         "queued",
         "ingesting",
         "transcoding",
@@ -178,7 +179,11 @@ class Job(BaseModel):
         "transcoded",
         "waiting",
     ]
-    """Current status of the job"""
+    """Current status of the job.
+
+    New jobs start as pending while waiting for scheduler admission, then become
+    queued when admitted for processing.
+    """
 
     storage: Storage
     """Storage settings for where the job output will be saved"""

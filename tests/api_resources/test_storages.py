@@ -41,6 +41,8 @@ class TestStorages:
                 "provider": "aws",
                 "region": "us-east-1",
                 "secret_access_key": "1234567890",
+                "base_prefix": "chunkify/",
+                "cdn_base_url": "https://media.example.com",
                 "public": True,
             },
         )
@@ -226,6 +228,8 @@ class TestAsyncStorages:
                 "provider": "aws",
                 "region": "us-east-1",
                 "secret_access_key": "1234567890",
+                "base_prefix": "chunkify/",
+                "cdn_base_url": "https://media.example.com",
                 "public": True,
             },
         )
