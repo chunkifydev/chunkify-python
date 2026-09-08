@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Union
+from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypeAlias
 
@@ -33,6 +33,12 @@ class Cloudflare(BaseModel):
     id: str
     """Unique identifier of the storage configuration"""
 
+    base_prefix: str
+    """
+    Canonical object-key prefix prepended to every final job output in this
+    customer-owned storage. An empty string means the bucket root.
+    """
+
     bucket: str
     """Bucket is the name of the storage bucket."""
 
@@ -57,10 +63,22 @@ class Cloudflare(BaseModel):
     slug: str
     """Unique identifier of the storage configuration"""
 
+    cdn_base_url: Optional[str] = None
+    """
+    Optional customer-managed HTTPS delivery origin used to build stable CDN URLs
+    for objects in this storage.
+    """
+
 
 class Aws(BaseModel):
     id: str
     """Unique identifier of the storage configuration"""
+
+    base_prefix: str
+    """
+    Canonical object-key prefix prepended to every final job output in this
+    customer-owned storage. An empty string means the bucket root.
+    """
 
     bucket: str
     """Bucket is the name of the storage bucket."""
@@ -97,6 +115,12 @@ class Aws(BaseModel):
 
     slug: str
     """Unique identifier of the storage configuration"""
+
+    cdn_base_url: Optional[str] = None
+    """
+    Optional customer-managed HTTPS delivery origin used to build stable CDN URLs
+    for objects in this storage.
+    """
 
 
 Storage: TypeAlias = Annotated[Union[Chunkify, Cloudflare, Aws], PropertyInfo(discriminator="provider")]
