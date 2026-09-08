@@ -98,8 +98,12 @@ class JobsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Job:
-        """
-        Create a new video processing job with specified parameters
+        """Create a new video processing job with specified parameters.
+
+        The job is created
+        with pending status and waits for scheduler admission before processing. Pending
+        jobs are admitted oldest first across all projects in the team as vCPU capacity
+        becomes available.
 
         Args:
           format: Required format configuration, one and only one valid format configuration must
@@ -203,7 +207,7 @@ class JobsResource(SyncAPIResource):
         metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["completed", "processing", "failed", "cancelled", "queued"] | Omit = omit,
+        status: Literal["completed", "processing", "failed", "cancelled", "queued", "pending"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -391,8 +395,12 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Job:
-        """
-        Create a new video processing job with specified parameters
+        """Create a new video processing job with specified parameters.
+
+        The job is created
+        with pending status and waits for scheduler admission before processing. Pending
+        jobs are admitted oldest first across all projects in the team as vCPU capacity
+        becomes available.
 
         Args:
           format: Required format configuration, one and only one valid format configuration must
@@ -496,7 +504,7 @@ class AsyncJobsResource(AsyncAPIResource):
         metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["completed", "processing", "failed", "cancelled", "queued"] | Omit = omit,
+        status: Literal["completed", "processing", "failed", "cancelled", "queued", "pending"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

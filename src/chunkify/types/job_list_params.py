@@ -34,7 +34,7 @@ class JobListParams(TypedDict, total=False):
     source_id: str
     """Filter by source ID"""
 
-    status: Literal["completed", "processing", "failed", "cancelled", "queued"]
+    status: Literal["completed", "processing", "failed", "cancelled", "queued", "pending"]
     """Filter by job status"""
 
 

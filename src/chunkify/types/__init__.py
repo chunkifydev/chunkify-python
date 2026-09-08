@@ -43,6 +43,7 @@ from .project_list_response import ProjectListResponse as ProjectListResponse
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
 from .storage_create_params import StorageCreateParams as StorageCreateParams
 from .storage_list_response import StorageListResponse as StorageListResponse
+from .storage_update_params import StorageUpdateParams as StorageUpdateParams
 from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
 from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
