@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import Any, Optional, cast
 
 import httpx
 
-from ..types import storage_create_params
-from .._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from ..types import storage_create_params, storage_update_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -131,6 +131,60 @@ class StoragesResource(SyncAPIResource):
                     Any, DataWrapper[Storage]
                 ),  # Union types cannot be passed in as arguments in the type system
             ),
+        )
+
+    def update(
+        self,
+        storage_id: str,
+        *,
+        base_prefix: str | Omit = omit,
+        cdn_base_url: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Update customer-owned storage settings.
+
+        Prefix changes apply to final outputs
+        that have not been uploaded yet. Existing files keep their stored object keys.
+
+        Args:
+          base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
+              object keys. Send an empty string to use the bucket root.
+
+          cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not storage_id:
+            raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._patch(
+            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            body=maybe_transform(
+                {
+                    "base_prefix": base_prefix,
+                    "cdn_base_url": cdn_base_url,
+                },
+                storage_update_params.StorageUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
+            ),
+            cast_to=NoneType,
         )
 
     def list(
@@ -305,6 +359,60 @@ class AsyncStoragesResource(AsyncAPIResource):
             ),
         )
 
+    async def update(
+        self,
+        storage_id: str,
+        *,
+        base_prefix: str | Omit = omit,
+        cdn_base_url: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Update customer-owned storage settings.
+
+        Prefix changes apply to final outputs
+        that have not been uploaded yet. Existing files keep their stored object keys.
+
+        Args:
+          base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
+              object keys. Send an empty string to use the bucket root.
+
+          cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not storage_id:
+            raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._patch(
+            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            body=await async_maybe_transform(
+                {
+                    "base_prefix": base_prefix,
+                    "cdn_base_url": cdn_base_url,
+                },
+                storage_update_params.StorageUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={"project_access_token": True},
+            ),
+            cast_to=NoneType,
+        )
+
     async def list(
         self,
         *,
@@ -379,6 +487,9 @@ class StoragesResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             storages.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            storages.update,
+        )
         self.list = to_raw_response_wrapper(
             storages.list,
         )
@@ -396,6 +507,9 @@ class AsyncStoragesResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             storages.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            storages.update,
         )
         self.list = async_to_raw_response_wrapper(
             storages.list,
@@ -415,6 +529,9 @@ class StoragesResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             storages.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            storages.update,
+        )
         self.list = to_streamed_response_wrapper(
             storages.list,
         )
@@ -432,6 +549,9 @@ class AsyncStoragesResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             storages.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            storages.update,
         )
         self.list = async_to_streamed_response_wrapper(
             storages.list,

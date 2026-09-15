@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/chunkifydev/chunkify-python/compare/v0.14.0...v0.14.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* add missing endpoint to stainless.yml ([d8102ca](https://github.com/chunkifydev/chunkify-python/commit/d8102ca50980cfed9a694856db7b6ef531488e1b))
+
 ## [0.14.0](https://github.com/chunkifydev/chunkify-python/compare/v0.13.0...v0.14.0) (2026-09-01)
 
 
