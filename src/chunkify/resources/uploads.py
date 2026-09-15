@@ -50,6 +50,7 @@ class UploadsResource(SyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
+        storage: upload_create_params.Storage | Omit = omit,
         validity_timeout: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -65,7 +66,11 @@ class UploadsResource(SyncAPIResource):
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
-          validity_timeout: The upload URL will be valid for the given timeout in seconds
+          storage: Optional Storage override. Omit id to use the Project default.
+              Customer-connected Storage requires path; Chunkify Storage generates its own
+              path.
+
+          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
 
           extra_headers: Send extra headers
 
@@ -80,6 +85,7 @@ class UploadsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "metadata": metadata,
+                    "storage": storage,
                     "validity_timeout": validity_timeout,
                 },
                 upload_create_params.UploadCreateParams,
@@ -238,6 +244,50 @@ class UploadsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def complete(
+        self,
+        token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """After a successful PUT, POST the returned completion_url before expires_at.
+
+        The
+        token authorizes only this Upload; no API key, cookies, or request body is
+        required. Verifies the stored object and commits one Source relationship. Valid
+        retries return 204 without duplicate side effects. Retry network errors, 429,
+        and 5xx responses with bounded backoff; never repeat the PUT just to retry
+        completion.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            path_template("/api/uploads/completion/{token}", token=token),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncUploadsResource(AsyncAPIResource):
     @cached_property
@@ -263,6 +313,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
+        storage: upload_create_params.Storage | Omit = omit,
         validity_timeout: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -278,7 +329,11 @@ class AsyncUploadsResource(AsyncAPIResource):
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
-          validity_timeout: The upload URL will be valid for the given timeout in seconds
+          storage: Optional Storage override. Omit id to use the Project default.
+              Customer-connected Storage requires path; Chunkify Storage generates its own
+              path.
+
+          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
 
           extra_headers: Send extra headers
 
@@ -293,6 +348,7 @@ class AsyncUploadsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "metadata": metadata,
+                    "storage": storage,
                     "validity_timeout": validity_timeout,
                 },
                 upload_create_params.UploadCreateParams,
@@ -451,6 +507,50 @@ class AsyncUploadsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def complete(
+        self,
+        token: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """After a successful PUT, POST the returned completion_url before expires_at.
+
+        The
+        token authorizes only this Upload; no API key, cookies, or request body is
+        required. Verifies the stored object and commits one Source relationship. Valid
+        retries return 204 without duplicate side effects. Retry network errors, 429,
+        and 5xx responses with bounded backoff; never repeat the PUT just to retry
+        completion.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            path_template("/api/uploads/completion/{token}", token=token),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
+            ),
+            cast_to=NoneType,
+        )
+
 
 class UploadsResourceWithRawResponse:
     def __init__(self, uploads: UploadsResource) -> None:
@@ -467,6 +567,9 @@ class UploadsResourceWithRawResponse:
         )
         self.delete = to_raw_response_wrapper(
             uploads.delete,
+        )
+        self.complete = to_raw_response_wrapper(
+            uploads.complete,
         )
 
 
@@ -486,6 +589,9 @@ class AsyncUploadsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             uploads.delete,
         )
+        self.complete = async_to_raw_response_wrapper(
+            uploads.complete,
+        )
 
 
 class UploadsResourceWithStreamingResponse:
@@ -504,6 +610,9 @@ class UploadsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             uploads.delete,
         )
+        self.complete = to_streamed_response_wrapper(
+            uploads.complete,
+        )
 
 
 class AsyncUploadsResourceWithStreamingResponse:
@@ -521,4 +630,7 @@ class AsyncUploadsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             uploads.delete,
+        )
+        self.complete = async_to_streamed_response_wrapper(
+            uploads.complete,
         )

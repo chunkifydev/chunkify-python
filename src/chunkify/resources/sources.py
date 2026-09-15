@@ -49,8 +49,9 @@ class SourcesResource(SyncAPIResource):
     def create(
         self,
         *,
-        url: str,
         metadata: Dict[str, str] | Omit = omit,
+        storage: source_create_params.Storage | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,10 +66,12 @@ class SourcesResource(SyncAPIResource):
         after the data retention period.
 
         Args:
-          url: Url is the URL of the source, which must be a valid HTTP URL.
-
           metadata: Metadata allows for additional information to be attached to the source, with a
               maximum size of 2048 bytes.
+
+          storage: Storage input configuration. Provide this or url, never both.
+
+          url: Url is the URL of the source, which must be a valid HTTP URL.
 
           extra_headers: Send extra headers
 
@@ -82,8 +85,9 @@ class SourcesResource(SyncAPIResource):
             "/api/sources",
             body=maybe_transform(
                 {
-                    "url": url,
                     "metadata": metadata,
+                    "storage": storage,
+                    "url": url,
                 },
                 source_create_params.SourceCreateParams,
             ),
@@ -280,8 +284,9 @@ class AsyncSourcesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        url: str,
         metadata: Dict[str, str] | Omit = omit,
+        storage: source_create_params.Storage | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -296,10 +301,12 @@ class AsyncSourcesResource(AsyncAPIResource):
         after the data retention period.
 
         Args:
-          url: Url is the URL of the source, which must be a valid HTTP URL.
-
           metadata: Metadata allows for additional information to be attached to the source, with a
               maximum size of 2048 bytes.
+
+          storage: Storage input configuration. Provide this or url, never both.
+
+          url: Url is the URL of the source, which must be a valid HTTP URL.
 
           extra_headers: Send extra headers
 
@@ -313,8 +320,9 @@ class AsyncSourcesResource(AsyncAPIResource):
             "/api/sources",
             body=await async_maybe_transform(
                 {
-                    "url": url,
                     "metadata": metadata,
+                    "storage": storage,
+                    "url": url,
                 },
                 source_create_params.SourceCreateParams,
             ),
