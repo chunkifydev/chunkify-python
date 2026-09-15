@@ -32,7 +32,11 @@ class TestUploads:
                 "key": "value",
                 "key2": "value2",
             },
-            validity_timeout=3600,
+            storage={
+                "id": "x",
+                "path": "x",
+            },
+            validity_timeout=7200,
         )
         assert_matches_type(Upload, upload, path=["response"])
 
@@ -208,7 +212,11 @@ class TestAsyncUploads:
                 "key": "value",
                 "key2": "value2",
             },
-            validity_timeout=3600,
+            storage={
+                "id": "x",
+                "path": "x",
+            },
+            validity_timeout=7200,
         )
         assert_matches_type(Upload, upload, path=["response"])
 

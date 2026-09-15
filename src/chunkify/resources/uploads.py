@@ -50,6 +50,7 @@ class UploadsResource(SyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
+        storage: upload_create_params.Storage | Omit = omit,
         validity_timeout: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -65,7 +66,11 @@ class UploadsResource(SyncAPIResource):
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
-          validity_timeout: The upload URL will be valid for the given timeout in seconds
+          storage: Optional Storage override. Omit id to use the Project default.
+              Customer-connected Storage requires path; Chunkify Storage generates its own
+              path.
+
+          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
 
           extra_headers: Send extra headers
 
@@ -80,6 +85,7 @@ class UploadsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "metadata": metadata,
+                    "storage": storage,
                     "validity_timeout": validity_timeout,
                 },
                 upload_create_params.UploadCreateParams,
@@ -263,6 +269,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
+        storage: upload_create_params.Storage | Omit = omit,
         validity_timeout: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -278,7 +285,11 @@ class AsyncUploadsResource(AsyncAPIResource):
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
-          validity_timeout: The upload URL will be valid for the given timeout in seconds
+          storage: Optional Storage override. Omit id to use the Project default.
+              Customer-connected Storage requires path; Chunkify Storage generates its own
+              path.
+
+          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
 
           extra_headers: Send extra headers
 
@@ -293,6 +304,7 @@ class AsyncUploadsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "metadata": metadata,
+                    "storage": storage,
                     "validity_timeout": validity_timeout,
                 },
                 upload_create_params.UploadCreateParams,
