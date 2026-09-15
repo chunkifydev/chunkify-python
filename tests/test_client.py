@@ -426,6 +426,28 @@ class TestChunkify:
         test_client.close()
         test_client2.close()
 
+    def test_validate_headers(self) -> None:
+        client = Chunkify(
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
+        )
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
+
+        with update_env(
+            **{
+                "CHUNKIFY_TOKEN": Omit(),
+                "CHUNKIFY_TEAM_TOKEN": Omit(),
+            }
+        ):
+            client2 = Chunkify(
+                base_url=base_url, project_access_token=None, team_access_token=None, _strict_response_validation=True
+            )
+
+        client2._build_request(FinalRequestOptions(method="get", url="/foo"))
+
     def test_default_query_option(self) -> None:
         client = Chunkify(
             base_url=base_url,
@@ -1403,6 +1425,28 @@ class TestAsyncChunkify:
 
         await test_client.close()
         await test_client2.close()
+
+    def test_validate_headers(self) -> None:
+        client = AsyncChunkify(
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
+        )
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
+
+        with update_env(
+            **{
+                "CHUNKIFY_TOKEN": Omit(),
+                "CHUNKIFY_TEAM_TOKEN": Omit(),
+            }
+        ):
+            client2 = AsyncChunkify(
+                base_url=base_url, project_access_token=None, team_access_token=None, _strict_response_validation=True
+            )
+
+        client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
     async def test_default_query_option(self) -> None:
         client = AsyncChunkify(
