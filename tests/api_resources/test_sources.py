@@ -21,29 +21,29 @@ class TestSources:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
-        source = client.sources.create(
-            url="https://example.com/video.mp4",
-        )
+        source = client.sources.create()
         assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         source = client.sources.create(
-            url="https://example.com/video.mp4",
             metadata={
                 "key": "value",
                 "key2": "value2",
             },
+            storage={
+                "path": "x",
+                "id": "x",
+            },
+            url="https://example.com/video.mp4",
         )
         assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
-        response = client.sources.with_raw_response.create(
-            url="https://example.com/video.mp4",
-        )
+        response = client.sources.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -53,9 +53,7 @@ class TestSources:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
-        with client.sources.with_streaming_response.create(
-            url="https://example.com/video.mp4",
-        ) as response:
+        with client.sources.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -232,29 +230,29 @@ class TestAsyncSources:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
-        source = await async_client.sources.create(
-            url="https://example.com/video.mp4",
-        )
+        source = await async_client.sources.create()
         assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         source = await async_client.sources.create(
-            url="https://example.com/video.mp4",
             metadata={
                 "key": "value",
                 "key2": "value2",
             },
+            storage={
+                "path": "x",
+                "id": "x",
+            },
+            url="https://example.com/video.mp4",
         )
         assert_matches_type(Source, source, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.sources.with_raw_response.create(
-            url="https://example.com/video.mp4",
-        )
+        response = await async_client.sources.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -264,9 +262,7 @@ class TestAsyncSources:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
-        async with async_client.sources.with_streaming_response.create(
-            url="https://example.com/video.mp4",
-        ) as response:
+        async with async_client.sources.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
