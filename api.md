@@ -160,6 +160,7 @@ Methods:
 - <code title="get /api/uploads/{uploadId}">client.uploads.<a href="./src/chunkify/resources/uploads.py">retrieve</a>(upload_id) -> <a href="./src/chunkify/types/upload.py">Upload</a></code>
 - <code title="get /api/uploads">client.uploads.<a href="./src/chunkify/resources/uploads.py">list</a>(\*\*<a href="src/chunkify/types/upload_list_params.py">params</a>) -> <a href="./src/chunkify/types/upload.py">SyncPaginatedResults[Upload]</a></code>
 - <code title="delete /api/uploads/{uploadId}">client.uploads.<a href="./src/chunkify/resources/uploads.py">delete</a>(upload_id) -> None</code>
+- <code title="post /api/uploads/completion/{token}">client.uploads.<a href="./src/chunkify/resources/uploads.py">complete</a>(token) -> None</code>
 
 # Webhooks
 

@@ -26,8 +26,12 @@ class Upload(BaseModel):
     updated_at: datetime
     """Timestamp when the upload was updated"""
 
-    upload_url: str
-    """Pre-signed URL where the file should be uploaded to"""
+    completion_url: Optional[str] = None
+    """Short-lived completion capability, returned only on creation.
+
+    POST after a successful PUT before expires_at. Requires no API key. Repeated
+    valid calls are idempotent.
+    """
 
     error: Optional[ChunkifyError] = None
     """Error message of the upload"""
@@ -37,3 +41,15 @@ class Upload(BaseModel):
 
     source_id: Optional[str] = None
     """SourceId is the id of the source that was created from the upload"""
+
+    storage_id: Optional[str] = None
+    """Resolved Storage selected when the Upload was created.
+
+    Absent for historical uploads.
+    """
+
+    upload_url: Optional[str] = None
+    """Presigned PUT URL, returned only when creating an Upload session.
+
+    Call completion_url after the PUT succeeds.
+    """

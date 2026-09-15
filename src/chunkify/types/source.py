@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict
+from typing import Dict, Optional
 from datetime import datetime
 
 from .._models import BaseModel
@@ -36,9 +36,6 @@ class Source(BaseModel):
     size: int
     """Size of the source file in bytes"""
 
-    url: str
-    """URL where the source video can be accessed"""
-
     video_bitrate: int
     """Video bitrate in bits per second"""
 
@@ -50,3 +47,15 @@ class Source(BaseModel):
 
     width: int
     """Width of the video in pixels"""
+
+    path: Optional[str] = None
+    """Exact object key in the configured bucket, 1 to 1024 UTF-8 bytes.
+
+    The output base_prefix is not added.
+    """
+
+    storage_id: Optional[str] = None
+    """Connected Storage belonging to this Project."""
+
+    url: Optional[str] = None
+    """URL where the source video can be accessed"""
