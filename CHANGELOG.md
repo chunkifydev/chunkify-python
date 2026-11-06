@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.3](https://github.com/chunkifydev/chunkify-python/compare/v0.14.2...v0.14.3) (2026-11-06)
+
+
+### Bug Fixes
+
+* **python:** include webhook verification in base install ([e706edc](https://github.com/chunkifydev/chunkify-python/commit/e706edcec032a81c6f85d370952dd4c33df50ca0))
+
 ## [0.14.2](https://github.com/chunkifydev/chunkify-python/compare/v0.14.1...v0.14.2) (2026-09-15)
 
 
