@@ -9,7 +9,7 @@ __all__ = ["UploadCompleteParams", "Part"]
 
 
 class UploadCompleteParams(TypedDict, total=False):
-    parts: Required[Iterable[Part]]
+    parts: Iterable[Part]
     """
     All uploaded parts in ascending part_number order, with the ETags returned by
     storage.
