@@ -25,8 +25,8 @@ class TestKeys:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         key = client.projects.analytics.connections.keys.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         )
         assert_matches_type(KeyCreateResponse, key, path=["response"])
@@ -35,8 +35,8 @@ class TestKeys:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.keys.with_raw_response.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         )
 
@@ -49,8 +49,8 @@ class TestKeys:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.keys.with_streaming_response.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         ) as response:
             assert not response.is_closed
@@ -66,15 +66,15 @@ class TestKeys:
     def test_path_params_create(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.create(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
                 purpose="player",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.create(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
                 purpose="player",
             )
 
@@ -82,8 +82,8 @@ class TestKeys:
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
         key = client.projects.analytics.connections.keys.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(KeyListResponse, key, path=["response"])
 
@@ -91,8 +91,8 @@ class TestKeys:
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.keys.with_raw_response.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -104,8 +104,8 @@ class TestKeys:
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.keys.with_streaming_response.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -120,23 +120,23 @@ class TestKeys:
     def test_path_params_list(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.list(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.list(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_rotate(self, client: Chunkify) -> None:
         key = client.projects.analytics.connections.keys.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         )
         assert_matches_type(KeyRotateResponse, key, path=["response"])
 
@@ -144,9 +144,9 @@ class TestKeys:
     @parametrize
     def test_raw_response_rotate(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.keys.with_raw_response.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         )
 
         assert response.is_closed is True
@@ -158,9 +158,9 @@ class TestKeys:
     @parametrize
     def test_streaming_response_rotate(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.keys.with_streaming_response.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -175,23 +175,23 @@ class TestKeys:
     def test_path_params_rotate(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="keyId",
                 project_id="",
                 connection_id="connectionId",
-                key_id="keyId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="keyId",
                 project_id="projectId",
                 connection_id="",
-                key_id="keyId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `key_id` but received ''"):
             client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="",
                 project_id="projectId",
                 connection_id="connectionId",
-                key_id="",
             )
 
 
@@ -204,8 +204,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         key = await async_client.projects.analytics.connections.keys.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         )
         assert_matches_type(KeyCreateResponse, key, path=["response"])
@@ -214,8 +214,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.keys.with_raw_response.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         )
 
@@ -228,8 +228,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.keys.with_streaming_response.create(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             purpose="player",
         ) as response:
             assert not response.is_closed
@@ -245,15 +245,15 @@ class TestAsyncKeys:
     async def test_path_params_create(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.create(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
                 purpose="player",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.create(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
                 purpose="player",
             )
 
@@ -261,8 +261,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
         key = await async_client.projects.analytics.connections.keys.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(KeyListResponse, key, path=["response"])
 
@@ -270,8 +270,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.keys.with_raw_response.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -283,8 +283,8 @@ class TestAsyncKeys:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.keys.with_streaming_response.list(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -299,23 +299,23 @@ class TestAsyncKeys:
     async def test_path_params_list(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.list(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.list(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_rotate(self, async_client: AsyncChunkify) -> None:
         key = await async_client.projects.analytics.connections.keys.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         )
         assert_matches_type(KeyRotateResponse, key, path=["response"])
 
@@ -323,9 +323,9 @@ class TestAsyncKeys:
     @parametrize
     async def test_raw_response_rotate(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         )
 
         assert response.is_closed is True
@@ -337,9 +337,9 @@ class TestAsyncKeys:
     @parametrize
     async def test_streaming_response_rotate(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.keys.with_streaming_response.rotate(
+            key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
-            key_id="keyId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -354,21 +354,21 @@ class TestAsyncKeys:
     async def test_path_params_rotate(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="keyId",
                 project_id="",
                 connection_id="connectionId",
-                key_id="keyId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="keyId",
                 project_id="projectId",
                 connection_id="",
-                key_id="keyId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `key_id` but received ''"):
             await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
+                key_id="",
                 project_id="projectId",
                 connection_id="connectionId",
-                key_id="",
             )
