@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.15.0](https://github.com/chunkifydev/chunkify-python/compare/v0.14.2...v0.15.0) (2026-11-12)
+
+
+### Features
+
+* sync OpenAPI schema from Chunkify v2.0.0 ([2fe1b6a](https://github.com/chunkifydev/chunkify-python/commit/2fe1b6a9b7a06d09bba5d72d69dbff3dd59dd907))
+
+
+### Bug Fixes
+
+* align SDK method names with the API reference ([4c108d3](https://github.com/chunkifydev/chunkify-python/commit/4c108d3908f3a34c0d704e9654cdbe06c6412f00))
+* **python:** include webhook verification in base install ([e706edc](https://github.com/chunkifydev/chunkify-python/commit/e706edcec032a81c6f85d370952dd4c33df50ca0))
+
 ## [0.14.2](https://github.com/chunkifydev/chunkify-python/compare/v0.14.1...v0.14.2) (2026-09-15)
 
 
