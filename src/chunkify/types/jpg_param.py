@@ -15,7 +15,7 @@ class JpgParam(TypedDict, total=False):
     interval: Required[int]
     """
     Time interval in seconds at which frames are extracted from the video (e.g.,
-    interval=10 extracts frames at 0s, 10s, 20s, etc.). Must be between 1 and 60
+    interval=10 extracts frames at 0s, 10s, 20s, etc.). Must be between 1 and 3600
     seconds.
     """
 

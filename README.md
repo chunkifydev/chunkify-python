@@ -32,20 +32,11 @@ client = Chunkify(
     project_access_token=os.environ.get("CHUNKIFY_TOKEN"),  # This is the default and can be omitted
 )
 
-job = client.jobs.create(
-    format={
-        "id": "mp4_h264",
-        "width": 1920,
-        "height": 1080,
-        "crf": 21,
-    },
+asset = client.assets.create(
     source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
-    transcoder={
-        "quantity": 4,
-        "type": "8vCPU",
-    },
+    title="Launch video",
 )
-print(job.id)
+print(asset.id)
 ```
 
 While you can provide a `project_access_token` keyword argument,
@@ -68,20 +59,11 @@ client = AsyncChunkify(
 
 
 async def main() -> None:
-    job = await client.jobs.create(
-        format={
-            "id": "mp4_h264",
-            "width": 1920,
-            "height": 1080,
-            "crf": 21,
-        },
+    asset = await client.assets.create(
         source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
-        transcoder={
-            "quantity": 4,
-            "type": "8vCPU",
-        },
+        title="Launch video",
     )
-    print(job.id)
+    print(asset.id)
 
 
 asyncio.run(main())
@@ -116,20 +98,11 @@ async def main() -> None:
         ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        job = await client.jobs.create(
-            format={
-                "id": "mp4_h264",
-                "width": 1920,
-                "height": 1080,
-                "crf": 21,
-            },
+        asset = await client.assets.create(
             source_id="src_2G6MJiNz71bHQGNzGwKx5cJwPFS",
-            transcoder={
-                "quantity": 4,
-                "type": "8vCPU",
-            },
+            title="Launch video",
         )
-        print(job.id)
+        print(asset.id)
 
 
 asyncio.run(main())
@@ -226,12 +199,11 @@ from chunkify import Chunkify
 
 client = Chunkify()
 
-job = client.jobs.create(
-    format={"id": "mp4_av1"},
-    source_id="src_UioP9I876hjKlNBH78ILp0mo56t",
-    storage={},
+asset = client.assets.create(
+    source_id="src_example",
+    storage={"id": "stor_example"},
 )
-print(job.storage)
+print(asset.storage)
 ```
 
 ## Handling errors
@@ -250,7 +222,7 @@ from chunkify import Chunkify
 client = Chunkify()
 
 try:
-    client.files.list()
+    client.assets.list()
 except chunkify.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -293,7 +265,7 @@ client = Chunkify(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).files.list()
+client.with_options(max_retries=5).assets.list()
 ```
 
 ### Timeouts
@@ -316,7 +288,7 @@ client = Chunkify(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).files.list()
+client.with_options(timeout=5.0).assets.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -357,11 +329,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from chunkify import Chunkify
 
 client = Chunkify()
-response = client.files.with_raw_response.list()
+response = client.assets.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-file = response.parse()  # get the object that `files.list()` would have returned
-print(file.id)
+asset = response.parse()  # get the object that `assets.list()` would have returned
+print(asset.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/chunkifydev/chunkify-python/tree/main/src/chunkify/_response.py) object.
@@ -375,7 +347,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.files.with_streaming_response.list() as response:
+with client.assets.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
