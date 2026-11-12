@@ -57,7 +57,41 @@ class WebhooksResource(SyncAPIResource):
         enabled: bool | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -90,7 +124,7 @@ class WebhooksResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/webhooks",
+            "/webhooks",
             body=maybe_transform(
                 {
                     "url": url,
@@ -138,7 +172,7 @@ class WebhooksResource(SyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         return self._get(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -157,7 +191,41 @@ class WebhooksResource(SyncAPIResource):
         enabled: bool | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -190,7 +258,7 @@ class WebhooksResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._patch(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             body=maybe_transform(
                 {
                     "enabled": enabled,
@@ -224,7 +292,7 @@ class WebhooksResource(SyncAPIResource):
         includes its URL, enabled status, and subscribed events.
         """
         return self._get(
-            "/api/webhooks",
+            "/webhooks",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -264,7 +332,7 @@ class WebhooksResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -329,7 +397,41 @@ class AsyncWebhooksResource(AsyncAPIResource):
         enabled: bool | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -362,7 +464,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/webhooks",
+            "/webhooks",
             body=await async_maybe_transform(
                 {
                     "url": url,
@@ -410,7 +512,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         return await self._get(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -429,7 +531,41 @@ class AsyncWebhooksResource(AsyncAPIResource):
         enabled: bool | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -462,7 +598,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._patch(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             body=await async_maybe_transform(
                 {
                     "enabled": enabled,
@@ -496,7 +632,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         includes its URL, enabled status, and subscribed events.
         """
         return await self._get(
-            "/api/webhooks",
+            "/webhooks",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -536,7 +672,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/webhooks/{webhook_id}", webhook_id=webhook_id),
+            path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

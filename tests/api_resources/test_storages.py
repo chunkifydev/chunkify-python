@@ -141,8 +141,10 @@ class TestStorages:
     def test_method_update_with_all_params(self, client: Chunkify) -> None:
         storage = client.storages.update(
             storage_id="storageId",
+            access_key_id="x",
             base_prefix="chunkify/",
             cdn_base_url="https://media.example.com",
+            secret_access_key="x",
         )
         assert storage is None
 
@@ -380,8 +382,10 @@ class TestAsyncStorages:
     async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
         storage = await async_client.storages.update(
             storage_id="storageId",
+            access_key_id="x",
             base_prefix="chunkify/",
             cdn_base_url="https://media.example.com",
+            secret_access_key="x",
         )
         assert storage is None
 

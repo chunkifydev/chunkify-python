@@ -106,6 +106,14 @@ class TestProjects:
     def test_method_update_with_all_params(self, client: Chunkify) -> None:
         project = client.projects.update(
             project_id="projectId",
+            asset_defaults={
+                "delete_files_on_failure": True,
+                "max_resolution": "1080p",
+                "min_resolution": "auto",
+                "path_template": "videos/{metadata.VideoID}",
+                "preview_enabled": True,
+            },
+            default_workflow_id="x",
             name="name",
             storage_id="xxxx",
         )
@@ -310,6 +318,14 @@ class TestAsyncProjects:
     async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
         project = await async_client.projects.update(
             project_id="projectId",
+            asset_defaults={
+                "delete_files_on_failure": True,
+                "max_resolution": "1080p",
+                "min_resolution": "auto",
+                "path_template": "videos/{metadata.VideoID}",
+                "preview_enabled": True,
+            },
+            default_workflow_id="x",
             name="name",
             storage_id="xxxx",
         )

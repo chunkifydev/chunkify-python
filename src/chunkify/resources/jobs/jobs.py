@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Dict, Type, Iterable, cast
 from typing_extensions import Literal
 
@@ -82,6 +83,7 @@ class JobsResource(SyncAPIResource):
         """
         return JobsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def create(
         self,
         *,
@@ -103,7 +105,8 @@ class JobsResource(SyncAPIResource):
         The job is created
         with pending status and waits for scheduler admission before processing. Pending
         jobs are admitted oldest first across all projects in the team as vCPU capacity
-        becomes available.
+        becomes available. Deprecated: Jobs are a legacy resource. Use Assets,
+        Transcodings or Thumbnails instead.
 
         Args:
           format: Required format configuration, one and only one valid format configuration must
@@ -134,7 +137,7 @@ class JobsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/jobs",
+            "/jobs",
             body=maybe_transform(
                 {
                     "format": format,
@@ -157,6 +160,7 @@ class JobsResource(SyncAPIResource):
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def retrieve(
         self,
         job_id: str,
@@ -168,8 +172,10 @@ class JobsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Job:
-        """
-        Retrieve details of a specific job
+        """Retrieve details of a specific job.
+
+        Deprecated: Jobs are a legacy resource. Use
+        Assets, Transcodings or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -183,7 +189,7 @@ class JobsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            path_template("/api/jobs/{job_id}", job_id=job_id),
+            path_template("/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -195,6 +201,7 @@ class JobsResource(SyncAPIResource):
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
@@ -215,8 +222,10 @@ class JobsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Job]:
-        """
-        Retrieve a list of jobs with optional filtering and pagination
+        """Retrieve a list of jobs with optional filtering and pagination.
+
+        Deprecated: Jobs
+        are a legacy resource. Use Assets, Transcodings or Thumbnails instead.
 
         Args:
           id: Filter by job ID
@@ -244,7 +253,7 @@ class JobsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/jobs",
+            "/jobs",
             page=SyncPaginatedResults[Job],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -270,6 +279,7 @@ class JobsResource(SyncAPIResource):
             model=Job,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def delete(
         self,
         job_id: str,
@@ -281,8 +291,10 @@ class JobsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a job.
+        """Delete a job.
+
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings
+        or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -297,7 +309,7 @@ class JobsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/jobs/{job_id}", job_id=job_id),
+            path_template("/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -308,6 +320,7 @@ class JobsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def cancel(
         self,
         job_id: str,
@@ -319,8 +332,10 @@ class JobsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Cancel a job.
+        """Cancel a job.
+
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings
+        or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -335,7 +350,7 @@ class JobsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            path_template("/api/jobs/{job_id}/cancel", job_id=job_id),
+            path_template("/jobs/{job_id}/cancel", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -379,6 +394,7 @@ class AsyncJobsResource(AsyncAPIResource):
         """
         return AsyncJobsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def create(
         self,
         *,
@@ -400,7 +416,8 @@ class AsyncJobsResource(AsyncAPIResource):
         The job is created
         with pending status and waits for scheduler admission before processing. Pending
         jobs are admitted oldest first across all projects in the team as vCPU capacity
-        becomes available.
+        becomes available. Deprecated: Jobs are a legacy resource. Use Assets,
+        Transcodings or Thumbnails instead.
 
         Args:
           format: Required format configuration, one and only one valid format configuration must
@@ -431,7 +448,7 @@ class AsyncJobsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/jobs",
+            "/jobs",
             body=await async_maybe_transform(
                 {
                     "format": format,
@@ -454,6 +471,7 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def retrieve(
         self,
         job_id: str,
@@ -465,8 +483,10 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Job:
-        """
-        Retrieve details of a specific job
+        """Retrieve details of a specific job.
+
+        Deprecated: Jobs are a legacy resource. Use
+        Assets, Transcodings or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -480,7 +500,7 @@ class AsyncJobsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            path_template("/api/jobs/{job_id}", job_id=job_id),
+            path_template("/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -492,6 +512,7 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=cast(Type[Job], DataWrapper[Job]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
@@ -512,8 +533,10 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Job, AsyncPaginatedResults[Job]]:
-        """
-        Retrieve a list of jobs with optional filtering and pagination
+        """Retrieve a list of jobs with optional filtering and pagination.
+
+        Deprecated: Jobs
+        are a legacy resource. Use Assets, Transcodings or Thumbnails instead.
 
         Args:
           id: Filter by job ID
@@ -541,7 +564,7 @@ class AsyncJobsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/jobs",
+            "/jobs",
             page=AsyncPaginatedResults[Job],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -567,6 +590,7 @@ class AsyncJobsResource(AsyncAPIResource):
             model=Job,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def delete(
         self,
         job_id: str,
@@ -578,8 +602,10 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a job.
+        """Delete a job.
+
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings
+        or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -594,7 +620,7 @@ class AsyncJobsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/jobs/{job_id}", job_id=job_id),
+            path_template("/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -605,6 +631,7 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def cancel(
         self,
         job_id: str,
@@ -616,8 +643,10 @@ class AsyncJobsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Cancel a job.
+        """Cancel a job.
+
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings
+        or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -632,7 +661,7 @@ class AsyncJobsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            path_template("/api/jobs/{job_id}/cancel", job_id=job_id),
+            path_template("/jobs/{job_id}/cancel", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -648,20 +677,30 @@ class JobsResourceWithRawResponse:
     def __init__(self, jobs: JobsResource) -> None:
         self._jobs = jobs
 
-        self.create = to_raw_response_wrapper(
-            jobs.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                jobs.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = to_raw_response_wrapper(
-            jobs.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                jobs.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_raw_response_wrapper(
-            jobs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                jobs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_raw_response_wrapper(
-            jobs.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                jobs.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = to_raw_response_wrapper(
-            jobs.cancel,
+        self.cancel = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                jobs.cancel,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -681,20 +720,30 @@ class AsyncJobsResourceWithRawResponse:
     def __init__(self, jobs: AsyncJobsResource) -> None:
         self._jobs = jobs
 
-        self.create = async_to_raw_response_wrapper(
-            jobs.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                jobs.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = async_to_raw_response_wrapper(
-            jobs.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                jobs.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_raw_response_wrapper(
-            jobs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                jobs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_raw_response_wrapper(
-            jobs.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                jobs.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = async_to_raw_response_wrapper(
-            jobs.cancel,
+        self.cancel = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                jobs.cancel,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -714,20 +763,30 @@ class JobsResourceWithStreamingResponse:
     def __init__(self, jobs: JobsResource) -> None:
         self._jobs = jobs
 
-        self.create = to_streamed_response_wrapper(
-            jobs.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                jobs.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = to_streamed_response_wrapper(
-            jobs.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                jobs.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_streamed_response_wrapper(
-            jobs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                jobs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_streamed_response_wrapper(
-            jobs.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                jobs.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = to_streamed_response_wrapper(
-            jobs.cancel,
+        self.cancel = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                jobs.cancel,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -747,20 +806,30 @@ class AsyncJobsResourceWithStreamingResponse:
     def __init__(self, jobs: AsyncJobsResource) -> None:
         self._jobs = jobs
 
-        self.create = async_to_streamed_response_wrapper(
-            jobs.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                jobs.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.retrieve = async_to_streamed_response_wrapper(
-            jobs.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                jobs.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_streamed_response_wrapper(
-            jobs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                jobs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_streamed_response_wrapper(
-            jobs.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                jobs.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = async_to_streamed_response_wrapper(
-            jobs.cancel,
+        self.cancel = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                jobs.cancel,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property

@@ -11,6 +11,8 @@ from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
 from chunkify.types.jobs import TranscoderListResponse
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -20,17 +22,20 @@ class TestTranscoders:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
-        transcoder = client.jobs.transcoders.list(
-            "jobId",
-        )
+        with pytest.warns(DeprecationWarning):
+            transcoder = client.jobs.transcoders.list(
+                "jobId",
+            )
+
         assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
-        response = client.jobs.transcoders.with_raw_response.list(
-            "jobId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.transcoders.with_raw_response.list(
+                "jobId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -40,24 +45,26 @@ class TestTranscoders:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
-        with client.jobs.transcoders.with_streaming_response.list(
-            "jobId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.transcoders.with_streaming_response.list(
+                "jobId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            transcoder = response.parse()
-            assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
+                transcoder = response.parse()
+                assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.jobs.transcoders.with_raw_response.list(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                client.jobs.transcoders.with_raw_response.list(
+                    "",
+                )
 
 
 class TestAsyncTranscoders:
@@ -68,17 +75,20 @@ class TestAsyncTranscoders:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
-        transcoder = await async_client.jobs.transcoders.list(
-            "jobId",
-        )
+        with pytest.warns(DeprecationWarning):
+            transcoder = await async_client.jobs.transcoders.list(
+                "jobId",
+            )
+
         assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.jobs.transcoders.with_raw_response.list(
-            "jobId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.transcoders.with_raw_response.list(
+                "jobId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -88,21 +98,23 @@ class TestAsyncTranscoders:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
-        async with async_client.jobs.transcoders.with_streaming_response.list(
-            "jobId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.transcoders.with_streaming_response.list(
+                "jobId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            transcoder = await response.parse()
-            assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
+                transcoder = await response.parse()
+                assert_matches_type(TranscoderListResponse, transcoder, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.jobs.transcoders.with_raw_response.list(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                await async_client.jobs.transcoders.with_raw_response.list(
+                    "",
+                )
