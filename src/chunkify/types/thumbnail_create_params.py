@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Dict, Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ThumbnailCreateParams", "Range", "Storage"]
+from .thumbnail_create_storage_param import ThumbnailCreateStorageParam
+
+__all__ = ["ThumbnailCreateParams", "Range"]
 
 
 class ThumbnailCreateParams(TypedDict, total=False):
@@ -43,7 +45,7 @@ class ThumbnailCreateParams(TypedDict, total=False):
     cropping or upscaling.
     """
 
-    storage: Storage
+    storage: ThumbnailCreateStorageParam
     """Storage overrides the Project output destination and names the output files.
 
     Source storage remains independent.
@@ -71,24 +73,3 @@ class Range(TypedDict, total=False):
 
     start: float
     """Start specifies the inclusive lower bound in seconds. Defaults to zero."""
-
-
-class Storage(TypedDict, total=False):
-    """Storage overrides the Project output destination and names the output files.
-
-    Source storage remains independent.
-    """
-
-    id: str
-    """Id identifies output Storage in this Project. Omit to use the Project default."""
-
-    path: str
-    """
-    Path specifies the output filename template relative to the selected Storage
-    base_prefix. Required for customer storage; generated for Chunkify temporary
-    storage. The filename must contain one %05d placeholder, replaced by the image
-    or sprite sheet number starting at 1, and end in .jpg for jpeg or .webp for
-    webp. The WebVTT file uses the filename without the placeholder and its adjacent
-    separator, such as thumb.vtt for thumb-%05d.jpg. The combined path may contain
-    at most 1024 bytes.
-    """

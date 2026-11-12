@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from typing import Any, cast
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
+from ...types import AssetStaticRenditionCreateParams
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -22,6 +23,7 @@ from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assets import output_list_params, output_create_params, output_delete_params
 from ...types.assets.asset_output import AssetOutput
+from ...types.asset_static_rendition_create_params import AssetStaticRenditionCreateParams
 
 __all__ = ["OutputsResource", "AsyncOutputsResource"]
 
@@ -48,11 +50,13 @@ class OutputsResource(SyncAPIResource):
         """
         return OutputsResourceWithStreamingResponse(self)
 
+    @overload
     def create(
         self,
         asset_id: str,
         *,
-        output: output_create_params.Output,
+        params: output_create_params.AssetCaptionOutputCreateParamsParams,
+        type: Literal["caption"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,8 +71,9 @@ class OutputsResource(SyncAPIResource):
         output reads.
 
         Args:
-          output: Create one output for an Asset. Type selects its required, strictly validated
-              parameters.
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
 
           extra_headers: Send extra headers
 
@@ -78,13 +83,144 @@ class OutputsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def create(
+        self,
+        asset_id: str,
+        *,
+        params: AssetStaticRenditionCreateParams,
+        type: Literal["static_rendition"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def create(
+        self,
+        asset_id: str,
+        *,
+        params: output_create_params.AssetThumbnailOutputCreateParamsParams,
+        type: Literal["thumbnail"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def create(
+        self,
+        asset_id: str,
+        *,
+        params: object,
+        type: Literal["transcript"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Parameters for an original-language transcript. Pass an empty object; the spoken
+              language is detected automatically.
+
+          type: Type specifies the output kind.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["params", "type"])
+    def create(
+        self,
+        asset_id: str,
+        *,
+        params: output_create_params.AssetCaptionOutputCreateParamsParams
+        | AssetStaticRenditionCreateParams
+        | output_create_params.AssetThumbnailOutputCreateParamsParams
+        | object,
+        type: Literal["caption"] | Literal["static_rendition"] | Literal["thumbnail"] | Literal["transcript"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
         if not asset_id:
             raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
         return cast(
             AssetOutput,
             self._post(
                 path_template("/assets/{asset_id}/outputs", asset_id=asset_id),
-                body=maybe_transform(output, output_create_params.OutputCreateParams),
+                body=maybe_transform(
+                    {
+                        "params": params,
+                        "type": type,
+                    },
+                    output_create_params.OutputCreateParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -287,11 +423,13 @@ class AsyncOutputsResource(AsyncAPIResource):
         """
         return AsyncOutputsResourceWithStreamingResponse(self)
 
+    @overload
     async def create(
         self,
         asset_id: str,
         *,
-        output: output_create_params.Output,
+        params: output_create_params.AssetCaptionOutputCreateParamsParams,
+        type: Literal["caption"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -306,8 +444,9 @@ class AsyncOutputsResource(AsyncAPIResource):
         output reads.
 
         Args:
-          output: Create one output for an Asset. Type selects its required, strictly validated
-              parameters.
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
 
           extra_headers: Send extra headers
 
@@ -317,13 +456,144 @@ class AsyncOutputsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def create(
+        self,
+        asset_id: str,
+        *,
+        params: AssetStaticRenditionCreateParams,
+        type: Literal["static_rendition"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def create(
+        self,
+        asset_id: str,
+        *,
+        params: output_create_params.AssetThumbnailOutputCreateParamsParams,
+        type: Literal["thumbnail"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Params specifies the settings for this output type.
+
+          type: Type specifies the output kind to create.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def create(
+        self,
+        asset_id: str,
+        *,
+        params: object,
+        type: Literal["transcript"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
+        """Create one caption, static rendition or additional thumbnail output.
+
+        The
+        accepted output processes asynchronously and is returned in the same envelope as
+        output reads.
+
+        Args:
+          params: Parameters for an original-language transcript. Pass an empty object; the spoken
+              language is detected automatically.
+
+          type: Type specifies the output kind.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["params", "type"])
+    async def create(
+        self,
+        asset_id: str,
+        *,
+        params: output_create_params.AssetCaptionOutputCreateParamsParams
+        | AssetStaticRenditionCreateParams
+        | output_create_params.AssetThumbnailOutputCreateParamsParams
+        | object,
+        type: Literal["caption"] | Literal["static_rendition"] | Literal["thumbnail"] | Literal["transcript"],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssetOutput:
         if not asset_id:
             raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
         return cast(
             AssetOutput,
             await self._post(
                 path_template("/assets/{asset_id}/outputs", asset_id=asset_id),
-                body=await async_maybe_transform(output, output_create_params.OutputCreateParams),
+                body=await async_maybe_transform(
+                    {
+                        "params": params,
+                        "type": type,
+                    },
+                    output_create_params.OutputCreateParams,
+                ),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
