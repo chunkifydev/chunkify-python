@@ -74,7 +74,7 @@ class StoragesResource(SyncAPIResource):
         return cast(
             Storage,
             self._post(
-                "/api/storages",
+                "/storages",
                 body=maybe_transform(storage, storage_create_params.StorageCreateParams),
                 options=make_request_options(
                     extra_headers=extra_headers,
@@ -118,7 +118,7 @@ class StoragesResource(SyncAPIResource):
         return cast(
             Storage,
             self._get(
-                path_template("/api/storages/{storage_id}", storage_id=storage_id),
+                path_template("/storages/{storage_id}", storage_id=storage_id),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -137,8 +137,10 @@ class StoragesResource(SyncAPIResource):
         self,
         storage_id: str,
         *,
+        access_key_id: str | Omit = omit,
         base_prefix: str | Omit = omit,
         cdn_base_url: Optional[str] | Omit = omit,
+        secret_access_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -148,14 +150,35 @@ class StoragesResource(SyncAPIResource):
     ) -> None:
         """Update customer-owned storage settings.
 
-        Prefix changes apply to final outputs
-        that have not been uploaded yet. Existing files keep their stored object keys.
+        Send access_key_id and secret_access_key
+        together to rotate credentials for AWS S3, Cloudflare R2, or S3-compatible
+        storage. Both values must be non-empty and non-null. Omitting both preserves the
+        saved pair and skips connection validation. Replacement credentials are checked
+        against the saved bucket, endpoint, region, and addressing style using the
+        creation upload, metadata, and download checks with best-effort probe cleanup. A
+        prefix changed in the same request is used for validation. Both credentials are
+        encrypted and saved atomically with other settings; a failed update preserves
+        the previous values. Credential-only updates keep the Storage ID, resource
+        associations, object paths, and Project default. Subsequent storage lookups use
+        the new pair; running work may retain an existing client or signed URL. Rotation
+        does not renew issued URLs, and revoking old keys can invalidate them. Prefix
+        changes apply to final outputs that have not been uploaded yet. Existing files
+        keep their stored object keys.
 
         Args:
+          access_key_id: Replacement access key ID for customer-managed storage. Send with a non-empty
+              secret_access_key. Omit both credential fields to keep the saved pair. Null and
+              empty values are rejected. Credentials are validated before either value is
+              saved and are never returned.
+
           base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
               object keys. Send an empty string to use the bucket root.
 
           cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+
+          secret_access_key: Replacement secret access key. Required with access_key_id; cannot be null or
+              empty. The pair is encrypted and saved atomically only after validation
+              succeeds.
 
           extra_headers: Send extra headers
 
@@ -169,11 +192,13 @@ class StoragesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._patch(
-            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            path_template("/storages/{storage_id}", storage_id=storage_id),
             body=maybe_transform(
                 {
+                    "access_key_id": access_key_id,
                     "base_prefix": base_prefix,
                     "cdn_base_url": cdn_base_url,
+                    "secret_access_key": secret_access_key,
                 },
                 storage_update_params.StorageUpdateParams,
             ),
@@ -199,7 +224,7 @@ class StoragesResource(SyncAPIResource):
     ) -> StorageListResponse:
         """Retrieve a list of all storage configurations for the current project."""
         return self._get(
-            "/api/storages",
+            "/storages",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -239,7 +264,7 @@ class StoragesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            path_template("/storages/{storage_id}", storage_id=storage_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -300,7 +325,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         return cast(
             Storage,
             await self._post(
-                "/api/storages",
+                "/storages",
                 body=await async_maybe_transform(storage, storage_create_params.StorageCreateParams),
                 options=make_request_options(
                     extra_headers=extra_headers,
@@ -344,7 +369,7 @@ class AsyncStoragesResource(AsyncAPIResource):
         return cast(
             Storage,
             await self._get(
-                path_template("/api/storages/{storage_id}", storage_id=storage_id),
+                path_template("/storages/{storage_id}", storage_id=storage_id),
                 options=make_request_options(
                     extra_headers=extra_headers,
                     extra_query=extra_query,
@@ -363,8 +388,10 @@ class AsyncStoragesResource(AsyncAPIResource):
         self,
         storage_id: str,
         *,
+        access_key_id: str | Omit = omit,
         base_prefix: str | Omit = omit,
         cdn_base_url: Optional[str] | Omit = omit,
+        secret_access_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -374,14 +401,35 @@ class AsyncStoragesResource(AsyncAPIResource):
     ) -> None:
         """Update customer-owned storage settings.
 
-        Prefix changes apply to final outputs
-        that have not been uploaded yet. Existing files keep their stored object keys.
+        Send access_key_id and secret_access_key
+        together to rotate credentials for AWS S3, Cloudflare R2, or S3-compatible
+        storage. Both values must be non-empty and non-null. Omitting both preserves the
+        saved pair and skips connection validation. Replacement credentials are checked
+        against the saved bucket, endpoint, region, and addressing style using the
+        creation upload, metadata, and download checks with best-effort probe cleanup. A
+        prefix changed in the same request is used for validation. Both credentials are
+        encrypted and saved atomically with other settings; a failed update preserves
+        the previous values. Credential-only updates keep the Storage ID, resource
+        associations, object paths, and Project default. Subsequent storage lookups use
+        the new pair; running work may retain an existing client or signed URL. Rotation
+        does not renew issued URLs, and revoking old keys can invalidate them. Prefix
+        changes apply to final outputs that have not been uploaded yet. Existing files
+        keep their stored object keys.
 
         Args:
+          access_key_id: Replacement access key ID for customer-managed storage. Send with a non-empty
+              secret_access_key. Omit both credential fields to keep the saved pair. Null and
+              empty values are rejected. Credentials are validated before either value is
+              saved and are never returned.
+
           base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
               object keys. Send an empty string to use the bucket root.
 
           cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+
+          secret_access_key: Replacement secret access key. Required with access_key_id; cannot be null or
+              empty. The pair is encrypted and saved atomically only after validation
+              succeeds.
 
           extra_headers: Send extra headers
 
@@ -395,11 +443,13 @@ class AsyncStoragesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._patch(
-            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            path_template("/storages/{storage_id}", storage_id=storage_id),
             body=await async_maybe_transform(
                 {
+                    "access_key_id": access_key_id,
                     "base_prefix": base_prefix,
                     "cdn_base_url": cdn_base_url,
+                    "secret_access_key": secret_access_key,
                 },
                 storage_update_params.StorageUpdateParams,
             ),
@@ -425,7 +475,7 @@ class AsyncStoragesResource(AsyncAPIResource):
     ) -> StorageListResponse:
         """Retrieve a list of all storage configurations for the current project."""
         return await self._get(
-            "/api/storages",
+            "/storages",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -465,7 +515,7 @@ class AsyncStoragesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `storage_id` but received {storage_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/storages/{storage_id}", storage_id=storage_id),
+            path_template("/storages/{storage_id}", storage_id=storage_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

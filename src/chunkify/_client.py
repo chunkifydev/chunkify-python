@@ -12,7 +12,6 @@ from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     Omit,
-    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -37,16 +36,38 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import jobs, files, tokens, sources, uploads, projects, storages, webhooks, notifications
+    from .resources import (
+        jobs,
+        files,
+        assets,
+        events,
+        tokens,
+        metrics,
+        sources,
+        uploads,
+        projects,
+        storages,
+        webhooks,
+        workflows,
+        thumbnails,
+        transcodings,
+        notifications,
+    )
     from .resources.files import FilesResource, AsyncFilesResource
+    from .resources.events import EventsResource, AsyncEventsResource
     from .resources.tokens import TokensResource, AsyncTokensResource
+    from .resources.metrics import MetricsResource, AsyncMetricsResource
     from .resources.sources import SourcesResource, AsyncSourcesResource
     from .resources.uploads import UploadsResource, AsyncUploadsResource
-    from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.storages import StoragesResource, AsyncStoragesResource
     from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.jobs.jobs import JobsResource, AsyncJobsResource
+    from .resources.thumbnails import ThumbnailsResource, AsyncThumbnailsResource
+    from .resources.transcodings import TranscodingsResource, AsyncTranscodingsResource
+    from .resources.assets.assets import AssetsResource, AsyncAssetsResource
     from .resources.notifications import NotificationsResource, AsyncNotificationsResource
+    from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.workflows.workflows import WorkflowsResource, AsyncWorkflowsResource
 
 __all__ = [
     "Timeout",
@@ -136,6 +157,19 @@ class Chunkify(SyncAPIClient):
         )
 
     @cached_property
+    def assets(self) -> AssetsResource:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AssetsResource
+
+        return AssetsResource(self)
+
+    @cached_property
+    def events(self) -> EventsResource:
+        from .resources.events import EventsResource
+
+        return EventsResource(self)
+
+    @cached_property
     def files(self) -> FilesResource:
         from .resources.files import FilesResource
 
@@ -146,6 +180,12 @@ class Chunkify(SyncAPIClient):
         from .resources.jobs import JobsResource
 
         return JobsResource(self)
+
+    @cached_property
+    def metrics(self) -> MetricsResource:
+        from .resources.metrics import MetricsResource
+
+        return MetricsResource(self)
 
     @cached_property
     def notifications(self) -> NotificationsResource:
@@ -172,10 +212,22 @@ class Chunkify(SyncAPIClient):
         return StoragesResource(self)
 
     @cached_property
+    def thumbnails(self) -> ThumbnailsResource:
+        from .resources.thumbnails import ThumbnailsResource
+
+        return ThumbnailsResource(self)
+
+    @cached_property
     def tokens(self) -> TokensResource:
         from .resources.tokens import TokensResource
 
         return TokensResource(self)
+
+    @cached_property
+    def transcodings(self) -> TranscodingsResource:
+        from .resources.transcodings import TranscodingsResource
+
+        return TranscodingsResource(self)
 
     @cached_property
     def uploads(self) -> UploadsResource:
@@ -188,6 +240,12 @@ class Chunkify(SyncAPIClient):
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
+
+    @cached_property
+    def workflows(self) -> WorkflowsResource:
+        from .resources.workflows import WorkflowsResource
+
+        return WorkflowsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ChunkifyWithRawResponse:
@@ -235,15 +293,6 @@ class Chunkify(SyncAPIClient):
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected either project_access_token or team_access_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,
@@ -410,6 +459,19 @@ class AsyncChunkify(AsyncAPIClient):
         )
 
     @cached_property
+    def assets(self) -> AsyncAssetsResource:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AsyncAssetsResource
+
+        return AsyncAssetsResource(self)
+
+    @cached_property
+    def events(self) -> AsyncEventsResource:
+        from .resources.events import AsyncEventsResource
+
+        return AsyncEventsResource(self)
+
+    @cached_property
     def files(self) -> AsyncFilesResource:
         from .resources.files import AsyncFilesResource
 
@@ -420,6 +482,12 @@ class AsyncChunkify(AsyncAPIClient):
         from .resources.jobs import AsyncJobsResource
 
         return AsyncJobsResource(self)
+
+    @cached_property
+    def metrics(self) -> AsyncMetricsResource:
+        from .resources.metrics import AsyncMetricsResource
+
+        return AsyncMetricsResource(self)
 
     @cached_property
     def notifications(self) -> AsyncNotificationsResource:
@@ -446,10 +514,22 @@ class AsyncChunkify(AsyncAPIClient):
         return AsyncStoragesResource(self)
 
     @cached_property
+    def thumbnails(self) -> AsyncThumbnailsResource:
+        from .resources.thumbnails import AsyncThumbnailsResource
+
+        return AsyncThumbnailsResource(self)
+
+    @cached_property
     def tokens(self) -> AsyncTokensResource:
         from .resources.tokens import AsyncTokensResource
 
         return AsyncTokensResource(self)
+
+    @cached_property
+    def transcodings(self) -> AsyncTranscodingsResource:
+        from .resources.transcodings import AsyncTranscodingsResource
+
+        return AsyncTranscodingsResource(self)
 
     @cached_property
     def uploads(self) -> AsyncUploadsResource:
@@ -462,6 +542,12 @@ class AsyncChunkify(AsyncAPIClient):
         from .resources.webhooks import AsyncWebhooksResource
 
         return AsyncWebhooksResource(self)
+
+    @cached_property
+    def workflows(self) -> AsyncWorkflowsResource:
+        from .resources.workflows import AsyncWorkflowsResource
+
+        return AsyncWorkflowsResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncChunkifyWithRawResponse:
@@ -509,15 +595,6 @@ class AsyncChunkify(AsyncAPIClient):
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected either project_access_token or team_access_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,
@@ -615,6 +692,19 @@ class ChunkifyWithRawResponse:
         self._client = client
 
     @cached_property
+    def assets(self) -> assets.AssetsResourceWithRawResponse:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AssetsResourceWithRawResponse
+
+        return AssetsResourceWithRawResponse(self._client.assets)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithRawResponse:
+        from .resources.events import EventsResourceWithRawResponse
+
+        return EventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
     def files(self) -> files.FilesResourceWithRawResponse:
         from .resources.files import FilesResourceWithRawResponse
 
@@ -625,6 +715,12 @@ class ChunkifyWithRawResponse:
         from .resources.jobs import JobsResourceWithRawResponse
 
         return JobsResourceWithRawResponse(self._client.jobs)
+
+    @cached_property
+    def metrics(self) -> metrics.MetricsResourceWithRawResponse:
+        from .resources.metrics import MetricsResourceWithRawResponse
+
+        return MetricsResourceWithRawResponse(self._client.metrics)
 
     @cached_property
     def notifications(self) -> notifications.NotificationsResourceWithRawResponse:
@@ -651,10 +747,22 @@ class ChunkifyWithRawResponse:
         return StoragesResourceWithRawResponse(self._client.storages)
 
     @cached_property
+    def thumbnails(self) -> thumbnails.ThumbnailsResourceWithRawResponse:
+        from .resources.thumbnails import ThumbnailsResourceWithRawResponse
+
+        return ThumbnailsResourceWithRawResponse(self._client.thumbnails)
+
+    @cached_property
     def tokens(self) -> tokens.TokensResourceWithRawResponse:
         from .resources.tokens import TokensResourceWithRawResponse
 
         return TokensResourceWithRawResponse(self._client.tokens)
+
+    @cached_property
+    def transcodings(self) -> transcodings.TranscodingsResourceWithRawResponse:
+        from .resources.transcodings import TranscodingsResourceWithRawResponse
+
+        return TranscodingsResourceWithRawResponse(self._client.transcodings)
 
     @cached_property
     def uploads(self) -> uploads.UploadsResourceWithRawResponse:
@@ -668,12 +776,31 @@ class ChunkifyWithRawResponse:
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
 
+    @cached_property
+    def workflows(self) -> workflows.WorkflowsResourceWithRawResponse:
+        from .resources.workflows import WorkflowsResourceWithRawResponse
+
+        return WorkflowsResourceWithRawResponse(self._client.workflows)
+
 
 class AsyncChunkifyWithRawResponse:
     _client: AsyncChunkify
 
     def __init__(self, client: AsyncChunkify) -> None:
         self._client = client
+
+    @cached_property
+    def assets(self) -> assets.AsyncAssetsResourceWithRawResponse:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AsyncAssetsResourceWithRawResponse
+
+        return AsyncAssetsResourceWithRawResponse(self._client.assets)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithRawResponse:
+        from .resources.events import AsyncEventsResourceWithRawResponse
+
+        return AsyncEventsResourceWithRawResponse(self._client.events)
 
     @cached_property
     def files(self) -> files.AsyncFilesResourceWithRawResponse:
@@ -686,6 +813,12 @@ class AsyncChunkifyWithRawResponse:
         from .resources.jobs import AsyncJobsResourceWithRawResponse
 
         return AsyncJobsResourceWithRawResponse(self._client.jobs)
+
+    @cached_property
+    def metrics(self) -> metrics.AsyncMetricsResourceWithRawResponse:
+        from .resources.metrics import AsyncMetricsResourceWithRawResponse
+
+        return AsyncMetricsResourceWithRawResponse(self._client.metrics)
 
     @cached_property
     def notifications(self) -> notifications.AsyncNotificationsResourceWithRawResponse:
@@ -712,10 +845,22 @@ class AsyncChunkifyWithRawResponse:
         return AsyncStoragesResourceWithRawResponse(self._client.storages)
 
     @cached_property
+    def thumbnails(self) -> thumbnails.AsyncThumbnailsResourceWithRawResponse:
+        from .resources.thumbnails import AsyncThumbnailsResourceWithRawResponse
+
+        return AsyncThumbnailsResourceWithRawResponse(self._client.thumbnails)
+
+    @cached_property
     def tokens(self) -> tokens.AsyncTokensResourceWithRawResponse:
         from .resources.tokens import AsyncTokensResourceWithRawResponse
 
         return AsyncTokensResourceWithRawResponse(self._client.tokens)
+
+    @cached_property
+    def transcodings(self) -> transcodings.AsyncTranscodingsResourceWithRawResponse:
+        from .resources.transcodings import AsyncTranscodingsResourceWithRawResponse
+
+        return AsyncTranscodingsResourceWithRawResponse(self._client.transcodings)
 
     @cached_property
     def uploads(self) -> uploads.AsyncUploadsResourceWithRawResponse:
@@ -729,12 +874,31 @@ class AsyncChunkifyWithRawResponse:
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
+    @cached_property
+    def workflows(self) -> workflows.AsyncWorkflowsResourceWithRawResponse:
+        from .resources.workflows import AsyncWorkflowsResourceWithRawResponse
+
+        return AsyncWorkflowsResourceWithRawResponse(self._client.workflows)
+
 
 class ChunkifyWithStreamedResponse:
     _client: Chunkify
 
     def __init__(self, client: Chunkify) -> None:
         self._client = client
+
+    @cached_property
+    def assets(self) -> assets.AssetsResourceWithStreamingResponse:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AssetsResourceWithStreamingResponse
+
+        return AssetsResourceWithStreamingResponse(self._client.assets)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithStreamingResponse:
+        from .resources.events import EventsResourceWithStreamingResponse
+
+        return EventsResourceWithStreamingResponse(self._client.events)
 
     @cached_property
     def files(self) -> files.FilesResourceWithStreamingResponse:
@@ -747,6 +911,12 @@ class ChunkifyWithStreamedResponse:
         from .resources.jobs import JobsResourceWithStreamingResponse
 
         return JobsResourceWithStreamingResponse(self._client.jobs)
+
+    @cached_property
+    def metrics(self) -> metrics.MetricsResourceWithStreamingResponse:
+        from .resources.metrics import MetricsResourceWithStreamingResponse
+
+        return MetricsResourceWithStreamingResponse(self._client.metrics)
 
     @cached_property
     def notifications(self) -> notifications.NotificationsResourceWithStreamingResponse:
@@ -773,10 +943,22 @@ class ChunkifyWithStreamedResponse:
         return StoragesResourceWithStreamingResponse(self._client.storages)
 
     @cached_property
+    def thumbnails(self) -> thumbnails.ThumbnailsResourceWithStreamingResponse:
+        from .resources.thumbnails import ThumbnailsResourceWithStreamingResponse
+
+        return ThumbnailsResourceWithStreamingResponse(self._client.thumbnails)
+
+    @cached_property
     def tokens(self) -> tokens.TokensResourceWithStreamingResponse:
         from .resources.tokens import TokensResourceWithStreamingResponse
 
         return TokensResourceWithStreamingResponse(self._client.tokens)
+
+    @cached_property
+    def transcodings(self) -> transcodings.TranscodingsResourceWithStreamingResponse:
+        from .resources.transcodings import TranscodingsResourceWithStreamingResponse
+
+        return TranscodingsResourceWithStreamingResponse(self._client.transcodings)
 
     @cached_property
     def uploads(self) -> uploads.UploadsResourceWithStreamingResponse:
@@ -790,12 +972,31 @@ class ChunkifyWithStreamedResponse:
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
+    @cached_property
+    def workflows(self) -> workflows.WorkflowsResourceWithStreamingResponse:
+        from .resources.workflows import WorkflowsResourceWithStreamingResponse
+
+        return WorkflowsResourceWithStreamingResponse(self._client.workflows)
+
 
 class AsyncChunkifyWithStreamedResponse:
     _client: AsyncChunkify
 
     def __init__(self, client: AsyncChunkify) -> None:
         self._client = client
+
+    @cached_property
+    def assets(self) -> assets.AsyncAssetsResourceWithStreamingResponse:
+        """Automatic video-on-demand Assets and independent H.264 MP4 static renditions."""
+        from .resources.assets import AsyncAssetsResourceWithStreamingResponse
+
+        return AsyncAssetsResourceWithStreamingResponse(self._client.assets)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
+        from .resources.events import AsyncEventsResourceWithStreamingResponse
+
+        return AsyncEventsResourceWithStreamingResponse(self._client.events)
 
     @cached_property
     def files(self) -> files.AsyncFilesResourceWithStreamingResponse:
@@ -808,6 +1009,12 @@ class AsyncChunkifyWithStreamedResponse:
         from .resources.jobs import AsyncJobsResourceWithStreamingResponse
 
         return AsyncJobsResourceWithStreamingResponse(self._client.jobs)
+
+    @cached_property
+    def metrics(self) -> metrics.AsyncMetricsResourceWithStreamingResponse:
+        from .resources.metrics import AsyncMetricsResourceWithStreamingResponse
+
+        return AsyncMetricsResourceWithStreamingResponse(self._client.metrics)
 
     @cached_property
     def notifications(self) -> notifications.AsyncNotificationsResourceWithStreamingResponse:
@@ -834,10 +1041,22 @@ class AsyncChunkifyWithStreamedResponse:
         return AsyncStoragesResourceWithStreamingResponse(self._client.storages)
 
     @cached_property
+    def thumbnails(self) -> thumbnails.AsyncThumbnailsResourceWithStreamingResponse:
+        from .resources.thumbnails import AsyncThumbnailsResourceWithStreamingResponse
+
+        return AsyncThumbnailsResourceWithStreamingResponse(self._client.thumbnails)
+
+    @cached_property
     def tokens(self) -> tokens.AsyncTokensResourceWithStreamingResponse:
         from .resources.tokens import AsyncTokensResourceWithStreamingResponse
 
         return AsyncTokensResourceWithStreamingResponse(self._client.tokens)
+
+    @cached_property
+    def transcodings(self) -> transcodings.AsyncTranscodingsResourceWithStreamingResponse:
+        from .resources.transcodings import AsyncTranscodingsResourceWithStreamingResponse
+
+        return AsyncTranscodingsResourceWithStreamingResponse(self._client.transcodings)
 
     @cached_property
     def uploads(self) -> uploads.AsyncUploadsResourceWithStreamingResponse:
@@ -850,6 +1069,12 @@ class AsyncChunkifyWithStreamedResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+
+    @cached_property
+    def workflows(self) -> workflows.AsyncWorkflowsResourceWithStreamingResponse:
+        from .resources.workflows import AsyncWorkflowsResourceWithStreamingResponse
+
+        return AsyncWorkflowsResourceWithStreamingResponse(self._client.workflows)
 
 
 Client = Chunkify

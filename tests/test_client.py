@@ -426,6 +426,28 @@ class TestChunkify:
         test_client.close()
         test_client2.close()
 
+    def test_validate_headers(self) -> None:
+        client = Chunkify(
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
+        )
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
+
+        with update_env(
+            **{
+                "CHUNKIFY_TOKEN": Omit(),
+                "CHUNKIFY_TEAM_TOKEN": Omit(),
+            }
+        ):
+            client2 = Chunkify(
+                base_url=base_url, project_access_token=None, team_access_token=None, _strict_response_validation=True
+            )
+
+        client2._build_request(FinalRequestOptions(method="get", url="/foo"))
+
     def test_default_query_option(self) -> None:
         client = Chunkify(
             base_url=base_url,
@@ -971,7 +993,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list()
 
@@ -995,7 +1017,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
@@ -1018,7 +1040,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
@@ -1403,6 +1425,28 @@ class TestAsyncChunkify:
 
         await test_client.close()
         await test_client2.close()
+
+    def test_validate_headers(self) -> None:
+        client = AsyncChunkify(
+            base_url=base_url,
+            project_access_token=project_access_token,
+            team_access_token=team_access_token,
+            _strict_response_validation=True,
+        )
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {project_access_token}"
+
+        with update_env(
+            **{
+                "CHUNKIFY_TOKEN": Omit(),
+                "CHUNKIFY_TEAM_TOKEN": Omit(),
+            }
+        ):
+            client2 = AsyncChunkify(
+                base_url=base_url, project_access_token=None, team_access_token=None, _strict_response_validation=True
+            )
+
+        client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
     async def test_default_query_option(self) -> None:
         client = AsyncChunkify(
@@ -1954,7 +1998,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list()
 
@@ -1978,7 +2022,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
@@ -2001,7 +2045,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 

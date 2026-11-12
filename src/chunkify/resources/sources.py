@@ -82,7 +82,7 @@ class SourcesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/sources",
+            "/sources",
             body=maybe_transform(
                 {
                     "metadata": metadata,
@@ -129,7 +129,7 @@ class SourcesResource(SyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         return self._get(
-            path_template("/api/sources/{source_id}", source_id=source_id),
+            path_template("/sources/{source_id}", source_id=source_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -192,7 +192,7 @@ class SourcesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/sources",
+            "/sources",
             page=SyncPaginatedResults[Source],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -249,7 +249,7 @@ class SourcesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/sources/{source_id}", source_id=source_id),
+            path_template("/sources/{source_id}", source_id=source_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -317,7 +317,7 @@ class AsyncSourcesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/sources",
+            "/sources",
             body=await async_maybe_transform(
                 {
                     "metadata": metadata,
@@ -364,7 +364,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         return await self._get(
-            path_template("/api/sources/{source_id}", source_id=source_id),
+            path_template("/sources/{source_id}", source_id=source_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -427,7 +427,7 @@ class AsyncSourcesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/sources",
+            "/sources",
             page=AsyncPaginatedResults[Source],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -484,7 +484,7 @@ class AsyncSourcesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/sources/{source_id}", source_id=source_id),
+            path_template("/sources/{source_id}", source_id=source_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

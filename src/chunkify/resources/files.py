@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Type, cast
 
 import httpx
@@ -45,6 +46,7 @@ class FilesResource(SyncAPIResource):
         """
         return FilesResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def retrieve(
         self,
         file_id: str,
@@ -58,7 +60,9 @@ class FilesResource(SyncAPIResource):
     ) -> JobFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
-        properties, and associated jobs.
+        properties, and associated jobs. Deprecated: Files are a legacy resource.
+        Transcodings and Thumbnails include their output files, and List Asset outputs
+        returns an Asset's outputs.
 
         Args:
           extra_headers: Send extra headers
@@ -72,7 +76,7 @@ class FilesResource(SyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         return self._get(
-            path_template("/api/files/{file_id}", file_id=file_id),
+            path_template("/files/{file_id}", file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -84,6 +88,7 @@ class FilesResource(SyncAPIResource):
             cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
@@ -108,8 +113,11 @@ class FilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[JobFile]:
-        """
-        Retrieve a list of files with optional filtering and pagination
+        """Retrieve a list of files with optional filtering and pagination.
+
+        Deprecated:
+        Files are a legacy resource. Transcodings and Thumbnails include their output
+        files, and List Asset outputs returns an Asset's outputs.
 
         Args:
           id: Filter by file ID
@@ -137,7 +145,7 @@ class FilesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/files",
+            "/files",
             page=SyncPaginatedResults[JobFile],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -168,6 +176,7 @@ class FilesResource(SyncAPIResource):
             model=JobFile,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def delete(
         self,
         file_id: str,
@@ -182,6 +191,8 @@ class FilesResource(SyncAPIResource):
         """Delete a file.
 
         It will fail if there are processing jobs using this file.
+        Deprecated: Files are a legacy resource. Transcodings and Thumbnails include
+        their output files, and List Asset outputs returns an Asset's outputs.
 
         Args:
           extra_headers: Send extra headers
@@ -196,7 +207,7 @@ class FilesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/files/{file_id}", file_id=file_id),
+            path_template("/files/{file_id}", file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -228,6 +239,7 @@ class AsyncFilesResource(AsyncAPIResource):
         """
         return AsyncFilesResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def retrieve(
         self,
         file_id: str,
@@ -241,7 +253,9 @@ class AsyncFilesResource(AsyncAPIResource):
     ) -> JobFile:
         """
         Retrieve details of a specific file by its ID, including metadata, media
-        properties, and associated jobs.
+        properties, and associated jobs. Deprecated: Files are a legacy resource.
+        Transcodings and Thumbnails include their output files, and List Asset outputs
+        returns an Asset's outputs.
 
         Args:
           extra_headers: Send extra headers
@@ -255,7 +269,7 @@ class AsyncFilesResource(AsyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         return await self._get(
-            path_template("/api/files/{file_id}", file_id=file_id),
+            path_template("/files/{file_id}", file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -267,6 +281,7 @@ class AsyncFilesResource(AsyncAPIResource):
             cast_to=cast(Type[JobFile], DataWrapper[JobFile]),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
@@ -291,8 +306,11 @@ class AsyncFilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[JobFile, AsyncPaginatedResults[JobFile]]:
-        """
-        Retrieve a list of files with optional filtering and pagination
+        """Retrieve a list of files with optional filtering and pagination.
+
+        Deprecated:
+        Files are a legacy resource. Transcodings and Thumbnails include their output
+        files, and List Asset outputs returns an Asset's outputs.
 
         Args:
           id: Filter by file ID
@@ -320,7 +338,7 @@ class AsyncFilesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/files",
+            "/files",
             page=AsyncPaginatedResults[JobFile],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -351,6 +369,7 @@ class AsyncFilesResource(AsyncAPIResource):
             model=JobFile,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def delete(
         self,
         file_id: str,
@@ -365,6 +384,8 @@ class AsyncFilesResource(AsyncAPIResource):
         """Delete a file.
 
         It will fail if there are processing jobs using this file.
+        Deprecated: Files are a legacy resource. Transcodings and Thumbnails include
+        their output files, and List Asset outputs returns an Asset's outputs.
 
         Args:
           extra_headers: Send extra headers
@@ -379,7 +400,7 @@ class AsyncFilesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/files/{file_id}", file_id=file_id),
+            path_template("/files/{file_id}", file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -395,14 +416,20 @@ class FilesResourceWithRawResponse:
     def __init__(self, files: FilesResource) -> None:
         self._files = files
 
-        self.retrieve = to_raw_response_wrapper(
-            files.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                files.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_raw_response_wrapper(
-            files.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                files.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_raw_response_wrapper(
-            files.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                files.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -410,14 +437,20 @@ class AsyncFilesResourceWithRawResponse:
     def __init__(self, files: AsyncFilesResource) -> None:
         self._files = files
 
-        self.retrieve = async_to_raw_response_wrapper(
-            files.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                files.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_raw_response_wrapper(
-            files.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                files.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_raw_response_wrapper(
-            files.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                files.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -425,14 +458,20 @@ class FilesResourceWithStreamingResponse:
     def __init__(self, files: FilesResource) -> None:
         self._files = files
 
-        self.retrieve = to_streamed_response_wrapper(
-            files.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                files.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_streamed_response_wrapper(
-            files.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                files.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = to_streamed_response_wrapper(
-            files.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                files.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -440,12 +479,18 @@ class AsyncFilesResourceWithStreamingResponse:
     def __init__(self, files: AsyncFilesResource) -> None:
         self._files = files
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            files.retrieve,
+        self.retrieve = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                files.retrieve,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_streamed_response_wrapper(
-            files.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                files.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.delete = async_to_streamed_response_wrapper(
-            files.delete,
+        self.delete = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                files.delete,  # pyright: ignore[reportDeprecated],
+            )
         )
