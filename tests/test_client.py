@@ -993,9 +993,9 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = client.files.with_raw_response.list()
+        response = client.assets.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1017,9 +1017,9 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.assets.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1040,9 +1040,9 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.assets.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1998,9 +1998,9 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = await client.files.with_raw_response.list()
+        response = await client.assets.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -2022,9 +2022,9 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = await client.assets.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -2045,9 +2045,9 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/assets").mock(side_effect=retry_handler)
 
-        response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.assets.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

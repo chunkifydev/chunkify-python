@@ -22,8 +22,8 @@ class TestNotifications:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         notification = client.notifications.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
         assert_matches_type(Notification, notification, path=["response"])
@@ -32,8 +32,8 @@ class TestNotifications:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.notifications.with_raw_response.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
 
@@ -46,8 +46,8 @@ class TestNotifications:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.notifications.with_streaming_response.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         ) as response:
             assert not response.is_closed
@@ -115,7 +115,8 @@ class TestNotifications:
                 "lte": 0,
                 "sort": "asc",
             },
-            events=["job.completed"],
+            event_id="event_id",
+            events=["asset.playback_ready"],
             limit=1,
             object_id="object_id",
             offset=0,
@@ -202,8 +203,8 @@ class TestAsyncNotifications:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         notification = await async_client.notifications.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
         assert_matches_type(Notification, notification, path=["response"])
@@ -212,8 +213,8 @@ class TestAsyncNotifications:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.notifications.with_raw_response.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         )
 
@@ -226,8 +227,8 @@ class TestAsyncNotifications:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.notifications.with_streaming_response.create(
-            event="job.completed",
-            object_id="job_A1cce6120E56e7Tu9ioP09Nhjk9",
+            event="asset.playback_ready",
+            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
             webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
         ) as response:
             assert not response.is_closed
@@ -295,7 +296,8 @@ class TestAsyncNotifications:
                 "lte": 0,
                 "sort": "asc",
             },
-            events=["job.completed"],
+            event_id="event_id",
+            events=["asset.playback_ready"],
             limit=1,
             object_id="object_id",
             offset=0,

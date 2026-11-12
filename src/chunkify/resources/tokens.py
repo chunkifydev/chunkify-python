@@ -80,7 +80,7 @@ class TokensResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/tokens",
+            "/tokens",
             body=maybe_transform(
                 {
                     "scope": scope,
@@ -117,7 +117,7 @@ class TokensResource(SyncAPIResource):
         the response for security reasons.
         """
         return self._get(
-            "/api/tokens",
+            "/tokens",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -157,7 +157,7 @@ class TokensResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/tokens/{token_id}", token_id=token_id),
+            path_template("/tokens/{token_id}", token_id=token_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -223,7 +223,7 @@ class AsyncTokensResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/tokens",
+            "/tokens",
             body=await async_maybe_transform(
                 {
                     "scope": scope,
@@ -260,7 +260,7 @@ class AsyncTokensResource(AsyncAPIResource):
         the response for security reasons.
         """
         return await self._get(
-            "/api/tokens",
+            "/tokens",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -300,7 +300,7 @@ class AsyncTokensResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `token_id` but received {token_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/tokens/{token_id}", token_id=token_id),
+            path_template("/tokens/{token_id}", token_id=token_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

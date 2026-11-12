@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing_extensions
+
 import httpx
 
 from ..._types import Body, Query, Headers, NotGiven, not_given
@@ -40,6 +42,7 @@ class TranscodersResource(SyncAPIResource):
         """
         return TranscodersResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         job_id: str,
@@ -51,8 +54,10 @@ class TranscodersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TranscoderListResponse:
-        """
-        Retrieve all the transcoders statuses for a specific job
+        """Retrieve all the transcoders statuses for a specific job.
+
+        Deprecated: Jobs are a
+        legacy resource. Use Assets, Transcodings or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -66,7 +71,7 @@ class TranscodersResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            path_template("/api/jobs/{job_id}/transcoders", job_id=job_id),
+            path_template("/jobs/{job_id}/transcoders", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -98,6 +103,7 @@ class AsyncTranscodersResource(AsyncAPIResource):
         """
         return AsyncTranscodersResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         job_id: str,
@@ -109,8 +115,10 @@ class AsyncTranscodersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TranscoderListResponse:
-        """
-        Retrieve all the transcoders statuses for a specific job
+        """Retrieve all the transcoders statuses for a specific job.
+
+        Deprecated: Jobs are a
+        legacy resource. Use Assets, Transcodings or Thumbnails instead.
 
         Args:
           extra_headers: Send extra headers
@@ -124,7 +132,7 @@ class AsyncTranscodersResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            path_template("/api/jobs/{job_id}/transcoders", job_id=job_id),
+            path_template("/jobs/{job_id}/transcoders", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -140,8 +148,10 @@ class TranscodersResourceWithRawResponse:
     def __init__(self, transcoders: TranscodersResource) -> None:
         self._transcoders = transcoders
 
-        self.list = to_raw_response_wrapper(
-            transcoders.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                transcoders.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -149,8 +159,10 @@ class AsyncTranscodersResourceWithRawResponse:
     def __init__(self, transcoders: AsyncTranscodersResource) -> None:
         self._transcoders = transcoders
 
-        self.list = async_to_raw_response_wrapper(
-            transcoders.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                transcoders.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -158,8 +170,10 @@ class TranscodersResourceWithStreamingResponse:
     def __init__(self, transcoders: TranscodersResource) -> None:
         self._transcoders = transcoders
 
-        self.list = to_streamed_response_wrapper(
-            transcoders.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                transcoders.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -167,6 +181,8 @@ class AsyncTranscodersResourceWithStreamingResponse:
     def __init__(self, transcoders: AsyncTranscodersResource) -> None:
         self._transcoders = transcoders
 
-        self.list = async_to_streamed_response_wrapper(
-            transcoders.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                transcoders.list,  # pyright: ignore[reportDeprecated],
+            )
         )

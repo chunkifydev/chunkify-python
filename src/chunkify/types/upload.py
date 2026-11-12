@@ -1,18 +1,51 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 from .shared.chunkify_error import ChunkifyError
 
-__all__ = ["Upload"]
+__all__ = ["Upload", "Multipart", "MultipartPart"]
+
+
+class MultipartPart(BaseModel):
+    part_number: int
+    """PartNumber specifies the one-based part number for this URL."""
+
+    upload_url: str
+    """UploadUrl specifies the signed PUT URL for this part.
+
+    Retry the same file slice with this URL before multipart.expires_at.
+    """
+
+
+class Multipart(BaseModel):
+    """Multipart transfer details, returned only on creation for multipart Uploads."""
+
+    expires_at: datetime
+    """ExpiresAt specifies when the signed part URLs expire.
+
+    URLs cannot be refreshed; create a new Upload after expiry.
+    """
+
+    part_size_bytes: int
+    """PartSizeBytes specifies the size of each part except the final part, in bytes."""
+
+    parts: List[MultipartPart]
+    """Parts contains every signed upload URL in ascending part_number order.
+
+    Upload file slices directly to these URLs.
+    """
 
 
 class Upload(BaseModel):
     id: str
     """Unique identifier of the upload"""
+
+    create_asset: bool
+    """Whether this Upload creates an Asset on completion."""
 
     created_at: datetime
     """Timestamp when the upload was created"""
@@ -26,18 +59,59 @@ class Upload(BaseModel):
     updated_at: datetime
     """Timestamp when the upload was updated"""
 
-    completion_url: Optional[str] = None
-    """Short-lived completion capability, returned only on creation.
+    upload_mode: Literal["single", "multipart"]
+    """Resolved transfer mode for this Upload."""
 
-    POST after a successful PUT before expires_at. Requires no API key. Repeated
-    valid calls are idempotent.
+    workflow_id: Optional[str] = None
+    """Selected Workflow ID, or null."""
+
+    workflow_revision: Optional[int] = None
+    """Pinned Workflow revision, or null."""
+
+    asset_id: Optional[str] = None
+    """Automatically created Asset.
+
+    May be absent before completion or after record deletion.
+    """
+
+    completion_url: Optional[str] = None
+    """Completion capability, returned only on creation.
+
+    POST after a successful single PUT or with all multipart ETags before
+    expires_at. Requires no API key. Repeated valid calls are idempotent.
+    """
+
+    created_by_token_id: Optional[str] = None
+    """CreatedByTokenId specifies the Project token used to create the resource.
+
+    It remains set after the token is revoked. Omitted for dashboard requests, MCP
+    OAuth connections, Workflow actions, and unknown creators.
+    """
+
+    created_by_user_id: Optional[str] = None
+    """
+    CreatedByUserId specifies the team member who created the resource. Omitted for
+    Workflow actions, unknown creators, and deleted accounts.
+    """
+
+    created_via: Optional[Literal["api", "dashboard", "mcp", "workflow"]] = None
+    """
+    CreatedVia specifies how the resource was created: api for API requests,
+    dashboard for the Chunkify dashboard, mcp for MCP clients, and workflow for
+    Workflow actions. Omitted when the creator is unknown.
     """
 
     error: Optional[ChunkifyError] = None
     """Error message of the upload"""
 
+    file_size_bytes: Optional[int] = None
+    """Declared file size in bytes, when supplied at creation."""
+
     metadata: Optional[Dict[str, str]] = None
     """Additional metadata for the upload"""
+
+    multipart: Optional[Multipart] = None
+    """Multipart transfer details, returned only on creation for multipart Uploads."""
 
     source_id: Optional[str] = None
     """SourceId is the id of the source that was created from the upload"""
@@ -49,7 +123,7 @@ class Upload(BaseModel):
     """
 
     upload_url: Optional[str] = None
-    """Presigned PUT URL, returned only when creating an Upload session.
+    """Presigned PUT URL, returned only when creating a single-PUT Upload session.
 
     Call completion_url after the PUT succeeds.
     """

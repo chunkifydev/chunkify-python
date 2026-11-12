@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing_extensions import Literal
 
 import httpx
@@ -43,6 +44,7 @@ class LogsResource(SyncAPIResource):
         """
         return LogsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         job_id: str,
@@ -57,7 +59,9 @@ class LogsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LogListResponse:
         """
-        Retrieve logs for a specific job, either from the transcoder or manager service
+        Retrieve logs for a specific job, either from the transcoder or manager service.
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings or Thumbnails
+        instead.
 
         Args:
           service: Service type (transcoder or manager)
@@ -75,7 +79,7 @@ class LogsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            path_template("/api/jobs/{job_id}/logs", job_id=job_id),
+            path_template("/jobs/{job_id}/logs", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -114,6 +118,7 @@ class AsyncLogsResource(AsyncAPIResource):
         """
         return AsyncLogsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         job_id: str,
@@ -128,7 +133,9 @@ class AsyncLogsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> LogListResponse:
         """
-        Retrieve logs for a specific job, either from the transcoder or manager service
+        Retrieve logs for a specific job, either from the transcoder or manager service.
+        Deprecated: Jobs are a legacy resource. Use Assets, Transcodings or Thumbnails
+        instead.
 
         Args:
           service: Service type (transcoder or manager)
@@ -146,7 +153,7 @@ class AsyncLogsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            path_template("/api/jobs/{job_id}/logs", job_id=job_id),
+            path_template("/jobs/{job_id}/logs", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -169,8 +176,10 @@ class LogsResourceWithRawResponse:
     def __init__(self, logs: LogsResource) -> None:
         self._logs = logs
 
-        self.list = to_raw_response_wrapper(
-            logs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                logs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -178,8 +187,10 @@ class AsyncLogsResourceWithRawResponse:
     def __init__(self, logs: AsyncLogsResource) -> None:
         self._logs = logs
 
-        self.list = async_to_raw_response_wrapper(
-            logs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                logs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -187,8 +198,10 @@ class LogsResourceWithStreamingResponse:
     def __init__(self, logs: LogsResource) -> None:
         self._logs = logs
 
-        self.list = to_streamed_response_wrapper(
-            logs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                logs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -196,6 +209,8 @@ class AsyncLogsResourceWithStreamingResponse:
     def __init__(self, logs: AsyncLogsResource) -> None:
         self._logs = logs
 
-        self.list = async_to_streamed_response_wrapper(
-            logs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                logs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
