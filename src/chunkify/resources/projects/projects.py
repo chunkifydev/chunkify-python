@@ -20,23 +20,23 @@ from ..._response import (
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
 from ...types.project import Project
-from ...types.project_list_response import ProjectListResponse
-from .analytics_connections.analytics_connections import (
-    AnalyticsConnectionsResource,
-    AsyncAnalyticsConnectionsResource,
-    AnalyticsConnectionsResourceWithRawResponse,
-    AsyncAnalyticsConnectionsResourceWithRawResponse,
-    AnalyticsConnectionsResourceWithStreamingResponse,
-    AsyncAnalyticsConnectionsResourceWithStreamingResponse,
+from .analytics.analytics import (
+    AnalyticsResource,
+    AsyncAnalyticsResource,
+    AnalyticsResourceWithRawResponse,
+    AsyncAnalyticsResourceWithRawResponse,
+    AnalyticsResourceWithStreamingResponse,
+    AsyncAnalyticsResourceWithStreamingResponse,
 )
+from ...types.project_list_response import ProjectListResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
 
 class ProjectsResource(SyncAPIResource):
     @cached_property
-    def analytics_connections(self) -> AnalyticsConnectionsResource:
-        return AnalyticsConnectionsResource(self._client)
+    def analytics(self) -> AnalyticsResource:
+        return AnalyticsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
@@ -266,8 +266,8 @@ class ProjectsResource(SyncAPIResource):
 
 class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
-    def analytics_connections(self) -> AsyncAnalyticsConnectionsResource:
-        return AsyncAnalyticsConnectionsResource(self._client)
+    def analytics(self) -> AsyncAnalyticsResource:
+        return AsyncAnalyticsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
@@ -516,8 +516,8 @@ class ProjectsResourceWithRawResponse:
         )
 
     @cached_property
-    def analytics_connections(self) -> AnalyticsConnectionsResourceWithRawResponse:
-        return AnalyticsConnectionsResourceWithRawResponse(self._projects.analytics_connections)
+    def analytics(self) -> AnalyticsResourceWithRawResponse:
+        return AnalyticsResourceWithRawResponse(self._projects.analytics)
 
 
 class AsyncProjectsResourceWithRawResponse:
@@ -541,8 +541,8 @@ class AsyncProjectsResourceWithRawResponse:
         )
 
     @cached_property
-    def analytics_connections(self) -> AsyncAnalyticsConnectionsResourceWithRawResponse:
-        return AsyncAnalyticsConnectionsResourceWithRawResponse(self._projects.analytics_connections)
+    def analytics(self) -> AsyncAnalyticsResourceWithRawResponse:
+        return AsyncAnalyticsResourceWithRawResponse(self._projects.analytics)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -566,8 +566,8 @@ class ProjectsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def analytics_connections(self) -> AnalyticsConnectionsResourceWithStreamingResponse:
-        return AnalyticsConnectionsResourceWithStreamingResponse(self._projects.analytics_connections)
+    def analytics(self) -> AnalyticsResourceWithStreamingResponse:
+        return AnalyticsResourceWithStreamingResponse(self._projects.analytics)
 
 
 class AsyncProjectsResourceWithStreamingResponse:
@@ -591,5 +591,5 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def analytics_connections(self) -> AsyncAnalyticsConnectionsResourceWithStreamingResponse:
-        return AsyncAnalyticsConnectionsResourceWithStreamingResponse(self._projects.analytics_connections)
+    def analytics(self) -> AsyncAnalyticsResourceWithStreamingResponse:
+        return AsyncAnalyticsResourceWithStreamingResponse(self._projects.analytics)
