@@ -22,6 +22,7 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.thumbnail import Thumbnail
+from ..types.thumbnail_create_storage_param import ThumbnailCreateStorageParam
 
 __all__ = ["ThumbnailsResource", "AsyncThumbnailsResource"]
 
@@ -56,7 +57,7 @@ class ThumbnailsResource(SyncAPIResource):
         output: Literal["images", "sprites"] | Omit = omit,
         range: thumbnail_create_params.Range | Omit = omit,
         size: int | Omit = omit,
-        storage: thumbnail_create_params.Storage | Omit = omit,
+        storage: ThumbnailCreateStorageParam | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -319,7 +320,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         output: Literal["images", "sprites"] | Omit = omit,
         range: thumbnail_create_params.Range | Omit = omit,
         size: int | Omit = omit,
-        storage: thumbnail_create_params.Storage | Omit = omit,
+        storage: ThumbnailCreateStorageParam | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

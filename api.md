@@ -9,7 +9,7 @@ from chunkify.types import ChunkifyError
 Types:
 
 ```python
-from chunkify.types import Asset, AssetStatus
+from chunkify.types import Asset, AssetStaticRenditionCreateParams, AssetStatus
 ```
 
 Methods:
@@ -45,8 +45,13 @@ from chunkify.types.assets import AssetActionRun
 
 Methods:
 
-- <code title="post /assets/{assetId}/workflow/update">client.assets.workflow.<a href="./src/chunkify/resources/assets/workflow.py">update</a>(asset_id) -> <a href="./src/chunkify/types/workflows/workflow_run.py">WorkflowRun</a></code>
-- <code title="get /assets/{assetId}/workflow/actions">client.assets.workflow.<a href="./src/chunkify/resources/assets/workflow.py">list_actions</a>(asset_id, \*\*<a href="src/chunkify/types/assets/workflow_list_actions_params.py">params</a>) -> <a href="./src/chunkify/types/assets/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
+- <code title="post /assets/{assetId}/workflow/update">client.assets.workflow.<a href="./src/chunkify/resources/assets/workflow/workflow.py">update</a>(asset_id) -> <a href="./src/chunkify/types/workflows/workflow_run.py">WorkflowRun</a></code>
+
+### Actions
+
+Methods:
+
+- <code title="get /assets/{assetId}/workflow/actions">client.assets.workflow.actions.<a href="./src/chunkify/resources/assets/workflow/actions.py">list</a>(asset_id, \*\*<a href="src/chunkify/types/assets/workflow/action_list_params.py">params</a>) -> <a href="./src/chunkify/types/assets/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
 
 # Events
 
@@ -172,32 +177,34 @@ Methods:
 - <code title="get /projects">client.projects.<a href="./src/chunkify/resources/projects/projects.py">list</a>() -> <a href="./src/chunkify/types/project_list_response.py">ProjectListResponse</a></code>
 - <code title="delete /projects/{projectId}">client.projects.<a href="./src/chunkify/resources/projects/projects.py">delete</a>(project_id) -> None</code>
 
-## AnalyticsConnections
+## Analytics
+
+### Connections
 
 Types:
 
 ```python
-from chunkify.types.projects import (
+from chunkify.types.projects.analytics import (
     AnalyticsConnection,
-    AnalyticsConnectionCreateResponse,
-    AnalyticsConnectionListResponse,
+    ConnectionCreateResponse,
+    ConnectionListResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /projects/{projectId}/analytics/connections">client.projects.analytics_connections.<a href="./src/chunkify/resources/projects/analytics_connections/analytics_connections.py">create</a>(project_id, \*\*<a href="src/chunkify/types/projects/analytics_connection_create_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics_connection_create_response.py">AnalyticsConnectionCreateResponse</a></code>
-- <code title="get /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics_connections.<a href="./src/chunkify/resources/projects/analytics_connections/analytics_connections.py">retrieve</a>(connection_id, \*, project_id) -> <a href="./src/chunkify/types/projects/analytics_connection.py">AnalyticsConnection</a></code>
-- <code title="patch /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics_connections.<a href="./src/chunkify/resources/projects/analytics_connections/analytics_connections.py">update</a>(connection_id, \*, project_id, \*\*<a href="src/chunkify/types/projects/analytics_connection_update_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics_connection.py">AnalyticsConnection</a></code>
-- <code title="get /projects/{projectId}/analytics/connections">client.projects.analytics_connections.<a href="./src/chunkify/resources/projects/analytics_connections/analytics_connections.py">list</a>(project_id) -> <a href="./src/chunkify/types/projects/analytics_connection_list_response.py">AnalyticsConnectionListResponse</a></code>
-- <code title="delete /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics_connections.<a href="./src/chunkify/resources/projects/analytics_connections/analytics_connections.py">delete</a>(connection_id, \*, project_id) -> None</code>
+- <code title="post /projects/{projectId}/analytics/connections">client.projects.analytics.connections.<a href="./src/chunkify/resources/projects/analytics/connections/connections.py">create</a>(project_id, \*\*<a href="src/chunkify/types/projects/analytics/connection_create_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics/connection_create_response.py">ConnectionCreateResponse</a></code>
+- <code title="get /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics.connections.<a href="./src/chunkify/resources/projects/analytics/connections/connections.py">retrieve</a>(project_id, connection_id) -> <a href="./src/chunkify/types/projects/analytics/analytics_connection.py">AnalyticsConnection</a></code>
+- <code title="patch /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics.connections.<a href="./src/chunkify/resources/projects/analytics/connections/connections.py">update</a>(project_id, connection_id, \*\*<a href="src/chunkify/types/projects/analytics/connection_update_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics/analytics_connection.py">AnalyticsConnection</a></code>
+- <code title="get /projects/{projectId}/analytics/connections">client.projects.analytics.connections.<a href="./src/chunkify/resources/projects/analytics/connections/connections.py">list</a>(project_id) -> <a href="./src/chunkify/types/projects/analytics/connection_list_response.py">ConnectionListResponse</a></code>
+- <code title="delete /projects/{projectId}/analytics/connections/{connectionId}">client.projects.analytics.connections.<a href="./src/chunkify/resources/projects/analytics/connections/connections.py">delete</a>(project_id, connection_id) -> None</code>
 
-### Keys
+#### Keys
 
 Types:
 
 ```python
-from chunkify.types.projects.analytics_connections import (
+from chunkify.types.projects.analytics.connections import (
     AnalyticsKey,
     KeyCreateResponse,
     KeyListResponse,
@@ -207,9 +214,9 @@ from chunkify.types.projects.analytics_connections import (
 
 Methods:
 
-- <code title="post /projects/{projectId}/analytics/connections/{connectionId}/keys">client.projects.analytics_connections.keys.<a href="./src/chunkify/resources/projects/analytics_connections/keys.py">create</a>(connection_id, \*, project_id, \*\*<a href="src/chunkify/types/projects/analytics_connections/key_create_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics_connections/key_create_response.py">KeyCreateResponse</a></code>
-- <code title="get /projects/{projectId}/analytics/connections/{connectionId}/keys">client.projects.analytics_connections.keys.<a href="./src/chunkify/resources/projects/analytics_connections/keys.py">list</a>(connection_id, \*, project_id) -> <a href="./src/chunkify/types/projects/analytics_connections/key_list_response.py">KeyListResponse</a></code>
-- <code title="post /projects/{projectId}/analytics/connections/{connectionId}/keys/{keyId}/rotate">client.projects.analytics_connections.keys.<a href="./src/chunkify/resources/projects/analytics_connections/keys.py">rotate</a>(key_id, \*, project_id, connection_id) -> <a href="./src/chunkify/types/projects/analytics_connections/key_rotate_response.py">KeyRotateResponse</a></code>
+- <code title="post /projects/{projectId}/analytics/connections/{connectionId}/keys">client.projects.analytics.connections.keys.<a href="./src/chunkify/resources/projects/analytics/connections/keys.py">create</a>(project_id, connection_id, \*\*<a href="src/chunkify/types/projects/analytics/connections/key_create_params.py">params</a>) -> <a href="./src/chunkify/types/projects/analytics/connections/key_create_response.py">KeyCreateResponse</a></code>
+- <code title="get /projects/{projectId}/analytics/connections/{connectionId}/keys">client.projects.analytics.connections.keys.<a href="./src/chunkify/resources/projects/analytics/connections/keys.py">list</a>(project_id, connection_id) -> <a href="./src/chunkify/types/projects/analytics/connections/key_list_response.py">KeyListResponse</a></code>
+- <code title="post /projects/{projectId}/analytics/connections/{connectionId}/keys/{keyId}/rotate">client.projects.analytics.connections.keys.<a href="./src/chunkify/resources/projects/analytics/connections/keys.py">rotate</a>(project_id, connection_id, key_id) -> <a href="./src/chunkify/types/projects/analytics/connections/key_rotate_response.py">KeyRotateResponse</a></code>
 
 # Sources
 
@@ -247,7 +254,7 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import Thumbnail
+from chunkify.types import Thumbnail, ThumbnailCreateStorage
 ```
 
 Methods:
@@ -276,7 +283,14 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import Transcoding
+from chunkify.types import (
+    Transcoding,
+    TranscodingM4aAac,
+    TranscodingMP4Av1,
+    TranscodingMP4H264,
+    TranscodingMP4H265,
+    TranscodingWebmVp9,
+)
 ```
 
 Methods:
@@ -324,7 +338,20 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import Workflow
+from chunkify.types import (
+    Workflow,
+    WorkflowAction,
+    WorkflowCaptionAction,
+    WorkflowCaptionParams,
+    WorkflowRule,
+    WorkflowStaticAction,
+    WorkflowStaticParams,
+    WorkflowThumbnailAction,
+    WorkflowThumbnailParams,
+    WorkflowTranscriptAction,
+    WorkflowTranslationAction,
+    WorkflowTranslationParams,
+)
 ```
 
 Methods:
