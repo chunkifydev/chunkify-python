@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["ThumbnailCreateStorageParam"]
+__all__ = ["ThumbnailCreateStorageParams"]
 
 
-class ThumbnailCreateStorageParam(TypedDict, total=False):
+class ThumbnailCreateStorageParams(TypedDict, total=False):
     """Output Storage selection, independent of Source storage."""
 
     id: str

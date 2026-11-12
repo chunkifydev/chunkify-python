@@ -88,8 +88,8 @@ class TestConnections:
     @parametrize
     def test_method_retrieve(self, client: Chunkify) -> None:
         connection = client.projects.analytics.connections.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(AnalyticsConnection, connection, path=["response"])
 
@@ -97,8 +97,8 @@ class TestConnections:
     @parametrize
     def test_raw_response_retrieve(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.with_raw_response.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -110,8 +110,8 @@ class TestConnections:
     @parametrize
     def test_streaming_response_retrieve(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.with_streaming_response.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -126,22 +126,22 @@ class TestConnections:
     def test_path_params_retrieve(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.retrieve(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.retrieve(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Chunkify) -> None:
         connection = client.projects.analytics.connections.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(AnalyticsConnection, connection, path=["response"])
 
@@ -149,8 +149,8 @@ class TestConnections:
     @parametrize
     def test_method_update_with_all_params(self, client: Chunkify) -> None:
         connection = client.projects.analytics.connections.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             allowed_origins=["string"],
             default_for_dashboard=True,
             endpoint="endpoint",
@@ -164,8 +164,8 @@ class TestConnections:
     @parametrize
     def test_raw_response_update(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.with_raw_response.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -177,8 +177,8 @@ class TestConnections:
     @parametrize
     def test_streaming_response_update(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.with_streaming_response.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -193,14 +193,14 @@ class TestConnections:
     def test_path_params_update(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.update(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.update(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -249,8 +249,8 @@ class TestConnections:
     @parametrize
     def test_method_delete(self, client: Chunkify) -> None:
         connection = client.projects.analytics.connections.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert connection is None
 
@@ -258,8 +258,8 @@ class TestConnections:
     @parametrize
     def test_raw_response_delete(self, client: Chunkify) -> None:
         response = client.projects.analytics.connections.with_raw_response.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -271,8 +271,8 @@ class TestConnections:
     @parametrize
     def test_streaming_response_delete(self, client: Chunkify) -> None:
         with client.projects.analytics.connections.with_streaming_response.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -287,14 +287,14 @@ class TestConnections:
     def test_path_params_delete(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.delete(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             client.projects.analytics.connections.with_raw_response.delete(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
 
@@ -370,8 +370,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncChunkify) -> None:
         connection = await async_client.projects.analytics.connections.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(AnalyticsConnection, connection, path=["response"])
 
@@ -379,8 +379,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.with_raw_response.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -392,8 +392,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.with_streaming_response.retrieve(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -408,22 +408,22 @@ class TestAsyncConnections:
     async def test_path_params_retrieve(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.retrieve(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.retrieve(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncChunkify) -> None:
         connection = await async_client.projects.analytics.connections.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert_matches_type(AnalyticsConnection, connection, path=["response"])
 
@@ -431,8 +431,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncChunkify) -> None:
         connection = await async_client.projects.analytics.connections.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
             allowed_origins=["string"],
             default_for_dashboard=True,
             endpoint="endpoint",
@@ -446,8 +446,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.with_raw_response.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -459,8 +459,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.with_streaming_response.update(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -475,14 +475,14 @@ class TestAsyncConnections:
     async def test_path_params_update(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.update(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.update(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -531,8 +531,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_method_delete(self, async_client: AsyncChunkify) -> None:
         connection = await async_client.projects.analytics.connections.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
         assert connection is None
 
@@ -540,8 +540,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.projects.analytics.connections.with_raw_response.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         )
 
         assert response.is_closed is True
@@ -553,8 +553,8 @@ class TestAsyncConnections:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncChunkify) -> None:
         async with async_client.projects.analytics.connections.with_streaming_response.delete(
-            project_id="projectId",
             connection_id="connectionId",
+            project_id="projectId",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -569,12 +569,12 @@ class TestAsyncConnections:
     async def test_path_params_delete(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.delete(
-                project_id="",
                 connection_id="connectionId",
+                project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
             await async_client.projects.analytics.connections.with_raw_response.delete(
-                project_id="projectId",
                 connection_id="",
+                project_id="projectId",
             )

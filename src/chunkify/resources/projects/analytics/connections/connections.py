@@ -133,9 +133,9 @@ class ConnectionsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,9 +178,9 @@ class ConnectionsResource(SyncAPIResource):
 
     def update(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         allowed_origins: SequenceNotStr[str] | Omit = omit,
         default_for_dashboard: bool | Omit = omit,
         endpoint: str | Omit = omit,
@@ -307,9 +307,9 @@ class ConnectionsResource(SyncAPIResource):
 
     def delete(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -454,9 +454,9 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -499,9 +499,9 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def update(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         allowed_origins: SequenceNotStr[str] | Omit = omit,
         default_for_dashboard: bool | Omit = omit,
         endpoint: str | Omit = omit,
@@ -628,9 +628,9 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
