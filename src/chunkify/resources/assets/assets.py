@@ -18,14 +18,6 @@ from .outputs import (
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
-from .workflow import (
-    WorkflowResource,
-    AsyncWorkflowResource,
-    WorkflowResourceWithRawResponse,
-    AsyncWorkflowResourceWithRawResponse,
-    WorkflowResourceWithStreamingResponse,
-    AsyncWorkflowResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -38,6 +30,14 @@ from ..._wrappers import DataWrapper
 from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ...types.asset import Asset
 from ..._base_client import AsyncPaginator, make_request_options
+from .workflow.workflow import (
+    WorkflowResource,
+    AsyncWorkflowResource,
+    WorkflowResourceWithRawResponse,
+    AsyncWorkflowResourceWithRawResponse,
+    WorkflowResourceWithStreamingResponse,
+    AsyncWorkflowResourceWithStreamingResponse,
+)
 from ...types.asset_status import AssetStatus
 
 __all__ = ["AssetsResource", "AsyncAssetsResource"]
