@@ -7,7 +7,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import thumbnail_list_params, thumbnail_create_params, thumbnail_delete_params
+from ..types import (
+    ThumbnailCreateStorageParams,
+    thumbnail_list_params,
+    thumbnail_create_params,
+    thumbnail_delete_params,
+)
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,7 +27,7 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.thumbnail import Thumbnail
-from ..types.thumbnail_create_storage_param import ThumbnailCreateStorageParam
+from ..types.thumbnail_create_storage_params import ThumbnailCreateStorageParams
 
 __all__ = ["ThumbnailsResource", "AsyncThumbnailsResource"]
 
@@ -57,7 +62,7 @@ class ThumbnailsResource(SyncAPIResource):
         output: Literal["images", "sprites"] | Omit = omit,
         range: thumbnail_create_params.Range | Omit = omit,
         size: int | Omit = omit,
-        storage: ThumbnailCreateStorageParam | Omit = omit,
+        storage: ThumbnailCreateStorageParams | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -320,7 +325,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         output: Literal["images", "sprites"] | Omit = omit,
         range: thumbnail_create_params.Range | Omit = omit,
         size: int | Omit = omit,
-        storage: ThumbnailCreateStorageParam | Omit = omit,
+        storage: ThumbnailCreateStorageParams | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
