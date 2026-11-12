@@ -2,30 +2,42 @@
 
 from __future__ import annotations
 
-from typing import Type, cast
+from typing import Type, Optional, cast
 
 import httpx
 
-from ..types import project_create_params, project_update_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ...types import project_create_params, project_update_params
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._wrappers import DataWrapper
-from .._base_client import make_request_options
-from ..types.project import Project
-from ..types.project_list_response import ProjectListResponse
+from ..._wrappers import DataWrapper
+from ..._base_client import make_request_options
+from ...types.project import Project
+from ...types.project_list_response import ProjectListResponse
+from .analytics_connections.analytics_connections import (
+    AnalyticsConnectionsResource,
+    AsyncAnalyticsConnectionsResource,
+    AnalyticsConnectionsResourceWithRawResponse,
+    AsyncAnalyticsConnectionsResourceWithRawResponse,
+    AnalyticsConnectionsResourceWithStreamingResponse,
+    AsyncAnalyticsConnectionsResourceWithStreamingResponse,
+)
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
 
 class ProjectsResource(SyncAPIResource):
+    @cached_property
+    def analytics_connections(self) -> AnalyticsConnectionsResource:
+        return AnalyticsConnectionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> ProjectsResourceWithRawResponse:
         """
@@ -73,7 +85,7 @@ class ProjectsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/projects",
+            "/projects",
             body=maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -112,7 +124,7 @@ class ProjectsResource(SyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return self._get(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -128,6 +140,8 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
+        asset_defaults: project_update_params.AssetDefaults | Omit = omit,
+        default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -143,9 +157,15 @@ class ProjectsResource(SyncAPIResource):
         projects.
 
         Args:
-          name: Name is the name of the project. Required when storage_id is not provided.
+          asset_defaults: Defaults for new Assets and automatic Uploads. Replaces the whole object.
+              Omitted fields reset to their defaults. Existing Assets are unchanged.
 
-          storage_id: StorageId is the storage id of the project. Required when name is not provided.
+          default_workflow_id: DefaultWorkflowId specifies the default Workflow for new Assets. Set null to
+              clear it.
+
+          name: Project name.
+
+          storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
 
@@ -159,9 +179,11 @@ class ProjectsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._patch(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             body=maybe_transform(
                 {
+                    "asset_defaults": asset_defaults,
+                    "default_workflow_id": default_workflow_id,
                     "name": name,
                     "storage_id": storage_id,
                 },
@@ -189,7 +211,7 @@ class ProjectsResource(SyncAPIResource):
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
         return self._get(
-            "/api/projects",
+            "/projects",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -214,7 +236,8 @@ class ProjectsResource(SyncAPIResource):
         """Delete a project and revoke all associated access tokens.
 
         Only team owners can
-        delete projects.
+        delete projects. Customer output files remain in Storage; managed temporary
+        files retain their original expiry.
 
         Args:
           extra_headers: Send extra headers
@@ -229,7 +252,7 @@ class ProjectsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -242,6 +265,10 @@ class ProjectsResource(SyncAPIResource):
 
 
 class AsyncProjectsResource(AsyncAPIResource):
+    @cached_property
+    def analytics_connections(self) -> AsyncAnalyticsConnectionsResource:
+        return AsyncAnalyticsConnectionsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncProjectsResourceWithRawResponse:
         """
@@ -289,7 +316,7 @@ class AsyncProjectsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/projects",
+            "/projects",
             body=await async_maybe_transform({"name": name}, project_create_params.ProjectCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -328,7 +355,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         if not project_id:
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         return await self._get(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -344,6 +371,8 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
+        asset_defaults: project_update_params.AssetDefaults | Omit = omit,
+        default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -359,9 +388,15 @@ class AsyncProjectsResource(AsyncAPIResource):
         projects.
 
         Args:
-          name: Name is the name of the project. Required when storage_id is not provided.
+          asset_defaults: Defaults for new Assets and automatic Uploads. Replaces the whole object.
+              Omitted fields reset to their defaults. Existing Assets are unchanged.
 
-          storage_id: StorageId is the storage id of the project. Required when name is not provided.
+          default_workflow_id: DefaultWorkflowId specifies the default Workflow for new Assets. Set null to
+              clear it.
+
+          name: Project name.
+
+          storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
 
@@ -375,9 +410,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._patch(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             body=await async_maybe_transform(
                 {
+                    "asset_defaults": asset_defaults,
+                    "default_workflow_id": default_workflow_id,
                     "name": name,
                     "storage_id": storage_id,
                 },
@@ -405,7 +442,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     ) -> ProjectListResponse:
         """Retrieve a list of all projects for a team"""
         return await self._get(
-            "/api/projects",
+            "/projects",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -430,7 +467,8 @@ class AsyncProjectsResource(AsyncAPIResource):
         """Delete a project and revoke all associated access tokens.
 
         Only team owners can
-        delete projects.
+        delete projects. Customer output files remain in Storage; managed temporary
+        files retain their original expiry.
 
         Args:
           extra_headers: Send extra headers
@@ -445,7 +483,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `project_id` but received {project_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/projects/{project_id}", project_id=project_id),
+            path_template("/projects/{project_id}", project_id=project_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -477,6 +515,10 @@ class ProjectsResourceWithRawResponse:
             projects.delete,
         )
 
+    @cached_property
+    def analytics_connections(self) -> AnalyticsConnectionsResourceWithRawResponse:
+        return AnalyticsConnectionsResourceWithRawResponse(self._projects.analytics_connections)
+
 
 class AsyncProjectsResourceWithRawResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -497,6 +539,10 @@ class AsyncProjectsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             projects.delete,
         )
+
+    @cached_property
+    def analytics_connections(self) -> AsyncAnalyticsConnectionsResourceWithRawResponse:
+        return AsyncAnalyticsConnectionsResourceWithRawResponse(self._projects.analytics_connections)
 
 
 class ProjectsResourceWithStreamingResponse:
@@ -519,6 +565,10 @@ class ProjectsResourceWithStreamingResponse:
             projects.delete,
         )
 
+    @cached_property
+    def analytics_connections(self) -> AnalyticsConnectionsResourceWithStreamingResponse:
+        return AnalyticsConnectionsResourceWithStreamingResponse(self._projects.analytics_connections)
+
 
 class AsyncProjectsResourceWithStreamingResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
@@ -539,3 +589,7 @@ class AsyncProjectsResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             projects.delete,
         )
+
+    @cached_property
+    def analytics_connections(self) -> AsyncAnalyticsConnectionsResourceWithStreamingResponse:
+        return AsyncAnalyticsConnectionsResourceWithStreamingResponse(self._projects.analytics_connections)

@@ -57,17 +57,22 @@ class WebmVp9(BaseModel):
     """
 
     framerate: Optional[float] = None
-    """
-    Framerate specifies the output video frame rate. Must be between 15 and 120 fps.
+    """Framerate specifies the output video frame rate.
+
+    Must be greater than zero and at most 240 fps.
     """
 
     gop: Optional[int] = None
-    """Gop specifies the Group of Pictures (GOP) size. Must be between 1 and 300."""
+    """Gop specifies the Group of Pictures (GOP) size.
+
+    Must be between 1 and 960 frames.
+    """
 
     height: Optional[int] = None
-    """Height specifies the output video height in pixels. Must be between -2 and 7680.
+    """Height specifies the output video height in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """
 
     maxrate: Optional[int] = None
@@ -139,13 +144,14 @@ class WebmVp9(BaseModel):
     """
 
     video_bitrate: Optional[int] = None
-    """
-    VideoBitrate specifies the video bitrate in bits per second. Must be between
-    100Kbps and 50Mbps.
+    """VideoBitrate specifies the video bitrate in bits per second.
+
+    Must be between 1 bps and 100 Mbps.
     """
 
     width: Optional[int] = None
-    """Width specifies the output video width in pixels. Must be between -2 and 7680.
+    """Width specifies the output video width in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """

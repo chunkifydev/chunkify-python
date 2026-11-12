@@ -28,6 +28,8 @@ class TestUploads:
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         upload = client.uploads.create(
+            create_asset=True,
+            file_size_bytes=1,
             metadata={
                 "key": "value",
                 "key2": "value2",
@@ -36,7 +38,9 @@ class TestUploads:
                 "id": "x",
                 "path": "x",
             },
+            upload_mode="single",
             validity_timeout=7200,
+            workflow_id="x",
         )
         assert_matches_type(Upload, upload, path=["response"])
 
@@ -196,7 +200,13 @@ class TestUploads:
     @parametrize
     def test_method_complete(self, client: Chunkify) -> None:
         upload = client.uploads.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         )
         assert upload is None
 
@@ -204,7 +214,13 @@ class TestUploads:
     @parametrize
     def test_raw_response_complete(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -216,7 +232,13 @@ class TestUploads:
     @parametrize
     def test_streaming_response_complete(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -231,7 +253,13 @@ class TestUploads:
     def test_path_params_complete(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             client.uploads.with_raw_response.complete(
-                "",
+                token="",
+                parts=[
+                    {
+                        "etag": '"abc123"',
+                        "part_number": 1,
+                    }
+                ],
             )
 
 
@@ -250,6 +278,8 @@ class TestAsyncUploads:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.create(
+            create_asset=True,
+            file_size_bytes=1,
             metadata={
                 "key": "value",
                 "key2": "value2",
@@ -258,7 +288,9 @@ class TestAsyncUploads:
                 "id": "x",
                 "path": "x",
             },
+            upload_mode="single",
             validity_timeout=7200,
+            workflow_id="x",
         )
         assert_matches_type(Upload, upload, path=["response"])
 
@@ -418,7 +450,13 @@ class TestAsyncUploads:
     @parametrize
     async def test_method_complete(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         )
         assert upload is None
 
@@ -426,7 +464,13 @@ class TestAsyncUploads:
     @parametrize
     async def test_raw_response_complete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -438,7 +482,13 @@ class TestAsyncUploads:
     @parametrize
     async def test_streaming_response_complete(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.complete(
-            "token",
+            token="token",
+            parts=[
+                {
+                    "etag": '"abc123"',
+                    "part_number": 1,
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -453,5 +503,11 @@ class TestAsyncUploads:
     async def test_path_params_complete(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             await async_client.uploads.with_raw_response.complete(
-                "",
+                token="",
+                parts=[
+                    {
+                        "etag": '"abc123"',
+                        "part_number": 1,
+                    }
+                ],
             )

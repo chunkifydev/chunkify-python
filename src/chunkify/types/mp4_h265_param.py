@@ -48,17 +48,22 @@ class MP4H265Param(TypedDict, total=False):
     """
 
     framerate: float
-    """
-    Framerate specifies the output video frame rate. Must be between 15 and 120 fps.
+    """Framerate specifies the output video frame rate.
+
+    Must be greater than zero and at most 240 fps.
     """
 
     gop: int
-    """Gop specifies the Group of Pictures (GOP) size. Must be between 1 and 300."""
+    """Gop specifies the Group of Pictures (GOP) size.
+
+    Must be between 1 and 960 frames.
+    """
 
     height: int
-    """Height specifies the output video height in pixels. Must be between -2 and 7680.
+    """Height specifies the output video height in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """
 
     level: Literal[30, 31, 41]
@@ -150,15 +155,16 @@ class MP4H265Param(TypedDict, total=False):
     """
 
     video_bitrate: int
-    """
-    VideoBitrate specifies the video bitrate in bits per second. Must be between
-    100Kbps and 50Mbps.
+    """VideoBitrate specifies the video bitrate in bits per second.
+
+    Must be between 1 bps and 100 Mbps.
     """
 
     width: int
-    """Width specifies the output video width in pixels. Must be between -2 and 7680.
+    """Width specifies the output video width in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """
 
     x265_keyint: int

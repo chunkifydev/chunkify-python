@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, Iterable, cast
+from typing import Dict, Type, Iterable, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import upload_list_params, upload_create_params
+from ..types import upload_list_params, upload_create_params, upload_complete_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -49,9 +49,13 @@ class UploadsResource(SyncAPIResource):
     def create(
         self,
         *,
+        create_asset: bool | Omit = omit,
+        file_size_bytes: int | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         storage: upload_create_params.Storage | Omit = omit,
+        upload_mode: Literal["single", "multipart", "auto"] | Omit = omit,
         validity_timeout: int | Omit = omit,
+        workflow_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,10 +63,25 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
-        """
-        Create a new upload with the specified name.
+        """Create an Upload session for a direct transfer to storage.
+
+        Multipart creation
+        returns every signed part URL. Retry parts with their original URLs and complete
+        before expiry. Customer storage requires long-lived credentials and an
+        incomplete-multipart lifecycle rule. Start a new Upload after abandoning a
+        session.
 
         Args:
+          create_asset: CreateAsset specifies whether to create an Asset after Upload completion.
+              Defaults to false. Snapshots the Project output settings, including the path
+              template. Referenced metadata must be non-empty in this request. Asset
+              processing is billed separately.
+
+          file_size_bytes: FileSizeBytes specifies the exact file size in bytes. Required when UploadMode
+              is omitted, auto, or multipart. Optional for explicit single mode. Must fit the
+              team's Source size limit. Single PUT supports up to 5 GiB, subject to the
+              provider's limit; multipart supports up to 5 TiB.
+
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
@@ -70,7 +89,21 @@ class UploadsResource(SyncAPIResource):
               Customer-connected Storage requires path; Chunkify Storage generates its own
               path.
 
-          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
+          upload_mode: UploadMode specifies the transfer method. Defaults to auto. Auto chooses
+              multipart above 100 MiB and single PUT at or below 100 MiB for every Storage
+              provider. Multipart requires a provider that supports the required multipart
+              operations and signed part URLs. Provider failures return an error without
+              falling back to single PUT.
+
+          validity_timeout: ValidityTimeout specifies the session and signed URL lifetime in seconds. Single
+              PUT defaults to 7200 and allows 300–36000. Multipart defaults to twice the
+              transfer time at 5 Mbps plus 1800 seconds, bounded to 7200–172800; an explicit
+              value allows 300–172800. Complete before expiry. Storage credentials and
+              policies can shorten URL validity. Expired URLs cannot be refreshed.
+
+          workflow_id: WorkflowId specifies the Workflow to select. Omit to use the Project default.
+              Set null to disable automatic actions. The current revision is pinned when
+              creation is accepted.
 
           extra_headers: Send extra headers
 
@@ -81,12 +114,16 @@ class UploadsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/uploads",
+            "/uploads",
             body=maybe_transform(
                 {
+                    "create_asset": create_asset,
+                    "file_size_bytes": file_size_bytes,
                     "metadata": metadata,
                     "storage": storage,
+                    "upload_mode": upload_mode,
                     "validity_timeout": validity_timeout,
+                    "workflow_id": workflow_id,
                 },
                 upload_create_params.UploadCreateParams,
             ),
@@ -128,7 +165,7 @@ class UploadsResource(SyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         return self._get(
-            path_template("/api/uploads/{upload_id}", upload_id=upload_id),
+            path_template("/uploads/{upload_id}", upload_id=upload_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -182,7 +219,7 @@ class UploadsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/uploads",
+            "/uploads",
             page=SyncPaginatedResults[Upload],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -233,7 +270,7 @@ class UploadsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/uploads/{upload_id}", upload_id=upload_id),
+            path_template("/uploads/{upload_id}", upload_id=upload_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -248,6 +285,7 @@ class UploadsResource(SyncAPIResource):
         self,
         token: str,
         *,
+        parts: Iterable[upload_complete_params.Part],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -255,16 +293,20 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """After a successful PUT, POST the returned completion_url before expires_at.
+        """POST the returned completion_url before expires_at.
 
-        The
-        token authorizes only this Upload; no API key, cookies, or request body is
-        required. Verifies the stored object and commits one Source relationship. Valid
-        retries return 204 without duplicate side effects. Retry network errors, 429,
-        and 5xx responses with bounded backoff; never repeat the PUT just to retry
-        completion.
+        Single-PUT Uploads send no
+        body; multipart Uploads send every part number and storage ETag. Chunkify
+        verifies the assembled object and atomically creates the Source and optional
+        Asset. An Asset destination conflict returns 409 and fails the Upload without
+        committing Source, Asset, or usage changes. Valid retries return 204 without
+        duplicate side effects. Retry network errors, 429, and 5xx responses with
+        bounded backoff.
 
         Args:
+          parts: All uploaded parts in ascending part_number order, with the ETags returned by
+              storage.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -277,7 +319,8 @@ class UploadsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            path_template("/api/uploads/completion/{token}", token=token),
+            path_template("/uploads/completion/{token}", token=token),
+            body=maybe_transform({"parts": parts}, upload_complete_params.UploadCompleteParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -312,9 +355,13 @@ class AsyncUploadsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        create_asset: bool | Omit = omit,
+        file_size_bytes: int | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
         storage: upload_create_params.Storage | Omit = omit,
+        upload_mode: Literal["single", "multipart", "auto"] | Omit = omit,
         validity_timeout: int | Omit = omit,
+        workflow_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -322,10 +369,25 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
-        """
-        Create a new upload with the specified name.
+        """Create an Upload session for a direct transfer to storage.
+
+        Multipart creation
+        returns every signed part URL. Retry parts with their original URLs and complete
+        before expiry. Customer storage requires long-lived credentials and an
+        incomplete-multipart lifecycle rule. Start a new Upload after abandoning a
+        session.
 
         Args:
+          create_asset: CreateAsset specifies whether to create an Asset after Upload completion.
+              Defaults to false. Snapshots the Project output settings, including the path
+              template. Referenced metadata must be non-empty in this request. Asset
+              processing is billed separately.
+
+          file_size_bytes: FileSizeBytes specifies the exact file size in bytes. Required when UploadMode
+              is omitted, auto, or multipart. Optional for explicit single mode. Must fit the
+              team's Source size limit. Single PUT supports up to 5 GiB, subject to the
+              provider's limit; multipart supports up to 5 TiB.
+
           metadata: Metadata allows for additional information to be attached to the upload, with a
               maximum size of 2048 bytes.
 
@@ -333,7 +395,21 @@ class AsyncUploadsResource(AsyncAPIResource):
               Customer-connected Storage requires path; Chunkify Storage generates its own
               path.
 
-          validity_timeout: Both the file PUT and completion POST must finish within this timeout in seconds
+          upload_mode: UploadMode specifies the transfer method. Defaults to auto. Auto chooses
+              multipart above 100 MiB and single PUT at or below 100 MiB for every Storage
+              provider. Multipart requires a provider that supports the required multipart
+              operations and signed part URLs. Provider failures return an error without
+              falling back to single PUT.
+
+          validity_timeout: ValidityTimeout specifies the session and signed URL lifetime in seconds. Single
+              PUT defaults to 7200 and allows 300–36000. Multipart defaults to twice the
+              transfer time at 5 Mbps plus 1800 seconds, bounded to 7200–172800; an explicit
+              value allows 300–172800. Complete before expiry. Storage credentials and
+              policies can shorten URL validity. Expired URLs cannot be refreshed.
+
+          workflow_id: WorkflowId specifies the Workflow to select. Omit to use the Project default.
+              Set null to disable automatic actions. The current revision is pinned when
+              creation is accepted.
 
           extra_headers: Send extra headers
 
@@ -344,12 +420,16 @@ class AsyncUploadsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/uploads",
+            "/uploads",
             body=await async_maybe_transform(
                 {
+                    "create_asset": create_asset,
+                    "file_size_bytes": file_size_bytes,
                     "metadata": metadata,
                     "storage": storage,
+                    "upload_mode": upload_mode,
                     "validity_timeout": validity_timeout,
+                    "workflow_id": workflow_id,
                 },
                 upload_create_params.UploadCreateParams,
             ),
@@ -391,7 +471,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         if not upload_id:
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         return await self._get(
-            path_template("/api/uploads/{upload_id}", upload_id=upload_id),
+            path_template("/uploads/{upload_id}", upload_id=upload_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -445,7 +525,7 @@ class AsyncUploadsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/uploads",
+            "/uploads",
             page=AsyncPaginatedResults[Upload],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -496,7 +576,7 @@ class AsyncUploadsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `upload_id` but received {upload_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/uploads/{upload_id}", upload_id=upload_id),
+            path_template("/uploads/{upload_id}", upload_id=upload_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -511,6 +591,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         self,
         token: str,
         *,
+        parts: Iterable[upload_complete_params.Part],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -518,16 +599,20 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """After a successful PUT, POST the returned completion_url before expires_at.
+        """POST the returned completion_url before expires_at.
 
-        The
-        token authorizes only this Upload; no API key, cookies, or request body is
-        required. Verifies the stored object and commits one Source relationship. Valid
-        retries return 204 without duplicate side effects. Retry network errors, 429,
-        and 5xx responses with bounded backoff; never repeat the PUT just to retry
-        completion.
+        Single-PUT Uploads send no
+        body; multipart Uploads send every part number and storage ETag. Chunkify
+        verifies the assembled object and atomically creates the Source and optional
+        Asset. An Asset destination conflict returns 409 and fails the Upload without
+        committing Source, Asset, or usage changes. Valid retries return 204 without
+        duplicate side effects. Retry network errors, 429, and 5xx responses with
+        bounded backoff.
 
         Args:
+          parts: All uploaded parts in ascending part_number order, with the ETags returned by
+              storage.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -540,7 +625,8 @@ class AsyncUploadsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            path_template("/api/uploads/completion/{token}", token=token),
+            path_template("/uploads/completion/{token}", token=token),
+            body=await async_maybe_transform({"parts": parts}, upload_complete_params.UploadCompleteParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

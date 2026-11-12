@@ -1,22 +1,38 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union
+from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from .job import Job
+from .asset import Asset
 from .source import Source
 from .upload import Upload
 from .._models import BaseModel
 from .job_file import JobFile
+from .thumbnail import Thumbnail
+from .transcoding import Transcoding
+from .assets.asset_output import AssetOutput
+from .workflows.workflow_run import WorkflowRun
+from .assets.asset_action_run import AssetActionRun
 
 __all__ = [
     "NewEventWebhookEvent",
     "Data",
     "DataNotificationPayloadJobCompleted",
     "DataNotificationPayloadJobFailed",
+    "DataNotificationPayloadJobCreated",
+    "DataNotificationPayloadSourceCreated",
+    "DataNotificationPayloadUploadCreated",
     "DataNotificationPayloadUploadCompleted",
     "DataNotificationPayloadUploadFailed",
+    "DataNotificationPayloadAsset",
+    "DataNotificationPayloadAssetOutput",
+    "DataNotificationPayloadAssetOutputDeleted",
+    "DataNotificationPayloadAssetDeleted",
+    "DataNotificationPayloadWorkflowRun",
+    "DataNotificationPayloadTranscoding",
+    "DataThumbnailEventData",
 ]
 
 
@@ -35,6 +51,33 @@ class DataNotificationPayloadJobFailed(BaseModel):
     job: Job
 
 
+class DataNotificationPayloadJobCreated(BaseModel):
+    """Payload for job.created.
+
+    A standalone Job has been accepted for processing; execution may not have started.
+    """
+
+    job: Job
+
+
+class DataNotificationPayloadSourceCreated(BaseModel):
+    """Payload for source.created.
+
+    The Source has been validated and saved. Thumbnails may still be pending.
+    """
+
+    source: Source
+
+
+class DataNotificationPayloadUploadCreated(BaseModel):
+    """Payload for upload.created.
+
+    A waiting upload session has been created; its Source is created only after successful completion. Transfer credentials are not included.
+    """
+
+    upload: Upload
+
+
 class DataNotificationPayloadUploadCompleted(BaseModel):
     """Payload data structure for upload.completed events"""
 
@@ -49,11 +92,112 @@ class DataNotificationPayloadUploadFailed(BaseModel):
     upload: Upload
 
 
+class DataNotificationPayloadAsset(BaseModel):
+    asset: Asset
+
+
+class DataNotificationPayloadAssetOutput(BaseModel):
+    """Payload for Asset output creation, readiness, and failure events."""
+
+    output: AssetOutput
+    """
+    Output contains the canonical typed output snapshot at the event time, matching
+    the output API.
+    """
+
+
+class DataNotificationPayloadAssetOutputDeleted(BaseModel):
+    """Payload for asset.output.deleted.
+
+    The output snapshot is preserved after removal.
+    """
+
+    files_deleted: bool
+    """
+    FilesDeleted indicates whether the requested cleanup of the output files
+    completed without error. Missing files count as successful cleanup. False means
+    these files were not removed at event time. Private transcript text and saved
+    subtitle copies are always scheduled for asynchronous cleanup.
+    """
+
+    output: AssetOutput
+    """Output contains the canonical typed output snapshot before removal."""
+
+
+class DataNotificationPayloadAssetDeleted(BaseModel):
+    """Payload for asset.deleted.
+
+    The Asset snapshot is preserved after record deletion.
+    """
+
+    asset: Asset
+
+    files_deleted: bool
+    """
+    FilesDeleted indicates whether the requested cleanup of the Asset's generated
+    files completed without error. Missing files count as successful cleanup. False
+    means these files were not removed at event time. Private transcript text and
+    saved subtitle copies are always scheduled for asynchronous cleanup.
+    """
+
+    deleted_size: Optional[int] = None
+    """
+    DeletedSize specifies the recorded generated-file bytes removed with the Asset,
+    including attached outputs. Omitted when cleanup was not requested or the total
+    is unavailable. Missing storage objects still contribute their recorded sizes.
+    """
+
+
+class DataNotificationPayloadWorkflowRun(BaseModel):
+    """
+    Payload for workflow_run.created, workflow_run.completed, workflow_run.failed, and workflow_run.cancelled. The run and its actions are snapshots taken when the event was recorded.
+    """
+
+    action_runs: List[AssetActionRun]
+    """
+    ActionRuns specifies every action admitted by this run, including its rule and
+    action IDs, type, input, status, output reference, and any skip or failure
+    reason. Actions from other runs are excluded.
+    """
+
+    workflow_run: WorkflowRun
+    """Snapshot of the Workflow run when the event was recorded."""
+
+
+class DataNotificationPayloadTranscoding(BaseModel):
+    """
+    Payload for transcoding.created, transcoding.ready, transcoding.failed, transcoding.cancelled, transcoding.expired and transcoding.deleted events.
+    """
+
+    transcoding: Transcoding
+    """Transcoding contains the canonical resource snapshot at the event time."""
+
+
+class DataThumbnailEventData(BaseModel):
+    """A canonical thumbnail snapshot for standalone thumbnail.* events.
+
+    Asset-owned thumbnails use the Asset output event payload.
+    """
+
+    thumbnail: Thumbnail
+    """Thumbnail contains the resource at the event time."""
+
+
 Data: TypeAlias = Union[
     DataNotificationPayloadJobCompleted,
     DataNotificationPayloadJobFailed,
+    DataNotificationPayloadJobCreated,
+    DataNotificationPayloadSourceCreated,
+    DataNotificationPayloadUploadCreated,
     DataNotificationPayloadUploadCompleted,
     DataNotificationPayloadUploadFailed,
+    DataNotificationPayloadAsset,
+    DataNotificationPayloadAssetOutput,
+    DataNotificationPayloadAssetOutputDeleted,
+    DataNotificationPayloadAssetDeleted,
+    DataNotificationPayloadWorkflowRun,
+    DataNotificationPayloadTranscoding,
+    DataThumbnailEventData,
 ]
 
 
@@ -62,12 +206,50 @@ class NewEventWebhookEvent(BaseModel):
     """Unique identifier of the notification"""
 
     data: Data
-    """Event-specific payload data"""
+    """Payload for the event named in event.
+
+    Replays preserve the original data; retrieve the resource for current state and
+    fresh signed URLs.
+    """
 
     date: datetime
-    """Timestamp when the notification was sent"""
+    """Timestamp of the event payload."""
 
     event: Literal[
-        "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+        "job.created",
+        "job.completed",
+        "job.failed",
+        "job.cancelled",
+        "source.created",
+        "source.deleted",
+        "upload.created",
+        "upload.completed",
+        "upload.failed",
+        "upload.expired",
+        "asset.created",
+        "asset.ready",
+        "asset.playback_ready",
+        "asset.failed",
+        "asset.expired",
+        "asset.deleted",
+        "asset.output.created",
+        "asset.output.ready",
+        "asset.output.failed",
+        "asset.output.deleted",
+        "workflow_run.created",
+        "workflow_run.completed",
+        "workflow_run.failed",
+        "workflow_run.cancelled",
+        "transcoding.created",
+        "transcoding.ready",
+        "transcoding.failed",
+        "transcoding.cancelled",
+        "transcoding.expired",
+        "transcoding.deleted",
+        "thumbnail.created",
+        "thumbnail.ready",
+        "thumbnail.failed",
+        "thumbnail.expired",
+        "thumbnail.deleted",
     ]
     """Type of event that triggered the notification."""

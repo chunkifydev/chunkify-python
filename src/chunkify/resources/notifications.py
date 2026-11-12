@@ -50,7 +50,41 @@ class NotificationsResource(SyncAPIResource):
         self,
         *,
         event: Literal[
-            "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+            "job.created",
+            "job.completed",
+            "job.failed",
+            "job.cancelled",
+            "source.created",
+            "source.deleted",
+            "upload.created",
+            "upload.completed",
+            "upload.failed",
+            "upload.expired",
+            "asset.created",
+            "asset.ready",
+            "asset.playback_ready",
+            "asset.failed",
+            "asset.expired",
+            "asset.deleted",
+            "asset.output.created",
+            "asset.output.ready",
+            "asset.output.failed",
+            "asset.output.deleted",
+            "workflow_run.created",
+            "workflow_run.completed",
+            "workflow_run.failed",
+            "workflow_run.cancelled",
+            "transcoding.created",
+            "transcoding.ready",
+            "transcoding.failed",
+            "transcoding.cancelled",
+            "transcoding.expired",
+            "transcoding.deleted",
+            "thumbnail.created",
+            "thumbnail.ready",
+            "thumbnail.failed",
+            "thumbnail.expired",
+            "thumbnail.deleted",
         ],
         object_id: str,
         webhook_id: str,
@@ -61,13 +95,18 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
-        """
-        Create a new notification for a job event
+        """Send an event notification to a webhook endpoint.
+
+        Recorded events replay their
+        original payload.
 
         Args:
           event: Event specifies the type of event that triggered the notification.
 
-          object_id: ObjectId specifies the object that triggered this notification.
+          object_id: ID of the resource that triggered the event. Use the caption, static rendition,
+              or thumbnail ID for their Asset child events. Replaying asset events,
+              job.created, or source.created requires a retained snapshot. Resource deletion
+              does not prevent replay.
 
           webhook_id: WebhookId specifies the webhook endpoint that will receive the notification.
 
@@ -80,7 +119,7 @@ class NotificationsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/api/notifications",
+            "/notifications",
             body=maybe_transform(
                 {
                     "event": event,
@@ -126,7 +165,7 @@ class NotificationsResource(SyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         return self._get(
-            path_template("/api/notifications/{notification_id}", notification_id=notification_id),
+            path_template("/notifications/{notification_id}", notification_id=notification_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -142,9 +181,44 @@ class NotificationsResource(SyncAPIResource):
         self,
         *,
         created: notification_list_params.Created | Omit = omit,
+        event_id: str | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -164,6 +238,8 @@ class NotificationsResource(SyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
+          event_id: Filter deliveries by their originating event ID.
+
           events: Filter by events
 
           limit: Pagination limit (max 100)
@@ -183,7 +259,7 @@ class NotificationsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/notifications",
+            "/notifications",
             page=SyncPaginatedResults[Notification],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -193,6 +269,7 @@ class NotificationsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "created": created,
+                        "event_id": event_id,
                         "events": events,
                         "limit": limit,
                         "object_id": object_id,
@@ -234,7 +311,7 @@ class NotificationsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/api/notifications/{notification_id}", notification_id=notification_id),
+            path_template("/notifications/{notification_id}", notification_id=notification_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -270,7 +347,41 @@ class AsyncNotificationsResource(AsyncAPIResource):
         self,
         *,
         event: Literal[
-            "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+            "job.created",
+            "job.completed",
+            "job.failed",
+            "job.cancelled",
+            "source.created",
+            "source.deleted",
+            "upload.created",
+            "upload.completed",
+            "upload.failed",
+            "upload.expired",
+            "asset.created",
+            "asset.ready",
+            "asset.playback_ready",
+            "asset.failed",
+            "asset.expired",
+            "asset.deleted",
+            "asset.output.created",
+            "asset.output.ready",
+            "asset.output.failed",
+            "asset.output.deleted",
+            "workflow_run.created",
+            "workflow_run.completed",
+            "workflow_run.failed",
+            "workflow_run.cancelled",
+            "transcoding.created",
+            "transcoding.ready",
+            "transcoding.failed",
+            "transcoding.cancelled",
+            "transcoding.expired",
+            "transcoding.deleted",
+            "thumbnail.created",
+            "thumbnail.ready",
+            "thumbnail.failed",
+            "thumbnail.expired",
+            "thumbnail.deleted",
         ],
         object_id: str,
         webhook_id: str,
@@ -281,13 +392,18 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
-        """
-        Create a new notification for a job event
+        """Send an event notification to a webhook endpoint.
+
+        Recorded events replay their
+        original payload.
 
         Args:
           event: Event specifies the type of event that triggered the notification.
 
-          object_id: ObjectId specifies the object that triggered this notification.
+          object_id: ID of the resource that triggered the event. Use the caption, static rendition,
+              or thumbnail ID for their Asset child events. Replaying asset events,
+              job.created, or source.created requires a retained snapshot. Resource deletion
+              does not prevent replay.
 
           webhook_id: WebhookId specifies the webhook endpoint that will receive the notification.
 
@@ -300,7 +416,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/api/notifications",
+            "/notifications",
             body=await async_maybe_transform(
                 {
                     "event": event,
@@ -346,7 +462,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         return await self._get(
-            path_template("/api/notifications/{notification_id}", notification_id=notification_id),
+            path_template("/notifications/{notification_id}", notification_id=notification_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -362,9 +478,44 @@ class AsyncNotificationsResource(AsyncAPIResource):
         self,
         *,
         created: notification_list_params.Created | Omit = omit,
+        event_id: str | Omit = omit,
         events: List[
             Literal[
-                "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+                "job.created",
+                "job.completed",
+                "job.failed",
+                "job.cancelled",
+                "source.created",
+                "source.deleted",
+                "upload.created",
+                "upload.completed",
+                "upload.failed",
+                "upload.expired",
+                "asset.created",
+                "asset.ready",
+                "asset.playback_ready",
+                "asset.failed",
+                "asset.expired",
+                "asset.deleted",
+                "asset.output.created",
+                "asset.output.ready",
+                "asset.output.failed",
+                "asset.output.deleted",
+                "workflow_run.created",
+                "workflow_run.completed",
+                "workflow_run.failed",
+                "workflow_run.cancelled",
+                "transcoding.created",
+                "transcoding.ready",
+                "transcoding.failed",
+                "transcoding.cancelled",
+                "transcoding.expired",
+                "transcoding.deleted",
+                "thumbnail.created",
+                "thumbnail.ready",
+                "thumbnail.failed",
+                "thumbnail.expired",
+                "thumbnail.deleted",
             ]
         ]
         | Omit = omit,
@@ -384,6 +535,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Retrieve a list of notifications with optional filtering and pagination
 
         Args:
+          event_id: Filter deliveries by their originating event ID.
+
           events: Filter by events
 
           limit: Pagination limit (max 100)
@@ -403,7 +556,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/api/notifications",
+            "/notifications",
             page=AsyncPaginatedResults[Notification],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -413,6 +566,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "created": created,
+                        "event_id": event_id,
                         "events": events,
                         "limit": limit,
                         "object_id": object_id,
@@ -454,7 +608,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/api/notifications/{notification_id}", notification_id=notification_id),
+            path_template("/notifications/{notification_id}", notification_id=notification_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
