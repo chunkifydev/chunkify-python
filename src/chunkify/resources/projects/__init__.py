@@ -8,22 +8,22 @@ from .projects import (
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
 )
-from .analytics_connections import (
-    AnalyticsConnectionsResource,
-    AsyncAnalyticsConnectionsResource,
-    AnalyticsConnectionsResourceWithRawResponse,
-    AsyncAnalyticsConnectionsResourceWithRawResponse,
-    AnalyticsConnectionsResourceWithStreamingResponse,
-    AsyncAnalyticsConnectionsResourceWithStreamingResponse,
+from .analytics import (
+    AnalyticsResource,
+    AsyncAnalyticsResource,
+    AnalyticsResourceWithRawResponse,
+    AsyncAnalyticsResourceWithRawResponse,
+    AnalyticsResourceWithStreamingResponse,
+    AsyncAnalyticsResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "AnalyticsConnectionsResource",
-    "AsyncAnalyticsConnectionsResource",
-    "AnalyticsConnectionsResourceWithRawResponse",
-    "AsyncAnalyticsConnectionsResourceWithRawResponse",
-    "AnalyticsConnectionsResourceWithStreamingResponse",
-    "AsyncAnalyticsConnectionsResourceWithStreamingResponse",
+    "AnalyticsResource",
+    "AsyncAnalyticsResource",
+    "AnalyticsResourceWithRawResponse",
+    "AsyncAnalyticsResourceWithRawResponse",
+    "AnalyticsResourceWithStreamingResponse",
+    "AsyncAnalyticsResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",
