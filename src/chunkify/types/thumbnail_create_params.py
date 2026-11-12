@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-from .thumbnail_create_storage_param import ThumbnailCreateStorageParam
+from .thumbnail_create_storage_params import ThumbnailCreateStorageParams
 
 __all__ = ["ThumbnailCreateParams", "Range"]
 
@@ -45,7 +45,7 @@ class ThumbnailCreateParams(TypedDict, total=False):
     cropping or upscaling.
     """
 
-    storage: ThumbnailCreateStorageParam
+    storage: ThumbnailCreateStorageParams
     """Storage overrides the Project output destination and names the output files.
 
     Source storage remains independent.

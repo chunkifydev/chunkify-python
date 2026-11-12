@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ...._types import SequenceNotStr
+from ...._utils import PropertyInfo
 
 __all__ = ["ConnectionUpdateParams"]
 
 
 class ConnectionUpdateParams(TypedDict, total=False):
+    project_id: Required[Annotated[str, PropertyInfo(alias="projectId")]]
+
     allowed_origins: SequenceNotStr[str]
     """
     AllowedOrigins lists additional website origins permitted to ingest events for a

@@ -47,9 +47,9 @@ class KeysResource(SyncAPIResource):
 
     def create(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         purpose: Literal["player", "read", "mcp"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,9 +98,9 @@ class KeysResource(SyncAPIResource):
 
     def list(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -144,10 +144,10 @@ class KeysResource(SyncAPIResource):
 
     def rotate(
         self,
-        project_id: str,
-        connection_id: str,
         key_id: str,
         *,
+        project_id: str,
+        connection_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -215,9 +215,9 @@ class AsyncKeysResource(AsyncAPIResource):
 
     async def create(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         purpose: Literal["player", "read", "mcp"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -266,9 +266,9 @@ class AsyncKeysResource(AsyncAPIResource):
 
     async def list(
         self,
-        project_id: str,
         connection_id: str,
         *,
+        project_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -312,10 +312,10 @@ class AsyncKeysResource(AsyncAPIResource):
 
     async def rotate(
         self,
-        project_id: str,
-        connection_id: str,
         key_id: str,
         *,
+        project_id: str,
+        connection_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
