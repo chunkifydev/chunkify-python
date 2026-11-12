@@ -37,7 +37,7 @@ class JobFile(BaseModel):
     """Path to the file in storage"""
 
     size: int
-    """Size of the file in bytes"""
+    """Size of the object at this File's path in bytes"""
 
     storage_id: str
     """StorageId identifier where the file is stored"""
@@ -61,4 +61,11 @@ class JobFile(BaseModel):
     """
     Stable, unsigned CDN delivery URL derived from the file's current storage
     configuration. Omitted when no CDN base URL is configured.
+    """
+
+    package_size: Optional[int] = None
+    """
+    PackageSize specifies the media playlist and every media object it references in
+    bytes. Present only for HLS video media playlists; it excludes the shared master
+    playlist.
     """

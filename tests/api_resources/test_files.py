@@ -12,6 +12,8 @@ from tests.utils import assert_matches_type
 from chunkify.types import JobFile
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -21,17 +23,20 @@ class TestFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Chunkify) -> None:
-        file = client.files.retrieve(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            file = client.files.retrieve(
+                "fileId",
+            )
+
         assert_matches_type(JobFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Chunkify) -> None:
-        response = client.files.with_raw_response.retrieve(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.files.with_raw_response.retrieve(
+                "fileId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -41,87 +46,94 @@ class TestFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Chunkify) -> None:
-        with client.files.with_streaming_response.retrieve(
-            "fileId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.files.with_streaming_response.retrieve(
+                "fileId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = response.parse()
-            assert_matches_type(JobFile, file, path=["response"])
+                file = response.parse()
+                assert_matches_type(JobFile, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
-            client.files.with_raw_response.retrieve(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
+                client.files.with_raw_response.retrieve(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
-        file = client.files.list()
+        with pytest.warns(DeprecationWarning):
+            file = client.files.list()
+
         assert_matches_type(SyncPaginatedResults[JobFile], file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Chunkify) -> None:
-        file = client.files.list(
-            id="id",
-            audio_codec="audio_codec",
-            created={
-                "gte": 0,
-                "lte": 0,
-                "sort": "asc",
-            },
-            duration={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            height={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            job_id="job_id",
-            limit=1,
-            mime_type="mime_type",
-            offset=0,
-            path={
-                "eq": "eq",
-                "ilike": "ilike",
-            },
-            size={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            storage_id="storage_id",
-            video_codec="video_codec",
-            width={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            file = client.files.list(
+                id="id",
+                audio_codec="audio_codec",
+                created={
+                    "gte": 0,
+                    "lte": 0,
+                    "sort": "asc",
+                },
+                duration={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                height={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                job_id="job_id",
+                limit=1,
+                mime_type="mime_type",
+                offset=0,
+                path={
+                    "eq": "eq",
+                    "ilike": "ilike",
+                },
+                size={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                storage_id="storage_id",
+                video_codec="video_codec",
+                width={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+            )
+
         assert_matches_type(SyncPaginatedResults[JobFile], file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
-        response = client.files.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = client.files.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -131,29 +143,33 @@ class TestFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
-        with client.files.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.files.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = response.parse()
-            assert_matches_type(SyncPaginatedResults[JobFile], file, path=["response"])
+                file = response.parse()
+                assert_matches_type(SyncPaginatedResults[JobFile], file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Chunkify) -> None:
-        file = client.files.delete(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            file = client.files.delete(
+                "fileId",
+            )
+
         assert file is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Chunkify) -> None:
-        response = client.files.with_raw_response.delete(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.files.with_raw_response.delete(
+                "fileId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -163,24 +179,26 @@ class TestFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Chunkify) -> None:
-        with client.files.with_streaming_response.delete(
-            "fileId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.files.with_streaming_response.delete(
+                "fileId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = response.parse()
-            assert file is None
+                file = response.parse()
+                assert file is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
-            client.files.with_raw_response.delete(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
+                client.files.with_raw_response.delete(
+                    "",
+                )
 
 
 class TestAsyncFiles:
@@ -191,17 +209,20 @@ class TestAsyncFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncChunkify) -> None:
-        file = await async_client.files.retrieve(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            file = await async_client.files.retrieve(
+                "fileId",
+            )
+
         assert_matches_type(JobFile, file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.files.with_raw_response.retrieve(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.files.with_raw_response.retrieve(
+                "fileId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -211,87 +232,94 @@ class TestAsyncFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncChunkify) -> None:
-        async with async_client.files.with_streaming_response.retrieve(
-            "fileId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.files.with_streaming_response.retrieve(
+                "fileId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = await response.parse()
-            assert_matches_type(JobFile, file, path=["response"])
+                file = await response.parse()
+                assert_matches_type(JobFile, file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
-            await async_client.files.with_raw_response.retrieve(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
+                await async_client.files.with_raw_response.retrieve(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
-        file = await async_client.files.list()
+        with pytest.warns(DeprecationWarning):
+            file = await async_client.files.list()
+
         assert_matches_type(AsyncPaginatedResults[JobFile], file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncChunkify) -> None:
-        file = await async_client.files.list(
-            id="id",
-            audio_codec="audio_codec",
-            created={
-                "gte": 0,
-                "lte": 0,
-                "sort": "asc",
-            },
-            duration={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            height={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            job_id="job_id",
-            limit=1,
-            mime_type="mime_type",
-            offset=0,
-            path={
-                "eq": "eq",
-                "ilike": "ilike",
-            },
-            size={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-            storage_id="storage_id",
-            video_codec="video_codec",
-            width={
-                "eq": 0,
-                "gt": 0,
-                "gte": 0,
-                "lt": 0,
-                "lte": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            file = await async_client.files.list(
+                id="id",
+                audio_codec="audio_codec",
+                created={
+                    "gte": 0,
+                    "lte": 0,
+                    "sort": "asc",
+                },
+                duration={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                height={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                job_id="job_id",
+                limit=1,
+                mime_type="mime_type",
+                offset=0,
+                path={
+                    "eq": "eq",
+                    "ilike": "ilike",
+                },
+                size={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+                storage_id="storage_id",
+                video_codec="video_codec",
+                width={
+                    "eq": 0,
+                    "gt": 0,
+                    "gte": 0,
+                    "lt": 0,
+                    "lte": 0,
+                },
+            )
+
         assert_matches_type(AsyncPaginatedResults[JobFile], file, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.files.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.files.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -301,29 +329,33 @@ class TestAsyncFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
-        async with async_client.files.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.files.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = await response.parse()
-            assert_matches_type(AsyncPaginatedResults[JobFile], file, path=["response"])
+                file = await response.parse()
+                assert_matches_type(AsyncPaginatedResults[JobFile], file, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncChunkify) -> None:
-        file = await async_client.files.delete(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            file = await async_client.files.delete(
+                "fileId",
+            )
+
         assert file is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.files.with_raw_response.delete(
-            "fileId",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.files.with_raw_response.delete(
+                "fileId",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -333,21 +365,23 @@ class TestAsyncFiles:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncChunkify) -> None:
-        async with async_client.files.with_streaming_response.delete(
-            "fileId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.files.with_streaming_response.delete(
+                "fileId",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            file = await response.parse()
-            assert file is None
+                file = await response.parse()
+                assert file is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
-            await async_client.files.with_raw_response.delete(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `file_id` but received ''"):
+                await async_client.files.with_raw_response.delete(
+                    "",
+                )

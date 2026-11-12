@@ -18,7 +18,41 @@ class Notification(BaseModel):
     """Timestamp when the notification was created"""
 
     event: Literal[
-        "job.completed", "job.failed", "job.cancelled", "upload.completed", "upload.failed", "upload.expired"
+        "job.created",
+        "job.completed",
+        "job.failed",
+        "job.cancelled",
+        "source.created",
+        "source.deleted",
+        "upload.created",
+        "upload.completed",
+        "upload.failed",
+        "upload.expired",
+        "asset.created",
+        "asset.ready",
+        "asset.playback_ready",
+        "asset.failed",
+        "asset.expired",
+        "asset.deleted",
+        "asset.output.created",
+        "asset.output.ready",
+        "asset.output.failed",
+        "asset.output.deleted",
+        "workflow_run.created",
+        "workflow_run.completed",
+        "workflow_run.failed",
+        "workflow_run.cancelled",
+        "transcoding.created",
+        "transcoding.ready",
+        "transcoding.failed",
+        "transcoding.cancelled",
+        "transcoding.expired",
+        "transcoding.deleted",
+        "thumbnail.created",
+        "thumbnail.ready",
+        "thumbnail.failed",
+        "thumbnail.expired",
+        "thumbnail.deleted",
     ]
     """Type of event that triggered this notification"""
 
@@ -30,6 +64,9 @@ class Notification(BaseModel):
 
     webhook: Webhook
     """Webhook endpoint configuration that received this notification"""
+
+    event_id: Optional[str] = None
+    """Originating event ID, when recorded by the event log."""
 
     response_status_code: Optional[int] = None
     """HTTP status code received from the webhook endpoint"""

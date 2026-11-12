@@ -48,17 +48,22 @@ class HlsH264Param(TypedDict, total=False):
     """
 
     framerate: float
-    """
-    Framerate specifies the output video frame rate. Must be between 15 and 120 fps.
+    """Framerate specifies the output video frame rate.
+
+    Must be greater than zero and at most 240 fps.
     """
 
     gop: int
-    """Gop specifies the Group of Pictures (GOP) size. Must be between 1 and 300."""
+    """Gop specifies the Group of Pictures (GOP) size.
+
+    Must be between 1 and 960 frames.
+    """
 
     height: int
-    """Height specifies the output video height in pixels. Must be between -2 and 7680.
+    """Height specifies the output video height in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """
 
     hls_enc: bool
@@ -87,6 +92,12 @@ class HlsH264Param(TypedDict, total=False):
 
     - mpegts: Traditional MPEG-TS segments, better compatibility
     - fmp4: Fragmented MP4 segments, better efficiency
+    """
+
+    hls_single_file: bool
+    """
+    HlsSingleFile specifies whether to store HLS segments in one file using byte
+    ranges. Defaults to true. Set to false to create separate segment files.
     """
 
     hls_time: int
@@ -189,20 +200,21 @@ class HlsH264Param(TypedDict, total=False):
     """
 
     video_bitrate: int
-    """
-    VideoBitrate specifies the video bitrate in bits per second. Must be between
-    100Kbps and 50Mbps.
+    """VideoBitrate specifies the video bitrate in bits per second.
+
+    Must be between 1 bps and 100 Mbps.
     """
 
     width: int
-    """Width specifies the output video width in pixels. Must be between -2 and 7680.
+    """Width specifies the output video width in pixels.
 
-    Use -2 for automatic calculation while maintaining aspect ratio.
+    Must be between -2 and 7680. Use -2 for automatic calculation while maintaining
+    aspect ratio.
     """
 
     x264_keyint: int
     """
     X264KeyInt specifies the maximum number of frames between keyframes for H.264
-    encoding. Range: 1 to 300. Higher values can improve compression but may affect
+    encoding. Range: 1 to 960. Higher values can improve compression but may affect
     seeking.
     """

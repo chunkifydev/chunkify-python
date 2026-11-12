@@ -36,18 +36,12 @@ class FormatMP4Av1(MP4Av1):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
-
 
 class FormatMP4H264(MP4H264):
     """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
-
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatMP4H265(MP4H265):
@@ -56,18 +50,12 @@ class FormatMP4H265(MP4H265):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
-
 
 class FormatWebmVp9(WebmVp9):
     """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
-
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatHlsAv1(HlsAv1):
@@ -79,9 +67,6 @@ class FormatHlsAv1(HlsAv1):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
-
 
 class FormatHlsH264(HlsH264):
     """FFmpeg encoding parameters specific to HLS with H.264 encoding.
@@ -91,9 +76,6 @@ class FormatHlsH264(HlsH264):
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
-
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
 
 
 class FormatHlsH265(HlsH265):
@@ -105,18 +87,12 @@ class FormatHlsH265(HlsH265):
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
 
-    per_title: bool  # type: ignore
-    """Whether per-title optimization was enabled for this job."""
-
 
 class FormatJpg(Jpg):
     """FFmpeg encoding parameters specific to JPEG image extraction."""
 
     id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
     """The format ID"""
-
-    per_title: bool
-    """Whether per-title optimization was enabled for this job."""
 
 
 class Storage(BaseModel):
@@ -155,13 +131,13 @@ class Job(BaseModel):
     format: Union[
         FormatMP4Av1, FormatMP4H264, FormatMP4H265, FormatWebmVp9, FormatHlsAv1, FormatHlsH264, FormatHlsH265, FormatJpg
     ]
-    """A template defines the transcoding parameters and settings for a job"""
+    """The format parameters and settings for a job"""
 
     progress: float
     """Progress percentage of the job (0-100)"""
 
     source_id: str
-    """ID of the source video being transcoded"""
+    """ID of the source media being processed"""
 
     status: Literal[
         "pending",
@@ -179,17 +155,10 @@ class Job(BaseModel):
         "transcoded",
         "waiting",
     ]
-    """Current status of the job.
-
-    New jobs start as pending while waiting for scheduler admission, then become
-    queued when admitted for processing.
-    """
+    """Current status of the job."""
 
     storage: Storage
     """Storage settings for where the job output will be saved"""
-
-    transcoder: Transcoder
-    """The transcoder configuration for a job"""
 
     updated_at: datetime
     """Last update timestamp"""
@@ -205,3 +174,6 @@ class Job(BaseModel):
 
     started_at: Optional[datetime] = None
     """When the job started processing"""
+
+    transcoder: Optional[Transcoder] = None
+    """The transcoder configuration for a job"""

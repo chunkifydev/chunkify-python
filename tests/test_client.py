@@ -993,7 +993,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list()
 
@@ -1017,7 +1017,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
@@ -1040,7 +1040,7 @@ class TestChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
@@ -1998,7 +1998,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list()
 
@@ -2022,7 +2022,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
 
@@ -2045,7 +2045,7 @@ class TestAsyncChunkify:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/files").mock(side_effect=retry_handler)
+        respx_mock.get("/files").mock(side_effect=retry_handler)
 
         response = await client.files.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
 
