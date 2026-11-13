@@ -10,7 +10,7 @@ import pytest
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
-from chunkify.types.assets import AssetActionRun
+from chunkify.types.assets.workflow import AssetActionRun
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from chunkify.types import ChunkifyError
+from chunkify.types import AssetOutputError, ChunkifyError
 ```
 
 # Assets
@@ -9,7 +9,7 @@ from chunkify.types import ChunkifyError
 Types:
 
 ```python
-from chunkify.types import Asset, AssetStaticRenditionCreateParams, AssetStatus
+from chunkify.types import Asset
 ```
 
 Methods:
@@ -37,21 +37,21 @@ Methods:
 
 ## Workflow
 
-Types:
-
-```python
-from chunkify.types.assets import AssetActionRun
-```
-
 Methods:
 
 - <code title="post /assets/{assetId}/workflow/update">client.assets.workflow.<a href="./src/chunkify/resources/assets/workflow/workflow.py">update</a>(asset_id) -> <a href="./src/chunkify/types/workflows/workflow_run.py">WorkflowRun</a></code>
 
 ### Actions
 
+Types:
+
+```python
+from chunkify.types.assets.workflow import AssetActionRun
+```
+
 Methods:
 
-- <code title="get /assets/{assetId}/workflow/actions">client.assets.workflow.actions.<a href="./src/chunkify/resources/assets/workflow/actions.py">list</a>(asset_id, \*\*<a href="src/chunkify/types/assets/workflow/action_list_params.py">params</a>) -> <a href="./src/chunkify/types/assets/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
+- <code title="get /assets/{assetId}/workflow/actions">client.assets.workflow.actions.<a href="./src/chunkify/resources/assets/workflow/actions.py">list</a>(asset_id, \*\*<a href="src/chunkify/types/assets/workflow/action_list_params.py">params</a>) -> <a href="./src/chunkify/types/assets/workflow/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
 
 # Events
 
@@ -254,7 +254,7 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import Thumbnail, ThumbnailCreateStorageParams
+from chunkify.types import Thumbnail
 ```
 
 Methods:
@@ -338,20 +338,7 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import (
-    Workflow,
-    WorkflowAction,
-    WorkflowCaptionAction,
-    WorkflowCaptionParams,
-    WorkflowRule,
-    WorkflowStaticAction,
-    WorkflowStaticParams,
-    WorkflowThumbnailAction,
-    WorkflowThumbnailParams,
-    WorkflowTranscriptAction,
-    WorkflowTranslationAction,
-    WorkflowTranslationParams,
-)
+from chunkify.types import Workflow
 ```
 
 Methods:
@@ -391,5 +378,5 @@ Methods:
 
 Methods:
 
-- <code title="get /workflows/{workflowId}/runs/{runId}/actions/{actionRunId}">client.workflows.runs.actions.<a href="./src/chunkify/resources/workflows/runs/actions.py">retrieve</a>(action_run_id, \*, workflow_id, run_id) -> <a href="./src/chunkify/types/assets/asset_action_run.py">AssetActionRun</a></code>
-- <code title="get /workflows/{workflowId}/runs/{runId}/actions">client.workflows.runs.actions.<a href="./src/chunkify/resources/workflows/runs/actions.py">list</a>(run_id, \*, workflow_id, \*\*<a href="src/chunkify/types/workflows/runs/action_list_params.py">params</a>) -> <a href="./src/chunkify/types/assets/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
+- <code title="get /workflows/{workflowId}/runs/{runId}/actions/{actionRunId}">client.workflows.runs.actions.<a href="./src/chunkify/resources/workflows/runs/actions.py">retrieve</a>(action_run_id, \*, workflow_id, run_id) -> <a href="./src/chunkify/types/assets/workflow/asset_action_run.py">AssetActionRun</a></code>
+- <code title="get /workflows/{workflowId}/runs/{runId}/actions">client.workflows.runs.actions.<a href="./src/chunkify/resources/workflows/runs/actions.py">list</a>(run_id, \*, workflow_id, \*\*<a href="src/chunkify/types/workflows/runs/action_list_params.py">params</a>) -> <a href="./src/chunkify/types/assets/workflow/asset_action_run.py">SyncPaginatedResults[AssetActionRun]</a></code>
