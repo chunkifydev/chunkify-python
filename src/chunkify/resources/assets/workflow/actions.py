@@ -19,7 +19,7 @@ from ...._response import (
 from ....pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.assets.workflow import action_list_params
-from ....types.assets.asset_action_run import AssetActionRun
+from ....types.assets.workflow.asset_action_run import AssetActionRun
 
 __all__ = ["ActionsResource", "AsyncActionsResource"]
 

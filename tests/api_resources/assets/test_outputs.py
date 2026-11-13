@@ -20,34 +20,25 @@ class TestOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_create_overload_1(self, client: Chunkify) -> None:
+    def test_method_create(self, client: Chunkify) -> None:
         output = client.assets.outputs.create(
             asset_id="assetId",
-            params={},
-            type="caption",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: Chunkify) -> None:
-        output = client.assets.outputs.create(
-            asset_id="assetId",
-            params={
-                "language_code": "en",
-                "source_caption_id": "x",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
             },
-            type="caption",
         )
         assert_matches_type(AssetOutput, output, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_1(self, client: Chunkify) -> None:
+    def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.assets.outputs.with_raw_response.create(
             asset_id="assetId",
-            params={},
-            type="caption",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
+            },
         )
 
         assert response.is_closed is True
@@ -57,11 +48,13 @@ class TestOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: Chunkify) -> None:
+    def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.assets.outputs.with_streaming_response.create(
             asset_id="assetId",
-            params={},
-            type="caption",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -73,183 +66,14 @@ class TestOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_create_overload_1(self, client: Chunkify) -> None:
+    def test_path_params_create(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
             client.assets.outputs.with_raw_response.create(
                 asset_id="",
-                params={},
-                type="caption",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_create_overload_2(self, client: Chunkify) -> None:
-        output = client.assets.outputs.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_create_overload_2(self, client: Chunkify) -> None:
-        response = client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_create_overload_2(self, client: Chunkify) -> None:
-        with client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_create_overload_2(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={"resolution": "highest"},
-                type="static_rendition",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_create_overload_3(self, client: Chunkify) -> None:
-        output = client.assets.outputs.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_create_with_all_params_overload_3(self, client: Chunkify) -> None:
-        output = client.assets.outputs.create(
-            asset_id="assetId",
-            params={
-                "count": 1,
-                "format": "jpeg",
-                "metadata": {"foo": "string"},
-                "output": "images",
-                "range": {
-                    "end": 1,
-                    "start": 0,
+                output={
+                    "params": {"resolution": "1080p"},
+                    "type": "static_rendition",
                 },
-                "size": 64,
-                "timestamps": [0],
-            },
-            type="thumbnail",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_create_overload_3(self, client: Chunkify) -> None:
-        response = client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_create_overload_3(self, client: Chunkify) -> None:
-        with client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_create_overload_3(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={},
-                type="thumbnail",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_create_overload_4(self, client: Chunkify) -> None:
-        output = client.assets.outputs.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_create_overload_4(self, client: Chunkify) -> None:
-        response = client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_create_overload_4(self, client: Chunkify) -> None:
-        with client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_create_overload_4(self, client: Chunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={},
-                type="transcript",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -428,34 +252,25 @@ class TestAsyncOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_method_create(self, async_client: AsyncChunkify) -> None:
         output = await async_client.assets.outputs.create(
             asset_id="assetId",
-            params={},
-            type="caption",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncChunkify) -> None:
-        output = await async_client.assets.outputs.create(
-            asset_id="assetId",
-            params={
-                "language_code": "en",
-                "source_caption_id": "x",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
             },
-            type="caption",
         )
         assert_matches_type(AssetOutput, output, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.assets.outputs.with_raw_response.create(
             asset_id="assetId",
-            params={},
-            type="caption",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
+            },
         )
 
         assert response.is_closed is True
@@ -465,11 +280,13 @@ class TestAsyncOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.assets.outputs.with_streaming_response.create(
             asset_id="assetId",
-            params={},
-            type="caption",
+            output={
+                "params": {"resolution": "1080p"},
+                "type": "static_rendition",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -481,183 +298,14 @@ class TestAsyncOutputs:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_create_overload_1(self, async_client: AsyncChunkify) -> None:
+    async def test_path_params_create(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
             await async_client.assets.outputs.with_raw_response.create(
                 asset_id="",
-                params={},
-                type="caption",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncChunkify) -> None:
-        output = await async_client.assets.outputs.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = await response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncChunkify) -> None:
-        async with async_client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={"resolution": "highest"},
-            type="static_rendition",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = await response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_create_overload_2(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            await async_client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={"resolution": "highest"},
-                type="static_rendition",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_create_overload_3(self, async_client: AsyncChunkify) -> None:
-        output = await async_client.assets.outputs.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncChunkify) -> None:
-        output = await async_client.assets.outputs.create(
-            asset_id="assetId",
-            params={
-                "count": 1,
-                "format": "jpeg",
-                "metadata": {"foo": "string"},
-                "output": "images",
-                "range": {
-                    "end": 1,
-                    "start": 0,
+                output={
+                    "params": {"resolution": "1080p"},
+                    "type": "static_rendition",
                 },
-                "size": 64,
-                "timestamps": [0],
-            },
-            type="thumbnail",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_create_overload_3(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = await response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_create_overload_3(self, async_client: AsyncChunkify) -> None:
-        async with async_client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={},
-            type="thumbnail",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = await response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_create_overload_3(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            await async_client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={},
-                type="thumbnail",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_create_overload_4(self, async_client: AsyncChunkify) -> None:
-        output = await async_client.assets.outputs.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        )
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_create_overload_4(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.assets.outputs.with_raw_response.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        output = await response.parse()
-        assert_matches_type(AssetOutput, output, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_create_overload_4(self, async_client: AsyncChunkify) -> None:
-        async with async_client.assets.outputs.with_streaming_response.create(
-            asset_id="assetId",
-            params={},
-            type="transcript",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            output = await response.parse()
-            assert_matches_type(AssetOutput, output, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_create_overload_4(self, async_client: AsyncChunkify) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `asset_id` but received ''"):
-            await async_client.assets.outputs.with_raw_response.create(
-                asset_id="",
-                params={},
-                type="transcript",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

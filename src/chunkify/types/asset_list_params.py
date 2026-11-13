@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing_extensions import Literal, TypedDict
 
 from .._types import SequenceNotStr
-from .asset_status import AssetStatus
 
 __all__ = ["AssetListParams", "Created"]
 
@@ -31,7 +30,7 @@ class AssetListParams(TypedDict, total=False):
     Omit to include Assets from all Sources in the Project.
     """
 
-    status: AssetStatus
+    status: Literal["preparing", "ready", "failed", "expired"]
     """Filter by Asset status."""
 
     storage_id: str
