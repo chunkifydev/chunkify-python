@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypeAlias
+from typing_extensions import TypedDict
 
 __all__ = ["WorkflowCaptionParams"]
 
-WorkflowCaptionParams: TypeAlias = object
+
+class WorkflowCaptionParams(TypedDict, total=False):
+    """Parameters for generating original captions.
+
+    Pass an empty object; the spoken language is detected automatically.
+    """
+
+    pass

@@ -3,6 +3,7 @@
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .workflow_transcript import WorkflowTranscript
 
 __all__ = ["WorkflowTranscriptAction"]
 
@@ -20,7 +21,7 @@ class WorkflowTranscriptAction(BaseModel):
     underscores.
     """
 
-    params: object
+    params: WorkflowTranscript
     """Params specifies transcript settings. Pass an empty object."""
 
     type: Literal["create_transcript"]

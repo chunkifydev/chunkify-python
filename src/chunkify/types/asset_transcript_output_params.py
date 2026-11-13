@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypeAlias
+from typing_extensions import TypedDict
 
 __all__ = ["AssetTranscriptOutputParams"]
 
-AssetTranscriptOutputParams: TypeAlias = object
+
+class AssetTranscriptOutputParams(TypedDict, total=False):
+    """Parameters for an original-language transcript.
+
+    Pass an empty object; the spoken language is detected automatically.
+    """
+
+    pass

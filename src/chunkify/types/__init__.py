@@ -75,6 +75,7 @@ from .thumbnail_output import ThumbnailOutput as ThumbnailOutput
 from .thumbnail_sample import ThumbnailSample as ThumbnailSample
 from .thumbnail_status import ThumbnailStatus as ThumbnailStatus
 from .transcoding_file import TranscodingFile as TranscodingFile
+from .workflow_caption import WorkflowCaption as WorkflowCaption
 from .asset_action_type import AssetActionType as AssetActionType
 from .asset_list_params import AssetListParams as AssetListParams
 from .event_list_params import EventListParams as EventListParams
@@ -103,6 +104,7 @@ from .token_list_response import TokenListResponse as TokenListResponse
 from .transcoding_storage import TranscodingStorage as TranscodingStorage
 from .workflow_rule_event import WorkflowRuleEvent as WorkflowRuleEvent
 from .workflow_run_status import WorkflowRunStatus as WorkflowRunStatus
+from .workflow_transcript import WorkflowTranscript as WorkflowTranscript
 from .asset_caption_output import AssetCaptionOutput as AssetCaptionOutput
 from .metric_assets_params import MetricAssetsParams as MetricAssetsParams
 from .metrics_asset_counts import MetricsAssetCounts as MetricsAssetCounts

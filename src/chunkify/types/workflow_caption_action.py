@@ -4,6 +4,7 @@ from typing import Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .workflow_caption import WorkflowCaption
 from .workflow_output_binding import WorkflowOutputBinding
 
 __all__ = ["WorkflowCaptionAction"]
@@ -21,7 +22,7 @@ class WorkflowCaptionAction(BaseModel):
     underscores.
     """
 
-    params: object
+    params: WorkflowCaption
     """Params specifies caption generation settings. Pass an empty object."""
 
     type: Literal["create_caption"]
