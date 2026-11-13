@@ -7,7 +7,7 @@ from .jpg import Jpg as Jpg
 from .asset import Asset as Asset
 from .event import Event as Event
 from .token import Token as Token
-from .shared import ChunkifyError as ChunkifyError
+from .shared import ChunkifyError as ChunkifyError, AssetOutputError as AssetOutputError
 from .source import Source as Source
 from .upload import Upload as Upload
 from .hls_av1 import HlsAv1 as HlsAv1

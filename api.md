@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from chunkify.types import ChunkifyError
+from chunkify.types import AssetOutputError, ChunkifyError
 ```
 
 # Assets
