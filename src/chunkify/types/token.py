@@ -1,9 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from datetime import datetime
-from typing_extensions import Literal
 
 from .._models import BaseModel
+from .token_scope import TokenScope
 
 __all__ = ["Token"]
 
@@ -24,5 +24,5 @@ class Token(BaseModel):
     project_id: str
     """ID of the project this token belongs to"""
 
-    scope: Literal["project", "team"]
+    scope: TokenScope
     """Access scope of the token"""

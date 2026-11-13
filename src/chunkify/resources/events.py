@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import List, Type, cast
-from typing_extensions import Literal
 
 import httpx
 
@@ -22,6 +21,7 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ..types.event import Event
 from .._base_client import AsyncPaginator, make_request_options
+from ..types.webhook_event import WebhookEvent
 
 __all__ = ["EventsResource", "AsyncEventsResource"]
 
@@ -89,46 +89,7 @@ class EventsResource(SyncAPIResource):
         self,
         *,
         created: event_list_params.Created | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         limit: int | Omit = omit,
         object_id: str | Omit = omit,
         offset: int | Omit = omit,
@@ -251,46 +212,7 @@ class AsyncEventsResource(AsyncAPIResource):
         self,
         *,
         created: event_list_params.Created | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         limit: int | Omit = omit,
         object_id: str | Omit = omit,
         offset: int | Omit = omit,

@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 from typing import Dict, Type, cast
-from typing_extensions import Literal
 
 import httpx
 
-from ..types import transcoding_list_params, transcoding_create_params, transcoding_delete_params
+from ..types import (
+    TranscodingStatus,
+    TranscodingCreateFormatParams,
+    TranscodingCreateStorageParams,
+    transcoding_list_params,
+    transcoding_create_params,
+    transcoding_delete_params,
+)
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,6 +28,9 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.transcoding import Transcoding
+from ..types.transcoding_status import TranscodingStatus
+from ..types.transcoding_create_format_params import TranscodingCreateFormatParams
+from ..types.transcoding_create_storage_params import TranscodingCreateStorageParams
 
 __all__ = ["TranscodingsResource", "AsyncTranscodingsResource"]
 
@@ -49,10 +58,10 @@ class TranscodingsResource(SyncAPIResource):
     def create(
         self,
         *,
-        format: transcoding_create_params.Format,
+        format: TranscodingCreateFormatParams,
         source_id: str,
         metadata: Dict[str, str] | Omit = omit,
-        storage: transcoding_create_params.Storage | Omit = omit,
+        storage: TranscodingCreateStorageParams | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -151,7 +160,7 @@ class TranscodingsResource(SyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["preparing", "ready", "failed", "cancelled", "expired"] | Omit = omit,
+        status: TranscodingStatus | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -326,10 +335,10 @@ class AsyncTranscodingsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        format: transcoding_create_params.Format,
+        format: TranscodingCreateFormatParams,
         source_id: str,
         metadata: Dict[str, str] | Omit = omit,
-        storage: transcoding_create_params.Storage | Omit = omit,
+        storage: TranscodingCreateStorageParams | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -428,7 +437,7 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["preparing", "ready", "failed", "cancelled", "expired"] | Omit = omit,
+        status: TranscodingStatus | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

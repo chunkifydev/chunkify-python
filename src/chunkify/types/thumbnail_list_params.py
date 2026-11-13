@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
+from .thumbnail_status import ThumbnailStatus
+
 __all__ = ["ThumbnailListParams", "Created"]
 
 
@@ -25,7 +27,7 @@ class ThumbnailListParams(TypedDict, total=False):
     Omit to include Thumbnails from all Sources in the Project.
     """
 
-    status: Literal["preparing", "ready", "failed", "expired"]
+    status: ThumbnailStatus
     """Filter by Thumbnail status."""
 
     storage_id: str

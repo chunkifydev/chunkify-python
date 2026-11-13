@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AssetCreateParams", "Storage"]
+from .asset_create_storage_params import AssetCreateStorageParams
+
+__all__ = ["AssetCreateParams"]
 
 
 class AssetCreateParams(TypedDict, total=False):
@@ -47,7 +49,7 @@ class AssetCreateParams(TypedDict, total=False):
     Omit to use the Project default. Does not control CDN or static download access.
     """
 
-    storage: Storage
+    storage: AssetCreateStorageParams
     """Output Storage.
 
     Omit to use the Project default. The path_template controls the folder for
@@ -62,18 +64,4 @@ class AssetCreateParams(TypedDict, total=False):
 
     Omit to use the Project default. Set null to disable automatic actions. The
     current revision is pinned when creation is accepted.
-    """
-
-
-class Storage(TypedDict, total=False):
-    """Output Storage.
-
-    Omit to use the Project default. The path_template controls the folder for generated output paths.
-    """
-
-    id: str
-    """ID of output Storage in this Project.
-
-    Omit to use the Project default. Applies to all outputs, including static
-    renditions added later.
     """

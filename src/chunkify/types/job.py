@@ -1,121 +1,16 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Union, Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from .jpg import Jpg
-from .hls_av1 import HlsAv1
-from .mp4_av1 import MP4Av1
 from .._models import BaseModel
-from .hls_h264 import HlsH264
-from .hls_h265 import HlsH265
-from .mp4_h264 import MP4H264
-from .mp4_h265 import MP4H265
-from .webm_vp9 import WebmVp9
+from .job_format import JobFormat
+from .job_storage import JobStorage
+from .job_transcoder import JobTranscoder
 from .shared.chunkify_error import ChunkifyError
 
-__all__ = [
-    "Job",
-    "FormatMP4Av1",
-    "FormatMP4H264",
-    "FormatMP4H265",
-    "FormatWebmVp9",
-    "FormatHlsAv1",
-    "FormatHlsH264",
-    "FormatHlsH265",
-    "FormatJpg",
-    "Storage",
-    "Transcoder",
-]
-
-
-class FormatMP4Av1(MP4Av1):
-    """FFmpeg encoding parameters specific to MP4 with AV1 encoding."""
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatMP4H264(MP4H264):
-    """FFmpeg encoding parameters specific to MP4 with H.264 encoding."""
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatMP4H265(MP4H265):
-    """FFmpeg encoding parameters specific to MP4 with H.265 encoding."""
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatWebmVp9(WebmVp9):
-    """FFmpeg encoding parameters specific to WebM with VP9 encoding."""
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatHlsAv1(HlsAv1):
-    """FFmpeg encoding parameters specific to HLS with AV1 encoding.
-
-    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
-    """
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatHlsH264(HlsH264):
-    """FFmpeg encoding parameters specific to HLS with H.264 encoding.
-
-    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
-    """
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatHlsH265(HlsH265):
-    """FFmpeg encoding parameters specific to HLS with H.265 encoding.
-
-    When per-title optimization is disabled, either audio_bitrate or video_bitrate is required.
-    """
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class FormatJpg(Jpg):
-    """FFmpeg encoding parameters specific to JPEG image extraction."""
-
-    id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]  # type: ignore
-    """The format ID"""
-
-
-class Storage(BaseModel):
-    """Storage settings for where the job output will be saved"""
-
-    id: str
-    """ID of the storage"""
-
-    path: str
-    """Path where the output will be stored"""
-
-
-class Transcoder(BaseModel):
-    """The transcoder configuration for a job"""
-
-    auto: bool
-    """Whether the transcoder configuration is automatically set by Chunkify"""
-
-    quantity: int
-    """Number of instances allocated"""
-
-    type: Literal["4vCPU", "8vCPU", "16vCPU"]
-    """Type of transcoder instance"""
+__all__ = ["Job"]
 
 
 class Job(BaseModel):
@@ -128,9 +23,7 @@ class Job(BaseModel):
     created_at: datetime
     """Creation timestamp"""
 
-    format: Union[
-        FormatMP4Av1, FormatMP4H264, FormatMP4H265, FormatWebmVp9, FormatHlsAv1, FormatHlsH264, FormatHlsH265, FormatJpg
-    ]
+    format: JobFormat
     """The format parameters and settings for a job"""
 
     progress: float
@@ -157,7 +50,7 @@ class Job(BaseModel):
     ]
     """Current status of the job."""
 
-    storage: Storage
+    storage: JobStorage
     """Storage settings for where the job output will be saved"""
 
     updated_at: datetime
@@ -175,5 +68,5 @@ class Job(BaseModel):
     started_at: Optional[datetime] = None
     """When the job started processing"""
 
-    transcoder: Optional[Transcoder] = None
+    transcoder: Optional[JobTranscoder] = None
     """The transcoder configuration for a job"""
