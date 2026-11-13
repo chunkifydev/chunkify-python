@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import AssetStatus, asset_list_params, asset_create_params, asset_delete_params, asset_update_params
+from ...types import asset_list_params, asset_create_params, asset_delete_params, asset_update_params
 from .outputs import (
     OutputsResource,
     AsyncOutputsResource,
@@ -38,7 +38,6 @@ from .workflow.workflow import (
     WorkflowResourceWithStreamingResponse,
     AsyncWorkflowResourceWithStreamingResponse,
 )
-from ...types.asset_status import AssetStatus
 
 __all__ = ["AssetsResource", "AsyncAssetsResource"]
 
@@ -272,7 +271,7 @@ class AssetsResource(SyncAPIResource):
         offset: int | Omit = omit,
         search: str | Omit = omit,
         source_id: str | Omit = omit,
-        status: AssetStatus | Omit = omit,
+        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -612,7 +611,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         offset: int | Omit = omit,
         search: str | Omit = omit,
         source_id: str | Omit = omit,
-        status: AssetStatus | Omit = omit,
+        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

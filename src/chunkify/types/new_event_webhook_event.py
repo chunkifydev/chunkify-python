@@ -14,7 +14,7 @@ from .thumbnail import Thumbnail
 from .transcoding import Transcoding
 from .assets.asset_output import AssetOutput
 from .workflows.workflow_run import WorkflowRun
-from .assets.asset_action_run import AssetActionRun
+from .assets.workflow.asset_action_run import AssetActionRun
 
 __all__ = [
     "NewEventWebhookEvent",
