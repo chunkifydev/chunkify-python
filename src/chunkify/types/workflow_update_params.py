@@ -9,17 +9,17 @@ __all__ = [
     "WorkflowUpdateParams",
     "Rule",
     "RuleAction",
-    "RuleActionWorkflowStaticAction",
     "RuleActionWorkflowStaticActionParams",
-    "RuleActionWorkflowCaptionAction",
-    "RuleActionWorkflowCaptionActionTranscriptID",
-    "RuleActionWorkflowTranslationAction",
-    "RuleActionWorkflowTranslationActionCaptionID",
+    "RuleActionWorkflowStaticActionParamsParams",
+    "RuleActionWorkflowCaptionActionParams",
+    "RuleActionWorkflowCaptionActionParamsTranscriptID",
     "RuleActionWorkflowTranslationActionParams",
-    "RuleActionWorkflowThumbnailAction",
+    "RuleActionWorkflowTranslationActionParamsCaptionID",
+    "RuleActionWorkflowTranslationActionParamsParams",
     "RuleActionWorkflowThumbnailActionParams",
-    "RuleActionWorkflowThumbnailActionParamsRange",
-    "RuleActionWorkflowTranscriptAction",
+    "RuleActionWorkflowThumbnailActionParamsParams",
+    "RuleActionWorkflowThumbnailActionParamsParamsRange",
+    "RuleActionWorkflowTranscriptActionParams",
     "RuleOrigin",
 ]
 
@@ -51,7 +51,7 @@ class WorkflowUpdateParams(TypedDict, total=False):
     """
 
 
-class RuleActionWorkflowStaticActionParams(TypedDict, total=False):
+class RuleActionWorkflowStaticActionParamsParams(TypedDict, total=False):
     """Params specifies the static rendition resolution."""
 
     resolution: Required[Literal["highest", "240p", "360p", "480p", "540p", "720p", "1080p", "1440p", "2160p"]]
@@ -63,7 +63,7 @@ class RuleActionWorkflowStaticActionParams(TypedDict, total=False):
     """
 
 
-class RuleActionWorkflowStaticAction(TypedDict, total=False):
+class RuleActionWorkflowStaticActionParams(TypedDict, total=False):
     """Creates or reuses one static rendition for the Asset."""
 
     id: Required[str]
@@ -73,15 +73,15 @@ class RuleActionWorkflowStaticAction(TypedDict, total=False):
     underscores.
     """
 
-    params: Required[RuleActionWorkflowStaticActionParams]
+    params: Required[RuleActionWorkflowStaticActionParamsParams]
     """Params specifies the static rendition resolution."""
 
     type: Required[Literal["create_static_rendition"]]
     """Type specifies the action to perform. Must be create_static_rendition."""
 
 
-_RuleActionWorkflowCaptionActionTranscriptIDReservedKeywords = TypedDict(
-    "_RuleActionWorkflowCaptionActionTranscriptIDReservedKeywords",
+_RuleActionWorkflowCaptionActionParamsTranscriptIDReservedKeywords = TypedDict(
+    "_RuleActionWorkflowCaptionActionParamsTranscriptIDReservedKeywords",
     {
         "from": Literal["event.output.id"],
     },
@@ -89,8 +89,8 @@ _RuleActionWorkflowCaptionActionTranscriptIDReservedKeywords = TypedDict(
 )
 
 
-class RuleActionWorkflowCaptionActionTranscriptID(
-    _RuleActionWorkflowCaptionActionTranscriptIDReservedKeywords, total=False
+class RuleActionWorkflowCaptionActionParamsTranscriptID(
+    _RuleActionWorkflowCaptionActionParamsTranscriptIDReservedKeywords, total=False
 ):
     """TranscriptId binds caption publication to the transcript in the triggering event.
 
@@ -100,7 +100,7 @@ class RuleActionWorkflowCaptionActionTranscriptID(
     pass
 
 
-class RuleActionWorkflowCaptionAction(TypedDict, total=False):
+class RuleActionWorkflowCaptionActionParams(TypedDict, total=False):
     """
     Generates or reuses original captions and their transcript from the Asset's speech.
     """
@@ -118,7 +118,7 @@ class RuleActionWorkflowCaptionAction(TypedDict, total=False):
     type: Required[Literal["create_caption"]]
     """Type specifies the action to perform. Must be create_caption."""
 
-    transcript_id: RuleActionWorkflowCaptionActionTranscriptID
+    transcript_id: RuleActionWorkflowCaptionActionParamsTranscriptID
     """TranscriptId binds caption publication to the transcript in the triggering
     event.
 
@@ -127,8 +127,8 @@ class RuleActionWorkflowCaptionAction(TypedDict, total=False):
     """
 
 
-_RuleActionWorkflowTranslationActionCaptionIDReservedKeywords = TypedDict(
-    "_RuleActionWorkflowTranslationActionCaptionIDReservedKeywords",
+_RuleActionWorkflowTranslationActionParamsCaptionIDReservedKeywords = TypedDict(
+    "_RuleActionWorkflowTranslationActionParamsCaptionIDReservedKeywords",
     {
         "from": Literal["event.output.id"],
     },
@@ -136,8 +136,8 @@ _RuleActionWorkflowTranslationActionCaptionIDReservedKeywords = TypedDict(
 )
 
 
-class RuleActionWorkflowTranslationActionCaptionID(
-    _RuleActionWorkflowTranslationActionCaptionIDReservedKeywords, total=False
+class RuleActionWorkflowTranslationActionParamsCaptionID(
+    _RuleActionWorkflowTranslationActionParamsCaptionIDReservedKeywords, total=False
 ):
     """
     CaptionId specifies the binding to the original caption in the triggering event.
@@ -146,7 +146,7 @@ class RuleActionWorkflowTranslationActionCaptionID(
     pass
 
 
-class RuleActionWorkflowTranslationActionParams(TypedDict, total=False):
+class RuleActionWorkflowTranslationActionParamsParams(TypedDict, total=False):
     """Params specifies the target language."""
 
     language_code: Required[
@@ -158,7 +158,7 @@ class RuleActionWorkflowTranslationActionParams(TypedDict, total=False):
     """
 
 
-class RuleActionWorkflowTranslationAction(TypedDict, total=False):
+class RuleActionWorkflowTranslationActionParams(TypedDict, total=False):
     """Translates or reuses an original caption in one target language.
 
     Requires an asset.output.ready rule connected to an original caption creation action.
@@ -171,19 +171,19 @@ class RuleActionWorkflowTranslationAction(TypedDict, total=False):
     underscores.
     """
 
-    caption_id: Required[RuleActionWorkflowTranslationActionCaptionID]
+    caption_id: Required[RuleActionWorkflowTranslationActionParamsCaptionID]
     """
     CaptionId specifies the binding to the original caption in the triggering event.
     """
 
-    params: Required[RuleActionWorkflowTranslationActionParams]
+    params: Required[RuleActionWorkflowTranslationActionParamsParams]
     """Params specifies the target language."""
 
     type: Required[Literal["translate_caption"]]
     """Type specifies the action to perform. Must be translate_caption."""
 
 
-class RuleActionWorkflowThumbnailActionParamsRange(TypedDict, total=False):
+class RuleActionWorkflowThumbnailActionParamsParamsRange(TypedDict, total=False):
     """Range limits sampling to part of the Source.
 
     Defaults to the whole Source duration.
@@ -199,7 +199,7 @@ class RuleActionWorkflowThumbnailActionParamsRange(TypedDict, total=False):
     """Start specifies the inclusive lower bound in seconds. Defaults to zero."""
 
 
-class RuleActionWorkflowThumbnailActionParams(TypedDict, total=False):
+class RuleActionWorkflowThumbnailActionParamsParams(TypedDict, total=False):
     """Params specifies sampling and image settings.
 
     Outputs use the Asset folder and Storage.
@@ -223,7 +223,7 @@ class RuleActionWorkflowThumbnailActionParams(TypedDict, total=False):
     output: Literal["images", "sprites"]
     """Output selects images or sprites. Defaults to images."""
 
-    range: RuleActionWorkflowThumbnailActionParamsRange
+    range: RuleActionWorkflowThumbnailActionParamsParamsRange
     """Range limits sampling to part of the Source.
 
     Defaults to the whole Source duration.
@@ -245,7 +245,7 @@ class RuleActionWorkflowThumbnailActionParams(TypedDict, total=False):
     """
 
 
-class RuleActionWorkflowThumbnailAction(TypedDict, total=False):
+class RuleActionWorkflowThumbnailActionParams(TypedDict, total=False):
     """Creates an independent thumbnail request after asset.ready.
 
     Replaying this action uses its accepted request; separate actions create separate requests.
@@ -254,7 +254,7 @@ class RuleActionWorkflowThumbnailAction(TypedDict, total=False):
     id: Required[str]
     """Id specifies a stable action key, unique within its rule."""
 
-    params: Required[RuleActionWorkflowThumbnailActionParams]
+    params: Required[RuleActionWorkflowThumbnailActionParamsParams]
     """Params specifies sampling and image settings.
 
     Outputs use the Asset folder and Storage.
@@ -264,7 +264,7 @@ class RuleActionWorkflowThumbnailAction(TypedDict, total=False):
     """Type specifies the action to perform. Must be create_thumbnails."""
 
 
-class RuleActionWorkflowTranscriptAction(TypedDict, total=False):
+class RuleActionWorkflowTranscriptActionParams(TypedDict, total=False):
     """Creates or reuses the original-language transcript.
 
     Can run alongside caption generation in the same asset.ready rule.
@@ -285,11 +285,11 @@ class RuleActionWorkflowTranscriptAction(TypedDict, total=False):
 
 
 RuleAction: TypeAlias = Union[
-    RuleActionWorkflowStaticAction,
-    RuleActionWorkflowCaptionAction,
-    RuleActionWorkflowTranslationAction,
-    RuleActionWorkflowThumbnailAction,
-    RuleActionWorkflowTranscriptAction,
+    RuleActionWorkflowStaticActionParams,
+    RuleActionWorkflowCaptionActionParams,
+    RuleActionWorkflowTranslationActionParams,
+    RuleActionWorkflowThumbnailActionParams,
+    RuleActionWorkflowTranscriptActionParams,
 ]
 
 
