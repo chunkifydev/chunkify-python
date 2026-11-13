@@ -16,6 +16,7 @@ __all__ = [
     "RuleActionWorkflowStaticAction",
     "RuleActionWorkflowStaticActionParams",
     "RuleActionWorkflowCaptionAction",
+    "RuleActionWorkflowCaptionActionParams",
     "RuleActionWorkflowCaptionActionTranscriptID",
     "RuleActionWorkflowTranslationAction",
     "RuleActionWorkflowTranslationActionCaptionID",
@@ -24,6 +25,7 @@ __all__ = [
     "RuleActionWorkflowThumbnailActionParams",
     "RuleActionWorkflowThumbnailActionParamsRange",
     "RuleActionWorkflowTranscriptAction",
+    "RuleActionWorkflowTranscriptActionParams",
     "RuleOrigin",
 ]
 
@@ -57,6 +59,12 @@ class RuleActionWorkflowStaticAction(BaseModel):
     """Type specifies the action to perform. Must be create_static_rendition."""
 
 
+class RuleActionWorkflowCaptionActionParams(BaseModel):
+    """Params specifies caption generation settings. Pass an empty object."""
+
+    pass
+
+
 class RuleActionWorkflowCaptionActionTranscriptID(BaseModel):
     """TranscriptId binds caption publication to the transcript in the triggering event.
 
@@ -83,7 +91,7 @@ class RuleActionWorkflowCaptionAction(BaseModel):
     underscores.
     """
 
-    params: object
+    params: RuleActionWorkflowCaptionActionParams
     """Params specifies caption generation settings. Pass an empty object."""
 
     type: Literal["create_caption"]
@@ -229,6 +237,12 @@ class RuleActionWorkflowThumbnailAction(BaseModel):
     """Type specifies the action to perform. Must be create_thumbnails."""
 
 
+class RuleActionWorkflowTranscriptActionParams(BaseModel):
+    """Params specifies transcript settings. Pass an empty object."""
+
+    pass
+
+
 class RuleActionWorkflowTranscriptAction(BaseModel):
     """Creates or reuses the original-language transcript.
 
@@ -242,7 +256,7 @@ class RuleActionWorkflowTranscriptAction(BaseModel):
     underscores.
     """
 
-    params: object
+    params: RuleActionWorkflowTranscriptActionParams
     """Params specifies transcript settings. Pass an empty object."""
 
     type: Literal["create_transcript"]
