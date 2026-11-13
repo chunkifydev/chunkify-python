@@ -5,29 +5,29 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from ..asset_static_rendition_create_params import AssetStaticRenditionCreateParams
-
 __all__ = [
     "OutputCreateParams",
-    "AssetCaptionOutputCreateParams",
-    "AssetCaptionOutputCreateParamsParams",
-    "AssetStaticRenditionOutputCreateParams",
-    "AssetThumbnailOutputCreateParams",
-    "AssetThumbnailOutputCreateParamsParams",
-    "AssetThumbnailOutputCreateParamsParamsRange",
-    "AssetTranscriptOutputCreateParams",
+    "Output",
+    "OutputAssetCaptionOutputCreateParams",
+    "OutputAssetCaptionOutputCreateParamsParams",
+    "OutputAssetStaticRenditionOutputCreateParams",
+    "OutputAssetStaticRenditionOutputCreateParamsParams",
+    "OutputAssetThumbnailOutputCreateParams",
+    "OutputAssetThumbnailOutputCreateParamsParams",
+    "OutputAssetThumbnailOutputCreateParamsParamsRange",
+    "OutputAssetTranscriptOutputCreateParams",
 ]
 
 
-class AssetCaptionOutputCreateParams(TypedDict, total=False):
-    params: Required[AssetCaptionOutputCreateParamsParams]
-    """Params specifies the settings for this output type."""
+class OutputCreateParams(TypedDict, total=False):
+    output: Required[Output]
+    """Create one output for an Asset.
 
-    type: Required[Literal["caption"]]
-    """Type specifies the output kind to create."""
+    Type selects its required, strictly validated parameters.
+    """
 
 
-class AssetCaptionOutputCreateParamsParams(TypedDict, total=False):
+class OutputAssetCaptionOutputCreateParamsParams(TypedDict, total=False):
     """Params specifies the settings for this output type."""
 
     language_code: Literal[
@@ -47,23 +47,39 @@ class AssetCaptionOutputCreateParamsParams(TypedDict, total=False):
     """
 
 
-class AssetStaticRenditionOutputCreateParams(TypedDict, total=False):
-    params: Required[AssetStaticRenditionCreateParams]
+class OutputAssetCaptionOutputCreateParams(TypedDict, total=False):
+    """Create an Asset-owned caption output."""
+
+    params: Required[OutputAssetCaptionOutputCreateParamsParams]
+    """Params specifies the settings for this output type."""
+
+    type: Required[Literal["caption"]]
+    """Type specifies the output kind to create."""
+
+
+class OutputAssetStaticRenditionOutputCreateParamsParams(TypedDict, total=False):
+    """Params specifies the settings for this output type."""
+
+    resolution: Required[Literal["highest", "240p", "360p", "480p", "540p", "720p", "1080p", "1440p", "2160p"]]
+    """H.264 MP4 resolution.
+
+    highest selects the largest supported output without upscaling. Hobby supports
+    up to 1080p; other plans support up to 2160p. Independent of the streaming
+    resolution limits.
+    """
+
+
+class OutputAssetStaticRenditionOutputCreateParams(TypedDict, total=False):
+    """Create an Asset-owned static rendition output."""
+
+    params: Required[OutputAssetStaticRenditionOutputCreateParamsParams]
     """Params specifies the settings for this output type."""
 
     type: Required[Literal["static_rendition"]]
     """Type specifies the output kind to create."""
 
 
-class AssetThumbnailOutputCreateParams(TypedDict, total=False):
-    params: Required[AssetThumbnailOutputCreateParamsParams]
-    """Params specifies the settings for this output type."""
-
-    type: Required[Literal["thumbnail"]]
-    """Type specifies the output kind to create."""
-
-
-class AssetThumbnailOutputCreateParamsParamsRange(TypedDict, total=False):
+class OutputAssetThumbnailOutputCreateParamsParamsRange(TypedDict, total=False):
     """Range limits sampling to part of the Source.
 
     Defaults to the whole Source duration.
@@ -79,7 +95,7 @@ class AssetThumbnailOutputCreateParamsParamsRange(TypedDict, total=False):
     """Start specifies the inclusive lower bound in seconds. Defaults to zero."""
 
 
-class AssetThumbnailOutputCreateParamsParams(TypedDict, total=False):
+class OutputAssetThumbnailOutputCreateParamsParams(TypedDict, total=False):
     """Params specifies the settings for this output type."""
 
     count: int
@@ -100,7 +116,7 @@ class AssetThumbnailOutputCreateParamsParams(TypedDict, total=False):
     output: Literal["images", "sprites"]
     """Output selects images or sprites. Defaults to images."""
 
-    range: AssetThumbnailOutputCreateParamsParamsRange
+    range: OutputAssetThumbnailOutputCreateParamsParamsRange
     """Range limits sampling to part of the Source.
 
     Defaults to the whole Source duration.
@@ -121,7 +137,22 @@ class AssetThumbnailOutputCreateParamsParams(TypedDict, total=False):
     """
 
 
-class AssetTranscriptOutputCreateParams(TypedDict, total=False):
+class OutputAssetThumbnailOutputCreateParams(TypedDict, total=False):
+    """Create an Asset-owned thumbnail output."""
+
+    params: Required[OutputAssetThumbnailOutputCreateParamsParams]
+    """Params specifies the settings for this output type."""
+
+    type: Required[Literal["thumbnail"]]
+    """Type specifies the output kind to create."""
+
+
+class OutputAssetTranscriptOutputCreateParams(TypedDict, total=False):
+    """Create or reuse the original-language transcript for an Asset.
+
+    Caption generation shares this transcript and its speech-recognition charge.
+    """
+
     params: Required[object]
     """Parameters for an original-language transcript.
 
@@ -132,9 +163,9 @@ class AssetTranscriptOutputCreateParams(TypedDict, total=False):
     """Type specifies the output kind."""
 
 
-OutputCreateParams: TypeAlias = Union[
-    AssetCaptionOutputCreateParams,
-    AssetStaticRenditionOutputCreateParams,
-    AssetThumbnailOutputCreateParams,
-    AssetTranscriptOutputCreateParams,
+Output: TypeAlias = Union[
+    OutputAssetCaptionOutputCreateParams,
+    OutputAssetStaticRenditionOutputCreateParams,
+    OutputAssetThumbnailOutputCreateParams,
+    OutputAssetTranscriptOutputCreateParams,
 ]
