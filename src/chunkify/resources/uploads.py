@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import upload_list_params, upload_create_params, upload_complete_params
+from ..types import UploadCreateStorageParams, upload_list_params, upload_create_params, upload_complete_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,6 +22,8 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.upload import Upload
+from ..types.upload_create_storage_params import UploadCreateStorageParams
+from ..types.upload_multipart_part_params import UploadMultipartPartParams
 
 __all__ = ["UploadsResource", "AsyncUploadsResource"]
 
@@ -52,7 +54,7 @@ class UploadsResource(SyncAPIResource):
         create_asset: bool | Omit = omit,
         file_size_bytes: int | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        storage: upload_create_params.Storage | Omit = omit,
+        storage: UploadCreateStorageParams | Omit = omit,
         upload_mode: Literal["single", "multipart", "auto"] | Omit = omit,
         validity_timeout: int | Omit = omit,
         workflow_id: Optional[str] | Omit = omit,
@@ -285,7 +287,7 @@ class UploadsResource(SyncAPIResource):
         self,
         token: str,
         *,
-        parts: Iterable[upload_complete_params.Part] | Omit = omit,
+        parts: Iterable[UploadMultipartPartParams] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -358,7 +360,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         create_asset: bool | Omit = omit,
         file_size_bytes: int | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        storage: upload_create_params.Storage | Omit = omit,
+        storage: UploadCreateStorageParams | Omit = omit,
         upload_mode: Literal["single", "multipart", "auto"] | Omit = omit,
         validity_timeout: int | Omit = omit,
         workflow_id: Optional[str] | Omit = omit,
@@ -591,7 +593,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         self,
         token: str,
         *,
-        parts: Iterable[upload_complete_params.Part] | Omit = omit,
+        parts: Iterable[UploadMultipartPartParams] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

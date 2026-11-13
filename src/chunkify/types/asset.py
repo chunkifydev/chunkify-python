@@ -5,138 +5,14 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .asset_error import AssetError
+from .asset_poster import AssetPoster
+from .asset_status import AssetStatus
+from .shared.created_via import CreatedVia
+from .asset_source_metadata import AssetSourceMetadata
+from .asset_timeline_previews import AssetTimelinePreviews
 
-__all__ = ["Asset", "SourceMetadata", "Error", "Poster", "TimelinePreviews"]
-
-
-class SourceMetadata(BaseModel):
-    """
-    Original media metadata saved at Asset creation and preserved after Source deletion.
-    """
-
-    audio_bitrate: int
-    """Original audio bitrate in bits per second, or zero when unavailable."""
-
-    audio_codec: str
-    """Original audio codec, or an empty string when there is no audio."""
-
-    audio_samplerate: int
-    """Original audio sample rate in Hz, or zero when unavailable."""
-
-    duration: float
-    """Original duration in seconds."""
-
-    height: int
-    """Original video height in pixels."""
-
-    size: int
-    """Original file size in bytes."""
-
-    video_bitrate: int
-    """Original video bitrate in bits per second, or zero when unknown."""
-
-    video_codec: str
-    """Original video codec."""
-
-    video_framerate: float
-    """Original video frame rate in frames per second."""
-
-    width: int
-    """Original video width in pixels."""
-
-
-class Error(BaseModel):
-    code: str
-    """Machine-readable processing error code."""
-
-    message: str
-    """Description of the processing failure."""
-
-    stage: Literal["ingest", "analysis", "encoding", "packaging", "upload", "validation", "cleanup"]
-    """Processing stage that failed."""
-
-
-class Poster(BaseModel):
-    """Poster image, available once generated."""
-
-    height: int
-    """Image height in pixels."""
-
-    path: str
-    """Image path in Storage."""
-
-    width: int
-    """Image width in pixels."""
-
-    cdn_url: Optional[str] = None
-    """Unsigned image CDN URL.
-
-    Available once the poster exists and Storage has a CDN URL.
-    """
-
-    preview_url: Optional[str] = None
-    """Public poster preview URL.
-
-    Available when the Asset is ready and preview_enabled is true.
-    """
-
-    size: Optional[int] = None
-    """Image size in bytes."""
-
-    time_seconds: Optional[float] = None
-    """Position of the selected frame in seconds."""
-
-    url: Optional[str] = None
-    """Signed image URL, valid for up to ten minutes.
-
-    Available once the poster exists, regardless of preview_enabled.
-    """
-
-
-class TimelinePreviews(BaseModel):
-    """Timeline thumbnails.
-
-    The WebVTT file maps video timestamps to image URLs and crop coordinates.
-    """
-
-    format: Literal["sprite"]
-    """Thumbnail image layout."""
-
-    vtt_path: str
-    """WebVTT file path in Storage."""
-
-    cdn_url: Optional[str] = None
-    """Unsigned WebVTT CDN URL.
-
-    Available when the Asset is ready and Storage has a CDN URL.
-    """
-
-    image_count: Optional[int] = None
-    """Number of thumbnails."""
-
-    interval_seconds: Optional[float] = None
-    """Target thumbnail sampling interval in seconds.
-
-    The WebVTT file provides actual cue timestamps.
-    """
-
-    preview_url: Optional[str] = None
-    """Public WebVTT preview URL with signed image references.
-
-    Available when the Asset is ready and preview_enabled is true.
-    """
-
-    size: Optional[int] = None
-    """Combined WebVTT and sprite image size in bytes."""
-
-    sprite_count: Optional[int] = None
-    """Number of sprite images containing the thumbnails."""
-
-    thumbnail_height: Optional[int] = None
-    """Thumbnail height in pixels."""
-
-    thumbnail_width: Optional[int] = None
-    """Thumbnail width in pixels."""
+__all__ = ["Asset"]
 
 
 class Asset(BaseModel):
@@ -177,13 +53,13 @@ class Asset(BaseModel):
     signed URLs already issued.
     """
 
-    source_metadata: SourceMetadata
+    source_metadata: AssetSourceMetadata
     """
     Original media metadata saved at Asset creation and preserved after Source
     deletion.
     """
 
-    status: Literal["preparing", "ready", "failed", "expired"]
+    status: AssetStatus
     """Status specifies the Asset preparation state.
 
     ready means the video is prepared for playback, with its poster and timeline
@@ -224,14 +100,14 @@ class Asset(BaseModel):
     Workflow actions, unknown creators, and deleted accounts.
     """
 
-    created_via: Optional[Literal["api", "dashboard", "mcp", "workflow"]] = None
+    created_via: Optional[CreatedVia] = None
     """
     CreatedVia specifies how the resource was created: api for API requests,
     dashboard for the Chunkify dashboard, mcp for MCP clients, and workflow for
     Workflow actions. Omitted when the creator is unknown.
     """
 
-    error: Optional[Error] = None
+    error: Optional[AssetError] = None
 
     expires_at: Optional[datetime] = None
     """When managed outputs expire, 24 hours after readiness.
@@ -248,7 +124,7 @@ class Asset(BaseModel):
     playback_ready_at: Optional[datetime] = None
     """When HLS playback first became available."""
 
-    poster: Optional[Poster] = None
+    poster: Optional[AssetPoster] = None
     """Poster image, available once generated."""
 
     preview_url: Optional[str] = None
@@ -271,7 +147,7 @@ class Asset(BaseModel):
     source_id: Optional[str] = None
     """Original Source ID. Omitted after Source deletion."""
 
-    timeline_previews: Optional[TimelinePreviews] = None
+    timeline_previews: Optional[AssetTimelinePreviews] = None
     """Timeline thumbnails.
 
     The WebVTT file maps video timestamps to image URLs and crop coordinates.
