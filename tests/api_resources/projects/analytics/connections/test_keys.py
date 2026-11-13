@@ -9,7 +9,7 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types.projects.analytics_connections import (
+from chunkify.types.projects.analytics.connections import (
     KeyListResponse,
     KeyCreateResponse,
     KeyRotateResponse,
@@ -24,7 +24,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
-        key = client.projects.analytics_connections.keys.create(
+        key = client.projects.analytics.connections.keys.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -34,7 +34,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
-        response = client.projects.analytics_connections.keys.with_raw_response.create(
+        response = client.projects.analytics.connections.keys.with_raw_response.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -48,7 +48,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
-        with client.projects.analytics_connections.keys.with_streaming_response.create(
+        with client.projects.analytics.connections.keys.with_streaming_response.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -65,14 +65,14 @@ class TestKeys:
     @parametrize
     def test_path_params_create(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.create(
+            client.projects.analytics.connections.keys.with_raw_response.create(
                 connection_id="connectionId",
                 project_id="",
                 purpose="player",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.create(
+            client.projects.analytics.connections.keys.with_raw_response.create(
                 connection_id="",
                 project_id="projectId",
                 purpose="player",
@@ -81,7 +81,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Chunkify) -> None:
-        key = client.projects.analytics_connections.keys.list(
+        key = client.projects.analytics.connections.keys.list(
             connection_id="connectionId",
             project_id="projectId",
         )
@@ -90,7 +90,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Chunkify) -> None:
-        response = client.projects.analytics_connections.keys.with_raw_response.list(
+        response = client.projects.analytics.connections.keys.with_raw_response.list(
             connection_id="connectionId",
             project_id="projectId",
         )
@@ -103,7 +103,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Chunkify) -> None:
-        with client.projects.analytics_connections.keys.with_streaming_response.list(
+        with client.projects.analytics.connections.keys.with_streaming_response.list(
             connection_id="connectionId",
             project_id="projectId",
         ) as response:
@@ -119,13 +119,13 @@ class TestKeys:
     @parametrize
     def test_path_params_list(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.list(
+            client.projects.analytics.connections.keys.with_raw_response.list(
                 connection_id="connectionId",
                 project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.list(
+            client.projects.analytics.connections.keys.with_raw_response.list(
                 connection_id="",
                 project_id="projectId",
             )
@@ -133,7 +133,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_rotate(self, client: Chunkify) -> None:
-        key = client.projects.analytics_connections.keys.rotate(
+        key = client.projects.analytics.connections.keys.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -143,7 +143,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_rotate(self, client: Chunkify) -> None:
-        response = client.projects.analytics_connections.keys.with_raw_response.rotate(
+        response = client.projects.analytics.connections.keys.with_raw_response.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -157,7 +157,7 @@ class TestKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_rotate(self, client: Chunkify) -> None:
-        with client.projects.analytics_connections.keys.with_streaming_response.rotate(
+        with client.projects.analytics.connections.keys.with_streaming_response.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -174,21 +174,21 @@ class TestKeys:
     @parametrize
     def test_path_params_rotate(self, client: Chunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.rotate(
+            client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="keyId",
                 project_id="",
                 connection_id="connectionId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.rotate(
+            client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="keyId",
                 project_id="projectId",
                 connection_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `key_id` but received ''"):
-            client.projects.analytics_connections.keys.with_raw_response.rotate(
+            client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="",
                 project_id="projectId",
                 connection_id="connectionId",
@@ -203,7 +203,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
-        key = await async_client.projects.analytics_connections.keys.create(
+        key = await async_client.projects.analytics.connections.keys.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -213,7 +213,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.projects.analytics_connections.keys.with_raw_response.create(
+        response = await async_client.projects.analytics.connections.keys.with_raw_response.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -227,7 +227,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
-        async with async_client.projects.analytics_connections.keys.with_streaming_response.create(
+        async with async_client.projects.analytics.connections.keys.with_streaming_response.create(
             connection_id="connectionId",
             project_id="projectId",
             purpose="player",
@@ -244,14 +244,14 @@ class TestAsyncKeys:
     @parametrize
     async def test_path_params_create(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.create(
+            await async_client.projects.analytics.connections.keys.with_raw_response.create(
                 connection_id="connectionId",
                 project_id="",
                 purpose="player",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.create(
+            await async_client.projects.analytics.connections.keys.with_raw_response.create(
                 connection_id="",
                 project_id="projectId",
                 purpose="player",
@@ -260,7 +260,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncChunkify) -> None:
-        key = await async_client.projects.analytics_connections.keys.list(
+        key = await async_client.projects.analytics.connections.keys.list(
             connection_id="connectionId",
             project_id="projectId",
         )
@@ -269,7 +269,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.projects.analytics_connections.keys.with_raw_response.list(
+        response = await async_client.projects.analytics.connections.keys.with_raw_response.list(
             connection_id="connectionId",
             project_id="projectId",
         )
@@ -282,7 +282,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncChunkify) -> None:
-        async with async_client.projects.analytics_connections.keys.with_streaming_response.list(
+        async with async_client.projects.analytics.connections.keys.with_streaming_response.list(
             connection_id="connectionId",
             project_id="projectId",
         ) as response:
@@ -298,13 +298,13 @@ class TestAsyncKeys:
     @parametrize
     async def test_path_params_list(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.list(
+            await async_client.projects.analytics.connections.keys.with_raw_response.list(
                 connection_id="connectionId",
                 project_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.list(
+            await async_client.projects.analytics.connections.keys.with_raw_response.list(
                 connection_id="",
                 project_id="projectId",
             )
@@ -312,7 +312,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_rotate(self, async_client: AsyncChunkify) -> None:
-        key = await async_client.projects.analytics_connections.keys.rotate(
+        key = await async_client.projects.analytics.connections.keys.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -322,7 +322,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_rotate(self, async_client: AsyncChunkify) -> None:
-        response = await async_client.projects.analytics_connections.keys.with_raw_response.rotate(
+        response = await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -336,7 +336,7 @@ class TestAsyncKeys:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_rotate(self, async_client: AsyncChunkify) -> None:
-        async with async_client.projects.analytics_connections.keys.with_streaming_response.rotate(
+        async with async_client.projects.analytics.connections.keys.with_streaming_response.rotate(
             key_id="keyId",
             project_id="projectId",
             connection_id="connectionId",
@@ -353,21 +353,21 @@ class TestAsyncKeys:
     @parametrize
     async def test_path_params_rotate(self, async_client: AsyncChunkify) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `project_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.rotate(
+            await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="keyId",
                 project_id="",
                 connection_id="connectionId",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.rotate(
+            await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="keyId",
                 project_id="projectId",
                 connection_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `key_id` but received ''"):
-            await async_client.projects.analytics_connections.keys.with_raw_response.rotate(
+            await async_client.projects.analytics.connections.keys.with_raw_response.rotate(
                 key_id="",
                 project_id="projectId",
                 connection_id="connectionId",

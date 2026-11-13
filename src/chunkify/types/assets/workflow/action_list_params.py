@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["WorkflowListActionsParams", "Created"]
+__all__ = ["ActionListParams", "Created"]
 
 
-class WorkflowListActionsParams(TypedDict, total=False):
+class ActionListParams(TypedDict, total=False):
     created: Created
 
     latest_per_action: bool

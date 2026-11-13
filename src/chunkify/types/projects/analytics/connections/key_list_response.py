@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import Literal
 
-from ...._models import BaseModel
+from ....._models import BaseModel
 from .analytics_key import AnalyticsKey
 
 __all__ = ["KeyListResponse"]

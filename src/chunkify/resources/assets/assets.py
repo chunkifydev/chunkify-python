@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import AssetStatus, asset_list_params, asset_create_params, asset_delete_params, asset_update_params
+from ...types import asset_list_params, asset_create_params, asset_delete_params, asset_update_params
 from .outputs import (
     OutputsResource,
     AsyncOutputsResource,
@@ -18,14 +18,6 @@ from .outputs import (
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
-from .workflow import (
-    WorkflowResource,
-    AsyncWorkflowResource,
-    WorkflowResourceWithRawResponse,
-    AsyncWorkflowResourceWithRawResponse,
-    WorkflowResourceWithStreamingResponse,
-    AsyncWorkflowResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -38,7 +30,14 @@ from ..._wrappers import DataWrapper
 from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ...types.asset import Asset
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.asset_status import AssetStatus
+from .workflow.workflow import (
+    WorkflowResource,
+    AsyncWorkflowResource,
+    WorkflowResourceWithRawResponse,
+    AsyncWorkflowResourceWithRawResponse,
+    WorkflowResourceWithStreamingResponse,
+    AsyncWorkflowResourceWithStreamingResponse,
+)
 
 __all__ = ["AssetsResource", "AsyncAssetsResource"]
 
@@ -272,7 +271,7 @@ class AssetsResource(SyncAPIResource):
         offset: int | Omit = omit,
         search: str | Omit = omit,
         source_id: str | Omit = omit,
-        status: AssetStatus | Omit = omit,
+        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -612,7 +611,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         offset: int | Omit = omit,
         search: str | Omit = omit,
         source_id: str | Omit = omit,
-        status: AssetStatus | Omit = omit,
+        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

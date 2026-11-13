@@ -201,6 +201,14 @@ class TestUploads:
     def test_method_complete(self, client: Chunkify) -> None:
         upload = client.uploads.complete(
             token="token",
+        )
+        assert upload is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_complete_with_all_params(self, client: Chunkify) -> None:
+        upload = client.uploads.complete(
+            token="token",
             parts=[
                 {
                     "etag": '"abc123"',
@@ -215,12 +223,6 @@ class TestUploads:
     def test_raw_response_complete(self, client: Chunkify) -> None:
         response = client.uploads.with_raw_response.complete(
             token="token",
-            parts=[
-                {
-                    "etag": '"abc123"',
-                    "part_number": 1,
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -233,12 +235,6 @@ class TestUploads:
     def test_streaming_response_complete(self, client: Chunkify) -> None:
         with client.uploads.with_streaming_response.complete(
             token="token",
-            parts=[
-                {
-                    "etag": '"abc123"',
-                    "part_number": 1,
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -254,12 +250,6 @@ class TestUploads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             client.uploads.with_raw_response.complete(
                 token="",
-                parts=[
-                    {
-                        "etag": '"abc123"',
-                        "part_number": 1,
-                    }
-                ],
             )
 
 
@@ -451,6 +441,14 @@ class TestAsyncUploads:
     async def test_method_complete(self, async_client: AsyncChunkify) -> None:
         upload = await async_client.uploads.complete(
             token="token",
+        )
+        assert upload is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_complete_with_all_params(self, async_client: AsyncChunkify) -> None:
+        upload = await async_client.uploads.complete(
+            token="token",
             parts=[
                 {
                     "etag": '"abc123"',
@@ -465,12 +463,6 @@ class TestAsyncUploads:
     async def test_raw_response_complete(self, async_client: AsyncChunkify) -> None:
         response = await async_client.uploads.with_raw_response.complete(
             token="token",
-            parts=[
-                {
-                    "etag": '"abc123"',
-                    "part_number": 1,
-                }
-            ],
         )
 
         assert response.is_closed is True
@@ -483,12 +475,6 @@ class TestAsyncUploads:
     async def test_streaming_response_complete(self, async_client: AsyncChunkify) -> None:
         async with async_client.uploads.with_streaming_response.complete(
             token="token",
-            parts=[
-                {
-                    "etag": '"abc123"',
-                    "part_number": 1,
-                }
-            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -504,10 +490,4 @@ class TestAsyncUploads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             await async_client.uploads.with_raw_response.complete(
                 token="",
-                parts=[
-                    {
-                        "etag": '"abc123"',
-                        "part_number": 1,
-                    }
-                ],
             )

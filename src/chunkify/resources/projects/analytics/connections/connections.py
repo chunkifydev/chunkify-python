@@ -15,49 +15,49 @@ from .keys import (
     KeysResourceWithStreamingResponse,
     AsyncKeysResourceWithStreamingResponse,
 )
-from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ...._utils import path_template, maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from ....._utils import path_template, maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._wrappers import DataWrapper
-from ...._base_client import make_request_options
-from ....types.projects import analytics_connection_create_params, analytics_connection_update_params
-from ....types.projects.analytics_connection import AnalyticsConnection
-from ....types.projects.analytics_connection_list_response import AnalyticsConnectionListResponse
-from ....types.projects.analytics_connection_create_response import AnalyticsConnectionCreateResponse
+from ....._wrappers import DataWrapper
+from ....._base_client import make_request_options
+from .....types.projects.analytics import connection_create_params, connection_update_params
+from .....types.projects.analytics.analytics_connection import AnalyticsConnection
+from .....types.projects.analytics.connection_list_response import ConnectionListResponse
+from .....types.projects.analytics.connection_create_response import ConnectionCreateResponse
 
-__all__ = ["AnalyticsConnectionsResource", "AsyncAnalyticsConnectionsResource"]
+__all__ = ["ConnectionsResource", "AsyncConnectionsResource"]
 
 
-class AnalyticsConnectionsResource(SyncAPIResource):
+class ConnectionsResource(SyncAPIResource):
     @cached_property
     def keys(self) -> KeysResource:
         return KeysResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AnalyticsConnectionsResourceWithRawResponse:
+    def with_raw_response(self) -> ConnectionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
-        return AnalyticsConnectionsResourceWithRawResponse(self)
+        return ConnectionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AnalyticsConnectionsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ConnectionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
-        return AnalyticsConnectionsResourceWithStreamingResponse(self)
+        return ConnectionsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -74,7 +74,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AnalyticsConnectionCreateResponse:
+    ) -> ConnectionCreateResponse:
         """Add a hosted connection or validate and save a custom server.
 
         Only team owners
@@ -119,7 +119,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
                     "public_ingest_key": public_ingest_key,
                     "read_key": read_key,
                 },
-                analytics_connection_create_params.AnalyticsConnectionCreateParams,
+                connection_create_params.ConnectionCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -128,7 +128,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
                 timeout=timeout,
                 security={"team_access_token": True},
             ),
-            cast_to=AnalyticsConnectionCreateResponse,
+            cast_to=ConnectionCreateResponse,
         )
 
     def retrieve(
@@ -253,7 +253,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
                     "public_ingest_key": public_ingest_key,
                     "read_key": read_key,
                 },
-                analytics_connection_update_params.AnalyticsConnectionUpdateParams,
+                connection_update_params.ConnectionUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -276,7 +276,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AnalyticsConnectionListResponse:
+    ) -> ConnectionListResponse:
         """List the saved connections for this project.
 
         No connection is activated by this
@@ -302,7 +302,7 @@ class AnalyticsConnectionsResource(SyncAPIResource):
                 timeout=timeout,
                 security={"team_access_token": True},
             ),
-            cast_to=AnalyticsConnectionListResponse,
+            cast_to=ConnectionListResponse,
         )
 
     def delete(
@@ -356,29 +356,29 @@ class AnalyticsConnectionsResource(SyncAPIResource):
         )
 
 
-class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
+class AsyncConnectionsResource(AsyncAPIResource):
     @cached_property
     def keys(self) -> AsyncKeysResource:
         return AsyncKeysResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncAnalyticsConnectionsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncConnectionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/chunkifydev/chunkify-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncAnalyticsConnectionsResourceWithRawResponse(self)
+        return AsyncConnectionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAnalyticsConnectionsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncConnectionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/chunkifydev/chunkify-python#with_streaming_response
         """
-        return AsyncAnalyticsConnectionsResourceWithStreamingResponse(self)
+        return AsyncConnectionsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -395,7 +395,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AnalyticsConnectionCreateResponse:
+    ) -> ConnectionCreateResponse:
         """Add a hosted connection or validate and save a custom server.
 
         Only team owners
@@ -440,7 +440,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
                     "public_ingest_key": public_ingest_key,
                     "read_key": read_key,
                 },
-                analytics_connection_create_params.AnalyticsConnectionCreateParams,
+                connection_create_params.ConnectionCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -449,7 +449,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
                 timeout=timeout,
                 security={"team_access_token": True},
             ),
-            cast_to=AnalyticsConnectionCreateResponse,
+            cast_to=ConnectionCreateResponse,
         )
 
     async def retrieve(
@@ -574,7 +574,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
                     "public_ingest_key": public_ingest_key,
                     "read_key": read_key,
                 },
-                analytics_connection_update_params.AnalyticsConnectionUpdateParams,
+                connection_update_params.ConnectionUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -597,7 +597,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AnalyticsConnectionListResponse:
+    ) -> ConnectionListResponse:
         """List the saved connections for this project.
 
         No connection is activated by this
@@ -623,7 +623,7 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
                 timeout=timeout,
                 security={"team_access_token": True},
             ),
-            cast_to=AnalyticsConnectionListResponse,
+            cast_to=ConnectionListResponse,
         )
 
     async def delete(
@@ -677,101 +677,101 @@ class AsyncAnalyticsConnectionsResource(AsyncAPIResource):
         )
 
 
-class AnalyticsConnectionsResourceWithRawResponse:
-    def __init__(self, analytics_connections: AnalyticsConnectionsResource) -> None:
-        self._analytics_connections = analytics_connections
+class ConnectionsResourceWithRawResponse:
+    def __init__(self, connections: ConnectionsResource) -> None:
+        self._connections = connections
 
         self.create = to_raw_response_wrapper(
-            analytics_connections.create,
+            connections.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            analytics_connections.retrieve,
+            connections.retrieve,
         )
         self.update = to_raw_response_wrapper(
-            analytics_connections.update,
+            connections.update,
         )
         self.list = to_raw_response_wrapper(
-            analytics_connections.list,
+            connections.list,
         )
         self.delete = to_raw_response_wrapper(
-            analytics_connections.delete,
+            connections.delete,
         )
 
     @cached_property
     def keys(self) -> KeysResourceWithRawResponse:
-        return KeysResourceWithRawResponse(self._analytics_connections.keys)
+        return KeysResourceWithRawResponse(self._connections.keys)
 
 
-class AsyncAnalyticsConnectionsResourceWithRawResponse:
-    def __init__(self, analytics_connections: AsyncAnalyticsConnectionsResource) -> None:
-        self._analytics_connections = analytics_connections
+class AsyncConnectionsResourceWithRawResponse:
+    def __init__(self, connections: AsyncConnectionsResource) -> None:
+        self._connections = connections
 
         self.create = async_to_raw_response_wrapper(
-            analytics_connections.create,
+            connections.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            analytics_connections.retrieve,
+            connections.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
-            analytics_connections.update,
+            connections.update,
         )
         self.list = async_to_raw_response_wrapper(
-            analytics_connections.list,
+            connections.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            analytics_connections.delete,
+            connections.delete,
         )
 
     @cached_property
     def keys(self) -> AsyncKeysResourceWithRawResponse:
-        return AsyncKeysResourceWithRawResponse(self._analytics_connections.keys)
+        return AsyncKeysResourceWithRawResponse(self._connections.keys)
 
 
-class AnalyticsConnectionsResourceWithStreamingResponse:
-    def __init__(self, analytics_connections: AnalyticsConnectionsResource) -> None:
-        self._analytics_connections = analytics_connections
+class ConnectionsResourceWithStreamingResponse:
+    def __init__(self, connections: ConnectionsResource) -> None:
+        self._connections = connections
 
         self.create = to_streamed_response_wrapper(
-            analytics_connections.create,
+            connections.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            analytics_connections.retrieve,
+            connections.retrieve,
         )
         self.update = to_streamed_response_wrapper(
-            analytics_connections.update,
+            connections.update,
         )
         self.list = to_streamed_response_wrapper(
-            analytics_connections.list,
+            connections.list,
         )
         self.delete = to_streamed_response_wrapper(
-            analytics_connections.delete,
+            connections.delete,
         )
 
     @cached_property
     def keys(self) -> KeysResourceWithStreamingResponse:
-        return KeysResourceWithStreamingResponse(self._analytics_connections.keys)
+        return KeysResourceWithStreamingResponse(self._connections.keys)
 
 
-class AsyncAnalyticsConnectionsResourceWithStreamingResponse:
-    def __init__(self, analytics_connections: AsyncAnalyticsConnectionsResource) -> None:
-        self._analytics_connections = analytics_connections
+class AsyncConnectionsResourceWithStreamingResponse:
+    def __init__(self, connections: AsyncConnectionsResource) -> None:
+        self._connections = connections
 
         self.create = async_to_streamed_response_wrapper(
-            analytics_connections.create,
+            connections.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            analytics_connections.retrieve,
+            connections.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
-            analytics_connections.update,
+            connections.update,
         )
         self.list = async_to_streamed_response_wrapper(
-            analytics_connections.list,
+            connections.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            analytics_connections.delete,
+            connections.delete,
         )
 
     @cached_property
     def keys(self) -> AsyncKeysResourceWithStreamingResponse:
-        return AsyncKeysResourceWithStreamingResponse(self._analytics_connections.keys)
+        return AsyncKeysResourceWithStreamingResponse(self._connections.keys)

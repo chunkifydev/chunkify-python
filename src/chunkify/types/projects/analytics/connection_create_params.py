@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AnalyticsConnectionCreateParams"]
+__all__ = ["ConnectionCreateParams"]
 
 
-class AnalyticsConnectionCreateParams(TypedDict, total=False):
+class ConnectionCreateParams(TypedDict, total=False):
     name: Required[str]
     """Name identifies this connection in the dashboard."""
 

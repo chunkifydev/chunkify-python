@@ -3,13 +3,13 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from ...._models import BaseModel
 from .analytics_connection import AnalyticsConnection
 
-__all__ = ["AnalyticsConnectionCreateResponse"]
+__all__ = ["ConnectionCreateResponse"]
 
 
-class AnalyticsConnectionCreateResponse(BaseModel):
+class ConnectionCreateResponse(BaseModel):
     data: AnalyticsConnection
     """A saved source for analytics reports.
 

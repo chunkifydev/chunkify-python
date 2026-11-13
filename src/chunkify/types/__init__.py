@@ -7,7 +7,7 @@ from .jpg import Jpg as Jpg
 from .asset import Asset as Asset
 from .event import Event as Event
 from .token import Token as Token
-from .shared import ChunkifyError as ChunkifyError
+from .shared import ChunkifyError as ChunkifyError, AssetOutputError as AssetOutputError
 from .source import Source as Source
 from .upload import Upload as Upload
 from .hls_av1 import HlsAv1 as HlsAv1
@@ -25,7 +25,6 @@ from .workflow import Workflow as Workflow
 from .jpg_param import JpgParam as JpgParam
 from .thumbnail import Thumbnail as Thumbnail
 from .transcoding import Transcoding as Transcoding
-from .asset_status import AssetStatus as AssetStatus
 from .notification import Notification as Notification
 from .hls_av1_param import HlsAv1Param as HlsAv1Param
 from .metrics_usage import MetricsUsage as MetricsUsage
@@ -76,4 +75,9 @@ from .transcoding_list_params import TranscodingListParams as TranscodingListPar
 from .notification_list_params import NotificationListParams as NotificationListParams
 from .transcoding_create_params import TranscodingCreateParams as TranscodingCreateParams
 from .transcoding_delete_params import TranscodingDeleteParams as TranscodingDeleteParams
+from .transcoding_m4a_aac_param import TranscodingM4aAacParam as TranscodingM4aAacParam
+from .transcoding_mp4_av1_param import TranscodingMP4Av1Param as TranscodingMP4Av1Param
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
+from .transcoding_mp4_h264_param import TranscodingMP4H264Param as TranscodingMP4H264Param
+from .transcoding_mp4_h265_param import TranscodingMP4H265Param as TranscodingMP4H265Param
+from .transcoding_webm_vp9_param import TranscodingWebmVp9Param as TranscodingWebmVp9Param

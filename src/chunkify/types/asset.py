@@ -5,7 +5,6 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .asset_status import AssetStatus
 
 __all__ = ["Asset", "SourceMetadata", "Error", "Poster", "TimelinePreviews"]
 
@@ -184,7 +183,7 @@ class Asset(BaseModel):
     deletion.
     """
 
-    status: AssetStatus
+    status: Literal["preparing", "ready", "failed", "expired"]
     """Status specifies the Asset preparation state.
 
     ready means the video is prepared for playback, with its poster and timeline

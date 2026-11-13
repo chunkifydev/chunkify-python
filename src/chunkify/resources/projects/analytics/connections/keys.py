@@ -6,21 +6,21 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Query, Headers, NotGiven, not_given
-from ...._utils import path_template, maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._utils import path_template, maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.projects.analytics_connections import key_create_params
-from ....types.projects.analytics_connections.key_list_response import KeyListResponse
-from ....types.projects.analytics_connections.key_create_response import KeyCreateResponse
-from ....types.projects.analytics_connections.key_rotate_response import KeyRotateResponse
+from ....._base_client import make_request_options
+from .....types.projects.analytics.connections import key_create_params
+from .....types.projects.analytics.connections.key_list_response import KeyListResponse
+from .....types.projects.analytics.connections.key_create_response import KeyCreateResponse
+from .....types.projects.analytics.connections.key_rotate_response import KeyRotateResponse
 
 __all__ = ["KeysResource", "AsyncKeysResource"]
 

@@ -7,36 +7,21 @@ from typing_extensions import Literal, Annotated, TypeAlias
 from ..._utils import PropertyInfo
 from ..._models import BaseModel
 from ..thumbnail import Thumbnail
+from ..shared.asset_output_error import AssetOutputError
 
 __all__ = [
     "AssetOutput",
     "AssetCaptionOutput",
     "AssetCaptionOutputDetails",
-    "AssetCaptionOutputDetailsError",
     "AssetStaticRenditionOutput",
     "AssetStaticRenditionOutputDetails",
-    "AssetStaticRenditionOutputDetailsError",
     "AssetStaticRenditionOutputDetailsProgress",
     "AssetThumbnailOutput",
     "AssetTranscriptOutput",
     "AssetTranscriptOutputDetails",
     "AssetTranscriptOutputDetailsContent",
     "AssetTranscriptOutputDetailsContentSegment",
-    "AssetTranscriptOutputDetailsError",
 ]
-
-
-class AssetCaptionOutputDetailsError(BaseModel):
-    """Reason caption processing failed."""
-
-    code: str
-    """Machine-readable processing error code."""
-
-    message: str
-    """Description of the processing failure."""
-
-    stage: Literal["ingest", "analysis", "encoding", "packaging", "upload", "validation", "cleanup"]
-    """Processing stage that failed."""
 
 
 class AssetCaptionOutputDetails(BaseModel):
@@ -53,7 +38,7 @@ class AssetCaptionOutputDetails(BaseModel):
     created_at: Optional[datetime] = None
     """Time this caption output was requested."""
 
-    error: Optional[AssetCaptionOutputDetailsError] = None
+    error: Optional[AssetOutputError] = None
     """Reason caption processing failed."""
 
     language_code: Optional[str] = None
@@ -110,17 +95,6 @@ class AssetCaptionOutput(BaseModel):
 
     type: Literal["caption"]
     """Type identifies the output kind."""
-
-
-class AssetStaticRenditionOutputDetailsError(BaseModel):
-    code: str
-    """Machine-readable processing error code."""
-
-    message: str
-    """Description of the processing failure."""
-
-    stage: Literal["ingest", "analysis", "encoding", "packaging", "upload", "validation", "cleanup"]
-    """Processing stage that failed."""
 
 
 class AssetStaticRenditionOutputDetailsProgress(BaseModel):
@@ -220,7 +194,8 @@ class AssetStaticRenditionOutputDetails(BaseModel):
     duration: Optional[float] = None
     """Output duration in seconds. Omitted until ready."""
 
-    error: Optional[AssetStaticRenditionOutputDetailsError] = None
+    error: Optional[AssetOutputError] = None
+    """A customer-facing Asset output processing failure."""
 
     progress: Optional[AssetStaticRenditionOutputDetailsProgress] = None
     """Progress specifies the current processing stage and encoding percentage.
@@ -336,17 +311,6 @@ class AssetTranscriptOutputDetailsContent(BaseModel):
     """Text contains the complete recognized speech in the original language."""
 
 
-class AssetTranscriptOutputDetailsError(BaseModel):
-    code: str
-    """Machine-readable processing error code."""
-
-    message: str
-    """Description of the processing failure."""
-
-    stage: Literal["ingest", "analysis", "encoding", "packaging", "upload", "validation", "cleanup"]
-    """Processing stage that failed."""
-
-
 class AssetTranscriptOutputDetails(BaseModel):
     """An original-language transcript.
 
@@ -368,7 +332,8 @@ class AssetTranscriptOutputDetails(BaseModel):
     Included when ready; omitted while preparing, failed or expired.
     """
 
-    error: Optional[AssetTranscriptOutputDetailsError] = None
+    error: Optional[AssetOutputError] = None
+    """A customer-facing Asset output processing failure."""
 
     language_code: Optional[str] = None
     """LanguageCode identifies the detected primary language, such as en.
