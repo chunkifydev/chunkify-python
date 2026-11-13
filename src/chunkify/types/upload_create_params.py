@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["UploadCreateParams", "Storage"]
+from .upload_create_storage_params import UploadCreateStorageParams
+
+__all__ = ["UploadCreateParams"]
 
 
 class UploadCreateParams(TypedDict, total=False):
@@ -31,7 +33,7 @@ class UploadCreateParams(TypedDict, total=False):
     maximum size of 2048 bytes.
     """
 
-    storage: Storage
+    storage: UploadCreateStorageParams
     """Optional Storage override.
 
     Omit id to use the Project default. Customer-connected Storage requires path;
@@ -61,21 +63,4 @@ class UploadCreateParams(TypedDict, total=False):
 
     Omit to use the Project default. Set null to disable automatic actions. The
     current revision is pinned when creation is accepted.
-    """
-
-
-class Storage(TypedDict, total=False):
-    """Optional Storage override.
-
-    Omit id to use the Project default. Customer-connected Storage requires path; Chunkify Storage generates its own path.
-    """
-
-    id: str
-    """Storage belonging to this Project. Omit to use the Project default."""
-
-    path: str
-    """
-    Exact object key including filename, required for customer Storage and forbidden
-    for Chunkify Storage. The output base_prefix is not added. Existing keys may be
-    overwritten.
     """

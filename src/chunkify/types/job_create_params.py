@@ -2,23 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Dict
+from typing_extensions import Required, TypedDict
 
-from .jpg_param import JpgParam
-from .hls_av1_param import HlsAv1Param
-from .mp4_av1_param import MP4Av1Param
-from .hls_h264_param import HlsH264Param
-from .hls_h265_param import HlsH265Param
-from .mp4_h264_param import MP4H264Param
-from .mp4_h265_param import MP4H265Param
-from .webm_vp9_param import WebmVp9Param
+from .job_create_format_params import JobCreateFormatParams
+from .job_create_storage_params import JobCreateStorageParams
+from .job_create_transcoder_params import JobCreateTranscoderParams
 
-__all__ = ["JobCreateParams", "Format", "Storage", "Transcoder"]
+__all__ = ["JobCreateParams"]
 
 
 class JobCreateParams(TypedDict, total=False):
-    format: Required[Format]
+    format: Required[JobCreateFormatParams]
     """
     Required format configuration, one and only one valid format configuration must
     be provided. If you want to use a format without specifying any configuration,
@@ -38,56 +33,13 @@ class JobCreateParams(TypedDict, total=False):
     metadata: Dict[str, str]
     """Optional metadata to attach to the job, the maximum size allowed is 2048 bytes"""
 
-    storage: Storage
+    storage: JobCreateStorageParams
     """Optional storage configuration"""
 
-    transcoder: Transcoder
+    transcoder: JobCreateTranscoderParams
     """Optional transcoder configuration.
 
     If not provided, the system will automatically calculate the optimal quantity
     and CPU type based on the source file specifications and output requirements.
     This auto-scaling ensures efficient resource utilization.
-    """
-
-
-Format: TypeAlias = Union[
-    MP4Av1Param, MP4H264Param, MP4H265Param, WebmVp9Param, HlsAv1Param, HlsH264Param, HlsH265Param, JpgParam
-]
-
-
-class Storage(TypedDict, total=False):
-    """Optional storage configuration"""
-
-    id: str
-    """
-    Storage Id specifies the storage configuration to use from pre-configured
-    storage options. Must be 4-64 characters long and contain only alphanumeric
-    characters, underscores and hyphens. Optional if Storage Path is provided.
-    """
-
-    path: str
-    """
-    Storage Path specifies an object path relative to the selected storage
-    connection's base_prefix. Do not include the base_prefix. Leading slashes are
-    accepted for compatibility and removed before the path is stored. The
-    base_prefix and normalized path may contain at most 1024 bytes combined.
-    Optional if Storage Id is provided.
-    """
-
-
-class Transcoder(TypedDict, total=False):
-    """Optional transcoder configuration.
-
-    If not provided, the system will automatically
-    calculate the optimal quantity and CPU type based on the source file specifications
-    and output requirements. This auto-scaling ensures efficient resource utilization.
-    """
-
-    quantity: int
-    """Quantity specifies the number of transcoder instances. Required if Type is set."""
-
-    type: Literal["4vCPU", "8vCPU", "16vCPU"]
-    """
-    Type specifies the CPU configuration for each transcoder instance. Required if
-    Quantity is set.
     """

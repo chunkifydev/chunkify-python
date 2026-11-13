@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
+
+from .token_scope import TokenScope
 
 __all__ = ["TokenCreateParams"]
 
 
 class TokenCreateParams(TypedDict, total=False):
-    scope: Required[Literal["project", "team"]]
+    scope: Required[TokenScope]
     """
     Scope specifies the scope of the token, which must be either "team" or
     "project".

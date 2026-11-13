@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 from typing import Type, cast
-from typing_extensions import Literal
 
 import httpx
 
-from ..types import token_create_params
+from ..types import TokenScope, token_create_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -21,6 +20,7 @@ from .._response import (
 from .._wrappers import DataWrapper
 from ..types.token import Token
 from .._base_client import make_request_options
+from ..types.token_scope import TokenScope
 from ..types.token_list_response import TokenListResponse
 
 __all__ = ["TokensResource", "AsyncTokensResource"]
@@ -49,7 +49,7 @@ class TokensResource(SyncAPIResource):
     def create(
         self,
         *,
-        scope: Literal["project", "team"],
+        scope: TokenScope,
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -192,7 +192,7 @@ class AsyncTokensResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        scope: Literal["project", "team"],
+        scope: TokenScope,
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

@@ -9,7 +9,9 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import Transcoding
+from chunkify.types import (
+    Transcoding,
+)
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
