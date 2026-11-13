@@ -6,6 +6,7 @@ from typing import Iterable
 from typing_extensions import Literal, TypedDict
 
 from .._types import SequenceNotStr
+from .job_format_id import JobFormatID
 
 __all__ = ["JobListParams", "Created"]
 
@@ -16,7 +17,7 @@ class JobListParams(TypedDict, total=False):
 
     created: Created
 
-    format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
+    format_id: JobFormatID
     """Filter by format id"""
 
     hls_manifest_id: str

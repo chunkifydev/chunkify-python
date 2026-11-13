@@ -6,7 +6,7 @@ from typing import Type, Optional, cast
 
 import httpx
 
-from ...types import project_create_params, project_update_params
+from ...types import AssetDefaultsParams, project_create_params, project_update_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -28,6 +28,7 @@ from .analytics.analytics import (
     AnalyticsResourceWithStreamingResponse,
     AsyncAnalyticsResourceWithStreamingResponse,
 )
+from ...types.asset_defaults_params import AssetDefaultsParams
 from ...types.project_list_response import ProjectListResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
@@ -140,7 +141,7 @@ class ProjectsResource(SyncAPIResource):
         self,
         project_id: str,
         *,
-        asset_defaults: project_update_params.AssetDefaults | Omit = omit,
+        asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         storage_id: str | Omit = omit,
@@ -371,7 +372,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         self,
         project_id: str,
         *,
-        asset_defaults: project_update_params.AssetDefaults | Omit = omit,
+        asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
         storage_id: str | Omit = omit,

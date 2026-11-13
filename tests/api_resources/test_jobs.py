@@ -9,7 +9,9 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import Job
+from chunkify.types import (
+    Job,
+)
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 # pyright: reportDeprecated=false

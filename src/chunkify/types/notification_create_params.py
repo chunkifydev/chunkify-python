@@ -2,51 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
+
+from .webhook_event import WebhookEvent
 
 __all__ = ["NotificationCreateParams"]
 
 
 class NotificationCreateParams(TypedDict, total=False):
-    event: Required[
-        Literal[
-            "job.created",
-            "job.completed",
-            "job.failed",
-            "job.cancelled",
-            "source.created",
-            "source.deleted",
-            "upload.created",
-            "upload.completed",
-            "upload.failed",
-            "upload.expired",
-            "asset.created",
-            "asset.ready",
-            "asset.playback_ready",
-            "asset.failed",
-            "asset.expired",
-            "asset.deleted",
-            "asset.output.created",
-            "asset.output.ready",
-            "asset.output.failed",
-            "asset.output.deleted",
-            "workflow_run.created",
-            "workflow_run.completed",
-            "workflow_run.failed",
-            "workflow_run.cancelled",
-            "transcoding.created",
-            "transcoding.ready",
-            "transcoding.failed",
-            "transcoding.cancelled",
-            "transcoding.expired",
-            "transcoding.deleted",
-            "thumbnail.created",
-            "thumbnail.ready",
-            "thumbnail.failed",
-            "thumbnail.expired",
-            "thumbnail.deleted",
-        ]
-    ]
+    event: Required[WebhookEvent]
     """Event specifies the type of event that triggered the notification."""
 
     object_id: Required[str]
