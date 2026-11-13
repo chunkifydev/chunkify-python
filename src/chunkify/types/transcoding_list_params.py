@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
+from .transcoding_status import TranscodingStatus
+
 __all__ = ["TranscodingListParams", "Created"]
 
 
@@ -25,7 +27,7 @@ class TranscodingListParams(TypedDict, total=False):
     Omit to include Transcodings from all Sources in the Project.
     """
 
-    status: Literal["preparing", "ready", "failed", "cancelled", "expired"]
+    status: TranscodingStatus
     """Filter by Transcoding status."""
 
     storage_id: str
