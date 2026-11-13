@@ -16,6 +16,7 @@ __all__ = [
     "OutputAssetThumbnailOutputCreateParamsParams",
     "OutputAssetThumbnailOutputCreateParamsParamsRange",
     "OutputAssetTranscriptOutputCreateParams",
+    "OutputAssetTranscriptOutputCreateParamsParams",
 ]
 
 
@@ -147,13 +148,22 @@ class OutputAssetThumbnailOutputCreateParams(TypedDict, total=False):
     """Type specifies the output kind to create."""
 
 
+class OutputAssetTranscriptOutputCreateParamsParams(TypedDict, total=False):
+    """Parameters for an original-language transcript.
+
+    Pass an empty object; the spoken language is detected automatically.
+    """
+
+    pass
+
+
 class OutputAssetTranscriptOutputCreateParams(TypedDict, total=False):
     """Create or reuse the original-language transcript for an Asset.
 
     Caption generation shares this transcript and its speech-recognition charge.
     """
 
-    params: Required[object]
+    params: Required[OutputAssetTranscriptOutputCreateParamsParams]
     """Parameters for an original-language transcript.
 
     Pass an empty object; the spoken language is detected automatically.
