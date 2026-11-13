@@ -12,6 +12,7 @@ __all__ = [
     "RuleActionWorkflowStaticActionParams",
     "RuleActionWorkflowStaticActionParamsParams",
     "RuleActionWorkflowCaptionActionParams",
+    "RuleActionWorkflowCaptionActionParamsParams",
     "RuleActionWorkflowCaptionActionParamsTranscriptID",
     "RuleActionWorkflowTranslationActionParams",
     "RuleActionWorkflowTranslationActionParamsCaptionID",
@@ -20,6 +21,7 @@ __all__ = [
     "RuleActionWorkflowThumbnailActionParamsParams",
     "RuleActionWorkflowThumbnailActionParamsParamsRange",
     "RuleActionWorkflowTranscriptActionParams",
+    "RuleActionWorkflowTranscriptActionParamsParams",
     "RuleOrigin",
 ]
 
@@ -72,6 +74,12 @@ class RuleActionWorkflowStaticActionParams(TypedDict, total=False):
     """Type specifies the action to perform. Must be create_static_rendition."""
 
 
+class RuleActionWorkflowCaptionActionParamsParams(TypedDict, total=False):
+    """Params specifies caption generation settings. Pass an empty object."""
+
+    pass
+
+
 _RuleActionWorkflowCaptionActionParamsTranscriptIDReservedKeywords = TypedDict(
     "_RuleActionWorkflowCaptionActionParamsTranscriptIDReservedKeywords",
     {
@@ -104,7 +112,7 @@ class RuleActionWorkflowCaptionActionParams(TypedDict, total=False):
     underscores.
     """
 
-    params: Required[object]
+    params: Required[RuleActionWorkflowCaptionActionParamsParams]
     """Params specifies caption generation settings. Pass an empty object."""
 
     type: Required[Literal["create_caption"]]
@@ -256,6 +264,12 @@ class RuleActionWorkflowThumbnailActionParams(TypedDict, total=False):
     """Type specifies the action to perform. Must be create_thumbnails."""
 
 
+class RuleActionWorkflowTranscriptActionParamsParams(TypedDict, total=False):
+    """Params specifies transcript settings. Pass an empty object."""
+
+    pass
+
+
 class RuleActionWorkflowTranscriptActionParams(TypedDict, total=False):
     """Creates or reuses the original-language transcript.
 
@@ -269,7 +283,7 @@ class RuleActionWorkflowTranscriptActionParams(TypedDict, total=False):
     underscores.
     """
 
-    params: Required[object]
+    params: Required[RuleActionWorkflowTranscriptActionParamsParams]
     """Params specifies transcript settings. Pass an empty object."""
 
     type: Required[Literal["create_transcript"]]
