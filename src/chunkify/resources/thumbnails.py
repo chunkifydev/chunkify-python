@@ -3,11 +3,19 @@
 from __future__ import annotations
 
 from typing import Dict, Type, Iterable, cast
-from typing_extensions import Literal
 
 import httpx
 
-from ..types import thumbnail_list_params, thumbnail_create_params, thumbnail_delete_params
+from ..types import (
+    ThumbnailFormat,
+    ThumbnailOutput,
+    ThumbnailStatus,
+    ThumbnailRangeParams,
+    ThumbnailCreateStorageParams,
+    thumbnail_list_params,
+    thumbnail_create_params,
+    thumbnail_delete_params,
+)
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,6 +30,11 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.thumbnail import Thumbnail
+from ..types.thumbnail_format import ThumbnailFormat
+from ..types.thumbnail_output import ThumbnailOutput
+from ..types.thumbnail_status import ThumbnailStatus
+from ..types.thumbnail_range_params import ThumbnailRangeParams
+from ..types.thumbnail_create_storage_params import ThumbnailCreateStorageParams
 
 __all__ = ["ThumbnailsResource", "AsyncThumbnailsResource"]
 
@@ -51,12 +64,12 @@ class ThumbnailsResource(SyncAPIResource):
         *,
         source_id: str,
         count: int | Omit = omit,
-        format: Literal["jpeg", "webp"] | Omit = omit,
+        format: ThumbnailFormat | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        output: Literal["images", "sprites"] | Omit = omit,
-        range: thumbnail_create_params.Range | Omit = omit,
+        output: ThumbnailOutput | Omit = omit,
+        range: ThumbnailRangeParams | Omit = omit,
         size: int | Omit = omit,
-        storage: thumbnail_create_params.Storage | Omit = omit,
+        storage: ThumbnailCreateStorageParams | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -179,7 +192,7 @@ class ThumbnailsResource(SyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
+        status: ThumbnailStatus | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -314,12 +327,12 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         *,
         source_id: str,
         count: int | Omit = omit,
-        format: Literal["jpeg", "webp"] | Omit = omit,
+        format: ThumbnailFormat | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        output: Literal["images", "sprites"] | Omit = omit,
-        range: thumbnail_create_params.Range | Omit = omit,
+        output: ThumbnailOutput | Omit = omit,
+        range: ThumbnailRangeParams | Omit = omit,
         size: int | Omit = omit,
-        storage: thumbnail_create_params.Storage | Omit = omit,
+        storage: ThumbnailCreateStorageParams | Omit = omit,
         timestamps: Iterable[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -442,7 +455,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
-        status: Literal["preparing", "ready", "failed", "expired"] | Omit = omit,
+        status: ThumbnailStatus | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

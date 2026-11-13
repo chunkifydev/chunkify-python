@@ -2,39 +2,12 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from ..._models import BaseModel
+from ..workflow_run_status import WorkflowRunStatus
+from ..workflow_action_counts import WorkflowActionCounts
 
-__all__ = ["WorkflowRun", "Actions"]
-
-
-class Actions(BaseModel):
-    """Counts of action outcomes in this run.
-
-    Reused actions are included in completed.
-    """
-
-    cancelled: int
-    """Number of actions cancelled before completion."""
-
-    completed: int
-    """Number of actions that completed successfully, including reused outputs."""
-
-    failed: int
-    """Number of actions that failed."""
-
-    reused: int
-    """Number of completed actions that reused an existing output.
-
-    Included in completed.
-    """
-
-    skipped: int
-    """Number of actions skipped without producing an output."""
-
-    total: int
-    """Total number of actions in the run, including unfinished actions."""
+__all__ = ["WorkflowRun"]
 
 
 class WorkflowRun(BaseModel):
@@ -45,13 +18,13 @@ class WorkflowRun(BaseModel):
     id: str
     """Unique Workflow run ID."""
 
-    actions: Actions
+    actions: WorkflowActionCounts
     """Counts of action outcomes in this run.
 
     Reused actions are included in completed.
     """
 
-    asset_execution_status: Literal["pending", "running", "completed", "failed", "cancelled"]
+    asset_execution_status: WorkflowRunStatus
     """
     AssetExecutionStatus specifies the combined status of this revision for the
     Asset across retained runs. Any failed action or run makes it failed. Pending or
@@ -93,7 +66,7 @@ class WorkflowRun(BaseModel):
     Equals id when this run starts the chain.
     """
 
-    status: Literal["pending", "running", "completed", "failed", "cancelled"]
+    status: WorkflowRunStatus
     """Current status of this event run, based on its own actions."""
 
     updated_at: datetime

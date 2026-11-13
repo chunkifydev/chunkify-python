@@ -38,6 +38,7 @@ from ..._wrappers import DataWrapper
 from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.workflow import Workflow
+from ...types.workflow_rule_params import WorkflowRuleParams
 
 __all__ = ["WorkflowsResource", "AsyncWorkflowsResource"]
 
@@ -74,7 +75,7 @@ class WorkflowsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        rules: Iterable[workflow_create_params.Rule],
+        rules: Iterable[WorkflowRuleParams],
         schema_version: Literal[1],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -172,7 +173,7 @@ class WorkflowsResource(SyncAPIResource):
         *,
         expected_revision: int | Omit = omit,
         name: str | Omit = omit,
-        rules: Iterable[workflow_update_params.Rule] | Omit = omit,
+        rules: Iterable[WorkflowRuleParams] | Omit = omit,
         schema_version: Literal[1] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -367,7 +368,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        rules: Iterable[workflow_create_params.Rule],
+        rules: Iterable[WorkflowRuleParams],
         schema_version: Literal[1],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -465,7 +466,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         *,
         expected_revision: int | Omit = omit,
         name: str | Omit = omit,
-        rules: Iterable[workflow_update_params.Rule] | Omit = omit,
+        rules: Iterable[WorkflowRuleParams] | Omit = omit,
         schema_version: Literal[1] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

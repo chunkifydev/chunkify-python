@@ -7,7 +7,14 @@ from .jpg import Jpg as Jpg
 from .asset import Asset as Asset
 from .event import Event as Event
 from .token import Token as Token
-from .shared import ChunkifyError as ChunkifyError, AssetOutputError as AssetOutputError
+from .shared import (
+    Log as Log,
+    CreatedVia as CreatedVia,
+    InstanceType as InstanceType,
+    ChunkifyError as ChunkifyError,
+    AssetOutputError as AssetOutputError,
+    TranscoderStatus as TranscoderStatus,
+)
 from .source import Source as Source
 from .upload import Upload as Upload
 from .hls_av1 import HlsAv1 as HlsAv1
@@ -24,60 +31,255 @@ from .webm_vp9 import WebmVp9 as WebmVp9
 from .workflow import Workflow as Workflow
 from .jpg_param import JpgParam as JpgParam
 from .thumbnail import Thumbnail as Thumbnail
+from .aws_region import AwsRegion as AwsRegion
+from .job_format import JobFormat as JobFormat
+from .asset_error import AssetError as AssetError
+from .job_storage import JobStorage as JobStorage
+from .storage_aws import StorageAws as StorageAws
+from .token_scope import TokenScope as TokenScope
 from .transcoding import Transcoding as Transcoding
+from .asset_poster import AssetPoster as AssetPoster
+from .asset_status import AssetStatus as AssetStatus
 from .notification import Notification as Notification
+from .asset_caption import AssetCaption as AssetCaption
 from .hls_av1_param import HlsAv1Param as HlsAv1Param
+from .job_format_id import JobFormatID as JobFormatID
 from .metrics_usage import MetricsUsage as MetricsUsage
 from .mp4_av1_param import MP4Av1Param as MP4Av1Param
+from .webhook_event import WebhookEvent as WebhookEvent
+from .workflow_rule import WorkflowRule as WorkflowRule
+from .asset_defaults import AssetDefaults as AssetDefaults
 from .hls_h264_param import HlsH264Param as HlsH264Param
 from .hls_h265_param import HlsH265Param as HlsH265Param
+from .job_transcoder import JobTranscoder as JobTranscoder
 from .metrics_assets import MetricsAssets as MetricsAssets
 from .mp4_h264_param import MP4H264Param as MP4H264Param
 from .mp4_h265_param import MP4H265Param as MP4H265Param
+from .thumbnail_crop import ThumbnailCrop as ThumbnailCrop
+from .thumbnail_file import ThumbnailFile as ThumbnailFile
 from .webm_vp9_param import WebmVp9Param as WebmVp9Param
+from .chunkify_region import ChunkifyRegion as ChunkifyRegion
 from .job_list_params import JobListParams as JobListParams
 from .metrics_storage import MetricsStorage as MetricsStorage
+from .thumbnail_error import ThumbnailError as ThumbnailError
+from .thumbnail_range import ThumbnailRange as ThumbnailRange
+from .workflow_action import WorkflowAction as WorkflowAction
+from .workflow_origin import WorkflowOrigin as WorkflowOrigin
+from .workflow_static import WorkflowStatic as WorkflowStatic
+from .asset_transcript import AssetTranscript as AssetTranscript
 from .file_list_params import FileListParams as FileListParams
+from .storage_chunkify import StorageChunkify as StorageChunkify
+from .storage_location import StorageLocation as StorageLocation
+from .thumbnail_format import ThumbnailFormat as ThumbnailFormat
+from .thumbnail_output import ThumbnailOutput as ThumbnailOutput
+from .thumbnail_sample import ThumbnailSample as ThumbnailSample
+from .thumbnail_status import ThumbnailStatus as ThumbnailStatus
+from .transcoding_file import TranscodingFile as TranscodingFile
+from .asset_action_type import AssetActionType as AssetActionType
 from .asset_list_params import AssetListParams as AssetListParams
 from .event_list_params import EventListParams as EventListParams
 from .job_create_params import JobCreateParams as JobCreateParams
+from .metrics_asset_day import MetricsAssetDay as MetricsAssetDay
+from .metrics_usage_day import MetricsUsageDay as MetricsUsageDay
+from .transcoding_error import TranscodingError as TranscodingError
+from .asset_action_input import AssetActionInput as AssetActionInput
 from .source_list_params import SourceListParams as SourceListParams
+from .storage_cloudflare import StorageCloudflare as StorageCloudflare
+from .thumbnail_settings import ThumbnailSettings as ThumbnailSettings
+from .transcoding_format import TranscodingFormat as TranscodingFormat
+from .transcoding_status import TranscodingStatus as TranscodingStatus
 from .upload_list_params import UploadListParams as UploadListParams
+from .workflow_thumbnail import WorkflowThumbnail as WorkflowThumbnail
+from .asset_action_result import AssetActionResult as AssetActionResult
+from .asset_action_status import AssetActionStatus as AssetActionStatus
 from .asset_create_params import AssetCreateParams as AssetCreateParams
 from .asset_delete_params import AssetDeleteParams as AssetDeleteParams
+from .asset_output_status import AssetOutputStatus as AssetOutputStatus
 from .asset_update_params import AssetUpdateParams as AssetUpdateParams
 from .metric_usage_params import MetricUsageParams as MetricUsageParams
+from .metrics_storage_day import MetricsStorageDay as MetricsStorageDay
 from .token_create_params import TokenCreateParams as TokenCreateParams
 from .token_list_response import TokenListResponse as TokenListResponse
+from .transcoding_storage import TranscodingStorage as TranscodingStorage
+from .workflow_rule_event import WorkflowRuleEvent as WorkflowRuleEvent
+from .workflow_run_status import WorkflowRunStatus as WorkflowRunStatus
+from .asset_caption_output import AssetCaptionOutput as AssetCaptionOutput
 from .metric_assets_params import MetricAssetsParams as MetricAssetsParams
+from .metrics_asset_counts import MetricsAssetCounts as MetricsAssetCounts
+from .metrics_asset_values import MetricsAssetValues as MetricsAssetValues
+from .metrics_usage_assets import MetricsUsageAssets as MetricsUsageAssets
+from .metrics_usage_egress import MetricsUsageEgress as MetricsUsageEgress
+from .metrics_usage_values import MetricsUsageValues as MetricsUsageValues
 from .source_create_params import SourceCreateParams as SourceCreateParams
 from .unwrap_webhook_event import UnwrapWebhookEvent as UnwrapWebhookEvent
 from .upload_create_params import UploadCreateParams as UploadCreateParams
 from .workflow_list_params import WorkflowListParams as WorkflowListParams
+from .workflow_rule_params import WorkflowRuleParams as WorkflowRuleParams
+from .workflow_translation import WorkflowTranslation as WorkflowTranslation
+from .asset_defaults_params import AssetDefaultsParams as AssetDefaultsParams
+from .asset_source_metadata import AssetSourceMetadata as AssetSourceMetadata
 from .metric_storage_params import MetricStorageParams as MetricStorageParams
+from .metrics_asset_outputs import MetricsAssetOutputs as MetricsAssetOutputs
+from .metrics_asset_sources import MetricsAssetSources as MetricsAssetSources
+from .metrics_asset_timings import MetricsAssetTimings as MetricsAssetTimings
+from .metrics_credits_spent import MetricsCreditsSpent as MetricsCreditsSpent
+from .metrics_storage_entry import MetricsStorageEntry as MetricsStorageEntry
+from .metrics_usage_sources import MetricsUsageSources as MetricsUsageSources
+from .metrics_usage_uploads import MetricsUsageUploads as MetricsUsageUploads
 from .project_create_params import ProjectCreateParams as ProjectCreateParams
 from .project_list_response import ProjectListResponse as ProjectListResponse
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
 from .storage_create_params import StorageCreateParams as StorageCreateParams
 from .storage_list_response import StorageListResponse as StorageListResponse
+from .storage_s3_compatible import StorageS3Compatible as StorageS3Compatible
 from .storage_update_params import StorageUpdateParams as StorageUpdateParams
 from .thumbnail_list_params import ThumbnailListParams as ThumbnailListParams
 from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
 from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
+from .asset_static_rendition import AssetStaticRendition as AssetStaticRendition
+from .asset_thumbnail_output import AssetThumbnailOutput as AssetThumbnailOutput
+from .metrics_storage_values import MetricsStorageValues as MetricsStorageValues
+from .metrics_usage_captions import MetricsUsageCaptions as MetricsUsageCaptions
+from .thumbnail_range_params import ThumbnailRangeParams as ThumbnailRangeParams
 from .upload_complete_params import UploadCompleteParams as UploadCompleteParams
+from .workflow_action_counts import WorkflowActionCounts as WorkflowActionCounts
+from .workflow_action_params import WorkflowActionParams as WorkflowActionParams
 from .workflow_create_params import WorkflowCreateParams as WorkflowCreateParams
+from .workflow_origin_params import WorkflowOriginParams as WorkflowOriginParams
+from .workflow_static_action import WorkflowStaticAction as WorkflowStaticAction
+from .workflow_static_params import WorkflowStaticParams as WorkflowStaticParams
 from .workflow_update_params import WorkflowUpdateParams as WorkflowUpdateParams
-from .new_event_webhook_event import NewEventWebhookEvent as NewEventWebhookEvent
+from .asset_timeline_previews import AssetTimelinePreviews as AssetTimelinePreviews
+from .asset_transcript_output import AssetTranscriptOutput as AssetTranscriptOutput
+from .metrics_asset_streaming import MetricsAssetStreaming as MetricsAssetStreaming
 from .thumbnail_create_params import ThumbnailCreateParams as ThumbnailCreateParams
 from .thumbnail_delete_params import ThumbnailDeleteParams as ThumbnailDeleteParams
 from .transcoding_list_params import TranscodingListParams as TranscodingListParams
+from .workflow_caption_action import WorkflowCaptionAction as WorkflowCaptionAction
+from .workflow_caption_params import WorkflowCaptionParams as WorkflowCaptionParams
+from .workflow_output_binding import WorkflowOutputBinding as WorkflowOutputBinding
+from .asset_rendition_progress import AssetRenditionProgress as AssetRenditionProgress
+from .asset_transcript_content import AssetTranscriptContent as AssetTranscriptContent
+from .asset_transcript_segment import AssetTranscriptSegment as AssetTranscriptSegment
+from .job_create_format_params import JobCreateFormatParams as JobCreateFormatParams
+from .metrics_usage_thumbnails import MetricsUsageThumbnails as MetricsUsageThumbnails
 from .notification_list_params import NotificationListParams as NotificationListParams
+from .upload_multipart_session import UploadMultipartSession as UploadMultipartSession
+from .workflow_thumbnail_range import WorkflowThumbnailRange as WorkflowThumbnailRange
+from .job_create_storage_params import JobCreateStorageParams as JobCreateStorageParams
+from .storage_aws_create_params import StorageAwsCreateParams as StorageAwsCreateParams
 from .transcoding_create_params import TranscodingCreateParams as TranscodingCreateParams
 from .transcoding_delete_params import TranscodingDeleteParams as TranscodingDeleteParams
 from .transcoding_m4a_aac_param import TranscodingM4aAacParam as TranscodingM4aAacParam
 from .transcoding_mp4_av1_param import TranscodingMP4Av1Param as TranscodingMP4Av1Param
+from .workflow_thumbnail_action import WorkflowThumbnailAction as WorkflowThumbnailAction
+from .workflow_thumbnail_params import WorkflowThumbnailParams as WorkflowThumbnailParams
+from .metrics_usage_transcodings import MetricsUsageTranscodings as MetricsUsageTranscodings
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
+from .notification_payload_asset import NotificationPayloadAsset as NotificationPayloadAsset
+from .transcoding_file_thumbnail import TranscodingFileThumbnail as TranscodingFileThumbnail
 from .transcoding_mp4_h264_param import TranscodingMP4H264Param as TranscodingMP4H264Param
 from .transcoding_mp4_h265_param import TranscodingMP4H265Param as TranscodingMP4H265Param
 from .transcoding_webm_vp9_param import TranscodingWebmVp9Param as TranscodingWebmVp9Param
+from .workflow_static_resolution import WorkflowStaticResolution as WorkflowStaticResolution
+from .workflow_transcript_action import WorkflowTranscriptAction as WorkflowTranscriptAction
+from .workflow_transcript_params import WorkflowTranscriptParams as WorkflowTranscriptParams
+from .asset_caption_output_params import AssetCaptionOutputParams as AssetCaptionOutputParams
+from .asset_create_storage_params import AssetCreateStorageParams as AssetCreateStorageParams
+from .metrics_usage_notifications import MetricsUsageNotifications as MetricsUsageNotifications
+from .workflow_translation_action import WorkflowTranslationAction as WorkflowTranslationAction
+from .workflow_translation_params import WorkflowTranslationParams as WorkflowTranslationParams
+from .job_create_transcoder_params import JobCreateTranscoderParams as JobCreateTranscoderParams
+from .source_create_storage_params import SourceCreateStorageParams as SourceCreateStorageParams
+from .transcoding_processing_stage import TranscodingProcessingStage as TranscodingProcessingStage
+from .upload_create_storage_params import UploadCreateStorageParams as UploadCreateStorageParams
+from .upload_multipart_part_params import UploadMultipartPartParams as UploadMultipartPartParams
+from .upload_multipart_signed_part import UploadMultipartSignedPart as UploadMultipartSignedPart
+from .workflow_output_binding_from import WorkflowOutputBindingFrom as WorkflowOutputBindingFrom
+from .asset_defaults_max_resolution import AssetDefaultsMaxResolution as AssetDefaultsMaxResolution
+from .asset_defaults_min_resolution import AssetDefaultsMinResolution as AssetDefaultsMinResolution
+from .asset_static_rendition_output import AssetStaticRenditionOutput as AssetStaticRenditionOutput
+from .asset_thumbnail_create_params import AssetThumbnailCreateParams as AssetThumbnailCreateParams
+from .workflow_static_action_params import WorkflowStaticActionParams as WorkflowStaticActionParams
+from .asset_transcript_output_params import AssetTranscriptOutputParams as AssetTranscriptOutputParams
+from .notification_payload_thumbnail import NotificationPayloadThumbnail as NotificationPayloadThumbnail
+from .storage_chunkify_create_params import StorageChunkifyCreateParams as StorageChunkifyCreateParams
+from .workflow_caption_action_params import WorkflowCaptionActionParams as WorkflowCaptionActionParams
+from .workflow_output_binding_params import WorkflowOutputBindingParams as WorkflowOutputBindingParams
+from .metrics_usage_static_renditions import MetricsUsageStaticRenditions as MetricsUsageStaticRenditions
+from .notification_payload_asset_data import NotificationPayloadAssetData as NotificationPayloadAssetData
+from .notification_payload_job_failed import NotificationPayloadJobFailed as NotificationPayloadJobFailed
+from .thumbnail_create_storage_params import ThumbnailCreateStorageParams as ThumbnailCreateStorageParams
+from .workflow_thumbnail_range_params import WorkflowThumbnailRangeParams as WorkflowThumbnailRangeParams
+from .notification_payload_job_created import NotificationPayloadJobCreated as NotificationPayloadJobCreated
+from .notification_payload_transcoding import NotificationPayloadTranscoding as NotificationPayloadTranscoding
+from .storage_cloudflare_create_params import StorageCloudflareCreateParams as StorageCloudflareCreateParams
+from .transcoding_create_format_params import TranscodingCreateFormatParams as TranscodingCreateFormatParams
+from .workflow_thumbnail_action_params import WorkflowThumbnailActionParams as WorkflowThumbnailActionParams
+from .notification_payload_asset_output import NotificationPayloadAssetOutput as NotificationPayloadAssetOutput
+from .notification_payload_workflow_run import NotificationPayloadWorkflowRun as NotificationPayloadWorkflowRun
+from .transcoding_create_storage_params import TranscodingCreateStorageParams as TranscodingCreateStorageParams
+from .workflow_transcript_action_params import WorkflowTranscriptActionParams as WorkflowTranscriptActionParams
+from .asset_caption_output_create_params import AssetCaptionOutputCreateParams as AssetCaptionOutputCreateParams
+from .notification_payload_asset_deleted import NotificationPayloadAssetDeleted as NotificationPayloadAssetDeleted
+from .notification_payload_job_completed import NotificationPayloadJobCompleted as NotificationPayloadJobCompleted
+from .notification_payload_upload_failed import NotificationPayloadUploadFailed as NotificationPayloadUploadFailed
+from .workflow_translation_action_params import WorkflowTranslationActionParams as WorkflowTranslationActionParams
+from .workflow_translation_language_code import WorkflowTranslationLanguageCode as WorkflowTranslationLanguageCode
+from .notification_payload_source_created import NotificationPayloadSourceCreated as NotificationPayloadSourceCreated
+from .notification_payload_source_deleted import NotificationPayloadSourceDeleted as NotificationPayloadSourceDeleted
+from .notification_payload_thumbnail_data import NotificationPayloadThumbnailData as NotificationPayloadThumbnailData
+from .notification_payload_upload_created import NotificationPayloadUploadCreated as NotificationPayloadUploadCreated
+from .storage_s3_compatible_create_params import StorageS3CompatibleCreateParams as StorageS3CompatibleCreateParams
+from .asset_static_rendition_create_params import AssetStaticRenditionCreateParams as AssetStaticRenditionCreateParams
+from .asset_thumbnail_output_create_params import AssetThumbnailOutputCreateParams as AssetThumbnailOutputCreateParams
+from .notification_payload_job_failed_data import NotificationPayloadJobFailedData as NotificationPayloadJobFailedData
+from .asset_transcript_output_create_params import (
+    AssetTranscriptOutputCreateParams as AssetTranscriptOutputCreateParams,
+)
+from .notification_payload_job_created_data import (
+    NotificationPayloadJobCreatedData as NotificationPayloadJobCreatedData,
+)
+from .notification_payload_transcoding_data import (
+    NotificationPayloadTranscodingData as NotificationPayloadTranscodingData,
+)
+from .notification_payload_upload_completed import (
+    NotificationPayloadUploadCompleted as NotificationPayloadUploadCompleted,
+)
+from .notification_payload_asset_output_data import (
+    NotificationPayloadAssetOutputData as NotificationPayloadAssetOutputData,
+)
+from .notification_payload_workflow_run_data import (
+    NotificationPayloadWorkflowRunData as NotificationPayloadWorkflowRunData,
+)
+from .notification_payload_asset_deleted_data import (
+    NotificationPayloadAssetDeletedData as NotificationPayloadAssetDeletedData,
+)
+from .notification_payload_job_completed_data import (
+    NotificationPayloadJobCompletedData as NotificationPayloadJobCompletedData,
+)
+from .notification_payload_upload_failed_data import (
+    NotificationPayloadUploadFailedData as NotificationPayloadUploadFailedData,
+)
+from .notification_payload_source_created_data import (
+    NotificationPayloadSourceCreatedData as NotificationPayloadSourceCreatedData,
+)
+from .notification_payload_source_deleted_data import (
+    NotificationPayloadSourceDeletedData as NotificationPayloadSourceDeletedData,
+)
+from .notification_payload_upload_created_data import (
+    NotificationPayloadUploadCreatedData as NotificationPayloadUploadCreatedData,
+)
+from .notification_payload_asset_output_deleted import (
+    NotificationPayloadAssetOutputDeleted as NotificationPayloadAssetOutputDeleted,
+)
+from .notification_payload_upload_completed_data import (
+    NotificationPayloadUploadCompletedData as NotificationPayloadUploadCompletedData,
+)
+from .asset_static_rendition_output_create_params import (
+    AssetStaticRenditionOutputCreateParams as AssetStaticRenditionOutputCreateParams,
+)
+from .notification_payload_asset_output_deleted_data import (
+    NotificationPayloadAssetOutputDeletedData as NotificationPayloadAssetOutputDeletedData,
+)

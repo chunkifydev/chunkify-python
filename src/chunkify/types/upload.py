@@ -1,43 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .shared.created_via import CreatedVia
 from .shared.chunkify_error import ChunkifyError
+from .upload_multipart_session import UploadMultipartSession
 
-__all__ = ["Upload", "Multipart", "MultipartPart"]
-
-
-class MultipartPart(BaseModel):
-    part_number: int
-    """PartNumber specifies the one-based part number for this URL."""
-
-    upload_url: str
-    """UploadUrl specifies the signed PUT URL for this part.
-
-    Retry the same file slice with this URL before multipart.expires_at.
-    """
-
-
-class Multipart(BaseModel):
-    """Multipart transfer details, returned only on creation for multipart Uploads."""
-
-    expires_at: datetime
-    """ExpiresAt specifies when the signed part URLs expire.
-
-    URLs cannot be refreshed; create a new Upload after expiry.
-    """
-
-    part_size_bytes: int
-    """PartSizeBytes specifies the size of each part except the final part, in bytes."""
-
-    parts: List[MultipartPart]
-    """Parts contains every signed upload URL in ascending part_number order.
-
-    Upload file slices directly to these URLs.
-    """
+__all__ = ["Upload"]
 
 
 class Upload(BaseModel):
@@ -94,7 +66,7 @@ class Upload(BaseModel):
     Workflow actions, unknown creators, and deleted accounts.
     """
 
-    created_via: Optional[Literal["api", "dashboard", "mcp", "workflow"]] = None
+    created_via: Optional[CreatedVia] = None
     """
     CreatedVia specifies how the resource was created: api for API requests,
     dashboard for the Chunkify dashboard, mcp for MCP clients, and workflow for
@@ -110,7 +82,7 @@ class Upload(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     """Additional metadata for the upload"""
 
-    multipart: Optional[Multipart] = None
+    multipart: Optional[UploadMultipartSession] = None
     """Multipart transfer details, returned only on creation for multipart Uploads."""
 
     source_id: Optional[str] = None

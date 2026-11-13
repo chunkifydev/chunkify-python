@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from typing import List, Type, Mapping, cast
-from typing_extensions import Literal
 
 import httpx
 
@@ -24,6 +23,7 @@ from .._wrappers import DataWrapper
 from .._exceptions import ChunkifyError
 from .._base_client import make_request_options
 from ..types.webhook import Webhook
+from ..types.webhook_event import WebhookEvent
 from ..types.unwrap_webhook_event import UnwrapWebhookEvent
 from ..types.webhook_list_response import WebhookListResponse
 
@@ -55,46 +55,7 @@ class WebhooksResource(SyncAPIResource):
         *,
         url: str,
         enabled: bool | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -189,46 +150,7 @@ class WebhooksResource(SyncAPIResource):
         webhook_id: str,
         *,
         enabled: bool | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -395,46 +317,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         url: str,
         enabled: bool | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -529,46 +412,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         webhook_id: str,
         *,
         enabled: bool | Omit = omit,
-        events: List[
-            Literal[
-                "job.created",
-                "job.completed",
-                "job.failed",
-                "job.cancelled",
-                "source.created",
-                "source.deleted",
-                "upload.created",
-                "upload.completed",
-                "upload.failed",
-                "upload.expired",
-                "asset.created",
-                "asset.ready",
-                "asset.playback_ready",
-                "asset.failed",
-                "asset.expired",
-                "asset.deleted",
-                "asset.output.created",
-                "asset.output.ready",
-                "asset.output.failed",
-                "asset.output.deleted",
-                "workflow_run.created",
-                "workflow_run.completed",
-                "workflow_run.failed",
-                "workflow_run.cancelled",
-                "transcoding.created",
-                "transcoding.ready",
-                "transcoding.failed",
-                "transcoding.cancelled",
-                "transcoding.expired",
-                "transcoding.deleted",
-                "thumbnail.created",
-                "thumbnail.ready",
-                "thumbnail.failed",
-                "thumbnail.expired",
-                "thumbnail.deleted",
-            ]
-        ]
-        | Omit = omit,
+        events: List[WebhookEvent] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

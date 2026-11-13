@@ -24,7 +24,14 @@ from .files import (
     FilesResourceWithStreamingResponse,
     AsyncFilesResourceWithStreamingResponse,
 )
-from ...types import job_list_params, job_create_params
+from ...types import (
+    JobFormatID,
+    JobCreateFormatParams,
+    JobCreateStorageParams,
+    JobCreateTranscoderParams,
+    job_list_params,
+    job_create_params,
+)
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -47,6 +54,10 @@ from .transcoders import (
 )
 from ...pagination import SyncPaginatedResults, AsyncPaginatedResults
 from ..._base_client import AsyncPaginator, make_request_options
+from ...types.job_format_id import JobFormatID
+from ...types.job_create_format_params import JobCreateFormatParams
+from ...types.job_create_storage_params import JobCreateStorageParams
+from ...types.job_create_transcoder_params import JobCreateTranscoderParams
 
 __all__ = ["JobsResource", "AsyncJobsResource"]
 
@@ -87,12 +98,12 @@ class JobsResource(SyncAPIResource):
     def create(
         self,
         *,
-        format: job_create_params.Format,
+        format: JobCreateFormatParams,
         source_id: str,
         hls_manifest_id: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        storage: job_create_params.Storage | Omit = omit,
-        transcoder: job_create_params.Transcoder | Omit = omit,
+        storage: JobCreateStorageParams | Omit = omit,
+        transcoder: JobCreateTranscoderParams | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -207,8 +218,7 @@ class JobsResource(SyncAPIResource):
         *,
         id: str | Omit = omit,
         created: job_list_params.Created | Omit = omit,
-        format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
-        | Omit = omit,
+        format_id: JobFormatID | Omit = omit,
         hls_manifest_id: str | Omit = omit,
         limit: int | Omit = omit,
         metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
@@ -398,12 +408,12 @@ class AsyncJobsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        format: job_create_params.Format,
+        format: JobCreateFormatParams,
         source_id: str,
         hls_manifest_id: str | Omit = omit,
         metadata: Dict[str, str] | Omit = omit,
-        storage: job_create_params.Storage | Omit = omit,
-        transcoder: job_create_params.Transcoder | Omit = omit,
+        storage: JobCreateStorageParams | Omit = omit,
+        transcoder: JobCreateTranscoderParams | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -518,8 +528,7 @@ class AsyncJobsResource(AsyncAPIResource):
         *,
         id: str | Omit = omit,
         created: job_list_params.Created | Omit = omit,
-        format_id: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "hls_h264", "hls_h265", "hls_av1", "jpg"]
-        | Omit = omit,
+        format_id: JobFormatID | Omit = omit,
         hls_manifest_id: str | Omit = omit,
         limit: int | Omit = omit,
         metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
