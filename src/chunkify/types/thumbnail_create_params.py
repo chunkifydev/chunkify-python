@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 from typing import Dict, Iterable
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
-__all__ = ["ThumbnailCreateParams", "Range", "Storage"]
+from .thumbnail_format import ThumbnailFormat
+from .thumbnail_output import ThumbnailOutput
+from .thumbnail_range_params import ThumbnailRangeParams
+from .thumbnail_create_storage_params import ThumbnailCreateStorageParams
+
+__all__ = ["ThumbnailCreateParams"]
 
 
 class ThumbnailCreateParams(TypedDict, total=False):
@@ -18,7 +23,7 @@ class ThumbnailCreateParams(TypedDict, total=False):
     selected range.
     """
 
-    format: Literal["jpeg", "webp"]
+    format: ThumbnailFormat
     """Format selects JPEG or WebP. Defaults to JPEG."""
 
     metadata: Dict[str, str]
@@ -27,10 +32,10 @@ class ThumbnailCreateParams(TypedDict, total=False):
     The serialized object may contain at most 2048 bytes.
     """
 
-    output: Literal["images", "sprites"]
+    output: ThumbnailOutput
     """Output selects images or sprites. Defaults to images."""
 
-    range: Range
+    range: ThumbnailRangeParams
     """Range limits sampling to part of the Source.
 
     Defaults to the whole Source duration.
@@ -43,7 +48,7 @@ class ThumbnailCreateParams(TypedDict, total=False):
     cropping or upscaling.
     """
 
-    storage: Storage
+    storage: ThumbnailCreateStorageParams
     """Storage overrides the Project output destination and names the output files.
 
     Source storage remains independent.
@@ -54,41 +59,4 @@ class ThumbnailCreateParams(TypedDict, total=False):
 
     Every time must be within the selected range. Repeated targets produce separate
     outputs.
-    """
-
-
-class Range(TypedDict, total=False):
-    """Range limits sampling to part of the Source.
-
-    Defaults to the whole Source duration.
-    """
-
-    end: float
-    """End specifies the exclusive upper bound in seconds.
-
-    Defaults to the Source duration.
-    """
-
-    start: float
-    """Start specifies the inclusive lower bound in seconds. Defaults to zero."""
-
-
-class Storage(TypedDict, total=False):
-    """Storage overrides the Project output destination and names the output files.
-
-    Source storage remains independent.
-    """
-
-    id: str
-    """Id identifies output Storage in this Project. Omit to use the Project default."""
-
-    path: str
-    """
-    Path specifies the output filename template relative to the selected Storage
-    base_prefix. Required for customer storage; generated for Chunkify temporary
-    storage. The filename must contain one %05d placeholder, replaced by the image
-    or sprite sheet number starting at 1, and end in .jpg for jpeg or .webp for
-    webp. The WebVTT file uses the filename without the placeholder and its adjacent
-    separator, such as thumb.vtt for thumb-%05d.jpg. The combined path may contain
-    at most 1024 bytes.
     """

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Iterable
 from typing_extensions import Literal, TypedDict
 
 from .._types import SequenceNotStr
@@ -19,8 +18,11 @@ class UploadListParams(TypedDict, total=False):
     limit: int
     """Pagination limit (max 100)"""
 
-    metadata: Iterable[SequenceNotStr[str]]
-    """Filter by metadata"""
+    metadata: SequenceNotStr[str]
+    """Filter by metadata.
+
+    Repeat key:value pairs to match all supplied metadata conditions.
+    """
 
     offset: int
     """Pagination offset"""

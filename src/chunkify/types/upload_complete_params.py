@@ -3,25 +3,16 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["UploadCompleteParams", "Part"]
+from .upload_multipart_part_params import UploadMultipartPartParams
+
+__all__ = ["UploadCompleteParams"]
 
 
 class UploadCompleteParams(TypedDict, total=False):
-    parts: Iterable[Part]
+    parts: Iterable[UploadMultipartPartParams]
     """
     All uploaded parts in ascending part_number order, with the ETags returned by
     storage.
     """
-
-
-class Part(TypedDict, total=False):
-    etag: Required[str]
-    """
-    ETag returned by storage for this part, including its quotation marks when
-    present.
-    """
-
-    part_number: Required[int]
-    """One-based part number."""

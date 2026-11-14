@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, Iterable, cast
+from typing import Dict, Type, cast
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import source_list_params, source_create_params
+from ..types import SourceCreateStorageParams, source_list_params, source_create_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -22,6 +22,7 @@ from .._wrappers import DataWrapper
 from ..pagination import SyncPaginatedResults, AsyncPaginatedResults
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.source import Source
+from ..types.source_create_storage_params import SourceCreateStorageParams
 
 __all__ = ["SourcesResource", "AsyncSourcesResource"]
 
@@ -50,7 +51,7 @@ class SourcesResource(SyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
-        storage: source_create_params.Storage | Omit = omit,
+        storage: SourceCreateStorageParams | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -151,7 +152,7 @@ class SourcesResource(SyncAPIResource):
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,
@@ -177,7 +178,8 @@ class SourcesResource(SyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 
@@ -285,7 +287,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         self,
         *,
         metadata: Dict[str, str] | Omit = omit,
-        storage: source_create_params.Storage | Omit = omit,
+        storage: SourceCreateStorageParams | Omit = omit,
         url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -386,7 +388,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,
@@ -412,7 +414,8 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 

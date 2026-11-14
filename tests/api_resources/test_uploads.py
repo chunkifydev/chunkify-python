@@ -9,7 +9,9 @@ import pytest
 
 from chunkify import Chunkify, AsyncChunkify
 from tests.utils import assert_matches_type
-from chunkify.types import Upload
+from chunkify.types import (
+    Upload,
+)
 from chunkify.pagination import SyncPaginatedResults, AsyncPaginatedResults
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -125,7 +127,7 @@ class TestUploads:
                 "sort": "asc",
             },
             limit=1,
-            metadata=[["key1:value1"]],
+            metadata=["key1:value1"],
             offset=0,
             source_id="source_id",
             status="waiting",
@@ -365,7 +367,7 @@ class TestAsyncUploads:
                 "sort": "asc",
             },
             limit=1,
-            metadata=[["key1:value1"]],
+            metadata=["key1:value1"],
             offset=0,
             source_id="source_id",
             status="waiting",
