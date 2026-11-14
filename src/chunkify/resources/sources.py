@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type, Iterable, cast
+from typing import Dict, Type, cast
 from typing_extensions import Literal
 
 import httpx
@@ -152,7 +152,7 @@ class SourcesResource(SyncAPIResource):
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,
@@ -178,7 +178,8 @@ class SourcesResource(SyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 
@@ -387,7 +388,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         duration: source_list_params.Duration | Omit = omit,
         height: source_list_params.Height | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
         video_codec: str | Omit = omit,
@@ -413,7 +414,8 @@ class AsyncSourcesResource(AsyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 

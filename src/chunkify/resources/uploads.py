@@ -185,7 +185,7 @@ class UploadsResource(SyncAPIResource):
         id: str | Omit = omit,
         created: upload_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
@@ -204,7 +204,8 @@ class UploadsResource(SyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 
@@ -491,7 +492,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         id: str | Omit = omit,
         created: upload_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
-        metadata: Iterable[SequenceNotStr[str]] | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
@@ -510,7 +511,8 @@ class AsyncUploadsResource(AsyncAPIResource):
 
           limit: Pagination limit (max 100)
 
-          metadata: Filter by metadata
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Pagination offset
 
