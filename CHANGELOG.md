@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.0.0](https://github.com/chunkifydev/chunkify-python/compare/v0.15.0...v1.0.0) (2026-11-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **config:** declare every spec schema as an SDK model
+* **config:** restore the pre-#19 type models and declare AssetOutputError
+* mirror the OpenAPI spec for analytics params and thumbnail storage
+
+### Features
+
+* **config:** declare every spec schema as an SDK model ([48f2fa1](https://github.com/chunkifydev/chunkify-python/commit/48f2fa12fd7565322ce7013a358b1e775ec06b59))
+* mirror the OpenAPI spec for analytics params and thumbnail storage ([f929296](https://github.com/chunkifydev/chunkify-python/commit/f929296504ec70d308982d8a58bd11173f15d7cb))
+
+
+### Bug Fixes
+
+* **config:** restore the pre-[#19](https://github.com/chunkifydev/chunkify-python/issues/19) type models and declare AssetOutputError ([a80e5dc](https://github.com/chunkifydev/chunkify-python/commit/a80e5dc3713f324233deea405605dadbc7cb8197))
+
+
+### Chores
+
+* **config:** publish SDK releases as full releases ([4d75b96](https://github.com/chunkifydev/chunkify-python/commit/4d75b9618ab37616c4d1c6df17085281af444722))
+* release 1.0.0 ([61d7eed](https://github.com/chunkifydev/chunkify-python/commit/61d7eed1bda4247467575861d2d11756c472801e))
+* sync OpenAPI schema from Chunkify v3.0.0 ([db6f045](https://github.com/chunkifydev/chunkify-python/commit/db6f0454daa6407ceef7e55a9b84fdc3cdf37f45))
+* sync OpenAPI schema from Chunkify v3.1.0 ([cae5094](https://github.com/chunkifydev/chunkify-python/commit/cae50945b1be3011fa5d63352def6f87862a3f4f))
+* sync OpenAPI schema from Chunkify v3.2.1 ([bcb4d98](https://github.com/chunkifydev/chunkify-python/commit/bcb4d98f579938c30dc45e8d54287e1fd3b1daf3))
+
 ## [0.15.0](https://github.com/chunkifydev/chunkify-python/compare/v0.14.2...v0.15.0) (2026-11-12)
 
 
