@@ -200,8 +200,8 @@ from chunkify import Chunkify
 client = Chunkify()
 
 asset = client.assets.create(
-    source_id="src_example",
-    storage={"id": "stor_example"},
+    source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
+    storage={"id": "stor_3GldXEVxF304PlE1B1cFKKiykDN"},
 )
 print(asset.storage)
 ```

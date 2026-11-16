@@ -25,7 +25,7 @@ class TestTranscodings:
     def test_method_create(self, client: Chunkify) -> None:
         transcoding = client.transcodings.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Transcoding, transcoding, path=["response"])
 
@@ -58,10 +58,10 @@ class TestTranscodings:
                 "width": -2,
                 "x264_keyint": 60,
             },
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             metadata={"foo": "string"},
             storage={
-                "id": "stor_example",
+                "id": "stor_3GldXEVxF304PlE1B1cFKKiykDN",
                 "path": "exports/video.mp4",
             },
         )
@@ -72,7 +72,7 @@ class TestTranscodings:
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.transcodings.with_raw_response.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -85,7 +85,7 @@ class TestTranscodings:
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.transcodings.with_streaming_response.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -287,7 +287,7 @@ class TestAsyncTranscodings:
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         transcoding = await async_client.transcodings.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Transcoding, transcoding, path=["response"])
 
@@ -320,10 +320,10 @@ class TestAsyncTranscodings:
                 "width": -2,
                 "x264_keyint": 60,
             },
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             metadata={"foo": "string"},
             storage={
-                "id": "stor_example",
+                "id": "stor_3GldXEVxF304PlE1B1cFKKiykDN",
                 "path": "exports/video.mp4",
             },
         )
@@ -334,7 +334,7 @@ class TestAsyncTranscodings:
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.transcodings.with_raw_response.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -347,7 +347,7 @@ class TestAsyncTranscodings:
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.transcodings.with_streaming_response.create(
             format={"id": "mp4_h264"},
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

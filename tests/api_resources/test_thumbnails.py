@@ -24,7 +24,7 @@ class TestThumbnails:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         thumbnail = client.thumbnails.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Thumbnail, thumbnail, path=["response"])
 
@@ -32,7 +32,7 @@ class TestThumbnails:
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         thumbnail = client.thumbnails.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             count=10,
             format="jpeg",
             metadata={"foo": "string"},
@@ -54,7 +54,7 @@ class TestThumbnails:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.thumbnails.with_raw_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -66,7 +66,7 @@ class TestThumbnails:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.thumbnails.with_streaming_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -225,7 +225,7 @@ class TestAsyncThumbnails:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         thumbnail = await async_client.thumbnails.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Thumbnail, thumbnail, path=["response"])
 
@@ -233,7 +233,7 @@ class TestAsyncThumbnails:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         thumbnail = await async_client.thumbnails.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             count=10,
             format="jpeg",
             metadata={"foo": "string"},
@@ -255,7 +255,7 @@ class TestAsyncThumbnails:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.thumbnails.with_raw_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -267,7 +267,7 @@ class TestAsyncThumbnails:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.thumbnails.with_streaming_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
