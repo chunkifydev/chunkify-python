@@ -31,7 +31,7 @@ class TestTokens:
         token = client.tokens.create(
             scope="project",
             name="My Token",
-            project_id="proj_A1cce6120E56e7Tu9ioP09Nhjk1",
+            project_id="proj_3MldVj0UeQPlZ06hDcDi6CWrKJZ",
         )
         assert_matches_type(Token, token, path=["response"])
 
@@ -151,7 +151,7 @@ class TestAsyncTokens:
         token = await async_client.tokens.create(
             scope="project",
             name="My Token",
-            project_id="proj_A1cce6120E56e7Tu9ioP09Nhjk1",
+            project_id="proj_3MldVj0UeQPlZ06hDcDi6CWrKJZ",
         )
         assert_matches_type(Token, token, path=["response"])
 
