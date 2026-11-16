@@ -25,6 +25,9 @@ class Upload(BaseModel):
     expires_at: datetime
     """Timestamp when the upload will expire"""
 
+    metadata: Dict[str, str]
+    """Additional metadata for the upload"""
+
     status: Literal["waiting", "completed", "failed", "expired"]
     """Current status of the upload"""
 
@@ -78,9 +81,6 @@ class Upload(BaseModel):
 
     file_size_bytes: Optional[int] = None
     """Declared file size in bytes, when supplied at creation."""
-
-    metadata: Optional[Dict[str, str]] = None
-    """Additional metadata for the upload"""
 
     multipart: Optional[UploadMultipartSession] = None
     """Multipart transfer details, returned only on creation for multipart Uploads."""
