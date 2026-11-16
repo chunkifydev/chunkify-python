@@ -248,8 +248,9 @@ class StoragesResource(SyncAPIResource):
     ) -> None:
         """Delete a storage configuration.
 
-        The storage must not be currently attached to
-        the project.
+        The storage must not be attached to the project
+        or used by an upload, source, asset, transcoding or thumbnail; otherwise the
+        request returns 403.
 
         Args:
           extra_headers: Send extra headers
@@ -499,8 +500,9 @@ class AsyncStoragesResource(AsyncAPIResource):
     ) -> None:
         """Delete a storage configuration.
 
-        The storage must not be currently attached to
-        the project.
+        The storage must not be attached to the project
+        or used by an upload, source, asset, transcoding or thumbnail; otherwise the
+        request returns 403.
 
         Args:
           extra_headers: Send extra headers
