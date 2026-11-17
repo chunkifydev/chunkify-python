@@ -24,7 +24,7 @@ class TestAssets:
     @parametrize
     def test_method_create(self, client: Chunkify) -> None:
         asset = client.assets.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Asset, asset, path=["response"])
 
@@ -32,7 +32,7 @@ class TestAssets:
     @parametrize
     def test_method_create_with_all_params(self, client: Chunkify) -> None:
         asset = client.assets.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             max_resolution="1080p",
             metadata={
                 "key": "value",
@@ -41,7 +41,7 @@ class TestAssets:
             min_resolution="auto",
             path_template="videos/{metadata.VideoID}",
             preview_enabled=True,
-            storage={"id": "stor_example"},
+            storage={"id": "stor_3GldXEVxF304PlE1B1cFKKiykDN"},
             title="Launch video",
             workflow_id="x",
         )
@@ -51,7 +51,7 @@ class TestAssets:
     @parametrize
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.assets.with_raw_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -63,7 +63,7 @@ class TestAssets:
     @parametrize
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.assets.with_streaming_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -279,7 +279,7 @@ class TestAsyncAssets:
     @parametrize
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         asset = await async_client.assets.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
         assert_matches_type(Asset, asset, path=["response"])
 
@@ -287,7 +287,7 @@ class TestAsyncAssets:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncChunkify) -> None:
         asset = await async_client.assets.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
             max_resolution="1080p",
             metadata={
                 "key": "value",
@@ -296,7 +296,7 @@ class TestAsyncAssets:
             min_resolution="auto",
             path_template="videos/{metadata.VideoID}",
             preview_enabled=True,
-            storage={"id": "stor_example"},
+            storage={"id": "stor_3GldXEVxF304PlE1B1cFKKiykDN"},
             title="Launch video",
             workflow_id="x",
         )
@@ -306,7 +306,7 @@ class TestAsyncAssets:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.assets.with_raw_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         )
 
         assert response.is_closed is True
@@ -318,7 +318,7 @@ class TestAsyncAssets:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.assets.with_streaming_response.create(
-            source_id="src_example",
+            source_id="src_3A0yDPVjACk8FkYZFnP7Ab5DSDV",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
