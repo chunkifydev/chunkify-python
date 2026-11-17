@@ -23,8 +23,8 @@ class TestNotifications:
     def test_method_create(self, client: Chunkify) -> None:
         notification = client.notifications.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         )
         assert_matches_type(Notification, notification, path=["response"])
 
@@ -33,8 +33,8 @@ class TestNotifications:
     def test_raw_response_create(self, client: Chunkify) -> None:
         response = client.notifications.with_raw_response.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         )
 
         assert response.is_closed is True
@@ -47,8 +47,8 @@ class TestNotifications:
     def test_streaming_response_create(self, client: Chunkify) -> None:
         with client.notifications.with_streaming_response.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -204,8 +204,8 @@ class TestAsyncNotifications:
     async def test_method_create(self, async_client: AsyncChunkify) -> None:
         notification = await async_client.notifications.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         )
         assert_matches_type(Notification, notification, path=["response"])
 
@@ -214,8 +214,8 @@ class TestAsyncNotifications:
     async def test_raw_response_create(self, async_client: AsyncChunkify) -> None:
         response = await async_client.notifications.with_raw_response.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         )
 
         assert response.is_closed is True
@@ -228,8 +228,8 @@ class TestAsyncNotifications:
     async def test_streaming_response_create(self, async_client: AsyncChunkify) -> None:
         async with async_client.notifications.with_streaming_response.create(
             event="asset.playback_ready",
-            object_id="ast_A1cce6120E56e7Tu9ioP09Nhjk9",
-            webhook_id="wh_A1cce6120E56e7Tu9ioP09Nhjk9",
+            object_id="ast_3DyDePsxLWfKa0WCi0mXWeaNWyF",
+            webhook_id="wh_3FzKFC3SMYiIEIzN1REhY1wpEx0",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
