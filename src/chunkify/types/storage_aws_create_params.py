@@ -42,9 +42,10 @@ class StorageAwsCreateParams(TypedDict, total=False):
     """
 
     cdn_base_url: Optional[str]
-    """Optional customer-managed HTTPS delivery origin.
+    """Optional customer-managed HTTPS delivery base URL.
 
-    It must not contain credentials, a path, query string, or fragment.
+    Object keys are appended to it. It may include a path prefix, but must not
+    contain credentials, a query string, or a fragment.
     """
 
     public: bool

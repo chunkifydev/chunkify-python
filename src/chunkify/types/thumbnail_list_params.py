@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
+from .._types import SequenceNotStr
 from .thumbnail_status import ThumbnailStatus
 
 __all__ = ["ThumbnailListParams", "Created"]
@@ -17,6 +18,12 @@ class ThumbnailListParams(TypedDict, total=False):
 
     limit: int
     """Maximum number of Thumbnails to return."""
+
+    metadata: SequenceNotStr[str]
+    """Filter by metadata.
+
+    Repeat key:value pairs to match all supplied metadata conditions.
+    """
 
     offset: int
     """Number of Thumbnails to skip."""

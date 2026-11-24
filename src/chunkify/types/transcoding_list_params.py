@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
+from .._types import SequenceNotStr
 from .transcoding_status import TranscodingStatus
 
 __all__ = ["TranscodingListParams", "Created"]
@@ -15,8 +16,17 @@ class TranscodingListParams(TypedDict, total=False):
 
     created: Created
 
+    format: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "m4a_aac"]
+    """Filter by Transcoding format ID."""
+
     limit: int
     """Maximum number of Transcodings to return."""
+
+    metadata: SequenceNotStr[str]
+    """Filter by metadata.
+
+    Repeat key:value pairs to match all supplied metadata conditions.
+    """
 
     offset: int
     """Number of Transcodings to skip."""
