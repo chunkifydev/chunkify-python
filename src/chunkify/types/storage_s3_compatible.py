@@ -35,10 +35,10 @@ class StorageS3Compatible(BaseModel):
     """Created at timestamp"""
 
     endpoint: str
-    """Public HTTPS origin for the S3-compatible service.
-
-    Credentials, paths, queries, fragments, and non-public destinations are
-    rejected.
+    """
+    Public HTTPS URL of the S3-compatible service, including any fixed path prefix
+    the service requires. Credentials, queries, fragments, and non-public
+    destinations are rejected.
     """
 
     location: StorageLocation
@@ -64,6 +64,6 @@ class StorageS3Compatible(BaseModel):
 
     cdn_base_url: Optional[str] = None
     """
-    Optional customer-managed HTTPS delivery origin used to build stable CDN URLs
+    Optional customer-managed HTTPS delivery base URL used to build stable CDN URLs
     for objects in this storage.
     """

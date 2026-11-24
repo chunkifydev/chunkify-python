@@ -155,6 +155,7 @@ class SourcesResource(SyncAPIResource):
         metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
+        storage_id: str | Omit = omit,
         video_codec: str | Omit = omit,
         width: source_list_params.Width | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -182,6 +183,8 @@ class SourcesResource(SyncAPIResource):
               conditions.
 
           offset: Pagination offset
+
+          storage_id: Filter by input Storage ID.
 
           video_codec: Filter by video codec
 
@@ -213,6 +216,7 @@ class SourcesResource(SyncAPIResource):
                         "metadata": metadata,
                         "offset": offset,
                         "size": size,
+                        "storage_id": storage_id,
                         "video_codec": video_codec,
                         "width": width,
                     },
@@ -391,6 +395,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
+        storage_id: str | Omit = omit,
         video_codec: str | Omit = omit,
         width: source_list_params.Width | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -418,6 +423,8 @@ class AsyncSourcesResource(AsyncAPIResource):
               conditions.
 
           offset: Pagination offset
+
+          storage_id: Filter by input Storage ID.
 
           video_codec: Filter by video codec
 
@@ -449,6 +456,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                         "metadata": metadata,
                         "offset": offset,
                         "size": size,
+                        "storage_id": storage_id,
                         "video_codec": video_codec,
                         "width": width,
                     },
