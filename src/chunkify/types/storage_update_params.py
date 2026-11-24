@@ -25,7 +25,7 @@ class StorageUpdateParams(TypedDict, total=False):
     """
 
     cdn_base_url: Optional[str]
-    """Customer-managed HTTPS delivery origin, or null to remove the current value."""
+    """Customer-managed HTTPS delivery base URL, or null to remove the current value."""
 
     secret_access_key: str
     """Replacement secret access key.
