@@ -40,6 +40,6 @@ class StorageAws(BaseModel):
 
     cdn_base_url: Optional[str] = None
     """
-    Optional customer-managed HTTPS delivery origin used to build stable CDN URLs
+    Optional customer-managed HTTPS delivery base URL used to build stable CDN URLs
     for objects in this storage.
     """

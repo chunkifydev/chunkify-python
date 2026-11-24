@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Type, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -14,7 +15,7 @@ from ..types import (
     transcoding_create_params,
     transcoding_delete_params,
 )
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -157,7 +158,9 @@ class TranscodingsResource(SyncAPIResource):
         *,
         id: str | Omit = omit,
         created: transcoding_list_params.Created | Omit = omit,
+        format: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "m4a_aac"] | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: TranscodingStatus | Omit = omit,
@@ -175,7 +178,12 @@ class TranscodingsResource(SyncAPIResource):
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
 
+          format: Filter by Transcoding format ID.
+
           limit: Maximum number of Transcodings to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Transcodings to skip.
 
@@ -206,7 +214,9 @@ class TranscodingsResource(SyncAPIResource):
                     {
                         "id": id,
                         "created": created,
+                        "format": format,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
@@ -434,7 +444,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         *,
         id: str | Omit = omit,
         created: transcoding_list_params.Created | Omit = omit,
+        format: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "m4a_aac"] | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: TranscodingStatus | Omit = omit,
@@ -452,7 +464,12 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
 
+          format: Filter by Transcoding format ID.
+
           limit: Maximum number of Transcodings to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Transcodings to skip.
 
@@ -483,7 +500,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
                     {
                         "id": id,
                         "created": created,
+                        "format": format,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,

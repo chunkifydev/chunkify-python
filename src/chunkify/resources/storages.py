@@ -174,7 +174,7 @@ class StoragesResource(SyncAPIResource):
           base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
               object keys. Send an empty string to use the bucket root.
 
-          cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+          cdn_base_url: Customer-managed HTTPS delivery base URL, or null to remove the current value.
 
           secret_access_key: Replacement secret access key. Required with access_key_id; cannot be null or
               empty. The pair is encrypted and saved atomically only after validation
@@ -426,7 +426,7 @@ class AsyncStoragesResource(AsyncAPIResource):
           base_prefix: Object-key prefix for future final job outputs. Existing files keep their stored
               object keys. Send an empty string to use the bucket root.
 
-          cdn_base_url: Customer-managed HTTPS delivery origin, or null to remove the current value.
+          cdn_base_url: Customer-managed HTTPS delivery base URL, or null to remove the current value.
 
           secret_access_key: Replacement secret access key. Required with access_key_id; cannot be null or
               empty. The pair is encrypted and saved atomically only after validation

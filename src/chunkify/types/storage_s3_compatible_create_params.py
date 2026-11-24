@@ -22,10 +22,10 @@ class StorageS3CompatibleCreateParams(TypedDict, total=False):
     """Bucket is the name of the storage bucket."""
 
     endpoint: Required[str]
-    """Public HTTPS origin for the S3-compatible service.
-
-    Credentials, paths, queries, fragments, and non-public destinations are
-    rejected.
+    """
+    Public HTTPS URL of the S3-compatible service, including any fixed path prefix
+    the service requires. Credentials, queries, fragments, and non-public
+    destinations are rejected.
     """
 
     location: Required[StorageLocation]
@@ -55,9 +55,10 @@ class StorageS3CompatibleCreateParams(TypedDict, total=False):
     """
 
     cdn_base_url: Optional[str]
-    """Optional customer-managed HTTPS delivery origin.
+    """Optional customer-managed HTTPS delivery base URL.
 
-    It must not contain credentials, a path, query string, or fragment.
+    Object keys are appended to it. It may include a path prefix, but must not
+    contain credentials, a query string, or a fragment.
     """
 
     public: bool
