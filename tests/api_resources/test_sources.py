@@ -146,6 +146,7 @@ class TestSources:
                 "lt": 0,
                 "lte": 0,
             },
+            storage_id="x",
             video_codec="video_codec",
             width={
                 "eq": 0,
@@ -355,6 +356,7 @@ class TestAsyncSources:
                 "lt": 0,
                 "lte": 0,
             },
+            storage_id="x",
             video_codec="video_codec",
             width={
                 "eq": 0,
