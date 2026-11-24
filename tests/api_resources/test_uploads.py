@@ -131,6 +131,7 @@ class TestUploads:
             offset=0,
             source_id="source_id",
             status="waiting",
+            storage_id="x",
         )
         assert_matches_type(SyncPaginatedResults[Upload], upload, path=["response"])
 
@@ -371,6 +372,7 @@ class TestAsyncUploads:
             offset=0,
             source_id="source_id",
             status="waiting",
+            storage_id="x",
         )
         assert_matches_type(AsyncPaginatedResults[Upload], upload, path=["response"])
 

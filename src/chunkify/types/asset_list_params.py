@@ -17,7 +17,10 @@ class AssetListParams(TypedDict, total=False):
     """Maximum number of Assets to return."""
 
     metadata: SequenceNotStr[str]
-    """Repeat key:value pairs to match all supplied metadata conditions."""
+    """Filter by metadata.
+
+    Repeat key:value pairs to match all supplied metadata conditions.
+    """
 
     offset: int
     """Number of Assets to skip."""

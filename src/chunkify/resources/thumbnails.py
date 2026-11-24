@@ -16,7 +16,7 @@ from ..types import (
     thumbnail_create_params,
     thumbnail_delete_params,
 )
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -190,6 +190,7 @@ class ThumbnailsResource(SyncAPIResource):
         id: str | Omit = omit,
         created: thumbnail_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: ThumbnailStatus | Omit = omit,
@@ -208,6 +209,9 @@ class ThumbnailsResource(SyncAPIResource):
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
 
           limit: Maximum number of Thumbnails to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Thumbnails to skip.
 
@@ -239,6 +243,7 @@ class ThumbnailsResource(SyncAPIResource):
                         "id": id,
                         "created": created,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
@@ -453,6 +458,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         id: str | Omit = omit,
         created: thumbnail_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: ThumbnailStatus | Omit = omit,
@@ -471,6 +477,9 @@ class AsyncThumbnailsResource(AsyncAPIResource):
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
 
           limit: Maximum number of Thumbnails to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Thumbnails to skip.
 
@@ -502,6 +511,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
                         "id": id,
                         "created": created,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,

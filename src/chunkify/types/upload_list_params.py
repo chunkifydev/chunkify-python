@@ -33,6 +33,9 @@ class UploadListParams(TypedDict, total=False):
     status: Literal["waiting", "completed", "failed", "expired"]
     """Filter by status (pending, completed, error)"""
 
+    storage_id: str
+    """Filter by input Storage ID."""
+
 
 class Created(TypedDict, total=False):
     gte: int

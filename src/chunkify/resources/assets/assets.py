@@ -295,7 +295,8 @@ class AssetsResource(SyncAPIResource):
         Args:
           limit: Maximum number of Assets to return.
 
-          metadata: Repeat key:value pairs to match all supplied metadata conditions.
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Assets to skip.
 
@@ -635,7 +636,8 @@ class AsyncAssetsResource(AsyncAPIResource):
         Args:
           limit: Maximum number of Assets to return.
 
-          metadata: Repeat key:value pairs to match all supplied metadata conditions.
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Assets to skip.
 
