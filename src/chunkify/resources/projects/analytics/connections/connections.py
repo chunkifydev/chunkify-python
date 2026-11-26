@@ -144,7 +144,8 @@ class ConnectionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AnalyticsConnection:
         """
-        Retrieve non-secret connection metadata within its owning project.
+        Retrieve one analytics connection in its owning Project, including its type,
+        endpoint, status, and allowed origins. Secret keys are not returned.
 
         Args:
           extra_headers: Send extra headers
@@ -277,10 +278,9 @@ class ConnectionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConnectionListResponse:
-        """List the saved connections for this project.
-
-        No connection is activated by this
-        request.
+        """
+        List the analytics connections saved for a Project, with their type, endpoint,
+        and status. Listing connections does not activate any of them.
 
         Args:
           extra_headers: Send extra headers
@@ -465,7 +465,8 @@ class AsyncConnectionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AnalyticsConnection:
         """
-        Retrieve non-secret connection metadata within its owning project.
+        Retrieve one analytics connection in its owning Project, including its type,
+        endpoint, status, and allowed origins. Secret keys are not returned.
 
         Args:
           extra_headers: Send extra headers
@@ -598,10 +599,9 @@ class AsyncConnectionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConnectionListResponse:
-        """List the saved connections for this project.
-
-        No connection is activated by this
-        request.
+        """
+        List the analytics connections saved for a Project, with their type, endpoint,
+        and status. Listing connections does not activate any of them.
 
         Args:
           extra_headers: Send extra headers

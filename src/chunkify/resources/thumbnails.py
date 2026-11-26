@@ -16,7 +16,7 @@ from ..types import (
     thumbnail_create_params,
     thumbnail_delete_params,
 )
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -157,8 +157,8 @@ class ThumbnailsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Thumbnail:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Thumbnail.
+        Retrieve one Thumbnail request with its accepted settings, current status,
+        sampled frames, and published image files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -190,6 +190,7 @@ class ThumbnailsResource(SyncAPIResource):
         id: str | Omit = omit,
         created: thumbnail_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: ThumbnailStatus | Omit = omit,
@@ -201,13 +202,18 @@ class ThumbnailsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Thumbnail]:
-        """
-        List Thumbnails in the authenticated Project, newest first by default.
+        """List Thumbnails in the authenticated Project, newest first by default.
+
+        Filter by
+        status, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
 
           limit: Maximum number of Thumbnails to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Thumbnails to skip.
 
@@ -239,6 +245,7 @@ class ThumbnailsResource(SyncAPIResource):
                         "id": id,
                         "created": created,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
@@ -420,8 +427,8 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Thumbnail:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Thumbnail.
+        Retrieve one Thumbnail request with its accepted settings, current status,
+        sampled frames, and published image files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -453,6 +460,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         id: str | Omit = omit,
         created: thumbnail_list_params.Created | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: ThumbnailStatus | Omit = omit,
@@ -464,13 +472,18 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Thumbnail, AsyncPaginatedResults[Thumbnail]]:
-        """
-        List Thumbnails in the authenticated Project, newest first by default.
+        """List Thumbnails in the authenticated Project, newest first by default.
+
+        Filter by
+        status, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
 
           limit: Maximum number of Thumbnails to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Thumbnails to skip.
 
@@ -502,6 +515,7 @@ class AsyncThumbnailsResource(AsyncAPIResource):
                         "id": id,
                         "created": created,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,

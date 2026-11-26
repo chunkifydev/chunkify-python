@@ -56,8 +56,8 @@ class RevisionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRevision:
         """
-        Retrieve an immutable definition revision, including revisions of archived
-        Workflows.
+        Retrieve an immutable Workflow definition revision and its rules, including
+        revisions of archived Workflows, to see what a past run executed.
 
         Args:
           extra_headers: Send extra headers
@@ -117,8 +117,8 @@ class AsyncRevisionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRevision:
         """
-        Retrieve an immutable definition revision, including revisions of archived
-        Workflows.
+        Retrieve an immutable Workflow definition revision and its rules, including
+        revisions of archived Workflows, to see what a past run executed.
 
         Args:
           extra_headers: Send extra headers

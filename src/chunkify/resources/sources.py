@@ -115,8 +115,8 @@ class SourcesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Source:
         """
-        Retrieve details of a specific source by its ID, including metadata, media
-        properties, and associated jobs.
+        Retrieve a Source by its ID, including its Storage location, file size,
+        duration, dimensions, codecs, bitrates, frame rate, and metadata.
 
         Args:
           extra_headers: Send extra headers
@@ -155,6 +155,7 @@ class SourcesResource(SyncAPIResource):
         metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
+        storage_id: str | Omit = omit,
         video_codec: str | Omit = omit,
         width: source_list_params.Width | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -182,6 +183,8 @@ class SourcesResource(SyncAPIResource):
               conditions.
 
           offset: Pagination offset
+
+          storage_id: Filter by input Storage ID.
 
           video_codec: Filter by video codec
 
@@ -213,6 +216,7 @@ class SourcesResource(SyncAPIResource):
                         "metadata": metadata,
                         "offset": offset,
                         "size": size,
+                        "storage_id": storage_id,
                         "video_codec": video_codec,
                         "width": width,
                     },
@@ -234,9 +238,10 @@ class SourcesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a source.
+        """Delete a Source that no processing still needs and record a source.deleted
+        event.
 
-        It will fail if there are processing jobs using this source.
+        Assets and other outputs created from the Source are preserved.
 
         Args:
           extra_headers: Send extra headers
@@ -351,8 +356,8 @@ class AsyncSourcesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Source:
         """
-        Retrieve details of a specific source by its ID, including metadata, media
-        properties, and associated jobs.
+        Retrieve a Source by its ID, including its Storage location, file size,
+        duration, dimensions, codecs, bitrates, frame rate, and metadata.
 
         Args:
           extra_headers: Send extra headers
@@ -391,6 +396,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         size: source_list_params.Size | Omit = omit,
+        storage_id: str | Omit = omit,
         video_codec: str | Omit = omit,
         width: source_list_params.Width | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -418,6 +424,8 @@ class AsyncSourcesResource(AsyncAPIResource):
               conditions.
 
           offset: Pagination offset
+
+          storage_id: Filter by input Storage ID.
 
           video_codec: Filter by video codec
 
@@ -449,6 +457,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                         "metadata": metadata,
                         "offset": offset,
                         "size": size,
+                        "storage_id": storage_id,
                         "video_codec": video_codec,
                         "width": width,
                     },
@@ -470,9 +479,10 @@ class AsyncSourcesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a source.
+        """Delete a Source that no processing still needs and record a source.deleted
+        event.
 
-        It will fail if there are processing jobs using this source.
+        Assets and other outputs created from the Source are preserved.
 
         Args:
           extra_headers: Send extra headers

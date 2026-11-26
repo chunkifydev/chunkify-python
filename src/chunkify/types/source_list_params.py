@@ -39,6 +39,9 @@ class SourceListParams(TypedDict, total=False):
 
     size: Size
 
+    storage_id: str
+    """Filter by input Storage ID."""
+
     video_codec: str
     """Filter by video codec"""
 

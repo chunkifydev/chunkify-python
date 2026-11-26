@@ -152,8 +152,8 @@ class UploadsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
         """
-        Retrieve details of a specific upload by its ID, including metadata, status, and
-        associated source.
+        Retrieve an Upload session by its ID, including its status, file size, expiry,
+        error details, and the Source or Asset created from it.
 
         Args:
           extra_headers: Send extra headers
@@ -189,6 +189,7 @@ class UploadsResource(SyncAPIResource):
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
+        storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -196,8 +197,10 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Upload]:
-        """
-        Retrieve a list of all uploads with optional filtering and pagination.
+        """List Upload sessions in the Project, newest first by default.
+
+        Filter by ID,
+        status, Source, Storage, metadata, or creation date, with pagination.
 
         Args:
           id: Filter by upload ID
@@ -212,6 +215,8 @@ class UploadsResource(SyncAPIResource):
           source_id: Filter by source ID
 
           status: Filter by status (pending, completed, error)
+
+          storage_id: Filter by input Storage ID.
 
           extra_headers: Send extra headers
 
@@ -238,6 +243,7 @@ class UploadsResource(SyncAPIResource):
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
+                        "storage_id": storage_id,
                     },
                     upload_list_params.UploadListParams,
                 ),
@@ -257,8 +263,10 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete an upload.
+        """Delete an Upload session record from the Project.
+
+        A Source already created from
+        a completed Upload is not deleted and can still be processed.
 
         Args:
           extra_headers: Send extra headers
@@ -459,8 +467,8 @@ class AsyncUploadsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
         """
-        Retrieve details of a specific upload by its ID, including metadata, status, and
-        associated source.
+        Retrieve an Upload session by its ID, including its status, file size, expiry,
+        error details, and the Source or Asset created from it.
 
         Args:
           extra_headers: Send extra headers
@@ -496,6 +504,7 @@ class AsyncUploadsResource(AsyncAPIResource):
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: Literal["waiting", "completed", "failed", "expired"] | Omit = omit,
+        storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -503,8 +512,10 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Upload, AsyncPaginatedResults[Upload]]:
-        """
-        Retrieve a list of all uploads with optional filtering and pagination.
+        """List Upload sessions in the Project, newest first by default.
+
+        Filter by ID,
+        status, Source, Storage, metadata, or creation date, with pagination.
 
         Args:
           id: Filter by upload ID
@@ -519,6 +530,8 @@ class AsyncUploadsResource(AsyncAPIResource):
           source_id: Filter by source ID
 
           status: Filter by status (pending, completed, error)
+
+          storage_id: Filter by input Storage ID.
 
           extra_headers: Send extra headers
 
@@ -545,6 +558,7 @@ class AsyncUploadsResource(AsyncAPIResource):
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
+                        "storage_id": storage_id,
                     },
                     upload_list_params.UploadListParams,
                 ),
@@ -564,8 +578,10 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete an upload.
+        """Delete an Upload session record from the Project.
+
+        A Source already created from
+        a completed Upload is not deleted and can still be processed.
 
         Args:
           extra_headers: Send extra headers

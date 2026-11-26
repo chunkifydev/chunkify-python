@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Type, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -14,7 +15,7 @@ from ..types import (
     transcoding_create_params,
     transcoding_delete_params,
 )
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -70,7 +71,8 @@ class TranscodingsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Create a standalone file export with resolved encoding settings.
+        Create a standalone Transcoding that exports a Source as an MP4, WebM, or M4A
+        file. Encoding settings are resolved and processing starts asynchronously.
 
         Args:
           format: Format specifies the requested encoding settings.
@@ -125,8 +127,8 @@ class TranscodingsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Transcoding.
+        Retrieve one Transcoding with its accepted encoding settings, current status and
+        progress, and published files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -157,7 +159,9 @@ class TranscodingsResource(SyncAPIResource):
         *,
         id: str | Omit = omit,
         created: transcoding_list_params.Created | Omit = omit,
+        format: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "m4a_aac"] | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: TranscodingStatus | Omit = omit,
@@ -169,13 +173,20 @@ class TranscodingsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Transcoding]:
-        """
-        List Transcodings in the authenticated Project, newest first by default.
+        """List Transcodings in the authenticated Project, newest first by default.
+
+        Filter
+        by status, format, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
 
+          format: Filter by Transcoding format ID.
+
           limit: Maximum number of Transcodings to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Transcodings to skip.
 
@@ -206,7 +217,9 @@ class TranscodingsResource(SyncAPIResource):
                     {
                         "id": id,
                         "created": created,
+                        "format": format,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
@@ -282,10 +295,9 @@ class TranscodingsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Cancel a preparing Transcoding and release its unpaid reservation.
-
-        Repeating an
-        accepted cancellation succeeds.
+        """
+        Cancel a Transcoding that is still preparing and release its unpaid reservation.
+        Repeating an accepted cancellation succeeds without changes.
 
         Args:
           extra_headers: Send extra headers
@@ -347,7 +359,8 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Create a standalone file export with resolved encoding settings.
+        Create a standalone Transcoding that exports a Source as an MP4, WebM, or M4A
+        file. Encoding settings are resolved and processing starts asynchronously.
 
         Args:
           format: Format specifies the requested encoding settings.
@@ -402,8 +415,8 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Transcoding.
+        Retrieve one Transcoding with its accepted encoding settings, current status and
+        progress, and published files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -434,7 +447,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         *,
         id: str | Omit = omit,
         created: transcoding_list_params.Created | Omit = omit,
+        format: Literal["mp4_h264", "mp4_h265", "mp4_av1", "webm_vp9", "m4a_aac"] | Omit = omit,
         limit: int | Omit = omit,
+        metadata: SequenceNotStr[str] | Omit = omit,
         offset: int | Omit = omit,
         source_id: str | Omit = omit,
         status: TranscodingStatus | Omit = omit,
@@ -446,13 +461,20 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Transcoding, AsyncPaginatedResults[Transcoding]]:
-        """
-        List Transcodings in the authenticated Project, newest first by default.
+        """List Transcodings in the authenticated Project, newest first by default.
+
+        Filter
+        by status, format, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
 
+          format: Filter by Transcoding format ID.
+
           limit: Maximum number of Transcodings to return.
+
+          metadata: Filter by metadata. Repeat key:value pairs to match all supplied metadata
+              conditions.
 
           offset: Number of Transcodings to skip.
 
@@ -483,7 +505,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
                     {
                         "id": id,
                         "created": created,
+                        "format": format,
                         "limit": limit,
+                        "metadata": metadata,
                         "offset": offset,
                         "source_id": source_id,
                         "status": status,
@@ -559,10 +583,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Cancel a preparing Transcoding and release its unpaid reservation.
-
-        Repeating an
-        accepted cancellation succeeds.
+        """
+        Cancel a Transcoding that is still preparing and release its unpaid reservation.
+        Repeating an accepted cancellation succeeds without changes.
 
         Args:
           extra_headers: Send extra headers

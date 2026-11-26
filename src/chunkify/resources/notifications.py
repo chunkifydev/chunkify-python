@@ -59,10 +59,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
-        """Send an event notification to a webhook endpoint.
+        """Send an event notification to one of the Project's webhook endpoints.
 
-        Recorded events replay their
-        original payload.
+        Recorded
+        events are replayed with their original payload.
 
         Args:
           event: Event specifies the type of event that triggered the notification.
@@ -115,7 +115,8 @@ class NotificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
         """
-        Retrieve details of a specific notification
+        Retrieve a notification delivery, including its event, payload, target webhook,
+        and the response status code returned by your endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -159,8 +160,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Notification]:
-        """
-        Retrieve a list of notifications with optional filtering and pagination
+        """List webhook notification deliveries in the Project.
+
+        Filter by event, object,
+        webhook, response status code, or creation date, with pagination.
 
         Args:
           event_id: Filter deliveries by their originating event ID.
@@ -220,8 +223,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a notification.
+        """Delete a delivered notification from the Project's history.
+
+        Notifications still
+        being processed cannot be deleted, and the webhook is unchanged.
 
         Args:
           extra_headers: Send extra headers
@@ -281,10 +286,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
-        """Send an event notification to a webhook endpoint.
+        """Send an event notification to one of the Project's webhook endpoints.
 
-        Recorded events replay their
-        original payload.
+        Recorded
+        events are replayed with their original payload.
 
         Args:
           event: Event specifies the type of event that triggered the notification.
@@ -337,7 +342,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Notification:
         """
-        Retrieve details of a specific notification
+        Retrieve a notification delivery, including its event, payload, target webhook,
+        and the response status code returned by your endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -381,8 +387,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Notification, AsyncPaginatedResults[Notification]]:
-        """
-        Retrieve a list of notifications with optional filtering and pagination
+        """List webhook notification deliveries in the Project.
+
+        Filter by event, object,
+        webhook, response status code, or creation date, with pagination.
 
         Args:
           event_id: Filter deliveries by their originating event ID.
@@ -442,8 +450,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a notification.
+        """Delete a delivered notification from the Project's history.
+
+        Notifications still
+        being processed cannot be deleted, and the webhook is unchanged.
 
         Args:
           extra_headers: Send extra headers
