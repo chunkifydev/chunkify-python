@@ -71,7 +71,8 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRun:
         """
-        Retrieve a retained run with its triggering event, status, and action counts.
+        Retrieve a retained Workflow run with its triggering event, Asset, revision,
+        status, and action counts, plus any error the run reported.
 
         Args:
           extra_headers: Send extra headers
@@ -117,10 +118,10 @@ class RunsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[WorkflowRun]:
-        """List retained runs for this Workflow, newest first.
+        """List retained runs for a Workflow, newest first.
 
         Each run corresponds to one
-        matching Asset event.
+        matching Asset event; filter by Asset, status, event, or date.
 
         Args:
           asset_id: AssetId specifies the Asset whose results to return. Omit it to include all
@@ -213,7 +214,8 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRun:
         """
-        Retrieve a retained run with its triggering event, status, and action counts.
+        Retrieve a retained Workflow run with its triggering event, Asset, revision,
+        status, and action counts, plus any error the run reported.
 
         Args:
           extra_headers: Send extra headers
@@ -259,10 +261,10 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[WorkflowRun, AsyncPaginatedResults[WorkflowRun]]:
-        """List retained runs for this Workflow, newest first.
+        """List retained runs for a Workflow, newest first.
 
         Each run corresponds to one
-        matching Asset event.
+        matching Asset event; filter by Asset, status, event, or date.
 
         Args:
           asset_id: AssetId specifies the Asset whose results to return. Omit it to include all

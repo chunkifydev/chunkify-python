@@ -63,10 +63,10 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Webhook:
-        """Create a new webhook for a project.
+        """Create a webhook for the Project.
 
-        The webhook will receive notifications for
-        specified events.
+        Chunkify sends a notification to its URL for
+        each subscribed event, and you can create it enabled or disabled.
 
         Args:
           url: Url is the endpoint that will receive webhook notifications, which must be a
@@ -116,10 +116,9 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Webhook:
-        """Retrieve details of a specific webhook configuration by its ID.
-
-        The webhook must
-        belong to the current project.
+        """
+        Retrieve a webhook in the current Project by its ID, including its endpoint URL,
+        subscribed events, and whether deliveries are enabled.
 
         Args:
           extra_headers: Send extra headers
@@ -158,10 +157,10 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update the enabled status of a webhook.
+        """Update a webhook's subscribed events or enable and disable its deliveries.
 
-        The webhook must belong to the current
-        project.
+        The
+        webhook must belong to the current Project.
 
         Args:
           enabled: Enabled indicates whether the webhook should be enabled or disabled.
@@ -325,10 +324,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Webhook:
-        """Create a new webhook for a project.
+        """Create a webhook for the Project.
 
-        The webhook will receive notifications for
-        specified events.
+        Chunkify sends a notification to its URL for
+        each subscribed event, and you can create it enabled or disabled.
 
         Args:
           url: Url is the endpoint that will receive webhook notifications, which must be a
@@ -378,10 +377,9 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Webhook:
-        """Retrieve details of a specific webhook configuration by its ID.
-
-        The webhook must
-        belong to the current project.
+        """
+        Retrieve a webhook in the current Project by its ID, including its endpoint URL,
+        subscribed events, and whether deliveries are enabled.
 
         Args:
           extra_headers: Send extra headers
@@ -420,10 +418,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update the enabled status of a webhook.
+        """Update a webhook's subscribed events or enable and disable its deliveries.
 
-        The webhook must belong to the current
-        project.
+        The
+        webhook must belong to the current Project.
 
         Args:
           enabled: Enabled indicates whether the webhook should be enabled or disabled.

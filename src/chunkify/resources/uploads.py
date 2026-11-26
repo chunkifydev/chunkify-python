@@ -152,8 +152,8 @@ class UploadsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
         """
-        Retrieve details of a specific upload by its ID, including metadata, status, and
-        associated source.
+        Retrieve an Upload session by its ID, including its status, file size, expiry,
+        error details, and the Source or Asset created from it.
 
         Args:
           extra_headers: Send extra headers
@@ -197,8 +197,10 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Upload]:
-        """
-        Retrieve a list of all uploads with optional filtering and pagination.
+        """List Upload sessions in the Project, newest first by default.
+
+        Filter by ID,
+        status, Source, Storage, metadata, or creation date, with pagination.
 
         Args:
           id: Filter by upload ID
@@ -261,8 +263,10 @@ class UploadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete an upload.
+        """Delete an Upload session record from the Project.
+
+        A Source already created from
+        a completed Upload is not deleted and can still be processed.
 
         Args:
           extra_headers: Send extra headers
@@ -463,8 +467,8 @@ class AsyncUploadsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Upload:
         """
-        Retrieve details of a specific upload by its ID, including metadata, status, and
-        associated source.
+        Retrieve an Upload session by its ID, including its status, file size, expiry,
+        error details, and the Source or Asset created from it.
 
         Args:
           extra_headers: Send extra headers
@@ -508,8 +512,10 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Upload, AsyncPaginatedResults[Upload]]:
-        """
-        Retrieve a list of all uploads with optional filtering and pagination.
+        """List Upload sessions in the Project, newest first by default.
+
+        Filter by ID,
+        status, Source, Storage, metadata, or creation date, with pagination.
 
         Args:
           id: Filter by upload ID
@@ -572,8 +578,10 @@ class AsyncUploadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete an upload.
+        """Delete an Upload session record from the Project.
+
+        A Source already created from
+        a completed Upload is not deleted and can still be processed.
 
         Args:
           extra_headers: Send extra headers

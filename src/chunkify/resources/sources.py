@@ -115,8 +115,8 @@ class SourcesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Source:
         """
-        Retrieve details of a specific source by its ID, including metadata, media
-        properties, and associated jobs.
+        Retrieve a Source by its ID, including its Storage location, file size,
+        duration, dimensions, codecs, bitrates, frame rate, and metadata.
 
         Args:
           extra_headers: Send extra headers
@@ -238,9 +238,10 @@ class SourcesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a source.
+        """Delete a Source that no processing still needs and record a source.deleted
+        event.
 
-        It will fail if there are processing jobs using this source.
+        Assets and other outputs created from the Source are preserved.
 
         Args:
           extra_headers: Send extra headers
@@ -355,8 +356,8 @@ class AsyncSourcesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Source:
         """
-        Retrieve details of a specific source by its ID, including metadata, media
-        properties, and associated jobs.
+        Retrieve a Source by its ID, including its Storage location, file size,
+        duration, dimensions, codecs, bitrates, frame rate, and metadata.
 
         Args:
           extra_headers: Send extra headers
@@ -478,9 +479,10 @@ class AsyncSourcesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a source.
+        """Delete a Source that no processing still needs and record a source.deleted
+        event.
 
-        It will fail if there are processing jobs using this source.
+        Assets and other outputs created from the Source are preserved.
 
         Args:
           extra_headers: Send extra headers
