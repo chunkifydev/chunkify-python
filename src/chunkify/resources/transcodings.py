@@ -71,7 +71,8 @@ class TranscodingsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Create a standalone file export with resolved encoding settings.
+        Create a standalone Transcoding that exports a Source as an MP4, WebM, or M4A
+        file. Encoding settings are resolved and processing starts asynchronously.
 
         Args:
           format: Format specifies the requested encoding settings.
@@ -126,8 +127,8 @@ class TranscodingsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Transcoding.
+        Retrieve one Transcoding with its accepted encoding settings, current status and
+        progress, and published files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -172,8 +173,10 @@ class TranscodingsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Transcoding]:
-        """
-        List Transcodings in the authenticated Project, newest first by default.
+        """List Transcodings in the authenticated Project, newest first by default.
+
+        Filter
+        by status, format, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
@@ -292,10 +295,9 @@ class TranscodingsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Cancel a preparing Transcoding and release its unpaid reservation.
-
-        Repeating an
-        accepted cancellation succeeds.
+        """
+        Cancel a Transcoding that is still preparing and release its unpaid reservation.
+        Repeating an accepted cancellation succeeds without changes.
 
         Args:
           extra_headers: Send extra headers
@@ -357,7 +359,8 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Create a standalone file export with resolved encoding settings.
+        Create a standalone Transcoding that exports a Source as an MP4, WebM, or M4A
+        file. Encoding settings are resolved and processing starts asynchronously.
 
         Args:
           format: Format specifies the requested encoding settings.
@@ -412,8 +415,8 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcoding:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Transcoding.
+        Retrieve one Transcoding with its accepted encoding settings, current status and
+        progress, and published files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -458,8 +461,10 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Transcoding, AsyncPaginatedResults[Transcoding]]:
-        """
-        List Transcodings in the authenticated Project, newest first by default.
+        """List Transcodings in the authenticated Project, newest first by default.
+
+        Filter
+        by status, format, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Transcoding ID. Omit to include all matching resources.
@@ -578,10 +583,9 @@ class AsyncTranscodingsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Cancel a preparing Transcoding and release its unpaid reservation.
-
-        Repeating an
-        accepted cancellation succeeds.
+        """
+        Cancel a Transcoding that is still preparing and release its unpaid reservation.
+        Repeating an accepted cancellation succeeds without changes.
 
         Args:
           extra_headers: Send extra headers

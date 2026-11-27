@@ -61,8 +61,8 @@ class MetricsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MetricsAssets:
         """
-        Retrieve Asset outcomes, timings, output sizes and source profiles by UTC
-        creation date.
+        Retrieve Asset outcomes, processing timings, output sizes, and source profiles
+        by UTC creation date, as JSON or CSV, for the past 7 days by default.
 
         Args:
           format: Response format. Defaults to JSON unless Accept requests CSV. Overrides Accept
@@ -177,7 +177,8 @@ class MetricsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MetricsUsage:
         """
-        Retrieve project usage totals and daily values for a UTC date range.
+        Retrieve the Project's usage totals and daily values for a UTC date range, as
+        JSON or CSV. Without dates, it covers the past 7 UTC calendar days.
 
         Args:
           format: Response format. Defaults to JSON unless Accept requests CSV. Overrides Accept
@@ -253,8 +254,8 @@ class AsyncMetricsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MetricsAssets:
         """
-        Retrieve Asset outcomes, timings, output sizes and source profiles by UTC
-        creation date.
+        Retrieve Asset outcomes, processing timings, output sizes, and source profiles
+        by UTC creation date, as JSON or CSV, for the past 7 days by default.
 
         Args:
           format: Response format. Defaults to JSON unless Accept requests CSV. Overrides Accept
@@ -369,7 +370,8 @@ class AsyncMetricsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MetricsUsage:
         """
-        Retrieve project usage totals and daily values for a UTC date range.
+        Retrieve the Project's usage totals and daily values for a UTC date range, as
+        JSON or CSV. Without dates, it covers the past 7 UTC calendar days.
 
         Args:
           format: Response format. Defaults to JSON unless Accept requests CSV. Overrides Accept

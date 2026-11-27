@@ -140,8 +140,10 @@ class WorkflowsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
-        """
-        Retrieve a Workflow and its current definition, including archived Workflows.
+        """Retrieve a Workflow with its name, current revision, and rules.
+
+        Archived
+        Workflows can still be retrieved and include the date they were archived.
 
         Args:
           extra_headers: Send extra headers
@@ -251,10 +253,9 @@ class WorkflowsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Workflow]:
-        """List Workflows in the Project, newest first.
-
-        Archived Workflows are excluded
-        unless archived is true.
+        """
+        List the Workflows in the Project, newest first, with their current revision and
+        rules. Archived Workflows are included only when archived is true.
 
         Args:
           archived: Archived specifies whether to include archived Workflows. Defaults to false.
@@ -433,8 +434,10 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
-        """
-        Retrieve a Workflow and its current definition, including archived Workflows.
+        """Retrieve a Workflow with its name, current revision, and rules.
+
+        Archived
+        Workflows can still be retrieved and include the date they were archived.
 
         Args:
           extra_headers: Send extra headers
@@ -544,10 +547,9 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Workflow, AsyncPaginatedResults[Workflow]]:
-        """List Workflows in the Project, newest first.
-
-        Archived Workflows are excluded
-        unless archived is true.
+        """
+        List the Workflows in the Project, newest first, with their current revision and
+        rules. Archived Workflows are included only when archived is true.
 
         Args:
           archived: Archived specifies whether to include archived Workflows. Defaults to false.
