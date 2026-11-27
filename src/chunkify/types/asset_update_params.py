@@ -16,11 +16,11 @@ class AssetUpdateParams(TypedDict, total=False):
     bytes.
     """
 
-    preview_enabled: bool
-    """Allow public preview access without an API token.
-
-    Does not control CDN or static download access. Disabling it does not revoke
-    signed URLs already issued.
+    public_playback: bool
+    """
+    Allow public playback without an API token, through the public preview page and
+    embeds. Does not control CDN or static download access. Disabling it does not
+    revoke signed URLs already issued.
     """
 
     title: str

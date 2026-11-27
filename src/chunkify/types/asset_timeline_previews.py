@@ -33,7 +33,7 @@ class AssetTimelinePreviews(BaseModel):
     preview_url: Optional[str] = None
     """Public WebVTT preview URL with signed image references.
 
-    Available when the Asset is ready and preview_enabled is true.
+    Available when the Asset is ready and public_playback is true.
     """
 
     size: Optional[int] = None
