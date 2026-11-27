@@ -46,11 +46,11 @@ class Asset(BaseModel):
     playback_ready: bool
     """Whether HLS playback is available, including while the Asset is preparing."""
 
-    preview_enabled: bool
-    """Allow public preview access without an API token.
-
-    Does not control CDN or static download access. Disabling it does not revoke
-    signed URLs already issued.
+    public_playback: bool
+    """
+    Allow public playback without an API token, through the public preview page and
+    embeds. Does not control CDN or static download access. Disabling it does not
+    revoke signed URLs already issued.
     """
 
     source_metadata: AssetSourceMetadata
@@ -130,7 +130,7 @@ class Asset(BaseModel):
     preview_url: Optional[str] = None
     """Public HLS preview URL.
 
-    Available when playback_ready and preview_enabled are true. No API token is
+    Available when playback_ready and public_playback are true. No API token is
     required.
     """
 

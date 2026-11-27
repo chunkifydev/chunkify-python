@@ -91,7 +91,7 @@ class AssetsResource(SyncAPIResource):
         metadata: Dict[str, str] | Omit = omit,
         min_resolution: Literal["auto", "240p", "360p", "540p", "720p", "1080p", "1440p", "2160p"] | Omit = omit,
         path_template: str | Omit = omit,
-        preview_enabled: bool | Omit = omit,
+        public_playback: bool | Omit = omit,
         storage: AssetCreateStorageParams | Omit = omit,
         title: str | Omit = omit,
         workflow_id: Optional[str] | Omit = omit,
@@ -127,8 +127,9 @@ class AssetsResource(SyncAPIResource):
               Maximum template size: 1024 UTF-8 bytes. Expanded prefix: 768 bytes including
               base_prefix and trailing slash.
 
-          preview_enabled: Allow public preview access without an API token. Omit to use the Project
-              default. Does not control CDN or static download access.
+          public_playback: Allow public playback without an API token, through the public preview page and
+              embeds. Omit to use the Project default. Does not control CDN or static download
+              access.
 
           storage: Output Storage. Omit to use the Project default. The path_template controls the
               folder for generated output paths.
@@ -156,7 +157,7 @@ class AssetsResource(SyncAPIResource):
                     "metadata": metadata,
                     "min_resolution": min_resolution,
                     "path_template": path_template,
-                    "preview_enabled": preview_enabled,
+                    "public_playback": public_playback,
                     "storage": storage,
                     "title": title,
                     "workflow_id": workflow_id,
@@ -218,7 +219,7 @@ class AssetsResource(SyncAPIResource):
         asset_id: str,
         *,
         metadata: Dict[str, str] | Omit = omit,
-        preview_enabled: bool | Omit = omit,
+        public_playback: bool | Omit = omit,
         title: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,8 +236,9 @@ class AssetsResource(SyncAPIResource):
           metadata: Replaces all metadata. Send {} to clear it; omit to leave unchanged. Maximum
               encoded JSON size: 2,048 bytes.
 
-          preview_enabled: Allow public preview access without an API token. Does not control CDN or static
-              download access. Disabling it does not revoke signed URLs already issued.
+          public_playback: Allow public playback without an API token, through the public preview page and
+              embeds. Does not control CDN or static download access. Disabling it does not
+              revoke signed URLs already issued.
 
           title: Asset title, up to 256 characters. Send an empty string to clear it; omit to
               leave unchanged.
@@ -257,7 +259,7 @@ class AssetsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "metadata": metadata,
-                    "preview_enabled": preview_enabled,
+                    "public_playback": public_playback,
                     "title": title,
                 },
                 asset_update_params.AssetUpdateParams,
@@ -435,7 +437,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         metadata: Dict[str, str] | Omit = omit,
         min_resolution: Literal["auto", "240p", "360p", "540p", "720p", "1080p", "1440p", "2160p"] | Omit = omit,
         path_template: str | Omit = omit,
-        preview_enabled: bool | Omit = omit,
+        public_playback: bool | Omit = omit,
         storage: AssetCreateStorageParams | Omit = omit,
         title: str | Omit = omit,
         workflow_id: Optional[str] | Omit = omit,
@@ -471,8 +473,9 @@ class AsyncAssetsResource(AsyncAPIResource):
               Maximum template size: 1024 UTF-8 bytes. Expanded prefix: 768 bytes including
               base_prefix and trailing slash.
 
-          preview_enabled: Allow public preview access without an API token. Omit to use the Project
-              default. Does not control CDN or static download access.
+          public_playback: Allow public playback without an API token, through the public preview page and
+              embeds. Omit to use the Project default. Does not control CDN or static download
+              access.
 
           storage: Output Storage. Omit to use the Project default. The path_template controls the
               folder for generated output paths.
@@ -500,7 +503,7 @@ class AsyncAssetsResource(AsyncAPIResource):
                     "metadata": metadata,
                     "min_resolution": min_resolution,
                     "path_template": path_template,
-                    "preview_enabled": preview_enabled,
+                    "public_playback": public_playback,
                     "storage": storage,
                     "title": title,
                     "workflow_id": workflow_id,
@@ -562,7 +565,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         asset_id: str,
         *,
         metadata: Dict[str, str] | Omit = omit,
-        preview_enabled: bool | Omit = omit,
+        public_playback: bool | Omit = omit,
         title: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -579,8 +582,9 @@ class AsyncAssetsResource(AsyncAPIResource):
           metadata: Replaces all metadata. Send {} to clear it; omit to leave unchanged. Maximum
               encoded JSON size: 2,048 bytes.
 
-          preview_enabled: Allow public preview access without an API token. Does not control CDN or static
-              download access. Disabling it does not revoke signed URLs already issued.
+          public_playback: Allow public playback without an API token, through the public preview page and
+              embeds. Does not control CDN or static download access. Disabling it does not
+              revoke signed URLs already issued.
 
           title: Asset title, up to 256 characters. Send an empty string to clear it; omit to
               leave unchanged.
@@ -601,7 +605,7 @@ class AsyncAssetsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "metadata": metadata,
-                    "preview_enabled": preview_enabled,
+                    "public_playback": public_playback,
                     "title": title,
                 },
                 asset_update_params.AssetUpdateParams,

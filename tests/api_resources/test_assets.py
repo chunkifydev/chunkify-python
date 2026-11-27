@@ -40,7 +40,7 @@ class TestAssets:
             },
             min_resolution="auto",
             path_template="videos/{metadata.VideoID}",
-            preview_enabled=True,
+            public_playback=True,
             storage={"id": "stor_3GldXEVxF304PlE1B1cFKKiykDN"},
             title="Launch video",
             workflow_id="x",
@@ -132,7 +132,7 @@ class TestAssets:
                 "key": "value",
                 "key2": "value2",
             },
-            preview_enabled=False,
+            public_playback=False,
             title="Launch video",
         )
         assert asset is None
@@ -295,7 +295,7 @@ class TestAsyncAssets:
             },
             min_resolution="auto",
             path_template="videos/{metadata.VideoID}",
-            preview_enabled=True,
+            public_playback=True,
             storage={"id": "stor_3GldXEVxF304PlE1B1cFKKiykDN"},
             title="Launch video",
             workflow_id="x",
@@ -387,7 +387,7 @@ class TestAsyncAssets:
                 "key": "value",
                 "key2": "value2",
             },
-            preview_enabled=False,
+            public_playback=False,
             title="Launch video",
         )
         assert asset is None

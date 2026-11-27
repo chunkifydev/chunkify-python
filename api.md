@@ -252,7 +252,16 @@ Methods:
 Types:
 
 ```python
-from chunkify.types import Project, ProjectListResponse
+from chunkify.types import (
+    PlayerAppearance,
+    PlayerAppearanceParams,
+    PlayerControl,
+    PlayerPalette,
+    PlayerPaletteParams,
+    PlayerThemeMode,
+    Project,
+    ProjectListResponse,
+)
 ```
 
 Methods:
