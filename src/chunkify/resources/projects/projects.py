@@ -6,7 +6,7 @@ from typing import Type, Optional, cast
 
 import httpx
 
-from ...types import AssetDefaultsParams, project_create_params, project_update_params
+from ...types import AssetDefaultsParams, PlayerAppearanceParams, project_create_params, project_update_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -30,6 +30,7 @@ from .analytics.analytics import (
 )
 from ...types.asset_defaults_params import AssetDefaultsParams
 from ...types.project_list_response import ProjectListResponse
+from ...types.player_appearance_params import PlayerAppearanceParams
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -145,7 +146,7 @@ class ProjectsResource(SyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
-        player_appearance: project_update_params.PlayerAppearance | Omit = omit,
+        player_appearance: PlayerAppearanceParams | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -385,7 +386,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
-        player_appearance: project_update_params.PlayerAppearance | Omit = omit,
+        player_appearance: PlayerAppearanceParams | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
