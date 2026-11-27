@@ -69,10 +69,10 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Project:
-        """Create a new project with the specified name.
+        """Create a Project in your team with a name of 4 to 32 characters.
 
-        The project will be created with
-        default Chunkify storage settings.
+        New Projects
+        start with Chunkify storage until you connect your own Storage.
 
         Args:
           name: Name is the name of the project, which must be between 4 and 32 characters.
@@ -111,7 +111,8 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Project:
         """
-        Retrieve details of a specific project by its slug
+        Retrieve a Project in your team by its ID, including its name, slug, default
+        Storage, Asset defaults, and default Workflow.
 
         Args:
           extra_headers: Send extra headers
@@ -152,10 +153,9 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update a project's name or storage settings.
-
-        Only team owners can update
-        projects.
+        """
+        Update a Project's name, default Storage, Asset defaults, or default Workflow.
+        Only team owners can update Projects, and project names must be unique.
 
         Args:
           asset_defaults: Defaults for new Assets and automatic Uploads. Replaces the whole object.
@@ -210,7 +210,10 @@ class ProjectsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
-        """Retrieve a list of all projects for a team"""
+        """
+        List the Projects in the team that owns the access token, with each Project's
+        name, slug, default Storage, and Asset defaults.
+        """
         return self._get(
             "/projects",
             options=make_request_options(
@@ -300,10 +303,10 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Project:
-        """Create a new project with the specified name.
+        """Create a Project in your team with a name of 4 to 32 characters.
 
-        The project will be created with
-        default Chunkify storage settings.
+        New Projects
+        start with Chunkify storage until you connect your own Storage.
 
         Args:
           name: Name is the name of the project, which must be between 4 and 32 characters.
@@ -342,7 +345,8 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Project:
         """
-        Retrieve details of a specific project by its slug
+        Retrieve a Project in your team by its ID, including its name, slug, default
+        Storage, Asset defaults, and default Workflow.
 
         Args:
           extra_headers: Send extra headers
@@ -383,10 +387,9 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update a project's name or storage settings.
-
-        Only team owners can update
-        projects.
+        """
+        Update a Project's name, default Storage, Asset defaults, or default Workflow.
+        Only team owners can update Projects, and project names must be unique.
 
         Args:
           asset_defaults: Defaults for new Assets and automatic Uploads. Replaces the whole object.
@@ -441,7 +444,10 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectListResponse:
-        """Retrieve a list of all projects for a team"""
+        """
+        List the Projects in the team that owns the access token, with each Project's
+        name, slug, default Storage, and Asset defaults.
+        """
         return await self._get(
             "/projects",
             options=make_request_options(

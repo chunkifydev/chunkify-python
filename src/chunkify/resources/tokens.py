@@ -141,8 +141,8 @@ class TokensResource(SyncAPIResource):
     ) -> None:
         """Revoke an access token by its ID.
 
-        This action is irreversible and will
-        immediately invalidate the token.
+        Revocation is immediate and irreversible, so
+        requests that still use the token are rejected right away.
 
         Args:
           extra_headers: Send extra headers
@@ -284,8 +284,8 @@ class AsyncTokensResource(AsyncAPIResource):
     ) -> None:
         """Revoke an access token by its ID.
 
-        This action is irreversible and will
-        immediately invalidate the token.
+        Revocation is immediate and irreversible, so
+        requests that still use the token are rejected right away.
 
         Args:
           extra_headers: Send extra headers

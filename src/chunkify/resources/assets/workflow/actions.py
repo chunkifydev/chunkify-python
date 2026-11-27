@@ -65,10 +65,9 @@ class ActionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[AssetActionRun]:
-        """List retained Workflow actions for an Asset, newest first.
-
-        Direct output
-        requests are excluded.
+        """
+        List the retained Workflow actions for an Asset, newest first, with status,
+        type, and date filters. Direct output requests are excluded.
 
         Args:
           latest_per_action: LatestPerAction specifies whether to return only the latest execution of each
@@ -167,10 +166,9 @@ class AsyncActionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[AssetActionRun, AsyncPaginatedResults[AssetActionRun]]:
-        """List retained Workflow actions for an Asset, newest first.
-
-        Direct output
-        requests are excluded.
+        """
+        List the retained Workflow actions for an Asset, newest first, with status,
+        type, and date filters. Direct output requests are excluded.
 
         Args:
           latest_per_action: LatestPerAction specifies whether to return only the latest execution of each

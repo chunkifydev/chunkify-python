@@ -60,8 +60,8 @@ class ActionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssetActionRun:
         """
-        Retrieve one action execution in a retained Workflow run, including its resolved
-        inputs, status, and result.
+        Retrieve one action execution in a retained Workflow run, including the Asset it
+        ran on, its resolved inputs, status, result, and error.
 
         Args:
           extra_headers: Send extra headers
@@ -207,8 +207,8 @@ class AsyncActionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssetActionRun:
         """
-        Retrieve one action execution in a retained Workflow run, including its resolved
-        inputs, status, and result.
+        Retrieve one action execution in a retained Workflow run, including the Asset it
+        ran on, its resolved inputs, status, result, and error.
 
         Args:
           extra_headers: Send extra headers
