@@ -26,7 +26,7 @@ class AssetPoster(BaseModel):
     preview_url: Optional[str] = None
     """Public poster preview URL.
 
-    Available when the Asset is ready and preview_enabled is true.
+    Available when the Asset is ready and public_playback is true.
     """
 
     size: Optional[int] = None
@@ -38,5 +38,5 @@ class AssetPoster(BaseModel):
     url: Optional[str] = None
     """Signed image URL, valid for up to ten minutes.
 
-    Available once the poster exists, regardless of preview_enabled.
+    Available once the poster exists, regardless of public_playback.
     """

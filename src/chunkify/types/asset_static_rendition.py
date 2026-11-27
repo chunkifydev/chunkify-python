@@ -102,7 +102,7 @@ class AssetStaticRendition(BaseModel):
     """Signed MP4 download URL, available when ready and unexpired.
 
     Valid for up to ten minutes. Retrieve the output to refresh it. Independent of
-    preview_enabled.
+    public_playback.
     """
 
     video_bitrate: Optional[int] = None

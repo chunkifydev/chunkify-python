@@ -5,6 +5,7 @@ from datetime import datetime
 
 from .._models import BaseModel
 from .asset_defaults import AssetDefaults
+from .player_appearance import PlayerAppearance
 
 __all__ = ["Project"]
 
@@ -21,6 +22,12 @@ class Project(BaseModel):
 
     name: str
     """Name of the project"""
+
+    player_appearance: PlayerAppearance
+    """
+    Player colours and controls used by Chunkify-hosted playback pages, such as
+    embeds.
+    """
 
     slug: str
     """Slug is the slug for the project."""

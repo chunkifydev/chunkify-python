@@ -6,7 +6,7 @@ from typing import Type, Optional, cast
 
 import httpx
 
-from ...types import AssetDefaultsParams, project_create_params, project_update_params
+from ...types import AssetDefaultsParams, PlayerAppearanceParams, project_create_params, project_update_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -30,6 +30,7 @@ from .analytics.analytics import (
 )
 from ...types.asset_defaults_params import AssetDefaultsParams
 from ...types.project_list_response import ProjectListResponse
+from ...types.player_appearance_params import PlayerAppearanceParams
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -145,6 +146,7 @@ class ProjectsResource(SyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
+        player_appearance: PlayerAppearanceParams | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -166,6 +168,10 @@ class ProjectsResource(SyncAPIResource):
 
           name: Project name.
 
+          player_appearance: Player colours and controls for Chunkify-hosted playback pages, such as embeds.
+              Replaces the whole object. Omitted fields reset to their defaults. Existing
+              embeds use the new values.
+
           storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
@@ -186,6 +192,7 @@ class ProjectsResource(SyncAPIResource):
                     "asset_defaults": asset_defaults,
                     "default_workflow_id": default_workflow_id,
                     "name": name,
+                    "player_appearance": player_appearance,
                     "storage_id": storage_id,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -379,6 +386,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
+        player_appearance: PlayerAppearanceParams | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -400,6 +408,10 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           name: Project name.
 
+          player_appearance: Player colours and controls for Chunkify-hosted playback pages, such as embeds.
+              Replaces the whole object. Omitted fields reset to their defaults. Existing
+              embeds use the new values.
+
           storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
@@ -420,6 +432,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "asset_defaults": asset_defaults,
                     "default_workflow_id": default_workflow_id,
                     "name": name,
+                    "player_appearance": player_appearance,
                     "storage_id": storage_id,
                 },
                 project_update_params.ProjectUpdateParams,
