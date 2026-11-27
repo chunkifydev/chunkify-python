@@ -55,6 +55,8 @@ from .job_transcoder import JobTranscoder as JobTranscoder
 from .metrics_assets import MetricsAssets as MetricsAssets
 from .mp4_h264_param import MP4H264Param as MP4H264Param
 from .mp4_h265_param import MP4H265Param as MP4H265Param
+from .player_control import PlayerControl as PlayerControl
+from .player_palette import PlayerPalette as PlayerPalette
 from .thumbnail_crop import ThumbnailCrop as ThumbnailCrop
 from .thumbnail_file import ThumbnailFile as ThumbnailFile
 from .webm_vp9_param import WebmVp9Param as WebmVp9Param
@@ -82,6 +84,8 @@ from .event_list_params import EventListParams as EventListParams
 from .job_create_params import JobCreateParams as JobCreateParams
 from .metrics_asset_day import MetricsAssetDay as MetricsAssetDay
 from .metrics_usage_day import MetricsUsageDay as MetricsUsageDay
+from .player_appearance import PlayerAppearance as PlayerAppearance
+from .player_theme_mode import PlayerThemeMode as PlayerThemeMode
 from .transcoding_error import TranscodingError as TranscodingError
 from .asset_action_input import AssetActionInput as AssetActionInput
 from .source_list_params import SourceListParams as SourceListParams
@@ -128,6 +132,7 @@ from .metrics_credits_spent import MetricsCreditsSpent as MetricsCreditsSpent
 from .metrics_storage_entry import MetricsStorageEntry as MetricsStorageEntry
 from .metrics_usage_sources import MetricsUsageSources as MetricsUsageSources
 from .metrics_usage_uploads import MetricsUsageUploads as MetricsUsageUploads
+from .player_palette_params import PlayerPaletteParams as PlayerPaletteParams
 from .project_create_params import ProjectCreateParams as ProjectCreateParams
 from .project_list_response import ProjectListResponse as ProjectListResponse
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
@@ -167,6 +172,7 @@ from .asset_transcript_segment import AssetTranscriptSegment as AssetTranscriptS
 from .job_create_format_params import JobCreateFormatParams as JobCreateFormatParams
 from .metrics_usage_thumbnails import MetricsUsageThumbnails as MetricsUsageThumbnails
 from .notification_list_params import NotificationListParams as NotificationListParams
+from .player_appearance_params import PlayerAppearanceParams as PlayerAppearanceParams
 from .upload_multipart_session import UploadMultipartSession as UploadMultipartSession
 from .workflow_thumbnail_range import WorkflowThumbnailRange as WorkflowThumbnailRange
 from .job_create_storage_params import JobCreateStorageParams as JobCreateStorageParams

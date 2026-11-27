@@ -6,6 +6,7 @@ from typing import Optional
 from typing_extensions import TypedDict
 
 from .asset_defaults_params import AssetDefaultsParams
+from .player_appearance_params import PlayerAppearanceParams
 
 __all__ = ["ProjectUpdateParams"]
 
@@ -26,6 +27,13 @@ class ProjectUpdateParams(TypedDict, total=False):
 
     name: str
     """Project name."""
+
+    player_appearance: PlayerAppearanceParams
+    """Player colours and controls for Chunkify-hosted playback pages, such as embeds.
+
+    Replaces the whole object. Omitted fields reset to their defaults. Existing
+    embeds use the new values.
+    """
 
     storage_id: str
     """ID of this Project's default Storage."""
