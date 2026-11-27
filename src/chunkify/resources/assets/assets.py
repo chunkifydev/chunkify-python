@@ -102,9 +102,10 @@ class AssetsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Asset:
-        """Create an Asset from a video Source.
+        """Create an Asset from a video Source to prepare it for streaming.
 
-        Processing starts asynchronously.
+        Processing
+        starts asynchronously, and the Asset is returned while it is preparing.
 
         Args:
           source_id: ID of the video Source to process.
@@ -185,7 +186,8 @@ class AssetsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Asset:
         """
-        Retrieve an Asset and its streaming, static, poster, and timeline outputs.
+        Retrieve an Asset with its status, source metadata, and its streaming, static,
+        poster, and timeline outputs, including their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -225,10 +227,9 @@ class AssetsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update the title, metadata, or public preview access.
-
-        Omitted fields remain
-        unchanged.
+        """
+        Update an Asset's title, metadata, or whether its preview can be watched without
+        an API token. Omitted fields remain unchanged.
 
         Args:
           metadata: Replaces all metadata. Send {} to clear it; omit to leave unchanged. Maximum
@@ -289,8 +290,10 @@ class AssetsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Asset]:
-        """
-        List Assets in the Project, with filtering and pagination.
+        """List Assets in the Project, newest first by default.
+
+        Filter by status, Source,
+        Storage, metadata, or creation date, and search by ID or title.
 
         Args:
           limit: Maximum number of Assets to return.
@@ -357,8 +360,8 @@ class AssetsResource(SyncAPIResource):
     ) -> None:
         """Delete an Asset after all processing finishes.
 
-        Files remain in Storage unless
-        delete_files is true.
+        Its streaming and static files
+        remain in your Storage unless delete_files is true.
 
         Args:
           delete_files: Also delete all files under the Asset's storage prefix, including streaming and
@@ -443,9 +446,10 @@ class AsyncAssetsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Asset:
-        """Create an Asset from a video Source.
+        """Create an Asset from a video Source to prepare it for streaming.
 
-        Processing starts asynchronously.
+        Processing
+        starts asynchronously, and the Asset is returned while it is preparing.
 
         Args:
           source_id: ID of the video Source to process.
@@ -526,7 +530,8 @@ class AsyncAssetsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Asset:
         """
-        Retrieve an Asset and its streaming, static, poster, and timeline outputs.
+        Retrieve an Asset with its status, source metadata, and its streaming, static,
+        poster, and timeline outputs, including their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -566,10 +571,9 @@ class AsyncAssetsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Update the title, metadata, or public preview access.
-
-        Omitted fields remain
-        unchanged.
+        """
+        Update an Asset's title, metadata, or whether its preview can be watched without
+        an API token. Omitted fields remain unchanged.
 
         Args:
           metadata: Replaces all metadata. Send {} to clear it; omit to leave unchanged. Maximum
@@ -630,8 +634,10 @@ class AsyncAssetsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Asset, AsyncPaginatedResults[Asset]]:
-        """
-        List Assets in the Project, with filtering and pagination.
+        """List Assets in the Project, newest first by default.
+
+        Filter by status, Source,
+        Storage, metadata, or creation date, and search by ID or title.
 
         Args:
           limit: Maximum number of Assets to return.
@@ -698,8 +704,8 @@ class AsyncAssetsResource(AsyncAPIResource):
     ) -> None:
         """Delete an Asset after all processing finishes.
 
-        Files remain in Storage unless
-        delete_files is true.
+        Its streaming and static files
+        remain in your Storage unless delete_files is true.
 
         Args:
           delete_files: Also delete all files under the Asset's storage prefix, including streaming and

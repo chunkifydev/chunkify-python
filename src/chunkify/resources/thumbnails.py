@@ -157,8 +157,8 @@ class ThumbnailsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Thumbnail:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Thumbnail.
+        Retrieve one Thumbnail request with its accepted settings, current status,
+        sampled frames, and published image files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -202,8 +202,10 @@ class ThumbnailsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPaginatedResults[Thumbnail]:
-        """
-        List Thumbnails in the authenticated Project, newest first by default.
+        """List Thumbnails in the authenticated Project, newest first by default.
+
+        Filter by
+        status, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
@@ -425,8 +427,8 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Thumbnail:
         """
-        Retrieve the accepted settings, published files and current state of one
-        Thumbnail.
+        Retrieve one Thumbnail request with its accepted settings, current status,
+        sampled frames, and published image files with their delivery URLs.
 
         Args:
           extra_headers: Send extra headers
@@ -470,8 +472,10 @@ class AsyncThumbnailsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Thumbnail, AsyncPaginatedResults[Thumbnail]]:
-        """
-        List Thumbnails in the authenticated Project, newest first by default.
+        """List Thumbnails in the authenticated Project, newest first by default.
+
+        Filter by
+        status, Source, Storage, metadata, or creation date.
 
         Args:
           id: Id filters by an exact Thumbnail ID. Omit to include all matching resources.
