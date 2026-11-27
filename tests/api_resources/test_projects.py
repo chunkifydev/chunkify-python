@@ -114,10 +114,24 @@ class TestProjects:
                 "max_resolution": "1080p",
                 "min_resolution": "auto",
                 "path_template": "videos/{metadata.VideoID}",
-                "preview_enabled": True,
+                "public_playback": True,
             },
             default_workflow_id="x",
             name="name",
+            player_appearance={
+                "dark": {
+                    "accent": "#16a34a",
+                    "primary": "#18181b",
+                    "secondary": "#ffffff",
+                },
+                "hidden_controls": ["captions"],
+                "light": {
+                    "accent": "#16a34a",
+                    "primary": "#18181b",
+                    "secondary": "#ffffff",
+                },
+                "mode": "auto",
+            },
             storage_id="xxxx",
         )
         assert project is None
@@ -326,10 +340,24 @@ class TestAsyncProjects:
                 "max_resolution": "1080p",
                 "min_resolution": "auto",
                 "path_template": "videos/{metadata.VideoID}",
-                "preview_enabled": True,
+                "public_playback": True,
             },
             default_workflow_id="x",
             name="name",
+            player_appearance={
+                "dark": {
+                    "accent": "#16a34a",
+                    "primary": "#18181b",
+                    "secondary": "#ffffff",
+                },
+                "hidden_controls": ["captions"],
+                "light": {
+                    "accent": "#16a34a",
+                    "primary": "#18181b",
+                    "secondary": "#ffffff",
+                },
+                "mode": "auto",
+            },
             storage_id="xxxx",
         )
         assert project is None

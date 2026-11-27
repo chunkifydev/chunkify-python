@@ -145,6 +145,7 @@ class ProjectsResource(SyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
+        player_appearance: project_update_params.PlayerAppearance | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -166,6 +167,10 @@ class ProjectsResource(SyncAPIResource):
 
           name: Project name.
 
+          player_appearance: Player colours and controls for Chunkify-hosted playback pages, such as embeds.
+              Replaces the whole object. Omitted fields reset to their defaults. Existing
+              embeds use the new values.
+
           storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
@@ -186,6 +191,7 @@ class ProjectsResource(SyncAPIResource):
                     "asset_defaults": asset_defaults,
                     "default_workflow_id": default_workflow_id,
                     "name": name,
+                    "player_appearance": player_appearance,
                     "storage_id": storage_id,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -379,6 +385,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         asset_defaults: AssetDefaultsParams | Omit = omit,
         default_workflow_id: Optional[str] | Omit = omit,
         name: str | Omit = omit,
+        player_appearance: project_update_params.PlayerAppearance | Omit = omit,
         storage_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -400,6 +407,10 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           name: Project name.
 
+          player_appearance: Player colours and controls for Chunkify-hosted playback pages, such as embeds.
+              Replaces the whole object. Omitted fields reset to their defaults. Existing
+              embeds use the new values.
+
           storage_id: ID of this Project's default Storage.
 
           extra_headers: Send extra headers
@@ -420,6 +431,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "asset_defaults": asset_defaults,
                     "default_workflow_id": default_workflow_id,
                     "name": name,
+                    "player_appearance": player_appearance,
                     "storage_id": storage_id,
                 },
                 project_update_params.ProjectUpdateParams,
