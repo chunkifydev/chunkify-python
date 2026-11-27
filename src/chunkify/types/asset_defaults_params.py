@@ -42,8 +42,8 @@ class AssetDefaultsParams(TypedDict, total=False):
     768 bytes including base_prefix and trailing slash.
     """
 
-    preview_enabled: bool
-    """Allow public preview access for new Assets without an API token.
-
-    Defaults to true. Existing Assets are unchanged.
+    public_playback: bool
+    """
+    Allow public playback of new Assets without an API token, through the public
+    preview page and embeds. Defaults to true. Existing Assets are unchanged.
     """

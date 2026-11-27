@@ -43,10 +43,11 @@ class AssetCreateParams(TypedDict, total=False):
     base_prefix and trailing slash.
     """
 
-    preview_enabled: bool
-    """Allow public preview access without an API token.
-
-    Omit to use the Project default. Does not control CDN or static download access.
+    public_playback: bool
+    """
+    Allow public playback without an API token, through the public preview page and
+    embeds. Omit to use the Project default. Does not control CDN or static download
+    access.
     """
 
     storage: AssetCreateStorageParams
